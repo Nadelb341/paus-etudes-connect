@@ -14,7 +14,432 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      family_accounts: {
+        Row: {
+          created_at: string
+          family_email: string
+          id: string
+          member_email: string
+          member_name: string
+          member_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          family_email: string
+          id?: string
+          member_email: string
+          member_name?: string
+          member_user_id: string
+        }
+        Update: {
+          created_at?: string
+          family_email?: string
+          id?: string
+          member_email?: string
+          member_name?: string
+          member_user_id?: string
+        }
+        Relationships: []
+      }
+      homework: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string
+          id: string
+          subject_id: string
+          target_levels: string[] | null
+          target_student_ids: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date: string
+          id?: string
+          subject_id: string
+          target_levels?: string[] | null
+          target_student_ids?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string
+          id?: string
+          subject_id?: string
+          target_levels?: string[] | null
+          target_student_ids?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      homework_completions: {
+        Row: {
+          completed: boolean | null
+          completed_at: string | null
+          homework_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          completed_at?: string | null
+          homework_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          completed_at?: string | null
+          homework_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "homework_completions_homework_id_fkey"
+            columns: ["homework_id"]
+            isOneToOne: false
+            referencedRelation: "homework"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          recipient_group: string | null
+          recipient_ids: string[] | null
+          recipient_type: string
+          sender_id: string
+          sender_name: string | null
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          recipient_group?: string | null
+          recipient_ids?: string[] | null
+          recipient_type?: string
+          sender_id: string
+          sender_name?: string | null
+          subject?: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          recipient_group?: string | null
+          recipient_ids?: string[] | null
+          recipient_type?: string
+          sender_id?: string
+          sender_name?: string | null
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean | null
+          message: string
+          recipient_group: string | null
+          recipient_ids: string[] | null
+          recipient_type: string
+          scheduled_at: string | null
+          sender_id: string | null
+          sent_at: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          message: string
+          recipient_group?: string | null
+          recipient_ids?: string[] | null
+          recipient_type?: string
+          scheduled_at?: string | null
+          sender_id?: string | null
+          sent_at?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          recipient_group?: string | null
+          recipient_ids?: string[] | null
+          recipient_type?: string
+          scheduled_at?: string | null
+          sender_id?: string | null
+          sent_at?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          birth_date: string | null
+          created_at: string
+          email: string
+          first_name: string
+          gender: string | null
+          id: string
+          is_approved: boolean | null
+          remarks: string | null
+          school_level: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          birth_date?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string
+          gender?: string | null
+          id?: string
+          is_approved?: boolean | null
+          remarks?: string | null
+          school_level?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          birth_date?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string
+          gender?: string | null
+          id?: string
+          is_approved?: boolean | null
+          remarks?: string | null
+          school_level?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      quiz_questions: {
+        Row: {
+          correct_option: number
+          explanation: string | null
+          id: string
+          options: string[]
+          order_index: number | null
+          question: string
+          quiz_id: string
+        }
+        Insert: {
+          correct_option?: number
+          explanation?: string | null
+          id?: string
+          options?: string[]
+          order_index?: number | null
+          question: string
+          quiz_id: string
+        }
+        Update: {
+          correct_option?: number
+          explanation?: string | null
+          id?: string
+          options?: string[]
+          order_index?: number | null
+          question?: string
+          quiz_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_questions_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_responses: {
+        Row: {
+          answered_at: string
+          attempts: number | null
+          id: string
+          is_correct: boolean | null
+          question_id: string
+          selected_option: number
+          user_id: string
+        }
+        Insert: {
+          answered_at?: string
+          attempts?: number | null
+          id?: string
+          is_correct?: boolean | null
+          question_id: string
+          selected_option: number
+          user_id: string
+        }
+        Update: {
+          answered_at?: string
+          attempts?: number | null
+          id?: string
+          is_correct?: boolean | null
+          question_id?: string
+          selected_option?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_responses_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "quiz_questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quizzes: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          subject_id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          subject_id: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          subject_id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      subject_content: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_visible: boolean | null
+          subject_id: string
+          title: string | null
+          updated_at: string
+          youtube_links: string[] | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_visible?: boolean | null
+          subject_id: string
+          title?: string | null
+          updated_at?: string
+          youtube_links?: string[] | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_visible?: boolean | null
+          subject_id?: string
+          title?: string | null
+          updated_at?: string
+          youtube_links?: string[] | null
+        }
+        Relationships: []
+      }
+      subject_documents: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_type: string | null
+          file_url: string
+          id: string
+          subject_id: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_type?: string | null
+          file_url: string
+          id?: string
+          subject_id: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_type?: string | null
+          file_url?: string
+          id?: string
+          subject_id?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      tutoring_hours: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          duration_hours: number
+          hourly_rate: number
+          id: string
+          notes: string | null
+          session_date: string
+          student_id: string
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          duration_hours?: number
+          hourly_rate: number
+          id?: string
+          notes?: string | null
+          session_date: string
+          student_id: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          duration_hours?: number
+          hourly_rate?: number
+          id?: string
+          notes?: string | null
+          session_date?: string
+          student_id?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
