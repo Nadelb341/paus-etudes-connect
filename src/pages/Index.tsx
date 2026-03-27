@@ -1,16 +1,23 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useAuth } from "@/hooks/useAuth";
+import AppHeader from "@/components/layout/AppHeader";
+import WelcomeBanner from "@/components/home/WelcomeBanner";
+import CahierDeTexte from "@/components/home/CahierDeTexte";
+import SubjectsGrid from "@/components/home/SubjectsGrid";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const { user } = useAuth();
+  const firstName = user?.user_metadata?.first_name || "Élève";
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background">
+      <AppHeader />
+      <main className="max-w-5xl mx-auto px-4 py-4 space-y-5 pb-8">
+        <WelcomeBanner firstName={firstName} />
+        <CahierDeTexte />
+        <SubjectsGrid />
+      </main>
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
