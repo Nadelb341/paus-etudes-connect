@@ -1,31 +1,26 @@
-import { motion } from "framer-motion";
+import { useMemo } from "react";
+import { DAILY_MOTIVATIONS } from "@/lib/constants";
 
 interface WelcomeBannerProps {
   firstName: string;
 }
 
 const WelcomeBanner = ({ firstName }: WelcomeBannerProps) => {
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Bonjour";
-    if (hour < 18) return "Bon après-midi";
-    return "Bonsoir";
-  };
+  const dailyMotivation = useMemo(() => {
+    const today = new Date();
+    const dayOfMonth = today.getDate();
+    return DAILY_MOTIVATIONS[(dayOfMonth - 1) % DAILY_MOTIVATIONS.length];
+  }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="bg-gradient-primary rounded-lg p-4 shadow-card"
-    >
-      <h2 className="text-xl font-heading font-bold text-primary-foreground">
-        {getGreeting()}, {firstName} ! 👋
+    <div className="text-center space-y-1">
+      <h2 className="text-xl font-heading font-bold text-amber-600">
+        Bienvenue, {firstName} !
       </h2>
-      <p className="text-primary-foreground/80 text-sm mt-1">
-        Bienvenue sur Paus'études — prêt(e) à apprendre aujourd'hui ?
+      <p className="text-sm text-muted-foreground italic">
+        {dailyMotivation}
       </p>
-    </motion.div>
+    </div>
   );
 };
 
