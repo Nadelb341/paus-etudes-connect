@@ -2,7 +2,7 @@ export const ADMIN_EMAIL = "nad341@live.fr";
 
 export const SCHOOL_LEVELS = [
   "Maternelle", "CP", "CE1", "CE2", "CM1", "CM2",
-  "6ème", "7ème", "8ème", "3ème",
+  "6ème", "5ème", "4ème", "3ème",
   "Seconde", "Première", "Terminale",
 ] as const;
 
