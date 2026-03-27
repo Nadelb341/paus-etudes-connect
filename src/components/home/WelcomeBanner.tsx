@@ -14,7 +14,7 @@ const WelcomeBanner = ({ firstName }: WelcomeBannerProps) => {
 
   return (
     <div className="text-center space-y-1">
-      <h2 className="text-xl font-heading font-bold text-amber-600">
+      <h2 className="text-xl font-heading font-bold text-primary">
         Bienvenue, {firstName} !
       </h2>
       <p className="text-sm text-muted-foreground italic">
