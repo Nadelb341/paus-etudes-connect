@@ -81,7 +81,6 @@ const DashboardPage = () => {
       ).subscribe();
       return () => { supabase.removeChannel(channel); };
     }
-    }
   }, [isAdmin]);
 
   const fetchProfiles = async () => {
