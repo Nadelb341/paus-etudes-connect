@@ -196,6 +196,7 @@ export type Database = {
       profiles: {
         Row: {
           birth_date: string | null
+          child_name: string | null
           created_at: string
           email: string
           first_name: string
@@ -204,11 +205,13 @@ export type Database = {
           is_approved: boolean | null
           remarks: string | null
           school_level: string
+          status: string
           updated_at: string
           user_id: string
         }
         Insert: {
           birth_date?: string | null
+          child_name?: string | null
           created_at?: string
           email?: string
           first_name?: string
@@ -217,11 +220,13 @@ export type Database = {
           is_approved?: boolean | null
           remarks?: string | null
           school_level?: string
+          status?: string
           updated_at?: string
           user_id: string
         }
         Update: {
           birth_date?: string | null
+          child_name?: string | null
           created_at?: string
           email?: string
           first_name?: string
@@ -230,6 +235,7 @@ export type Database = {
           is_approved?: boolean | null
           remarks?: string | null
           school_level?: string
+          status?: string
           updated_at?: string
           user_id?: string
         }
