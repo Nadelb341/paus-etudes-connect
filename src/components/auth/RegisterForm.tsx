@@ -131,6 +131,19 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
         </div>
       </div>
 
+      {formData.status === "parent" && (
+        <div className="space-y-1.5">
+          <Label htmlFor="reg-childname">Prénom de l'enfant</Label>
+          <Input
+            id="reg-childname"
+            placeholder="Prénom de votre enfant"
+            value={formData.childName}
+            onChange={(e) => updateField("childName", e.target.value)}
+            required
+          />
+        </div>
+      )}
+
       <div className="space-y-1.5">
         <Label htmlFor="reg-birth">Date de naissance</Label>
         <Input

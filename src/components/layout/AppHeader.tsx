@@ -1,5 +1,9 @@
-import { Settings, Users, Mail, Shield, Home } from "lucide-react";
+import { Settings, Users, Mail, Shield, Home, FolderOpen } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useAdminView } from "@/hooks/useAdminView";
+import { ADMIN_EMAIL } from "@/lib/constants";
+import { toast } from "sonner";
 
 interface AppHeaderProps {
   notificationCounts?: {
@@ -13,6 +17,9 @@ interface AppHeaderProps {
 const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
+  const isAdmin = user?.email === ADMIN_EMAIL;
+  const { viewMode, toggleViewMode } = useAdminView();
 
   const navItems = [
     { icon: Home, label: "Accueil", path: "/", key: "home" },
@@ -26,6 +33,26 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
     <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border shadow-card">
       <div className="flex items-center justify-end px-4 py-2">
         <nav className="flex items-center gap-1">
+          {isAdmin && (
+            <button
+              onClick={() => {
+                toggleViewMode();
+                toast.success(`Vue ${viewMode === "élève" ? "Parents" : "Élèves"} activée`);
+                if (location.pathname !== "/") navigate("/");
+              }}
+              className={`relative flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg transition-all ${
+                viewMode === "parent"
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              }`}
+              title={viewMode === "élève" ? "Basculer vers Parents" : "Basculer vers Élèves"}
+            >
+              <span className="text-lg">🗂️</span>
+              <span className="text-[10px] font-medium hidden sm:block">
+                {viewMode === "élève" ? "Parents" : "Élèves"}
+              </span>
+            </button>
+          )}
           {navItems.map(({ icon: Icon, label, path, key }) => {
             const isActive = location.pathname === path;
             const count = notificationCounts[key as keyof typeof notificationCounts];
