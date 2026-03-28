@@ -21,6 +21,8 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
     email: "",
     password: "",
     confirmPassword: "",
+    status: "",
+    childName: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -33,7 +35,7 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.firstName.trim() || !formData.gender || !formData.level || !formData.birthDate || !formData.email.trim() || !formData.password) {
+    if (!formData.firstName.trim() || !formData.gender || !formData.level || !formData.birthDate || !formData.email.trim() || !formData.password || !formData.status) {
       toast.error("Veuillez remplir tous les champs");
       return;
     }
@@ -58,6 +60,8 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
           gender: formData.gender,
           school_level: formData.level,
           birth_date: formData.birthDate,
+          status: formData.status,
+          child_name: formData.childName,
         },
         emailRedirectTo: window.location.origin,
       },
@@ -86,6 +90,19 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-1.5">
+          <Label>Statut</Label>
+          <Select value={formData.status} onValueChange={(v) => updateField("status", v)}>
+            <SelectTrigger>
+              <SelectValue placeholder="Choisir" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="élève">Élève</SelectItem>
+              <SelectItem value="parent">Parent</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         <div className="space-y-1.5">
           <Label>Genre</Label>
           <Select value={formData.gender} onValueChange={(v) => updateField("gender", v)}>
