@@ -380,6 +380,41 @@ const DashboardPage = () => {
                         <Label className="text-xs text-muted-foreground">Date à rendre</Label>
                         <Input type="date" value={hwDueDate} onChange={e => setHwDueDate(e.target.value)} />
                       </div>
+                      <div>
+                        <Label className="text-xs text-muted-foreground">Destinataires</Label>
+                        <Select value={hwTargetType} onValueChange={(v) => { setHwTargetType(v); setHwTargetLevel(""); setHwTargetStudentIds([]); }}>
+                          <SelectTrigger><SelectValue /></SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="all">Tous les élèves</SelectItem>
+                            <SelectItem value="level">Par niveau scolaire</SelectItem>
+                            <SelectItem value="individual">Élève(s) individuel(s)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      {hwTargetType === "level" && (
+                        <Select value={hwTargetLevel} onValueChange={setHwTargetLevel}>
+                          <SelectTrigger><SelectValue placeholder="Choisir un niveau" /></SelectTrigger>
+                          <SelectContent>{SCHOOL_LEVELS.map(l => <SelectItem key={l} value={l}>{l}</SelectItem>)}</SelectContent>
+                        </Select>
+                      )}
+                      {hwTargetType === "individual" && (
+                        <div className="space-y-2">
+                          {profiles.map(p => (
+                            <label key={p.user_id} className="flex items-center gap-2 text-sm cursor-pointer p-2 rounded-lg hover:bg-secondary/30">
+                              <input
+                                type="checkbox"
+                                checked={hwTargetStudentIds.includes(p.user_id)}
+                                onChange={(e) => {
+                                  if (e.target.checked) setHwTargetStudentIds([...hwTargetStudentIds, p.user_id]);
+                                  else setHwTargetStudentIds(hwTargetStudentIds.filter(id => id !== p.user_id));
+                                }}
+                                className="rounded border-border"
+                              />
+                              {p.first_name} ({p.school_level})
+                            </label>
+                          ))}
+                        </div>
+                      )}
                       <Button onClick={createHomework} className="bg-gradient-primary"><Plus size={14} className="mr-1" />Créer le devoir</Button>
                     </div>
                   )}
