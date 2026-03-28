@@ -74,6 +74,13 @@ const DashboardPage = () => {
     if (isAdmin) {
       fetchProfiles();
       fetchTutoringHours();
+      // Realtime: auto-refresh when new profiles are created
+      const channel = supabase.channel("profiles-realtime").on(
+        "postgres_changes", { event: "*", schema: "public", table: "profiles" },
+        () => fetchProfiles()
+      ).subscribe();
+      return () => { supabase.removeChannel(channel); };
+    }
     }
   }, [isAdmin]);
 
