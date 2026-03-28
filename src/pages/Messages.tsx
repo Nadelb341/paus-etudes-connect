@@ -28,7 +28,7 @@ const MessagesPage = () => {
   const [editingMessage, setEditingMessage] = useState<Message | null>(null);
 
   // Compose form
-  const [recipientType, setRecipientType] = useState("all");
+  const [recipientType, setRecipientType] = useState(isAdmin ? "all" : "admin");
   const [recipientId, setRecipientId] = useState("");
   const [msgSubject, setMsgSubject] = useState("");
   const [msgContent, setMsgContent] = useState("");
@@ -50,8 +50,15 @@ const MessagesPage = () => {
   };
 
   const fetchProfiles = async () => {
-    const { data } = await supabase.from("profiles").select("user_id, first_name, email").eq("is_approved", true);
-    if (data) setProfiles(data);
+    // Admin needs to see all approved profiles; students need admin profile for messaging
+    if (isAdmin) {
+      const { data } = await supabase.from("profiles").select("user_id, first_name, email").eq("is_approved", true);
+      if (data) setProfiles(data);
+    } else {
+      // Students: fetch admin profile so we can get admin user_id
+      const { data } = await supabase.from("profiles").select("user_id, first_name, email").eq("email", ADMIN_EMAIL);
+      if (data) setProfiles(data);
+    }
   };
 
   const sendMessage = async () => {
@@ -63,9 +70,15 @@ const MessagesPage = () => {
     if (recipientType === "individual" && recipientId) {
       insert.recipient_ids = [recipientId];
     }
+    if (recipientType === "admin") {
+      // Find admin user_id from profiles
+      const adminProfile = profiles.find(p => p.email === ADMIN_EMAIL);
+      if (adminProfile) insert.recipient_ids = [adminProfile.user_id];
+      insert.recipient_type = "individual";
+    }
     await supabase.from("messages").insert(insert);
     toast.success("Message envoyé !");
-    setShowCompose(false); setMsgSubject(""); setMsgContent(""); setRecipientType("all"); setRecipientId("");
+    setShowCompose(false); setMsgSubject(""); setMsgContent(""); setRecipientType(isAdmin ? "all" : "admin"); setRecipientId("");
   };
 
   const updateMessage = async () => {
@@ -156,18 +169,26 @@ const MessagesPage = () => {
           <DialogContent>
             <DialogHeader><DialogTitle>Nouveau message</DialogTitle></DialogHeader>
             <div className="space-y-4">
-              <Select value={recipientType} onValueChange={setRecipientType}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all"><div className="flex items-center gap-2"><Users size={14} />Tous les élèves</div></SelectItem>
-                  <SelectItem value="individual"><div className="flex items-center gap-2"><User size={14} />Un élève</div></SelectItem>
-                </SelectContent>
-              </Select>
-              {recipientType === "individual" && (
-                <Select value={recipientId} onValueChange={setRecipientId}>
-                  <SelectTrigger><SelectValue placeholder="Choisir un élève" /></SelectTrigger>
-                  <SelectContent>{profiles.map(p => <SelectItem key={p.user_id} value={p.user_id}>{p.first_name} ({p.email})</SelectItem>)}</SelectContent>
-                </Select>
+              {isAdmin ? (
+                <>
+                  <Select value={recipientType} onValueChange={setRecipientType}>
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all"><div className="flex items-center gap-2"><Users size={14} />Tous les élèves</div></SelectItem>
+                      <SelectItem value="individual"><div className="flex items-center gap-2"><User size={14} />Un élève</div></SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {recipientType === "individual" && (
+                    <Select value={recipientId} onValueChange={setRecipientId}>
+                      <SelectTrigger><SelectValue placeholder="Choisir un élève" /></SelectTrigger>
+                      <SelectContent>{profiles.filter(p => p.email !== ADMIN_EMAIL).map(p => <SelectItem key={p.user_id} value={p.user_id}>{p.first_name} ({p.email})</SelectItem>)}</SelectContent>
+                    </Select>
+                  )}
+                </>
+              ) : (
+                <div className="text-sm text-muted-foreground bg-secondary/30 rounded-lg p-3">
+                  <Users size={14} className="inline mr-2" />Destinataire : Administration
+                </div>
               )}
               <Input value={msgSubject} onChange={e => setMsgSubject(e.target.value)} placeholder="Sujet" />
               <Textarea value={msgContent} onChange={e => setMsgContent(e.target.value)} placeholder="Message..." rows={5} />

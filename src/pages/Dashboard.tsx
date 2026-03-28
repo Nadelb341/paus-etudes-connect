@@ -50,6 +50,9 @@ const DashboardPage = () => {
   const [hwTitle, setHwTitle] = useState("");
   const [hwDesc, setHwDesc] = useState("");
   const [hwDueDate, setHwDueDate] = useState("");
+  const [hwTargetType, setHwTargetType] = useState("all");
+  const [hwTargetLevel, setHwTargetLevel] = useState("");
+  const [hwTargetStudentIds, setHwTargetStudentIds] = useState<string[]>([]);
 
   // Tutoring hour form
   const [thStudentId, setThStudentId] = useState("");
@@ -109,11 +112,18 @@ const DashboardPage = () => {
 
   const createHomework = async () => {
     if (!hwSubject || !hwTitle || !hwDueDate) { toast.error("Remplissez tous les champs obligatoires"); return; }
-    await supabase.from("homework").insert({
+    const insert: any = {
       subject_id: hwSubject, title: hwTitle, description: hwDesc, due_date: hwDueDate, created_by: user?.id,
-    });
+    };
+    if (hwTargetType === "level" && hwTargetLevel) {
+      insert.target_levels = [hwTargetLevel];
+    } else if (hwTargetType === "individual" && hwTargetStudentIds.length > 0) {
+      insert.target_student_ids = hwTargetStudentIds;
+    }
+    // "all" = no target filter
+    await supabase.from("homework").insert(insert);
     toast.success("Devoir créé !");
-    setHwSubject(""); setHwTitle(""); setHwDesc(""); setHwDueDate("");
+    setHwSubject(""); setHwTitle(""); setHwDesc(""); setHwDueDate(""); setHwTargetType("all"); setHwTargetLevel(""); setHwTargetStudentIds([]);
   };
 
   const addTutoringHour = async () => {
@@ -370,6 +380,41 @@ const DashboardPage = () => {
                         <Label className="text-xs text-muted-foreground">Date à rendre</Label>
                         <Input type="date" value={hwDueDate} onChange={e => setHwDueDate(e.target.value)} />
                       </div>
+                      <div>
+                        <Label className="text-xs text-muted-foreground">Destinataires</Label>
+                        <Select value={hwTargetType} onValueChange={(v) => { setHwTargetType(v); setHwTargetLevel(""); setHwTargetStudentIds([]); }}>
+                          <SelectTrigger><SelectValue /></SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="all">Tous les élèves</SelectItem>
+                            <SelectItem value="level">Par niveau scolaire</SelectItem>
+                            <SelectItem value="individual">Élève(s) individuel(s)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      {hwTargetType === "level" && (
+                        <Select value={hwTargetLevel} onValueChange={setHwTargetLevel}>
+                          <SelectTrigger><SelectValue placeholder="Choisir un niveau" /></SelectTrigger>
+                          <SelectContent>{SCHOOL_LEVELS.map(l => <SelectItem key={l} value={l}>{l}</SelectItem>)}</SelectContent>
+                        </Select>
+                      )}
+                      {hwTargetType === "individual" && (
+                        <div className="space-y-2">
+                          {profiles.map(p => (
+                            <label key={p.user_id} className="flex items-center gap-2 text-sm cursor-pointer p-2 rounded-lg hover:bg-secondary/30">
+                              <input
+                                type="checkbox"
+                                checked={hwTargetStudentIds.includes(p.user_id)}
+                                onChange={(e) => {
+                                  if (e.target.checked) setHwTargetStudentIds([...hwTargetStudentIds, p.user_id]);
+                                  else setHwTargetStudentIds(hwTargetStudentIds.filter(id => id !== p.user_id));
+                                }}
+                                className="rounded border-border"
+                              />
+                              {p.first_name} ({p.school_level})
+                            </label>
+                          ))}
+                        </div>
+                      )}
                       <Button onClick={createHomework} className="bg-gradient-primary"><Plus size={14} className="mr-1" />Créer le devoir</Button>
                     </div>
                   )}

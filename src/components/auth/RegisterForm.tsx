@@ -93,8 +93,8 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
               <SelectValue placeholder="Choisir" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="fille">Fille</SelectItem>
-              <SelectItem value="garcon">Garçon</SelectItem>
+              <SelectItem value="Fille">Fille</SelectItem>
+              <SelectItem value="Garçon">Garçon</SelectItem>
             </SelectContent>
           </Select>
         </div>
