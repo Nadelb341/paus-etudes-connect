@@ -50,6 +50,9 @@ const DashboardPage = () => {
   const [hwTitle, setHwTitle] = useState("");
   const [hwDesc, setHwDesc] = useState("");
   const [hwDueDate, setHwDueDate] = useState("");
+  const [hwTargetType, setHwTargetType] = useState("all");
+  const [hwTargetLevel, setHwTargetLevel] = useState("");
+  const [hwTargetStudentIds, setHwTargetStudentIds] = useState<string[]>([]);
 
   // Tutoring hour form
   const [thStudentId, setThStudentId] = useState("");
@@ -109,11 +112,18 @@ const DashboardPage = () => {
 
   const createHomework = async () => {
     if (!hwSubject || !hwTitle || !hwDueDate) { toast.error("Remplissez tous les champs obligatoires"); return; }
-    await supabase.from("homework").insert({
+    const insert: any = {
       subject_id: hwSubject, title: hwTitle, description: hwDesc, due_date: hwDueDate, created_by: user?.id,
-    });
+    };
+    if (hwTargetType === "level" && hwTargetLevel) {
+      insert.target_levels = [hwTargetLevel];
+    } else if (hwTargetType === "individual" && hwTargetStudentIds.length > 0) {
+      insert.target_student_ids = hwTargetStudentIds;
+    }
+    // "all" = no target filter
+    await supabase.from("homework").insert(insert);
     toast.success("Devoir créé !");
-    setHwSubject(""); setHwTitle(""); setHwDesc(""); setHwDueDate("");
+    setHwSubject(""); setHwTitle(""); setHwDesc(""); setHwDueDate(""); setHwTargetType("all"); setHwTargetLevel(""); setHwTargetStudentIds([]);
   };
 
   const addTutoringHour = async () => {
