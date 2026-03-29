@@ -139,6 +139,8 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
     fetchDocuments();
   };
 
+  const canDeleteDoc = (doc: DocFile) => isAdmin || doc.uploaded_by === user?.id;
+
   const getYoutubeEmbedUrl = (url: string) => {
     const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]+)/);
     return match ? `https://www.youtube.com/embed/${match[1]}` : url;
