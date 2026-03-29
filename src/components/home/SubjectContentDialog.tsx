@@ -35,6 +35,7 @@ interface DocFile {
   file_name: string;
   file_url: string;
   file_type: string;
+  uploaded_by: string | null;
 }
 
 const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, subjectIcon, subjectColor, manageMode }: SubjectContentDialogProps) => {
