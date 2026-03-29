@@ -35,6 +35,7 @@ interface DocFile {
   file_name: string;
   file_url: string;
   file_type: string;
+  uploaded_by: string | null;
 }
 
 const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, subjectIcon, subjectColor, manageMode }: SubjectContentDialogProps) => {
@@ -139,6 +140,8 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
     fetchDocuments();
   };
 
+  const canDeleteDoc = (doc: DocFile) => isAdmin || doc.uploaded_by === user?.id;
+
   const getYoutubeEmbedUrl = (url: string) => {
     const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]+)/);
     return match ? `https://www.youtube.com/embed/${match[1]}` : url;
@@ -240,21 +243,35 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
             </TabsContent>
           </Tabs>
         ) : (
-          /* Student view */
+          /* Student/Parent view */
           <div className="space-y-6">
             {content.title && <h3 className="font-heading font-semibold text-lg">{content.title}</h3>}
             {content.description && <p className="text-sm text-muted-foreground whitespace-pre-wrap">{content.description}</p>}
 
-            {documents.length > 0 && (
-              <div className="space-y-2">
-                <h4 className="font-semibold text-sm flex items-center gap-2"><FileText size={16} />Documents</h4>
-                {documents.map(doc => (
-                  <a key={doc.id} href={doc.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-3 bg-secondary/30 rounded-lg text-sm hover:bg-secondary/50 transition-colors">
+            {/* Student upload section */}
+            <div className="space-y-2">
+              <h4 className="font-semibold text-sm flex items-center gap-2"><FileText size={16} />Documents</h4>
+              <div>
+                <label className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
+                  <Upload size={18} className="text-primary" />
+                  <span className="text-sm text-muted-foreground">{uploading ? "Téléversement..." : "Téléverser un document"}</span>
+                  <input type="file" className="hidden" onChange={handleFileUpload} disabled={uploading} accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
+                </label>
+              </div>
+              {documents.map(doc => (
+                <div key={doc.id} className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                  <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:text-primary">
                     <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
                   </a>
-                ))}
-              </div>
-            )}
+                  {canDeleteDoc(doc) && (
+                    <button onClick={() => deleteDocument(doc)} className="text-destructive hover:text-destructive/80 p-1">
+                      <Trash2 size={14} />
+                    </button>
+                  )}
+                </div>
+              ))}
+              {documents.length === 0 && <p className="text-sm text-muted-foreground italic">Aucun document</p>}
+            </div>
 
             {content.youtube_links.length > 0 && (
               <div className="space-y-3">

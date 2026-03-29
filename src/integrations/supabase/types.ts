@@ -193,6 +193,89 @@ export type Database = {
         }
         Relationships: []
       }
+      parent_child_cards: {
+        Row: {
+          child_name: string
+          child_profile_id: string | null
+          created_at: string
+          general_note: string | null
+          id: string
+          parent_user_id: string
+          updated_at: string
+        }
+        Insert: {
+          child_name?: string
+          child_profile_id?: string | null
+          created_at?: string
+          general_note?: string | null
+          id?: string
+          parent_user_id: string
+          updated_at?: string
+        }
+        Update: {
+          child_name?: string
+          child_profile_id?: string | null
+          created_at?: string
+          general_note?: string | null
+          id?: string
+          parent_user_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parent_child_cards_child_profile_id_fkey"
+            columns: ["child_profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_tracking: {
+        Row: {
+          created_at: string
+          id: string
+          is_paid: boolean | null
+          parent_card_id: string | null
+          payment_date: string | null
+          tutoring_hour_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_paid?: boolean | null
+          parent_card_id?: string | null
+          payment_date?: string | null
+          tutoring_hour_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_paid?: boolean | null
+          parent_card_id?: string | null
+          payment_date?: string | null
+          tutoring_hour_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_tracking_parent_card_id_fkey"
+            columns: ["parent_card_id"]
+            isOneToOne: false
+            referencedRelation: "parent_child_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_tracking_tutoring_hour_id_fkey"
+            columns: ["tutoring_hour_id"]
+            isOneToOne: false
+            referencedRelation: "tutoring_hours"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           birth_date: string | null
