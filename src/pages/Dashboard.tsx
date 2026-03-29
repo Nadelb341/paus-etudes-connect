@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye } from "lucide-react";
+import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, ClipboardList, Bookmark, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,8 +21,13 @@ interface Profile {
 }
 interface TutoringHour {
   id: string; student_id: string; session_date: string; duration_hours: number;
-  hourly_rate: number; subject: string; notes: string;
+  hourly_rate: number; subject: string; notes: string; track_note?: boolean;
 }
+interface HomeworkItem {
+  id: string; subject_id: string; title: string; due_date: string; description: string;
+  target_levels: string[] | null; target_student_ids: string[] | null;
+}
+interface Completion { homework_id: string; user_id: string; completed: boolean; }
 
 const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
 
@@ -70,11 +75,20 @@ const DashboardPage = () => {
   // Edit tutoring hour
   const [editingHour, setEditingHour] = useState<TutoringHour | null>(null);
 
+  // Homework tracking
+  const [allHomework, setAllHomework] = useState<HomeworkItem[]>([]);
+  const [allCompletions, setAllCompletions] = useState<Completion[]>([]);
+  const [relanceOpen, setRelanceOpen] = useState(false);
+  const [relanceHwId, setRelanceHwId] = useState("");
+  const [relanceStudentId, setRelanceStudentId] = useState("");
+  const [relanceMessage, setRelanceMessage] = useState("");
+
   useEffect(() => {
     if (isAdmin) {
       fetchProfiles();
       fetchTutoringHours();
-      // Realtime: auto-refresh when new profiles are created
+      fetchAllHomework();
+      fetchAllCompletions();
       const channel = supabase.channel("profiles-realtime").on(
         "postgres_changes", { event: "*", schema: "public", table: "profiles" },
         () => fetchProfiles()
@@ -93,7 +107,17 @@ const DashboardPage = () => {
 
   const fetchTutoringHours = async () => {
     const { data } = await supabase.from("tutoring_hours").select("*").order("session_date", { ascending: false });
-    if (data) setTutoringHours(data);
+    if (data) setTutoringHours(data as TutoringHour[]);
+  };
+
+  const fetchAllHomework = async () => {
+    const { data } = await supabase.from("homework").select("*").order("due_date", { ascending: false });
+    if (data) setAllHomework(data);
+  };
+
+  const fetchAllCompletions = async () => {
+    const { data } = await supabase.from("homework_completions").select("homework_id, user_id, completed");
+    if (data) setAllCompletions(data);
   };
 
   const approveStudent = async (profile: Profile) => {
@@ -118,18 +142,13 @@ const DashboardPage = () => {
 
   const createHomework = async () => {
     if (!hwSubject || !hwTitle || !hwDueDate) { toast.error("Remplissez tous les champs obligatoires"); return; }
-    const insert: any = {
-      subject_id: hwSubject, title: hwTitle, description: hwDesc, due_date: hwDueDate, created_by: user?.id,
-    };
-    if (hwTargetType === "level" && hwTargetLevel) {
-      insert.target_levels = [hwTargetLevel];
-    } else if (hwTargetType === "individual" && hwTargetStudentIds.length > 0) {
-      insert.target_student_ids = hwTargetStudentIds;
-    }
-    // "all" = no target filter
+    const insert: any = { subject_id: hwSubject, title: hwTitle, description: hwDesc, due_date: hwDueDate, created_by: user?.id };
+    if (hwTargetType === "level" && hwTargetLevel) insert.target_levels = [hwTargetLevel];
+    else if (hwTargetType === "individual" && hwTargetStudentIds.length > 0) insert.target_student_ids = hwTargetStudentIds;
     await supabase.from("homework").insert(insert);
     toast.success("Devoir créé !");
     setHwSubject(""); setHwTitle(""); setHwDesc(""); setHwDueDate(""); setHwTargetType("all"); setHwTargetLevel(""); setHwTargetStudentIds([]);
+    fetchAllHomework();
   };
 
   const addTutoringHour = async () => {
@@ -162,19 +181,42 @@ const DashboardPage = () => {
     fetchTutoringHours();
   };
 
+  const toggleTrackNote = async (hourId: string, current: boolean) => {
+    await supabase.from("tutoring_hours").update({ track_note: !current } as any).eq("id", hourId);
+    toast.success(!current ? "Note à suivre" : "Suivi retiré");
+    fetchTutoringHours();
+  };
+
   const sendNotification = async () => {
     if (!notifTitle || !notifMessage) { toast.error("Remplissez titre et message"); return; }
-    const insert: any = {
-      title: notifTitle, message: notifMessage, sender_id: user?.id,
-      recipient_type: notifRecipientType,
-    };
-    if (notifRecipientType === "individual" && notifRecipientId) {
-      insert.recipient_ids = [notifRecipientId];
-    }
+    const insert: any = { title: notifTitle, message: notifMessage, sender_id: user?.id, recipient_type: notifRecipientType };
+    if (notifRecipientType === "individual" && notifRecipientId) insert.recipient_ids = [notifRecipientId];
     await supabase.from("notifications").insert(insert);
     toast.success("Notification envoyée !");
     setNotifTitle(""); setNotifMessage(""); setNotifRecipientType("all"); setNotifRecipientId("");
   };
+
+  const sendRelance = async () => {
+    if (!relanceMessage.trim() || !relanceStudentId || !relanceHwId) return;
+    await supabase.from("homework_reminders").insert({
+      homework_id: relanceHwId, student_id: relanceStudentId, message: relanceMessage.trim(),
+    } as any);
+    toast.success("Relance envoyée !");
+    setRelanceOpen(false); setRelanceMessage(""); setRelanceHwId(""); setRelanceStudentId("");
+  };
+
+  // Helpers
+  const getStudentsForHomework = (hw: HomeworkItem) => {
+    if (!hw.target_levels?.length && !hw.target_student_ids?.length) return profiles;
+    if (hw.target_levels?.length) return profiles.filter(p => hw.target_levels!.includes(p.school_level));
+    if (hw.target_student_ids?.length) return profiles.filter(p => hw.target_student_ids!.includes(p.user_id));
+    return [];
+  };
+
+  const isCompletedBy = (hwId: string, userId: string) =>
+    allCompletions.some(c => c.homework_id === hwId && c.user_id === userId && c.completed);
+
+  const trackedHours = tutoringHours.filter(h => (h as any).track_note === true);
 
   if (!isAdmin) {
     return (
@@ -189,11 +231,14 @@ const DashboardPage = () => {
     );
   }
 
+  const getStudentName = (userId: string) => profiles.find(p => p.user_id === userId)?.first_name || "—";
+
   const sections = [
     { key: "pending", icon: UserCheck, title: `Inscriptions en attente (${pendingProfiles.length})`, color: "hsl(350, 65%, 50%)", badge: pendingProfiles.length },
     { key: "monitoring", icon: Activity, title: "Monitoring", color: "hsl(217, 91%, 60%)" },
     { key: "students", icon: Users, title: "Élèves", color: "hsl(142, 71%, 45%)" },
     { key: "hours", icon: Clock, title: "Registre des heures", color: "hsl(32, 80%, 50%)" },
+    { key: "notes", icon: ClipboardList, title: `Suivi des notes en attente (${trackedHours.length})`, color: "hsl(45, 90%, 50%)", badge: trackedHours.length },
     { key: "notifications", icon: Bell, title: "Notifications", color: "hsl(350, 65%, 50%)" },
     { key: "homework", icon: BookOpen, title: "Cahier de texte", color: "hsl(260, 50%, 55%)" },
   ];
@@ -202,8 +247,6 @@ const DashboardPage = () => {
     p.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const getStudentName = (userId: string) => profiles.find(p => p.user_id === userId)?.first_name || "—";
 
   return (
     <div className="min-h-screen bg-background">
@@ -233,7 +276,7 @@ const DashboardPage = () => {
 
               {activeSection === key && (
                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} className="border-t border-border p-4">
-                  {/* PENDING REGISTRATIONS */}
+                  {/* PENDING */}
                   {key === "pending" && (
                     <div className="space-y-3">
                       {pendingProfiles.length === 0 ? <p className="text-sm text-muted-foreground">Aucune inscription en attente</p> : (
@@ -246,15 +289,10 @@ const DashboardPage = () => {
                             <div className="flex gap-2">
                               <Button size="sm" onClick={() => approveStudent(p)} className="bg-green-600 hover:bg-green-700 text-white"><UserCheck size={14} className="mr-1" />Accepter</Button>
                               <AlertDialog>
-                                <AlertDialogTrigger asChild>
-                                  <Button size="sm" variant="destructive"><UserX size={14} className="mr-1" />Refuser</Button>
-                                </AlertDialogTrigger>
+                                <AlertDialogTrigger asChild><Button size="sm" variant="destructive"><UserX size={14} className="mr-1" />Refuser</Button></AlertDialogTrigger>
                                 <AlertDialogContent>
                                   <AlertDialogHeader><AlertDialogTitle>Refuser cette inscription ?</AlertDialogTitle></AlertDialogHeader>
-                                  <AlertDialogFooter>
-                                    <AlertDialogCancel>Annuler</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => rejectStudent(p)}>Refuser</AlertDialogAction>
-                                  </AlertDialogFooter>
+                                  <AlertDialogFooter><AlertDialogCancel>Annuler</AlertDialogCancel><AlertDialogAction onClick={() => rejectStudent(p)}>Refuser</AlertDialogAction></AlertDialogFooter>
                                 </AlertDialogContent>
                               </AlertDialog>
                             </div>
@@ -330,11 +368,19 @@ const DashboardPage = () => {
                       <div className="space-y-2 mt-4">
                         {tutoringHours.map(h => (
                           <div key={h.id} className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg text-sm">
-                            <div>
+                            <div className="flex-1">
                               <p className="font-medium">{getStudentName(h.student_id)} — {ALL_SUBJECTS.find(s => s.id === h.subject)?.label || h.subject}</p>
                               <p className="text-xs text-muted-foreground">{new Date(h.session_date).toLocaleDateString("fr-FR")} · {h.duration_hours}h · {h.hourly_rate}€/h = {(h.duration_hours * h.hourly_rate).toFixed(0)}€</p>
                             </div>
                             <div className="flex gap-1">
+                              <Button
+                                size="icon" variant="ghost"
+                                onClick={() => toggleTrackNote(h.id, !!(h as any).track_note)}
+                                title="Suivre la note"
+                                className={(h as any).track_note ? "text-amber-500" : "text-muted-foreground"}
+                              >
+                                <Bookmark size={14} />
+                              </Button>
                               <Button size="icon" variant="ghost" onClick={() => setEditingHour(h)}><Edit2 size={14} /></Button>
                               <AlertDialog>
                                 <AlertDialogTrigger asChild><Button size="icon" variant="ghost"><Trash2 size={14} className="text-destructive" /></Button></AlertDialogTrigger>
@@ -347,6 +393,29 @@ const DashboardPage = () => {
                           </div>
                         ))}
                       </div>
+                    </div>
+                  )}
+
+                  {/* NOTES TRACKING */}
+                  {key === "notes" && (
+                    <div className="space-y-3">
+                      {trackedHours.length === 0 ? (
+                        <p className="text-sm text-muted-foreground">Aucune note en attente de suivi</p>
+                      ) : (
+                        trackedHours.map(h => (
+                          <div key={h.id} className="flex items-center justify-between p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg text-sm">
+                            <div>
+                              <p className="font-medium text-amber-800 dark:text-amber-300">{getStudentName(h.student_id)}</p>
+                              <p className="text-xs text-amber-600 dark:text-amber-400">
+                                {ALL_SUBJECTS.find(s => s.id === h.subject)?.label || h.subject} · {new Date(h.session_date).toLocaleDateString("fr-FR")}
+                              </p>
+                            </div>
+                            <Button size="sm" variant="outline" onClick={() => toggleTrackNote(h.id, true)}>
+                              <Check size={14} className="mr-1" />Fait
+                            </Button>
+                          </div>
+                        ))
+                      )}
                     </div>
                   )}
 
@@ -374,54 +443,104 @@ const DashboardPage = () => {
 
                   {/* HOMEWORK */}
                   {key === "homework" && (
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-sm">Nouveau devoir</h4>
-                      <Select value={hwSubject} onValueChange={setHwSubject}>
-                        <SelectTrigger><SelectValue placeholder="Matière" /></SelectTrigger>
-                        <SelectContent>{ALL_SUBJECTS.map(s => <SelectItem key={s.id} value={s.id}>{s.icon} {s.label}</SelectItem>)}</SelectContent>
-                      </Select>
-                      <Input value={hwTitle} onChange={e => setHwTitle(e.target.value)} placeholder="Titre du devoir" />
-                      <Textarea value={hwDesc} onChange={e => setHwDesc(e.target.value)} placeholder="Description..." rows={3} />
-                      <div>
-                        <Label className="text-xs text-muted-foreground">Date à rendre</Label>
-                        <Input type="date" value={hwDueDate} onChange={e => setHwDueDate(e.target.value)} />
-                      </div>
-                      <div>
-                        <Label className="text-xs text-muted-foreground">Destinataires</Label>
-                        <Select value={hwTargetType} onValueChange={(v) => { setHwTargetType(v); setHwTargetLevel(""); setHwTargetStudentIds([]); }}>
-                          <SelectTrigger><SelectValue /></SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">Tous les élèves</SelectItem>
-                            <SelectItem value="level">Par niveau scolaire</SelectItem>
-                            <SelectItem value="individual">Élève(s) individuel(s)</SelectItem>
-                          </SelectContent>
+                    <div className="space-y-6">
+                      {/* Create homework */}
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-sm">Nouveau devoir</h4>
+                        <Select value={hwSubject} onValueChange={setHwSubject}>
+                          <SelectTrigger><SelectValue placeholder="Matière" /></SelectTrigger>
+                          <SelectContent>{ALL_SUBJECTS.map(s => <SelectItem key={s.id} value={s.id}>{s.icon} {s.label}</SelectItem>)}</SelectContent>
                         </Select>
-                      </div>
-                      {hwTargetType === "level" && (
-                        <Select value={hwTargetLevel} onValueChange={setHwTargetLevel}>
-                          <SelectTrigger><SelectValue placeholder="Choisir un niveau" /></SelectTrigger>
-                          <SelectContent>{SCHOOL_LEVELS.map(l => <SelectItem key={l} value={l}>{l}</SelectItem>)}</SelectContent>
-                        </Select>
-                      )}
-                      {hwTargetType === "individual" && (
-                        <div className="space-y-2">
-                          {profiles.map(p => (
-                            <label key={p.user_id} className="flex items-center gap-2 text-sm cursor-pointer p-2 rounded-lg hover:bg-secondary/30">
-                              <input
-                                type="checkbox"
-                                checked={hwTargetStudentIds.includes(p.user_id)}
-                                onChange={(e) => {
-                                  if (e.target.checked) setHwTargetStudentIds([...hwTargetStudentIds, p.user_id]);
-                                  else setHwTargetStudentIds(hwTargetStudentIds.filter(id => id !== p.user_id));
-                                }}
-                                className="rounded border-border"
-                              />
-                              {p.first_name} ({p.school_level})
-                            </label>
-                          ))}
+                        <Input value={hwTitle} onChange={e => setHwTitle(e.target.value)} placeholder="Titre du devoir" />
+                        <Textarea value={hwDesc} onChange={e => setHwDesc(e.target.value)} placeholder="Description..." rows={3} />
+                        <div>
+                          <Label className="text-xs text-muted-foreground">Date à rendre</Label>
+                          <Input type="date" value={hwDueDate} onChange={e => setHwDueDate(e.target.value)} />
                         </div>
-                      )}
-                      <Button onClick={createHomework} className="bg-gradient-primary"><Plus size={14} className="mr-1" />Créer le devoir</Button>
+                        <div>
+                          <Label className="text-xs text-muted-foreground">Destinataires</Label>
+                          <Select value={hwTargetType} onValueChange={(v) => { setHwTargetType(v); setHwTargetLevel(""); setHwTargetStudentIds([]); }}>
+                            <SelectTrigger><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">Tous les élèves</SelectItem>
+                              <SelectItem value="level">Par niveau scolaire</SelectItem>
+                              <SelectItem value="individual">Élève(s) individuel(s)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        {hwTargetType === "level" && (
+                          <Select value={hwTargetLevel} onValueChange={setHwTargetLevel}>
+                            <SelectTrigger><SelectValue placeholder="Choisir un niveau" /></SelectTrigger>
+                            <SelectContent>{SCHOOL_LEVELS.map(l => <SelectItem key={l} value={l}>{l}</SelectItem>)}</SelectContent>
+                          </Select>
+                        )}
+                        {hwTargetType === "individual" && (
+                          <div className="space-y-2">
+                            {profiles.map(p => (
+                              <label key={p.user_id} className="flex items-center gap-2 text-sm cursor-pointer p-2 rounded-lg hover:bg-secondary/30">
+                                <input type="checkbox" checked={hwTargetStudentIds.includes(p.user_id)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) setHwTargetStudentIds([...hwTargetStudentIds, p.user_id]);
+                                    else setHwTargetStudentIds(hwTargetStudentIds.filter(id => id !== p.user_id));
+                                  }} className="rounded border-border" />
+                                {p.first_name} ({p.school_level})
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                        <Button onClick={createHomework} className="bg-gradient-primary"><Plus size={14} className="mr-1" />Créer le devoir</Button>
+                      </div>
+
+                      {/* Homework tracking */}
+                      <div className="border-t border-border pt-4 space-y-3">
+                        <h4 className="font-semibold text-sm">Suivi des devoirs</h4>
+                        {allHomework.slice(0, 20).map(hw => {
+                          const targetStudents = getStudentsForHomework(hw);
+                          const subjectLabel = ALL_SUBJECTS.find(s => s.id === hw.subject_id)?.label || hw.subject_id;
+                          return (
+                            <div key={hw.id} className="bg-secondary/30 rounded-lg p-3 space-y-2">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <p className="font-medium text-sm">{subjectLabel} — {hw.title}</p>
+                                  <p className="text-xs text-muted-foreground">Pour le {new Date(hw.due_date).toLocaleDateString("fr-FR")}</p>
+                                </div>
+                              </div>
+                              <div className="space-y-1">
+                                {targetStudents.map(student => {
+                                  const completed = isCompletedBy(hw.id, student.user_id);
+                                  return (
+                                    <div key={student.user_id} className="flex items-center justify-between text-xs py-1">
+                                      <div className="flex items-center gap-2">
+                                        {completed ? (
+                                          <Check size={12} className="text-green-500" />
+                                        ) : (
+                                          <X size={12} className="text-destructive" />
+                                        )}
+                                        <span className={completed ? "text-green-700 dark:text-green-400" : "text-foreground"}>
+                                          {student.first_name}
+                                        </span>
+                                      </div>
+                                      {!completed && (
+                                        <Button
+                                          size="sm" variant="ghost" className="h-6 px-2 text-xs"
+                                          onClick={() => {
+                                            setRelanceHwId(hw.id);
+                                            setRelanceStudentId(student.user_id);
+                                            setRelanceMessage(`J'attends toujours ton devoir de ${subjectLabel} : "${hw.title}"`);
+                                            setRelanceOpen(true);
+                                          }}
+                                        >
+                                          ❓ Relancer
+                                        </Button>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
                 </motion.div>
@@ -467,6 +586,27 @@ const DashboardPage = () => {
                 <Button onClick={updateTutoringHour} className="bg-gradient-primary">Sauvegarder</Button>
               </div>
             )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Relance dialog */}
+        <Dialog open={relanceOpen} onOpenChange={setRelanceOpen}>
+          <DialogContent>
+            <DialogHeader><DialogTitle>Relancer un élève</DialogTitle></DialogHeader>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Envoyer un rappel à <strong>{getStudentName(relanceStudentId)}</strong>
+              </p>
+              <Textarea
+                value={relanceMessage}
+                onChange={e => setRelanceMessage(e.target.value)}
+                rows={3}
+                placeholder="Votre message de relance..."
+              />
+              <Button onClick={sendRelance} className="w-full bg-gradient-primary">
+                <Send size={14} className="mr-2" />Envoyer la relance
+              </Button>
+            </div>
           </DialogContent>
         </Dialog>
       </main>
