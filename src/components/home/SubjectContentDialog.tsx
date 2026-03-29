@@ -5,11 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { toast } from "sonner";
-import { Upload, Link, Trash2, FileText, Youtube, Plus, X } from "lucide-react";
+import { Upload, Trash2, FileText, Youtube, Plus, X } from "lucide-react";
 import QuizManager from "./QuizManager";
 import QuizPlayer from "./QuizPlayer";
 
@@ -23,20 +24,9 @@ interface SubjectContentDialogProps {
   manageMode?: boolean;
 }
 
-interface ContentData {
-  id?: string;
-  title: string;
-  description: string;
-  youtube_links: string[];
-}
-
-interface DocFile {
-  id: string;
-  file_name: string;
-  file_url: string;
-  file_type: string;
-  uploaded_by: string | null;
-}
+interface ContentData { id?: string; title: string; description: string; youtube_links: string[]; }
+interface DocFile { id: string; file_name: string; file_url: string; file_type: string; uploaded_by: string | null; }
+interface Profile { user_id: string; first_name: string; email: string; school_level: string; }
 
 const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, subjectIcon, subjectColor, manageMode }: SubjectContentDialogProps) => {
   const { user } = useAuth();
@@ -47,52 +37,65 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState("content");
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [targetStudentId, setTargetStudentId] = useState<string>("all");
 
   useEffect(() => {
     if (open) {
       fetchContent();
       fetchDocuments();
+      if (isAdmin && manageMode) fetchProfiles();
     }
-  }, [open, subjectId]);
+  }, [open, subjectId, targetStudentId]);
+
+  const fetchProfiles = async () => {
+    const { data } = await supabase.from("profiles").select("user_id, first_name, email, school_level").eq("is_approved", true);
+    if (data) setProfiles(data.filter(p => p.email !== ADMIN_EMAIL));
+  };
 
   const fetchContent = async () => {
-    const { data } = await supabase
-      .from("subject_content")
-      .select("*")
-      .eq("subject_id", subjectId)
-      .maybeSingle();
+    let query = supabase.from("subject_content").select("*").eq("subject_id", subjectId);
+    if (isAdmin && manageMode && targetStudentId !== "all") {
+      query = query.eq("target_student_id" as any, targetStudentId);
+    } else if (isAdmin && manageMode) {
+      query = query.is("target_student_id" as any, null);
+    }
+    const { data } = await query.maybeSingle();
     if (data) {
       setContent({ id: data.id, title: data.title || "", description: data.description || "", youtube_links: data.youtube_links || [] });
+    } else {
+      setContent({ title: "", description: "", youtube_links: [] });
     }
   };
 
   const fetchDocuments = async () => {
-    const { data } = await supabase
-      .from("subject_documents")
-      .select("*")
-      .eq("subject_id", subjectId)
-      .order("created_at", { ascending: false });
+    let query = supabase.from("subject_documents").select("*").eq("subject_id", subjectId).order("created_at", { ascending: false });
+    if (isAdmin && manageMode && targetStudentId !== "all") {
+      query = query.eq("target_student_id" as any, targetStudentId);
+    } else if (!isAdmin) {
+      // Student sees docs with their target_student_id OR null (for all)
+      // RLS handles this automatically
+    }
+    const { data } = await query;
     if (data) setDocuments(data);
   };
 
   const saveContent = async () => {
     setSaving(true);
     try {
+      const studentId = targetStudentId === "all" ? null : targetStudentId;
       if (content.id) {
         await supabase.from("subject_content").update({
-          title: content.title,
-          description: content.description,
-          youtube_links: content.youtube_links,
-          updated_at: new Date().toISOString(),
+          title: content.title, description: content.description,
+          youtube_links: content.youtube_links, updated_at: new Date().toISOString(),
         }).eq("id", content.id);
       } else {
-        const { data } = await supabase.from("subject_content").insert({
-          subject_id: subjectId,
-          title: content.title,
-          description: content.description,
-          youtube_links: content.youtube_links,
-          created_by: user?.id,
-        }).select().single();
+        const insertData: any = {
+          subject_id: subjectId, title: content.title, description: content.description,
+          youtube_links: content.youtube_links, created_by: user?.id,
+        };
+        if (studentId) insertData.target_student_id = studentId;
+        const { data } = await supabase.from("subject_content").insert(insertData).select().single();
         if (data) setContent(prev => ({ ...prev, id: data.id }));
       }
       toast.success("Contenu sauvegardé !");
@@ -120,13 +123,12 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
       const { error: uploadError } = await supabase.storage.from("subject-files").upload(filePath, file);
       if (uploadError) throw uploadError;
       const { data: { publicUrl } } = supabase.storage.from("subject-files").getPublicUrl(filePath);
-      await supabase.from("subject_documents").insert({
-        subject_id: subjectId,
-        file_name: file.name,
-        file_url: publicUrl,
-        file_type: file.type,
-        uploaded_by: user?.id,
-      });
+      const insertData: any = {
+        subject_id: subjectId, file_name: file.name, file_url: publicUrl,
+        file_type: file.type, uploaded_by: user?.id,
+      };
+      if (isAdmin && targetStudentId !== "all") insertData.target_student_id = targetStudentId;
+      await supabase.from("subject_documents").insert(insertData);
       toast.success("Fichier téléversé !");
       fetchDocuments();
     } catch { toast.error("Erreur lors du téléversement"); }
@@ -166,89 +168,103 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
         </DialogHeader>
 
         {isAdmin && manageMode ? (
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="content">Contenu</TabsTrigger>
-              <TabsTrigger value="documents">Documents</TabsTrigger>
-              <TabsTrigger value="videos">Vidéos</TabsTrigger>
-              <TabsTrigger value="quiz">Quiz</TabsTrigger>
-            </TabsList>
+          <div className="space-y-4">
+            {/* Student selector */}
+            <div className="bg-secondary/30 rounded-lg p-3">
+              <Label className="text-xs text-muted-foreground mb-2 block">Élève concerné</Label>
+              <Select value={targetStudentId} onValueChange={setTargetStudentId}>
+                <SelectTrigger><SelectValue placeholder="Choisir un élève" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Tous les élèves (contenu général)</SelectItem>
+                  {profiles.map(p => (
+                    <SelectItem key={p.user_id} value={p.user_id}>{p.first_name} ({p.school_level})</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
-            <TabsContent value="content" className="space-y-4 mt-4">
-              <div>
-                <Label>Titre</Label>
-                <Input value={content.title} onChange={(e) => setContent(prev => ({ ...prev, title: e.target.value }))} placeholder="Titre du contenu..." />
-              </div>
-              <div>
-                <Label>Description</Label>
-                <Textarea value={content.description} onChange={(e) => setContent(prev => ({ ...prev, description: e.target.value }))} placeholder="Description..." rows={5} />
-              </div>
-              <Button onClick={saveContent} disabled={saving} className="bg-gradient-primary">
-                {saving ? "Sauvegarde..." : "Sauvegarder"}
-              </Button>
-            </TabsContent>
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="content">Contenu</TabsTrigger>
+                <TabsTrigger value="documents">Documents</TabsTrigger>
+                <TabsTrigger value="videos">Vidéos</TabsTrigger>
+                <TabsTrigger value="quiz">Quiz</TabsTrigger>
+              </TabsList>
 
-            <TabsContent value="documents" className="space-y-4 mt-4">
-              <div>
-                <Label>Téléverser un document (PDF, Image, Word, Excel...)</Label>
-                <div className="mt-2">
-                  <label className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
-                    <Upload size={18} className="text-primary" />
-                    <span className="text-sm text-muted-foreground">{uploading ? "Téléversement..." : "Choisir un fichier"}</span>
-                    <input type="file" className="hidden" onChange={handleFileUpload} disabled={uploading} accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
-                  </label>
+              <TabsContent value="content" className="space-y-4 mt-4">
+                <div>
+                  <Label>Titre</Label>
+                  <Input value={content.title} onChange={(e) => setContent(prev => ({ ...prev, title: e.target.value }))} placeholder="Titre du contenu..." />
                 </div>
-              </div>
-              <div className="space-y-2">
-                {documents.map((doc) => (
-                  <div key={doc.id} className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
-                    <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-foreground hover:text-primary">
-                      <span>{getFileIcon(doc.file_type)}</span>
-                      {doc.file_name}
-                    </a>
-                    <Button variant="ghost" size="icon" onClick={() => deleteDocument(doc)}>
-                      <Trash2 size={14} className="text-destructive" />
-                    </Button>
-                  </div>
-                ))}
-                {documents.length === 0 && <p className="text-sm text-muted-foreground italic">Aucun document</p>}
-              </div>
-            </TabsContent>
+                <div>
+                  <Label>Description</Label>
+                  <Textarea value={content.description} onChange={(e) => setContent(prev => ({ ...prev, description: e.target.value }))} placeholder="Description..." rows={5} />
+                </div>
+                <Button onClick={saveContent} disabled={saving} className="bg-gradient-primary">
+                  {saving ? "Sauvegarde..." : "Sauvegarder"}
+                </Button>
+              </TabsContent>
 
-            <TabsContent value="videos" className="space-y-4 mt-4">
-              <div className="flex gap-2">
-                <Input value={newYoutubeLink} onChange={(e) => setNewYoutubeLink(e.target.value)} placeholder="Lien YouTube..." className="flex-1" />
-                <Button onClick={addYoutubeLink} size="icon"><Plus size={16} /></Button>
-              </div>
-              <div className="space-y-2">
-                {content.youtube_links.map((link, i) => (
-                  <div key={i} className="flex items-center justify-between p-2 bg-secondary/30 rounded-lg">
-                    <div className="flex items-center gap-2 text-sm truncate flex-1">
-                      <Youtube size={14} className="text-destructive shrink-0" />
-                      <span className="truncate">{link}</span>
+              <TabsContent value="documents" className="space-y-4 mt-4">
+                <div>
+                  <Label>Téléverser un document (PDF, Image, Word, Excel...)</Label>
+                  <div className="mt-2">
+                    <label className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
+                      <Upload size={18} className="text-primary" />
+                      <span className="text-sm text-muted-foreground">{uploading ? "Téléversement..." : "Choisir un fichier"}</span>
+                      <input type="file" className="hidden" onChange={handleFileUpload} disabled={uploading} accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
+                    </label>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  {documents.map((doc) => (
+                    <div key={doc.id} className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg">
+                      <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-foreground hover:text-primary">
+                        <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
+                      </a>
+                      <Button variant="ghost" size="icon" onClick={() => deleteDocument(doc)}>
+                        <Trash2 size={14} className="text-destructive" />
+                      </Button>
                     </div>
-                    <Button variant="ghost" size="icon" onClick={() => removeYoutubeLink(i)}>
-                      <X size={14} />
-                    </Button>
-                  </div>
-                ))}
-              </div>
-              <Button onClick={saveContent} disabled={saving} className="bg-gradient-primary">
-                {saving ? "Sauvegarde..." : "Sauvegarder les liens"}
-              </Button>
-            </TabsContent>
+                  ))}
+                  {documents.length === 0 && <p className="text-sm text-muted-foreground italic">Aucun document</p>}
+                </div>
+              </TabsContent>
 
-            <TabsContent value="quiz" className="mt-4">
-              <QuizManager subjectId={subjectId} />
-            </TabsContent>
-          </Tabs>
+              <TabsContent value="videos" className="space-y-4 mt-4">
+                <div className="flex gap-2">
+                  <Input value={newYoutubeLink} onChange={(e) => setNewYoutubeLink(e.target.value)} placeholder="Lien YouTube..." className="flex-1" />
+                  <Button onClick={addYoutubeLink} size="icon"><Plus size={16} /></Button>
+                </div>
+                <div className="space-y-2">
+                  {content.youtube_links.map((link, i) => (
+                    <div key={i} className="flex items-center justify-between p-2 bg-secondary/30 rounded-lg">
+                      <div className="flex items-center gap-2 text-sm truncate flex-1">
+                        <Youtube size={14} className="text-destructive shrink-0" />
+                        <span className="truncate">{link}</span>
+                      </div>
+                      <Button variant="ghost" size="icon" onClick={() => removeYoutubeLink(i)}>
+                        <X size={14} />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+                <Button onClick={saveContent} disabled={saving} className="bg-gradient-primary">
+                  {saving ? "Sauvegarde..." : "Sauvegarder les liens"}
+                </Button>
+              </TabsContent>
+
+              <TabsContent value="quiz" className="mt-4">
+                <QuizManager subjectId={subjectId} />
+              </TabsContent>
+            </Tabs>
+          </div>
         ) : (
           /* Student/Parent view */
           <div className="space-y-6">
             {content.title && <h3 className="font-heading font-semibold text-lg">{content.title}</h3>}
             {content.description && <p className="text-sm text-muted-foreground whitespace-pre-wrap">{content.description}</p>}
 
-            {/* Student upload section */}
             <div className="space-y-2">
               <h4 className="font-semibold text-sm flex items-center gap-2"><FileText size={16} />Documents</h4>
               <div>
