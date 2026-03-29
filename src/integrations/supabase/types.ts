@@ -112,6 +112,33 @@ export type Database = {
           },
         ]
       }
+      homework_reminders: {
+        Row: {
+          created_at: string
+          homework_id: string
+          id: string
+          message: string
+          seen_at: string | null
+          student_id: string
+        }
+        Insert: {
+          created_at?: string
+          homework_id: string
+          id?: string
+          message?: string
+          seen_at?: string | null
+          student_id: string
+        }
+        Update: {
+          created_at?: string
+          homework_id?: string
+          id?: string
+          message?: string
+          seen_at?: string | null
+          student_id?: string
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string
@@ -432,6 +459,7 @@ export type Database = {
           id: string
           is_visible: boolean | null
           subject_id: string
+          target_student_id: string | null
           title: string | null
           updated_at: string
           youtube_links: string[] | null
@@ -443,6 +471,7 @@ export type Database = {
           id?: string
           is_visible?: boolean | null
           subject_id: string
+          target_student_id?: string | null
           title?: string | null
           updated_at?: string
           youtube_links?: string[] | null
@@ -454,6 +483,7 @@ export type Database = {
           id?: string
           is_visible?: boolean | null
           subject_id?: string
+          target_student_id?: string | null
           title?: string | null
           updated_at?: string
           youtube_links?: string[] | null
@@ -468,6 +498,7 @@ export type Database = {
           file_url: string
           id: string
           subject_id: string
+          target_student_id: string | null
           uploaded_by: string | null
         }
         Insert: {
@@ -477,6 +508,7 @@ export type Database = {
           file_url: string
           id?: string
           subject_id: string
+          target_student_id?: string | null
           uploaded_by?: string | null
         }
         Update: {
@@ -486,6 +518,7 @@ export type Database = {
           file_url?: string
           id?: string
           subject_id?: string
+          target_student_id?: string | null
           uploaded_by?: string | null
         }
         Relationships: []
@@ -501,6 +534,7 @@ export type Database = {
           session_date: string
           student_id: string
           subject: string | null
+          track_note: boolean | null
           updated_at: string
         }
         Insert: {
@@ -513,6 +547,7 @@ export type Database = {
           session_date: string
           student_id: string
           subject?: string | null
+          track_note?: boolean | null
           updated_at?: string
         }
         Update: {
@@ -525,6 +560,7 @@ export type Database = {
           session_date?: string
           student_id?: string
           subject?: string | null
+          track_note?: boolean | null
           updated_at?: string
         }
         Relationships: []
