@@ -54,13 +54,11 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   };
 
   const fetchContent = async () => {
-    let query = supabase.from("subject_content").select("*").eq("subject_id", subjectId);
-    if (isAdmin && manageMode && targetStudentId !== "all") {
-      query = query.eq("target_student_id" as any, targetStudentId);
-    } else if (isAdmin && manageMode) {
-      query = query.is("target_student_id" as any, null);
-    }
-    const { data } = await query.maybeSingle();
+    const studentFilter = isAdmin && manageMode && targetStudentId !== "all" ? targetStudentId : null;
+    let q: any = supabase.from("subject_content").select("*").eq("subject_id", subjectId);
+    if (studentFilter) q = q.eq("target_student_id", studentFilter);
+    else if (isAdmin && manageMode) q = q.is("target_student_id", null);
+    const { data } = await q.maybeSingle();
     if (data) {
       setContent({ id: data.id, title: data.title || "", description: data.description || "", youtube_links: data.youtube_links || [] });
     } else {
@@ -69,14 +67,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   };
 
   const fetchDocuments = async () => {
-    let query = supabase.from("subject_documents").select("*").eq("subject_id", subjectId).order("created_at", { ascending: false });
-    if (isAdmin && manageMode && targetStudentId !== "all") {
-      query = query.eq("target_student_id" as any, targetStudentId);
-    } else if (!isAdmin) {
-      // Student sees docs with their target_student_id OR null (for all)
-      // RLS handles this automatically
-    }
-    const { data } = await query;
+    const studentFilter = isAdmin && manageMode && targetStudentId !== "all" ? targetStudentId : null;
+    let dq: any = supabase.from("subject_documents").select("*").eq("subject_id", subjectId).order("created_at", { ascending: false });
+    if (studentFilter) dq = dq.eq("target_student_id", studentFilter);
+    const { data } = await dq;
     if (data) setDocuments(data);
   };
 
