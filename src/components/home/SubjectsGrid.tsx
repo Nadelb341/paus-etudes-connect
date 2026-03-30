@@ -8,6 +8,8 @@ import { toast } from "sonner";
 
 interface SubjectVisibility { [key: string]: boolean; }
 
+const LYCEE_LEVELS = ["Seconde", "Première", "Terminale"];
+
 const SubjectsGrid = () => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
