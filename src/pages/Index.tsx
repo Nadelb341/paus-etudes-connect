@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import AppHeader from "@/components/layout/AppHeader";
 import WelcomeBanner from "@/components/home/WelcomeBanner";
 import CahierDeTexte from "@/components/home/CahierDeTexte";
+import AppointmentsCard from "@/components/home/AppointmentsCard";
 import SubjectsGrid from "@/components/home/SubjectsGrid";
 import ParentHome from "@/components/home/ParentHome";
 import logo from "@/assets/logo.png";
