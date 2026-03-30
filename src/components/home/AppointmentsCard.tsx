@@ -191,9 +191,20 @@ const AppointmentsCard = () => {
                     <span className="text-xs text-green-600 dark:text-green-400">✅ Vu</span>
                   )}
                   {isAdmin && (
-                    <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => handleDelete(appt.id)}>
-                      <Trash2 size={14} className="text-destructive" />
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="ghost" size="icon" className="h-6 w-6">
+                          <Trash2 size={14} className="text-destructive" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader><AlertDialogTitle>Supprimer ce RDV ?</AlertDialogTitle></AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Annuler</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => handleDelete(appt.id)}>Supprimer</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   )}
                 </div>
               </div>
