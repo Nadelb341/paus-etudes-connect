@@ -183,9 +183,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="content">Contenu</TabsTrigger>
-                <TabsTrigger value="documents">Documents</TabsTrigger>
+                <TabsTrigger value="documents">Docs</TabsTrigger>
+                <TabsTrigger value="chapters">Chapitres</TabsTrigger>
                 <TabsTrigger value="videos">Vidéos</TabsTrigger>
                 <TabsTrigger value="quiz">Quiz</TabsTrigger>
               </TabsList>
