@@ -13,6 +13,7 @@ import Messages from "./pages/Messages";
 import Dashboard from "./pages/Dashboard";
 import SwitchAccount from "./pages/SwitchAccount";
 import NotFound from "./pages/NotFound";
+import NotificationPoller from "./components/NotificationPoller";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <NotificationPoller />
           <BrowserRouter>
             <Routes>
               <Route path="/auth" element={<AuthRedirect />} />

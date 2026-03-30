@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import AppHeader from "@/components/layout/AppHeader";
 import { Button } from "@/components/ui/button";
@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { LogOut, Moon, Sun, Bell, Lock, User, Eye, EyeOff } from "lucide-react";
+import { LogOut, Moon, Sun, Bell, Lock, User, Eye, EyeOff, CheckCircle2, XCircle, Smartphone } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { requestNotificationPermission, subscribeToPush, getPushSubscriptionStatus } from "@/hooks/useNotifications";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -23,6 +24,12 @@ const SettingsPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
+  const [pushStatus, setPushStatus] = useState<"subscribed" | "not-subscribed" | "unsupported" | "loading">("loading");
+  const [activatingPush, setActivatingPush] = useState(false);
+
+  useEffect(() => {
+    getPushSubscriptionStatus().then(setPushStatus);
+  }, []);
 
   const handleSignOut = async () => {
     await signOut();
@@ -118,12 +125,70 @@ const SettingsPage = () => {
         <div className="bg-card rounded-lg border border-border shadow-card p-4 space-y-4">
           <div className="flex items-center gap-3">
             <Bell size={20} className="text-primary" />
-            <h2 className="font-heading font-semibold">Notifications</h2>
+            <h2 className="font-heading font-semibold">Notifications push</h2>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-foreground">Activer les notifications</span>
-            <Switch checked={notifications} onCheckedChange={setNotifications} />
-          </div>
+
+          {pushStatus === "loading" ? (
+            <p className="text-sm text-muted-foreground">Vérification...</p>
+          ) : pushStatus === "unsupported" ? (
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-orange-500">
+                <Smartphone size={16} />
+                <span className="text-sm font-medium">Non disponible</span>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Pour recevoir les notifications sur iPhone : ouvrir l'app dans Safari → Partager → "Sur l'écran d'accueil", puis relancer l'app depuis l'icône.
+              </p>
+            </div>
+          ) : pushStatus === "subscribed" ? (
+            <div className="flex items-center gap-2 text-green-500">
+              <CheckCircle2 size={16} />
+              <span className="text-sm font-medium">Notifications push activées</span>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {typeof Notification !== "undefined" && Notification.permission === "denied" ? (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-red-500">
+                    <XCircle size={16} />
+                    <span className="text-sm font-medium">Notifications bloquées</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Les notifications ont été refusées. Pour les réactiver : Réglages → Safari → Notifications → Paus'études → Autoriser.
+                  </p>
+                </div>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={activatingPush}
+                  onClick={async () => {
+                    if (!user) return;
+                    setActivatingPush(true);
+                    try {
+                      const permission = await requestNotificationPermission();
+                      if (permission === "granted") {
+                        await subscribeToPush(user.id);
+                        setPushStatus("subscribed");
+                        toast.success("Notifications push activées !");
+                      } else if (permission === "denied") {
+                        toast.error("Notifications refusées. Vérifiez les réglages de votre navigateur.");
+                        setPushStatus("not-subscribed");
+                      } else {
+                        toast.info("Autorisation en attente...");
+                      }
+                    } catch (err) {
+                      toast.error("Erreur lors de l'activation des notifications");
+                      console.error(err);
+                    }
+                    setActivatingPush(false);
+                  }}
+                >
+                  {activatingPush ? "Activation..." : "Activer les notifications push"}
+                </Button>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="bg-card rounded-lg border border-border shadow-card p-4 space-y-4">

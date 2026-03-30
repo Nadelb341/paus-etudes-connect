@@ -389,6 +389,75 @@ export type Database = {
           },
         ]
       }
+      push_subscriptions: {
+        Row: {
+          id: string
+          user_id: string
+          endpoint: string
+          p256dh: string
+          auth_key: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          endpoint: string
+          p256dh: string
+          auth_key: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          endpoint?: string
+          p256dh?: string
+          auth_key?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      scheduled_notifications: {
+        Row: {
+          id: string
+          user_id: string
+          recipient_user_id: string | null
+          title: string
+          body: string | null
+          scheduled_at: string
+          sent: boolean | null
+          is_active: boolean | null
+          notification_type: string | null
+          module: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          recipient_user_id?: string | null
+          title: string
+          body?: string | null
+          scheduled_at: string
+          sent?: boolean | null
+          is_active?: boolean | null
+          notification_type?: string | null
+          module?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          recipient_user_id?: string | null
+          title?: string
+          body?: string | null
+          scheduled_at?: string
+          sent?: boolean | null
+          is_active?: boolean | null
+          notification_type?: string | null
+          module?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           birth_date: string | null
