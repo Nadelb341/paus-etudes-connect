@@ -136,7 +136,6 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   };
 
   const deleteDocument = async (doc: DocFile) => {
-    if (!confirm("Supprimer ce document ?")) return;
     await supabase.from("subject_documents").delete().eq("id", doc.id);
     toast.success("Document supprimé");
     fetchDocuments();
