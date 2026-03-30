@@ -10,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { toast } from "sonner";
-import { Upload, Trash2, FileText, Youtube, Plus, X } from "lucide-react";
+import { Upload, Trash2, FileText, Youtube, Plus, X, Camera } from "lucide-react";
 import QuizManager from "./QuizManager";
 import QuizPlayer from "./QuizPlayer";
 import ChapterManager from "./ChapterManager";
