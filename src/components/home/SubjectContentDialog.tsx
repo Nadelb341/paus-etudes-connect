@@ -293,9 +293,18 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
                     <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
                   </a>
                   {canDeleteDoc(doc) && (
-                    <button onClick={() => deleteDocument(doc)} className="text-destructive hover:text-destructive/80 p-1">
-                      <Trash2 size={14} />
-                    </button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <button className="text-destructive hover:text-destructive/80 p-1"><Trash2 size={14} /></button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader><AlertDialogTitle>Supprimer ce document ?</AlertDialogTitle></AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Annuler</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => deleteDocument(doc)}>Supprimer</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   )}
                 </div>
               ))}
