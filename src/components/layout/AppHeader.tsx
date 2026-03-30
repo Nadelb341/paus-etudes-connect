@@ -36,6 +36,29 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
     <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border shadow-card">
       <div className="flex items-center justify-center px-4 py-2">
         <nav className="flex items-center gap-1">
+          {navItems.map(({ icon: Icon, label, path, key }) => {
+            const isActive = location.pathname === path;
+            const count = notificationCounts[key as keyof typeof notificationCounts];
+
+            return (
+              <button
+                key={key}
+                onClick={() => navigate(path)}
+                className={`relative flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg transition-all ${
+                  isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                }`}
+                title={label}
+              >
+                <Icon size={20} />
+                <span className="text-[10px] font-medium hidden sm:block">{label}</span>
+                {count && count > 0 && (
+                  <span className="badge-notification">{count}</span>
+                )}
+              </button>
+            );
+          })}
           {isAdmin && (
             <button
               onClick={() => {
@@ -56,7 +79,7 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
               </span>
             </button>
           )}
-          {navItems.map(({ icon: Icon, label, path, key }) => {
+          {navItemsAfterToggle.map(({ icon: Icon, label, path, key }) => {
             const isActive = location.pathname === path;
             const count = notificationCounts[key as keyof typeof notificationCounts];
 
