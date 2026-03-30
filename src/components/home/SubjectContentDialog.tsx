@@ -280,11 +280,16 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
 
             <div className="space-y-2">
               <h4 className="font-semibold text-sm flex items-center gap-2"><FileText size={16} />Documents</h4>
-              <div>
+              <div className="flex gap-2 flex-wrap">
                 <label className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
                   <Upload size={18} className="text-primary" />
-                  <span className="text-sm text-muted-foreground">{uploading ? "Téléversement..." : "Téléverser un document"}</span>
+                  <span className="text-sm text-muted-foreground">{uploading ? "Téléversement..." : "Téléverser"}</span>
                   <input type="file" className="hidden" onChange={handleFileUpload} disabled={uploading} accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
+                </label>
+                <label className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
+                  <Camera size={18} className="text-primary" />
+                  <span className="text-sm text-muted-foreground">Prendre photo</span>
+                  <input type="file" className="hidden" onChange={handleFileUpload} disabled={uploading} accept="image/*" capture="environment" />
                 </label>
               </div>
               {documents.map(doc => (
