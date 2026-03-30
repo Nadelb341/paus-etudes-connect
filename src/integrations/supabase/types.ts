@@ -62,6 +62,44 @@ export type Database = {
         }
         Relationships: []
       }
+      chapter_documents: {
+        Row: {
+          chapter_id: string
+          created_at: string
+          file_name: string
+          file_type: string | null
+          file_url: string
+          id: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          chapter_id: string
+          created_at?: string
+          file_name: string
+          file_type?: string | null
+          file_url: string
+          id?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          chapter_id?: string
+          created_at?: string
+          file_name?: string
+          file_type?: string | null
+          file_url?: string
+          id?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chapter_documents_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "subject_chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       family_accounts: {
         Row: {
           created_at: string
@@ -498,6 +536,83 @@ export type Database = {
           title?: string
         }
         Relationships: []
+      }
+      subject_chapters: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          order_index: number | null
+          subject_id: string
+          target_student_id: string | null
+          title: string
+          updated_at: string
+          youtube_links: string[] | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          order_index?: number | null
+          subject_id: string
+          target_student_id?: string | null
+          title?: string
+          updated_at?: string
+          youtube_links?: string[] | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          order_index?: number | null
+          subject_id?: string
+          target_student_id?: string | null
+          title?: string
+          updated_at?: string
+          youtube_links?: string[] | null
+        }
+        Relationships: []
+      }
+      subject_comments: {
+        Row: {
+          chapter_id: string | null
+          content: string
+          created_at: string
+          id: string
+          subject_id: string
+          user_id: string
+          user_name: string
+        }
+        Insert: {
+          chapter_id?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          subject_id: string
+          user_id: string
+          user_name?: string
+        }
+        Update: {
+          chapter_id?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          subject_id?: string
+          user_id?: string
+          user_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subject_comments_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "subject_chapters"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subject_content: {
         Row: {
