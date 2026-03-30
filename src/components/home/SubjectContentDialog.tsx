@@ -13,6 +13,12 @@ import { toast } from "sonner";
 import { Upload, Trash2, FileText, Youtube, Plus, X } from "lucide-react";
 import QuizManager from "./QuizManager";
 import QuizPlayer from "./QuizPlayer";
+import ChapterManager from "./ChapterManager";
+import SubjectComments from "./SubjectComments";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface SubjectContentDialogProps {
   open: boolean;
