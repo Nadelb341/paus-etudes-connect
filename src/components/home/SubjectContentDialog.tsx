@@ -10,9 +10,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { toast } from "sonner";
-import { Upload, Trash2, FileText, Youtube, Plus, X } from "lucide-react";
+import { Upload, Trash2, FileText, Youtube, Plus, X, Camera } from "lucide-react";
 import QuizManager from "./QuizManager";
 import QuizPlayer from "./QuizPlayer";
+import ChapterManager from "./ChapterManager";
+import SubjectComments from "./SubjectComments";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface SubjectContentDialogProps {
   open: boolean;
@@ -130,7 +136,6 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   };
 
   const deleteDocument = async (doc: DocFile) => {
-    if (!confirm("Supprimer ce document ?")) return;
     await supabase.from("subject_documents").delete().eq("id", doc.id);
     toast.success("Document supprimé");
     fetchDocuments();
@@ -178,9 +183,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="content">Contenu</TabsTrigger>
-                <TabsTrigger value="documents">Documents</TabsTrigger>
+                <TabsTrigger value="documents">Docs</TabsTrigger>
+                <TabsTrigger value="chapters">Chapitres</TabsTrigger>
                 <TabsTrigger value="videos">Vidéos</TabsTrigger>
                 <TabsTrigger value="quiz">Quiz</TabsTrigger>
               </TabsList>
@@ -216,9 +222,18 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
                       <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-foreground hover:text-primary">
                         <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
                       </a>
-                      <Button variant="ghost" size="icon" onClick={() => deleteDocument(doc)}>
-                        <Trash2 size={14} className="text-destructive" />
-                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost" size="icon"><Trash2 size={14} className="text-destructive" /></Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader><AlertDialogTitle>Supprimer ce document ?</AlertDialogTitle></AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Annuler</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => deleteDocument(doc)}>Supprimer</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   ))}
                   {documents.length === 0 && <p className="text-sm text-muted-foreground italic">Aucun document</p>}
@@ -248,6 +263,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
                 </Button>
               </TabsContent>
 
+              <TabsContent value="chapters" className="mt-4">
+                <ChapterManager subjectId={subjectId} targetStudentId={targetStudentId} manageMode={manageMode} />
+              </TabsContent>
+
               <TabsContent value="quiz" className="mt-4">
                 <QuizManager subjectId={subjectId} />
               </TabsContent>
@@ -261,11 +280,16 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
 
             <div className="space-y-2">
               <h4 className="font-semibold text-sm flex items-center gap-2"><FileText size={16} />Documents</h4>
-              <div>
+              <div className="flex gap-2 flex-wrap">
                 <label className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
                   <Upload size={18} className="text-primary" />
-                  <span className="text-sm text-muted-foreground">{uploading ? "Téléversement..." : "Téléverser un document"}</span>
+                  <span className="text-sm text-muted-foreground">{uploading ? "Téléversement..." : "Téléverser"}</span>
                   <input type="file" className="hidden" onChange={handleFileUpload} disabled={uploading} accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
+                </label>
+                <label className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
+                  <Camera size={18} className="text-primary" />
+                  <span className="text-sm text-muted-foreground">Prendre photo</span>
+                  <input type="file" className="hidden" onChange={handleFileUpload} disabled={uploading} accept="image/*" capture="environment" />
                 </label>
               </div>
               {documents.map(doc => (
@@ -274,9 +298,18 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
                     <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
                   </a>
                   {canDeleteDoc(doc) && (
-                    <button onClick={() => deleteDocument(doc)} className="text-destructive hover:text-destructive/80 p-1">
-                      <Trash2 size={14} />
-                    </button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <button className="text-destructive hover:text-destructive/80 p-1"><Trash2 size={14} /></button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader><AlertDialogTitle>Supprimer ce document ?</AlertDialogTitle></AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Annuler</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => deleteDocument(doc)}>Supprimer</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   )}
                 </div>
               ))}
@@ -293,6 +326,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
                 ))}
               </div>
             )}
+
+            <ChapterManager subjectId={subjectId} />
+
+            <SubjectComments subjectId={subjectId} />
 
             <QuizPlayer subjectId={subjectId} />
 

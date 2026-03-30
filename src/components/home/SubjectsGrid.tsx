@@ -8,9 +8,13 @@ import { toast } from "sonner";
 
 interface SubjectVisibility { [key: string]: boolean; }
 
+const LYCEE_LEVELS = ["Seconde", "Première", "Terminale"];
+
 const SubjectsGrid = () => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
+  const userLevel = user?.user_metadata?.school_level || "";
+  const showLycee = isAdmin || LYCEE_LEVELS.includes(userLevel);
   const [visibility, setVisibility] = useState<SubjectVisibility>({});
   const [selectedSubject, setSelectedSubject] = useState<typeof SUBJECTS_GENERAL[0] | null>(null);
   const [manageMode, setManageMode] = useState(false);
@@ -60,23 +64,27 @@ const SubjectsGrid = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="flex-1 h-px bg-border" />
-        <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Spécialités Lycée</span>
-        <div className="flex-1 h-px bg-border" />
-      </div>
+      {showLycee && (
+        <>
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-px bg-border" />
+            <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Spécialités Lycée</span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3">
-        {SUBJECTS_LYCEE.map((subject, i) => (
-          <SubjectCard
-            key={subject.id} {...subject} index={i + SUBJECTS_GENERAL.length}
-            isVisible={visibility[subject.id] !== false}
-            onClick={() => openSubject(subject)}
-            onManageContent={() => openSubject(subject, true)}
-            onToggleVisibility={() => toggleVisibility(subject.id)}
-          />
-        ))}
-      </div>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3">
+            {SUBJECTS_LYCEE.map((subject, i) => (
+              <SubjectCard
+                key={subject.id} {...subject} index={i + SUBJECTS_GENERAL.length}
+                isVisible={visibility[subject.id] !== false}
+                onClick={() => openSubject(subject)}
+                onManageContent={() => openSubject(subject, true)}
+                onToggleVisibility={() => toggleVisibility(subject.id)}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
       {selectedSubject && (
         <SubjectContentDialog
