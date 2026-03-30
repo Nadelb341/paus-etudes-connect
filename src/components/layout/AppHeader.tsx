@@ -34,7 +34,7 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
 
   return (
     <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border shadow-card">
-      <div className="flex items-center justify-end px-4 py-2">
+      <div className="flex items-center justify-center px-4 py-2">
         <nav className="flex items-center gap-1">
           {isAdmin && (
             <button

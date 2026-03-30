@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          appointment_date: string
+          created_at: string
+          created_by: string | null
+          estimated_duration: string
+          id: string
+          is_visible: boolean | null
+          items_to_bring: string | null
+          seen_by_student: boolean | null
+          start_time: string
+          student_id: string
+          student_name: string
+          subjects: string[]
+          updated_at: string
+        }
+        Insert: {
+          appointment_date: string
+          created_at?: string
+          created_by?: string | null
+          estimated_duration?: string
+          id?: string
+          is_visible?: boolean | null
+          items_to_bring?: string | null
+          seen_by_student?: boolean | null
+          start_time: string
+          student_id: string
+          student_name?: string
+          subjects?: string[]
+          updated_at?: string
+        }
+        Update: {
+          appointment_date?: string
+          created_at?: string
+          created_by?: string | null
+          estimated_duration?: string
+          id?: string
+          is_visible?: boolean | null
+          items_to_bring?: string | null
+          seen_by_student?: boolean | null
+          start_time?: string
+          student_id?: string
+          student_name?: string
+          subjects?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       family_accounts: {
         Row: {
           created_at: string
