@@ -22,11 +22,14 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
   const { viewMode, toggleViewMode } = useAdminView();
 
   const navItems = [
-    { icon: Home, label: "Accueil", path: "/", key: "home" },
-    { icon: Mail, label: "Messages", path: "/messages", key: "messages" },
-    { icon: Shield, label: "Tableau de bord", path: "/dashboard", key: "dashboard" },
-    { icon: Users, label: "Comptes", path: "/switch-account", key: "accounts" },
     { icon: Settings, label: "Paramètres", path: "/settings", key: "settings" },
+    { icon: Users, label: "Comptes", path: "/switch-account", key: "accounts" },
+    { icon: Mail, label: "Messages", path: "/messages", key: "messages" },
+    { icon: Home, label: "Accueil", path: "/", key: "home" },
+  ];
+
+  const navItemsAfterToggle = [
+    { icon: Shield, label: "Tableau de bord", path: "/dashboard", key: "dashboard" },
   ];
 
   return (
