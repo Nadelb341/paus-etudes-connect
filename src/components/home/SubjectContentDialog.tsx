@@ -221,9 +221,18 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
                       <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-foreground hover:text-primary">
                         <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
                       </a>
-                      <Button variant="ghost" size="icon" onClick={() => deleteDocument(doc)}>
-                        <Trash2 size={14} className="text-destructive" />
-                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost" size="icon"><Trash2 size={14} className="text-destructive" /></Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader><AlertDialogTitle>Supprimer ce document ?</AlertDialogTitle></AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Annuler</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => deleteDocument(doc)}>Supprimer</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   ))}
                   {documents.length === 0 && <p className="text-sm text-muted-foreground italic">Aucun document</p>}
