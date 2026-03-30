@@ -82,6 +82,7 @@ const Index = () => {
               </div>
             )}
 
+            <AppointmentsCard />
             <CahierDeTexte />
             <SubjectsGrid />
           </>
