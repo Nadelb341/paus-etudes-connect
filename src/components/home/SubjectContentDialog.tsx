@@ -262,6 +262,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
                 </Button>
               </TabsContent>
 
+              <TabsContent value="chapters" className="mt-4">
+                <ChapterManager subjectId={subjectId} targetStudentId={targetStudentId} manageMode={manageMode} />
+              </TabsContent>
+
               <TabsContent value="quiz" className="mt-4">
                 <QuizManager subjectId={subjectId} />
               </TabsContent>
