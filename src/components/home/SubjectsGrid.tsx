@@ -13,6 +13,8 @@ const LYCEE_LEVELS = ["Seconde", "Première", "Terminale"];
 const SubjectsGrid = () => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
+  const userLevel = user?.user_metadata?.school_level || "";
+  const showLycee = isAdmin || LYCEE_LEVELS.includes(userLevel);
   const [visibility, setVisibility] = useState<SubjectVisibility>({});
   const [selectedSubject, setSelectedSubject] = useState<typeof SUBJECTS_GENERAL[0] | null>(null);
   const [manageMode, setManageMode] = useState(false);
