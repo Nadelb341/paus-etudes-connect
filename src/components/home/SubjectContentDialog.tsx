@@ -322,6 +322,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
               </div>
             )}
 
+            <ChapterManager subjectId={subjectId} />
+
+            <SubjectComments subjectId={subjectId} />
+
             <QuizPlayer subjectId={subjectId} />
 
             {!content.title && !content.description && documents.length === 0 && content.youtube_links.length === 0 && (
