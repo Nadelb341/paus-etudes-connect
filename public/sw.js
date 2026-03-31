@@ -7,6 +7,9 @@ self.addEventListener('push', function(event) {
     badge: '/logo.png',
     tag: data.tag || 'notif',
     renotify: true,
+    silent: false,
+    requireInteraction: true,
+    vibrate: [200, 100, 200],
     data: { url: data.url || '/' },
   };
   event.waitUntil(
