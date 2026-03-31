@@ -27,8 +27,9 @@ src/
                     SubjectContentDialog, ChapterManager, QuizManager, QuizPlayer,
                     AppointmentsCard, SubjectComments, ParentHome
     layout/      -> AppHeader
+    NotificationPoller.tsx  -> polling Edge Function toutes les 2 min
     ui/          -> shadcn (ne pas modifier manuellement)
-  hooks/         -> useAuth, useAdminView, use-mobile, use-toast
+  hooks/         -> useAuth, useAdminView, useNotifications, use-mobile, use-toast
   integrations/  -> supabase client + types auto-generes
   lib/           -> constants.ts (admin email, niveaux, matieres, tarifs), utils.ts
 ```
@@ -37,7 +38,8 @@ src/
 Tables principales : profiles, subject_content, subject_documents, subject_chapters,
 chapter_documents, subject_comments, homework, homework_completions, homework_reminders,
 appointments, quizzes, quiz_questions, quiz_responses, messages, notifications,
-tutoring_hours, parent_child_cards, payment_tracking, family_accounts
+tutoring_hours, parent_child_cards, payment_tracking, family_accounts,
+push_subscriptions, scheduled_notifications
 
 Storage bucket : `subject-files` (public)
 
@@ -46,6 +48,19 @@ Storage bucket : `subject-files` (public)
 - Vars d'env dans .env (VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY)
 - RLS active sur toutes les tables
 - Real-time sur messages, reminders, quiz_responses, parent_child_cards
+- Edge Function : send-notifications (envoi push via VAPID)
+
+## Notifications Push (PWA)
+- Service Worker : public/sw.js
+- Hook : src/hooks/useNotifications.tsx
+- Poller : src/components/NotificationPoller.tsx (toutes les 2 min)
+- Edge Function : supabase/functions/send-notifications/index.ts
+- Cles VAPID en dur (pas en env vars — Lovable les ecrase)
+- PUBLIC : BNcZOsiXX15afLFeaV4ZS27i2cBzL5fY2XGfIR_T0QKdi3f4u9E085iD7C1OxEt0HJbbSjz8Dtpm4te6F2X6BYs
+- PRIVATE : I0jkPQD9oCJ2Geq46M-VCf8Ew_CqgnKosdk18O8A9NA
+- Triggers auto : messages, RDV, devoirs, rappels -> scheduled_notifications
+- iOS PWA : jamais new Notification(), tout via scheduled_notifications + Edge Function
+- Activation par l'utilisateur dans Settings > Notifications push
 
 ## Commandes
 ```bash
@@ -63,6 +78,8 @@ npm run test:watch   # Tests en watch mode
 - Niveaux scolaires : Maternelle -> Terminale
 - Les migrations Supabase sont dans supabase/migrations/
 - Projet Lovable : attention a la compatibilite avec l'editeur Lovable
+- iOS PWA : jamais new Notification(), tout via Edge Function
+- Cles VAPID en dur dans le code (Lovable ecrase les env vars)
 
 ## Routes
 - `/auth` - Connexion / Inscription
