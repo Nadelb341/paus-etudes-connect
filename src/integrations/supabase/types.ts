@@ -389,75 +389,6 @@ export type Database = {
           },
         ]
       }
-      push_subscriptions: {
-        Row: {
-          id: string
-          user_id: string
-          endpoint: string
-          p256dh: string
-          auth_key: string
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          user_id: string
-          endpoint: string
-          p256dh: string
-          auth_key: string
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          user_id?: string
-          endpoint?: string
-          p256dh?: string
-          auth_key?: string
-          created_at?: string
-        }
-        Relationships: []
-      }
-      scheduled_notifications: {
-        Row: {
-          id: string
-          user_id: string
-          recipient_user_id: string | null
-          title: string
-          body: string | null
-          scheduled_at: string
-          sent: boolean | null
-          is_active: boolean | null
-          notification_type: string | null
-          module: string | null
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          user_id: string
-          recipient_user_id?: string | null
-          title: string
-          body?: string | null
-          scheduled_at: string
-          sent?: boolean | null
-          is_active?: boolean | null
-          notification_type?: string | null
-          module?: string | null
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          user_id?: string
-          recipient_user_id?: string | null
-          title?: string
-          body?: string | null
-          scheduled_at?: string
-          sent?: boolean | null
-          is_active?: boolean | null
-          notification_type?: string | null
-          module?: string | null
-          created_at?: string
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           birth_date: string | null
@@ -502,6 +433,33 @@ export type Database = {
           school_level?: string
           status?: string
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      push_subscriptions: {
+        Row: {
+          auth_key: string
+          created_at: string | null
+          endpoint: string
+          id: string
+          p256dh: string
+          user_id: string
+        }
+        Insert: {
+          auth_key: string
+          created_at?: string | null
+          endpoint: string
+          id?: string
+          p256dh: string
+          user_id: string
+        }
+        Update: {
+          auth_key?: string
+          created_at?: string | null
+          endpoint?: string
+          id?: string
+          p256dh?: string
           user_id?: string
         }
         Relationships: []
@@ -603,6 +561,48 @@ export type Database = {
           id?: string
           subject_id?: string
           title?: string
+        }
+        Relationships: []
+      }
+      scheduled_notifications: {
+        Row: {
+          body: string | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          module: string | null
+          notification_type: string | null
+          recipient_user_id: string | null
+          scheduled_at: string
+          sent: boolean | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          module?: string | null
+          notification_type?: string | null
+          recipient_user_id?: string | null
+          scheduled_at: string
+          sent?: boolean | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          module?: string | null
+          notification_type?: string | null
+          recipient_user_id?: string | null
+          scheduled_at?: string
+          sent?: boolean | null
+          title?: string
+          user_id?: string
         }
         Relationships: []
       }
