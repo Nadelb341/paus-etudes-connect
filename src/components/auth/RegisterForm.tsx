@@ -35,7 +35,12 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.firstName.trim() || !formData.gender || !formData.level || !formData.birthDate || !formData.email.trim() || !formData.password || !formData.status) {
+    const isParent = formData.status === "parent";
+    if (!formData.firstName.trim() || !formData.gender || !formData.email.trim() || !formData.password || !formData.status) {
+      toast.error("Veuillez remplir tous les champs");
+      return;
+    }
+    if (!isParent && (!formData.level || !formData.birthDate)) {
       toast.error("Veuillez remplir tous les champs");
       return;
     }
@@ -116,19 +121,21 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
           </Select>
         </div>
 
-        <div className="space-y-1.5">
-          <Label>Niveau scolaire</Label>
-          <Select value={formData.level} onValueChange={(v) => updateField("level", v)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Niveau" />
-            </SelectTrigger>
-            <SelectContent>
-              {SCHOOL_LEVELS.map((level) => (
-                <SelectItem key={level} value={level}>{level}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        {formData.status !== "parent" && (
+          <div className="space-y-1.5">
+            <Label>Niveau scolaire</Label>
+            <Select value={formData.level} onValueChange={(v) => updateField("level", v)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Niveau" />
+              </SelectTrigger>
+              <SelectContent>
+                {SCHOOL_LEVELS.map((level) => (
+                  <SelectItem key={level} value={level}>{level}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
 
       {formData.status === "parent" && (
@@ -144,16 +151,18 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
         </div>
       )}
 
-      <div className="space-y-1.5">
-        <Label htmlFor="reg-birth">Date de naissance</Label>
-        <Input
-          id="reg-birth"
-          type="date"
-          value={formData.birthDate}
-          onChange={(e) => updateField("birthDate", e.target.value)}
-          required
-        />
-      </div>
+      {formData.status !== "parent" && (
+        <div className="space-y-1.5">
+          <Label htmlFor="reg-birth">Date de naissance</Label>
+          <Input
+            id="reg-birth"
+            type="date"
+            value={formData.birthDate}
+            onChange={(e) => updateField("birthDate", e.target.value)}
+            required
+          />
+        </div>
+      )}
 
       <div className="space-y-1.5">
         <Label htmlFor="reg-email">Email</Label>
