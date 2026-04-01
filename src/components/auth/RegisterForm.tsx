@@ -151,16 +151,18 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
         </div>
       )}
 
-      <div className="space-y-1.5">
-        <Label htmlFor="reg-birth">Date de naissance</Label>
-        <Input
-          id="reg-birth"
-          type="date"
-          value={formData.birthDate}
-          onChange={(e) => updateField("birthDate", e.target.value)}
-          required
-        />
-      </div>
+      {formData.status !== "parent" && (
+        <div className="space-y-1.5">
+          <Label htmlFor="reg-birth">Date de naissance</Label>
+          <Input
+            id="reg-birth"
+            type="date"
+            value={formData.birthDate}
+            onChange={(e) => updateField("birthDate", e.target.value)}
+            required
+          />
+        </div>
+      )}
 
       <div className="space-y-1.5">
         <Label htmlFor="reg-email">Email</Label>
