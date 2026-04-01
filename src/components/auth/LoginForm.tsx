@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, LogIn } from "lucide-react";
+import { Eye, EyeOff, LogIn, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 
 interface LoginFormProps {
@@ -15,6 +15,7 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [forgotLoading, setForgotLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +30,23 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
 
     if (error) {
       toast.error("Identifiants incorrects. Veuillez réessayer.");
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email.trim()) {
+      toast.error("Veuillez d'abord saisir votre email");
+      return;
+    }
+    setForgotLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setForgotLoading(false);
+    if (error) {
+      toast.error("Erreur : " + error.message);
+    } else {
+      toast.success("Un lien de réinitialisation a été envoyé à votre email !");
     }
   };
 
@@ -71,6 +89,17 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
         <LogIn size={18} className="mr-2" />
         {loading ? "Connexion..." : "Se connecter"}
       </Button>
+
+      <div className="text-center">
+        <button
+          type="button"
+          onClick={handleForgotPassword}
+          className="text-sm text-primary hover:underline font-medium inline-flex items-center gap-1"
+        >
+          <KeyRound size={14} />
+          Mot de passe oublié ?
+        </button>
+      </div>
 
       <p className="text-center text-sm text-muted-foreground">
         Pas encore inscrit ?{" "}

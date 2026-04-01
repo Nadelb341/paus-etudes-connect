@@ -12,6 +12,7 @@ import Settings from "./pages/Settings";
 import Messages from "./pages/Messages";
 import Dashboard from "./pages/Dashboard";
 import SwitchAccount from "./pages/SwitchAccount";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import NotificationPoller from "./components/NotificationPoller";
 
@@ -35,6 +36,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/auth" element={<AuthRedirect />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
               <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
               <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
