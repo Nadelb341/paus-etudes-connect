@@ -121,19 +121,21 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
           </Select>
         </div>
 
-        <div className="space-y-1.5">
-          <Label>Niveau scolaire</Label>
-          <Select value={formData.level} onValueChange={(v) => updateField("level", v)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Niveau" />
-            </SelectTrigger>
-            <SelectContent>
-              {SCHOOL_LEVELS.map((level) => (
-                <SelectItem key={level} value={level}>{level}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        {formData.status !== "parent" && (
+          <div className="space-y-1.5">
+            <Label>Niveau scolaire</Label>
+            <Select value={formData.level} onValueChange={(v) => updateField("level", v)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Niveau" />
+              </SelectTrigger>
+              <SelectContent>
+                {SCHOOL_LEVELS.map((level) => (
+                  <SelectItem key={level} value={level}>{level}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
 
       {formData.status === "parent" && (
