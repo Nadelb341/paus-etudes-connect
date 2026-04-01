@@ -89,6 +89,15 @@ npm run test:watch   # Tests en watch mode
 - `/settings` - Parametres profil
 - `/switch-account` - Gestion comptes famille
 
+## Collaboration Lovable
+- Nadia edite via Lovable, Mustapha assiste via Claude Code + GitHub
+- Synchro GitHub → Lovable : icone </> (editeur code) ou prompt "Pull from GitHub"
+- Le pull GitHub coute des credits sur Lovable, l'editeur de code est gratuit
+- SQL dans Lovable/Supabase : gratuit
+- Pour les petites modifs : Nadia modifie directement dans l'editeur de code Lovable
+
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
-- Nadia gere le projet cote Lovable, Ahmed/Mustapha assistent cote technique
+- Nadia gere le projet cote Lovable, Mustapha assiste cote technique
+- Notifications push : installees et testees OK (son + banniere) le 31 mars 2026
+- Collaborateur GitHub : badmust75-coder a acces en ecriture au repo
