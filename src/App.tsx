@@ -12,6 +12,7 @@ import Settings from "./pages/Settings";
 import Messages from "./pages/Messages";
 import Dashboard from "./pages/Dashboard";
 import SwitchAccount from "./pages/SwitchAccount";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import NotificationPoller from "./components/NotificationPoller";
 
