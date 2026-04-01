@@ -35,7 +35,12 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.firstName.trim() || !formData.gender || !formData.level || !formData.birthDate || !formData.email.trim() || !formData.password || !formData.status) {
+    const isParent = formData.status === "parent";
+    if (!formData.firstName.trim() || !formData.gender || !formData.email.trim() || !formData.password || !formData.status) {
+      toast.error("Veuillez remplir tous les champs");
+      return;
+    }
+    if (!isParent && (!formData.level || !formData.birthDate)) {
       toast.error("Veuillez remplir tous les champs");
       return;
     }
