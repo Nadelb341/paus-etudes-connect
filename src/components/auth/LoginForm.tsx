@@ -72,6 +72,17 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
         {loading ? "Connexion..." : "Se connecter"}
       </Button>
 
+      <div className="text-center">
+        <button
+          type="button"
+          onClick={handleForgotPassword}
+          className="text-sm text-primary hover:underline font-medium inline-flex items-center gap-1"
+        >
+          <KeyRound size={14} />
+          Mot de passe oublié ?
+        </button>
+      </div>
+
       <p className="text-center text-sm text-muted-foreground">
         Pas encore inscrit ?{" "}
         <button type="button" onClick={onSwitchToRegister} className="text-primary hover:underline font-medium">
