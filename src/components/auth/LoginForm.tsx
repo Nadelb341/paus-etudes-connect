@@ -33,6 +33,23 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email.trim()) {
+      toast.error("Veuillez d'abord saisir votre email");
+      return;
+    }
+    setForgotLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setForgotLoading(false);
+    if (error) {
+      toast.error("Erreur : " + error.message);
+    } else {
+      toast.success("Un lien de réinitialisation a été envoyé à votre email !");
+    }
+  };
+
   return (
     <form onSubmit={handleLogin} className="space-y-4">
       <div className="space-y-2">
