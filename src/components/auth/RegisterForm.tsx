@@ -63,10 +63,10 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
         data: {
           first_name: formData.firstName,
           gender: formData.gender,
-          school_level: formData.level,
-          birth_date: formData.birthDate,
+          school_level: isParent ? "" : formData.level,
+          birth_date: isParent ? null : formData.birthDate || null,
           status: formData.status,
-          child_name: formData.childName,
+          child_name: isParent ? formData.childName : "",
         },
         emailRedirectTo: window.location.origin,
       },
