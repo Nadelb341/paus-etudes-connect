@@ -154,7 +154,7 @@ const SettingsPage = () => {
                     <span className="text-sm font-medium">Notifications bloquées</span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                   Les notifications ont été refusées. Pour les réactiver : Réglages → Safari → Notifications → My Study Way → Autoriser.
+                    Les notifications ont été refusées. Pour les réactiver : Réglages → Safari → Notifications → My Study Way → Autoriser.
                   </p>
                 </div>
               ) : (

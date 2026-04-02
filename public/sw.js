@@ -1,6 +1,6 @@
 self.addEventListener('push', function(event) {
   const data = event.data ? event.data.json() : {};
-  const title = data.title || 'Paus\'études';
+  const title = data.title || 'My Study Way';
   const options = {
     body: data.body || '',
     icon: '/logo.png',
