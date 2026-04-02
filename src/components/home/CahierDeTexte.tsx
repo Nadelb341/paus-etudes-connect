@@ -11,7 +11,11 @@ interface Homework {
   target_levels: string[] | null; target_student_ids: string[] | null;
 }
 
-const CahierDeTexte = () => {
+interface CahierDeTexteProps {
+  badgeCount?: number;
+}
+
+const CahierDeTexte = ({ badgeCount = 0 }: CahierDeTexteProps) => {
   const { user } = useAuth();
   const [weekOffset, setWeekOffset] = useState(0);
   const [homework, setHomework] = useState<Homework[]>([]);
@@ -115,6 +119,11 @@ const CahierDeTexte = () => {
         <div className="flex items-center gap-2">
           <BookOpen size={20} className="text-primary" />
           <h3 className="font-heading font-semibold text-foreground">Cahier de texte</h3>
+          {badgeCount > 0 && (
+            <span className="bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1">
+              {badgeCount}
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <button onClick={() => setWeekOffset(p => p - 1)} className="p-1.5 rounded-md hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground">

@@ -32,6 +32,10 @@ const MessagesPage = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Mark messages as read (for badge system)
+    if (user) {
+      localStorage.setItem(`msw_messages_last_read_${user.id}`, new Date().toISOString());
+    }
     fetchMessages();
     fetchProfiles();
     const channel = supabase.channel("messages-realtime").on(

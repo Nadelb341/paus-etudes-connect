@@ -48,9 +48,10 @@ const DURATIONS = ["30min", "1h", "1h30", "2h", "2h30", "3h", "3h30", "4h"];
 
 interface AppointmentsCardProps {
   forParentStudentId?: string;
+  badgeCount?: number;
 }
 
-const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
+const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCardProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -276,6 +277,11 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
         <CardTitle className="text-base flex items-center gap-2">
           <CalendarIcon size={18} className="text-primary" />
           📅 RDV à venir
+          {badgeCount > 0 && (
+            <span className="bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1">
+              {badgeCount}
+            </span>
+          )}
         </CardTitle>
         {isAdmin && !forParentStudentId && (
           <DropdownMenu>
