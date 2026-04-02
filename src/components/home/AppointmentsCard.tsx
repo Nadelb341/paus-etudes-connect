@@ -12,7 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { CalendarIcon, MoreVertical, Plus, Trash2, Eye, EyeOff, Clock } from "lucide-react";
+import { CalendarIcon, MoreVertical, Plus, Trash2, Eye, EyeOff, Pin, Edit2, CalendarOff, XCircle } from "lucide-react";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -33,6 +33,8 @@ interface Appointment {
   items_to_bring: string;
   seen_by_student: boolean;
   is_visible: boolean;
+  status: string;
+  status_note: string;
 }
 
 interface Profile {
@@ -42,10 +44,13 @@ interface Profile {
 }
 
 const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
-
 const DURATIONS = ["30min", "1h", "1h30", "2h", "2h30", "3h", "3h30", "4h"];
 
-const AppointmentsCard = () => {
+interface AppointmentsCardProps {
+  forParentStudentId?: string;
+}
+
+const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -60,6 +65,18 @@ const AppointmentsCard = () => {
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [duration, setDuration] = useState("1h");
   const [itemsToBring, setItemsToBring] = useState("");
+
+  // Edit state
+  const [editingAppt, setEditingAppt] = useState<Appointment | null>(null);
+  const [editDate, setEditDate] = useState<Date>();
+  const [editTime, setEditTime] = useState("");
+  const [editSubjects, setEditSubjects] = useState<string[]>([]);
+  const [editDuration, setEditDuration] = useState("");
+  const [editItems, setEditItems] = useState("");
+
+  // Status change state
+  const [statusAction, setStatusAction] = useState<{ appt: Appointment; action: "postponed" | "cancelled" } | null>(null);
+  const [statusNote, setStatusNote] = useState("");
 
   const fetchAppointments = async () => {
     if (!user) return;
@@ -127,7 +144,6 @@ const AppointmentsCard = () => {
   const toggleGlobalVisibility = async () => {
     const newVal = !isVisible;
     setIsVisible(newVal);
-    // Update all appointments visibility
     await supabase.from("appointments").update({ is_visible: newVal }).neq("id", "00000000-0000-0000-0000-000000000000");
     toast.success(newVal ? "Carte visible pour les élèves" : "Carte masquée pour les élèves");
   };
@@ -137,18 +153,66 @@ const AppointmentsCard = () => {
     fetchAppointments();
   };
 
-  const toggleSubject = (subjectId: string) => {
-    setSelectedSubjects(prev =>
-      prev.includes(subjectId) ? prev.filter(s => s !== subjectId) : [...prev, subjectId]
-    );
+  const toggleSubject = (subjectId: string, list: string[], setter: (v: string[]) => void) => {
+    setter(list.includes(subjectId) ? list.filter(s => s !== subjectId) : [...list, subjectId]);
   };
 
-  // Filter: students see only their own, admin sees all
-  const visibleAppointments = isAdmin
-    ? appointments
-    : appointments.filter(a => a.student_id === user?.id);
+  // Edit appointment
+  const openEdit = (appt: Appointment) => {
+    setEditingAppt(appt);
+    setEditDate(new Date(appt.appointment_date));
+    setEditTime(appt.start_time?.slice(0, 5) || "14:00");
+    setEditSubjects([...appt.subjects]);
+    setEditDuration(appt.estimated_duration);
+    setEditItems(appt.items_to_bring || "");
+  };
 
-  if (!isAdmin && visibleAppointments.length === 0) return null;
+  const handleSaveEdit = async () => {
+    if (!editingAppt || !editDate) return;
+    const { error } = await supabase.from("appointments").update({
+      appointment_date: format(editDate, "yyyy-MM-dd"),
+      start_time: editTime,
+      subjects: editSubjects,
+      estimated_duration: editDuration,
+      items_to_bring: editItems,
+    }).eq("id", editingAppt.id);
+    if (error) { toast.error("Erreur"); return; }
+    toast.success("RDV modifié !");
+    setEditingAppt(null);
+    fetchAppointments();
+  };
+
+  // Status change (postpone / cancel)
+  const handleStatusChange = async () => {
+    if (!statusAction) return;
+    const { error } = await supabase.from("appointments").update({
+      status: statusAction.action,
+      status_note: statusNote,
+    }).eq("id", statusAction.appt.id);
+    if (error) { toast.error("Erreur"); return; }
+    toast.success(statusAction.action === "postponed" ? "RDV reporté" : "RDV annulé");
+    setStatusAction(null);
+    setStatusNote("");
+    fetchAppointments();
+  };
+
+  // Filter based on context
+  const visibleAppointments = (() => {
+    if (forParentStudentId) {
+      return appointments.filter(a => a.student_id === forParentStudentId);
+    }
+    if (isAdmin) return appointments;
+    return appointments.filter(a => a.student_id === user?.id);
+  })();
+
+  if (!isAdmin && !forParentStudentId && visibleAppointments.length === 0) return null;
+  if (forParentStudentId && visibleAppointments.length === 0) return null;
+
+  const getStatusBadge = (status: string) => {
+    if (status === "postponed") return <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-400">📅 Reporté</span>;
+    if (status === "cancelled") return <span className="text-xs px-2 py-0.5 rounded-full bg-destructive/10 text-destructive">❌ Annulé</span>;
+    return null;
+  };
 
   return (
     <Card className="border-border">
@@ -157,7 +221,7 @@ const AppointmentsCard = () => {
           <CalendarIcon size={18} className="text-primary" />
           📅 RDV à venir
         </CardTitle>
-        {isAdmin && (
+        {isAdmin && !forParentStudentId && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -181,16 +245,43 @@ const AppointmentsCard = () => {
           <p className="text-sm text-muted-foreground text-center py-2">Aucun RDV prévu</p>
         ) : (
           visibleAppointments.map(appt => (
-            <div key={appt.id} className="border border-border rounded-lg p-3 space-y-1 text-sm">
+            <div key={appt.id} className={cn(
+              "border border-border rounded-lg p-3 space-y-1 text-sm",
+              appt.status === "cancelled" && "opacity-60",
+              appt.status === "postponed" && "border-orange-300 dark:border-orange-700"
+            )}>
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-foreground">
-                  {isAdmin ? appt.student_name : "Mon prochain cours"}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-foreground">
+                    {isAdmin ? appt.student_name : (forParentStudentId ? appt.student_name : "Mon prochain cours")}
+                  </span>
+                  {getStatusBadge(appt.status)}
+                </div>
                 <div className="flex items-center gap-1">
                   {appt.seen_by_student && (
                     <span className="text-xs text-green-600 dark:text-green-400">✅ Vu</span>
                   )}
-                  {isAdmin && (
+                  {isAdmin && !forParentStudentId && appt.status === "active" && (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon" className="h-7 w-7">
+                          <Pin size={14} className="text-primary" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => openEdit(appt)}>
+                          <Edit2 size={14} className="mr-2" /> Modifier
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => { setStatusAction({ appt, action: "postponed" }); setStatusNote(""); }}>
+                          <CalendarOff size={14} className="mr-2" /> Reporter
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => { setStatusAction({ appt, action: "cancelled" }); setStatusNote(""); }}>
+                          <XCircle size={14} className="mr-2" /> Annuler
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
+                  {isAdmin && !forParentStudentId && (
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button variant="ghost" size="icon" className="h-6 w-6">
@@ -208,6 +299,9 @@ const AppointmentsCard = () => {
                   )}
                 </div>
               </div>
+              {appt.status_note && appt.status !== "active" && (
+                <p className="text-xs text-muted-foreground italic">💬 {appt.status_note}</p>
+              )}
               <p className="text-muted-foreground">
                 📅 {format(new Date(appt.appointment_date), "EEEE d MMMM yyyy", { locale: fr })}
                 {" · "}🕐 {appt.start_time?.slice(0, 5)}
@@ -222,7 +316,7 @@ const AppointmentsCard = () => {
                   <p className="whitespace-pre-line">{appt.items_to_bring}</p>
                 </div>
               )}
-              {!isAdmin && (
+              {!isAdmin && !forParentStudentId && (
                 <div className="flex items-center gap-2 pt-1">
                   <Checkbox
                     checked={appt.seen_by_student}
@@ -243,7 +337,6 @@ const AppointmentsCard = () => {
             <DialogTitle>Nouveau RDV</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            {/* Student */}
             <div>
               <label className="text-sm font-medium">Élève</label>
               <Select value={selectedStudent} onValueChange={setSelectedStudent}>
@@ -255,8 +348,6 @@ const AppointmentsCard = () => {
                 </SelectContent>
               </Select>
             </div>
-
-            {/* Date */}
             <div>
               <label className="text-sm font-medium">Date du cours</label>
               <Popover>
@@ -271,14 +362,10 @@ const AppointmentsCard = () => {
                 </PopoverContent>
               </Popover>
             </div>
-
-            {/* Time */}
             <div>
               <label className="text-sm font-medium">Heure de début</label>
               <Input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} />
             </div>
-
-            {/* Subjects multi-select */}
             <div>
               <label className="text-sm font-medium">Matière(s)</label>
               <div className="flex flex-wrap gap-2 mt-1 max-h-32 overflow-y-auto border border-input rounded-md p-2">
@@ -286,7 +373,7 @@ const AppointmentsCard = () => {
                   <button
                     key={s.id}
                     type="button"
-                    onClick={() => toggleSubject(s.id)}
+                    onClick={() => toggleSubject(s.id, selectedSubjects, setSelectedSubjects)}
                     className={cn(
                       "text-xs px-2 py-1 rounded-full border transition-all",
                       selectedSubjects.includes(s.id)
@@ -299,8 +386,6 @@ const AppointmentsCard = () => {
                 ))}
               </div>
             </div>
-
-            {/* Duration */}
             <div>
               <label className="text-sm font-medium">Temps estimé</label>
               <Select value={duration} onValueChange={setDuration}>
@@ -312,8 +397,6 @@ const AppointmentsCard = () => {
                 </SelectContent>
               </Select>
             </div>
-
-            {/* Items to bring */}
             <div>
               <label className="text-sm font-medium">Affaires à prendre</label>
               <Textarea
@@ -323,8 +406,105 @@ const AppointmentsCard = () => {
                 rows={4}
               />
             </div>
-
             <Button onClick={handleCreate} className="w-full">Créer le RDV</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit dialog */}
+      <Dialog open={!!editingAppt} onOpenChange={open => { if (!open) setEditingAppt(null); }}>
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Modifier le RDV — {editingAppt?.student_name}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium">Date du cours</label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className={cn("w-full justify-start text-left", !editDate && "text-muted-foreground")}>
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {editDate ? format(editDate, "PPP", { locale: fr }) : "Choisir une date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar mode="single" selected={editDate} onSelect={setEditDate} className={cn("p-3 pointer-events-auto")} />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Heure de début</label>
+              <Input type="time" value={editTime} onChange={e => setEditTime(e.target.value)} />
+            </div>
+            <div>
+              <label className="text-sm font-medium">Matière(s)</label>
+              <div className="flex flex-wrap gap-2 mt-1 max-h-32 overflow-y-auto border border-input rounded-md p-2">
+                {ALL_SUBJECTS.map(s => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => toggleSubject(s.id, editSubjects, setEditSubjects)}
+                    className={cn(
+                      "text-xs px-2 py-1 rounded-full border transition-all",
+                      editSubjects.includes(s.id)
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-secondary text-muted-foreground border-border hover:bg-accent"
+                    )}
+                  >
+                    {s.icon} {s.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Temps estimé</label>
+              <Select value={editDuration} onValueChange={setEditDuration}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  {DURATIONS.map(d => (
+                    <SelectItem key={d} value={d}>{d}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="text-sm font-medium">Affaires à prendre</label>
+              <Textarea value={editItems} onChange={e => setEditItems(e.target.value)} rows={4} />
+            </div>
+            <Button onClick={handleSaveEdit} className="w-full">Enregistrer</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Status change dialog (postpone/cancel) */}
+      <Dialog open={!!statusAction} onOpenChange={open => { if (!open) setStatusAction(null); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {statusAction?.action === "postponed" ? "📅 Reporter le RDV" : "❌ Annuler le RDV"}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              {statusAction?.action === "postponed"
+                ? "Ce RDV sera marqué comme reporté. L'élève et le parent seront notifiés."
+                : "Ce RDV sera marqué comme annulé. L'élève et le parent seront notifiés."}
+            </p>
+            <div>
+              <label className="text-sm font-medium">Note (optionnelle)</label>
+              <Textarea
+                value={statusNote}
+                onChange={e => setStatusNote(e.target.value)}
+                placeholder="Raison du report ou de l'annulation..."
+                rows={3}
+              />
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setStatusAction(null)} className="flex-1">Annuler</Button>
+              <Button onClick={handleStatusChange} className="flex-1" variant={statusAction?.action === "cancelled" ? "destructive" : "default"}>
+                Confirmer
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
