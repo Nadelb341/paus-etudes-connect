@@ -340,7 +340,6 @@ const MessagesPage = () => {
   const renderReactions = (msg: Message) => {
     const reactions = msg.reactions || {};
     const entries = Object.entries(reactions).filter(([, users]) => (users as string[]).length > 0);
-    if (entries.length === 0 && !showReactionPicker) return null;
     return (
       <div className="flex flex-wrap gap-1 mt-1">
         {entries.map(([emoji, users]) => (
@@ -350,7 +349,9 @@ const MessagesPage = () => {
           </button>
         ))}
         <button onClick={() => setShowReactionPicker(showReactionPicker === msg.id ? null : msg.id)}
-          className="text-xs px-1.5 py-0.5 rounded-full border border-border bg-secondary/30 hover:bg-secondary transition-all">+</button>
+          className="text-xs px-1.5 py-0.5 rounded-full border border-border bg-secondary/30 hover:bg-secondary transition-all">
+          😊
+        </button>
       </div>
     );
   };
