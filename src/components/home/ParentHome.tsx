@@ -112,7 +112,17 @@ const ParentHome = () => {
       .select("*")
       .eq("parent_user_id", parentUserId)
       .order("created_at");
-    if (data) setChildCards(data as ChildCard[]);
+    if (data) {
+      setChildCards(data as ChildCard[]);
+      // Resolve linked student user IDs for appointments
+      const profileIds = data.filter((c: any) => c.child_profile_id).map((c: any) => c.child_profile_id);
+      if (profileIds.length > 0) {
+        const { data: profiles } = await supabase.from("profiles").select("user_id").in("id", profileIds);
+        if (profiles) setLinkedStudentUserIds(profiles.map((p: any) => p.user_id));
+      } else {
+        setLinkedStudentUserIds([]);
+      }
+    }
   };
 
   const createChildCard = async () => {
@@ -270,6 +280,11 @@ const ParentHome = () => {
         </h2>
         <p className="text-sm text-muted-foreground font-medium">Suivi familial</p>
       </div>
+
+      {/* Appointments for linked children */}
+      {linkedStudentUserIds.map(studentId => (
+        <AppointmentsCard key={studentId} forParentStudentId={studentId} />
+      ))}
 
       {/* Admin: select parent */}
       {isAdmin && (
