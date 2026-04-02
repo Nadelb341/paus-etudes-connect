@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, ClipboardList, Bookmark, Send } from "lucide-react";
+import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, ClipboardList, Bookmark, Send, UserPlus, Link2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +18,10 @@ import { Badge } from "@/components/ui/badge";
 interface Profile {
   id: string; user_id: string; first_name: string; email: string; gender: string;
   birth_date: string | null; school_level: string; remarks: string; is_approved: boolean; created_at: string;
+  status: string; child_name: string | null;
+}
+interface ParentChildLink {
+  id: string; parent_user_id: string; child_profile_id: string | null; child_name: string;
 }
 interface TutoringHour {
   id: string; student_id: string; session_date: string; duration_hours: number;
@@ -83,12 +87,31 @@ const DashboardPage = () => {
   const [relanceStudentId, setRelanceStudentId] = useState("");
   const [relanceMessage, setRelanceMessage] = useState("");
 
+  // Parent management
+  const [parentChildLinks, setParentChildLinks] = useState<ParentChildLink[]>([]);
+  const [editingParent, setEditingParent] = useState<Profile | null>(null);
+  const [editParentName, setEditParentName] = useState("");
+  const [editParentEmail, setEditParentEmail] = useState("");
+  const [editParentChildName, setEditParentChildName] = useState("");
+  const [editParentRemarks, setEditParentRemarks] = useState("");
+  const [linkStudentId, setLinkStudentId] = useState("");
+  const [parentSearchTerm, setParentSearchTerm] = useState("");
+
+  const studentProfiles = profiles.filter(p => p.status !== "parent");
+  const parentProfilesList = profiles.filter(p => p.status === "parent");
+
+  const fetchParentChildLinks = async () => {
+    const { data } = await supabase.from("parent_child_cards").select("id, parent_user_id, child_profile_id, child_name");
+    if (data) setParentChildLinks(data as ParentChildLink[]);
+  };
+
   useEffect(() => {
     if (isAdmin) {
       fetchProfiles();
       fetchTutoringHours();
       fetchAllHomework();
       fetchAllCompletions();
+      fetchParentChildLinks();
       const channel = supabase.channel("profiles-realtime").on(
         "postgres_changes", { event: "*", schema: "public", table: "profiles" },
         () => fetchProfiles()
@@ -196,6 +219,64 @@ const DashboardPage = () => {
     setNotifTitle(""); setNotifMessage(""); setNotifRecipientType("all"); setNotifRecipientId("");
   };
 
+  // Parent management functions
+  const openEditParent = (parent: Profile) => {
+    setEditingParent(parent);
+    setEditParentName(parent.first_name);
+    setEditParentEmail(parent.email);
+    setEditParentChildName(parent.child_name || "");
+    setEditParentRemarks(parent.remarks || "");
+    // Find existing link
+    const existingLink = parentChildLinks.find(l => l.parent_user_id === parent.user_id);
+    if (existingLink?.child_profile_id) {
+      const linkedStudent = profiles.find(p => p.id === existingLink.child_profile_id);
+      setLinkStudentId(linkedStudent?.user_id || "");
+    } else {
+      setLinkStudentId("");
+    }
+  };
+
+  const saveParentEdit = async () => {
+    if (!editingParent) return;
+    await supabase.from("profiles").update({
+      first_name: editParentName,
+      child_name: editParentChildName,
+      remarks: editParentRemarks,
+    }).eq("id", editingParent.id);
+
+    // Handle parent-child link
+    if (linkStudentId) {
+      const { data: studentProfile } = await supabase.from("profiles").select("id, first_name").eq("user_id", linkStudentId).single();
+      if (studentProfile) {
+        const existingLink = parentChildLinks.find(l => l.parent_user_id === editingParent.user_id);
+        if (existingLink) {
+          await supabase.from("parent_child_cards").update({
+            child_profile_id: studentProfile.id,
+            child_name: studentProfile.first_name,
+          }).eq("id", existingLink.id);
+        } else {
+          await supabase.from("parent_child_cards").insert({
+            parent_user_id: editingParent.user_id,
+            child_profile_id: studentProfile.id,
+            child_name: studentProfile.first_name,
+          });
+        }
+      }
+    }
+
+    toast.success("Parent mis à jour !");
+    setEditingParent(null);
+    fetchProfiles();
+    fetchParentChildLinks();
+  };
+
+  const getLinkedChildName = (parentUserId: string): string => {
+    const link = parentChildLinks.find(l => l.parent_user_id === parentUserId);
+    if (!link?.child_profile_id) return "—";
+    const student = profiles.find(p => p.id === link.child_profile_id);
+    return student?.first_name || link.child_name || "—";
+  };
+
   const sendRelance = async () => {
     if (!relanceMessage.trim() || !relanceStudentId || !relanceHwId) return;
     await supabase.from("homework_reminders").insert({
@@ -237,15 +318,21 @@ const DashboardPage = () => {
     { key: "pending", icon: UserCheck, title: `Inscriptions en attente (${pendingProfiles.length})`, color: "hsl(350, 65%, 50%)", badge: pendingProfiles.length },
     { key: "monitoring", icon: Activity, title: "Monitoring", color: "hsl(217, 91%, 60%)" },
     { key: "students", icon: Users, title: "Élèves", color: "hsl(142, 71%, 45%)" },
+    { key: "parents", icon: UserPlus, title: `Parents (${parentProfilesList.length})`, color: "hsl(280, 60%, 55%)" },
     { key: "hours", icon: Clock, title: "Registre des heures", color: "hsl(32, 80%, 50%)" },
     { key: "notes", icon: ClipboardList, title: `Suivi des notes en attente (${trackedHours.length})`, color: "hsl(45, 90%, 50%)", badge: trackedHours.length },
     { key: "notifications", icon: Bell, title: "Notifications", color: "hsl(350, 65%, 50%)" },
     { key: "homework", icon: BookOpen, title: "Cahier de texte", color: "hsl(260, 50%, 55%)" },
   ];
 
-  const filteredProfiles = profiles.filter(p =>
+  const filteredProfiles = studentProfiles.filter(p =>
     p.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  const filteredParents = parentProfilesList.filter(p =>
+    p.first_name.toLowerCase().includes(parentSearchTerm.toLowerCase()) ||
+    p.email.toLowerCase().includes(parentSearchTerm.toLowerCase()) ||
+    (p.child_name || "").toLowerCase().includes(parentSearchTerm.toLowerCase())
   );
 
   return (
@@ -347,13 +434,56 @@ const DashboardPage = () => {
                     </div>
                   )}
 
+                  {/* PARENTS */}
+                  {key === "parents" && (
+                    <div className="space-y-3">
+                      <div className="relative">
+                        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                        <Input placeholder="Rechercher un parent..." className="pl-9" value={parentSearchTerm} onChange={e => setParentSearchTerm(e.target.value)} />
+                      </div>
+                      {filteredParents.length === 0 ? (
+                        <p className="text-sm text-muted-foreground text-center py-4">Aucun parent inscrit</p>
+                      ) : (
+                        filteredParents.map(parent => {
+                          const linkedChild = getLinkedChildName(parent.user_id);
+                          return (
+                            <div key={parent.id} className="p-3 bg-secondary/30 rounded-lg">
+                              <div className="flex items-center justify-between">
+                                <div className="flex-1">
+                                  <p className="font-medium text-sm">{parent.first_name}</p>
+                                  <p className="text-xs text-muted-foreground">{parent.email}</p>
+                                  <div className="flex items-center gap-2 mt-1">
+                                    <span className="text-xs text-muted-foreground">Enfant déclaré : <strong>{parent.child_name || "—"}</strong></span>
+                                    <span className="text-xs text-muted-foreground">·</span>
+                                    <span className="text-xs flex items-center gap-1">
+                                      <Link2 size={10} className={linkedChild !== "—" ? "text-green-500" : "text-destructive"} />
+                                      <span className={linkedChild !== "—" ? "text-green-600 dark:text-green-400 font-medium" : "text-destructive"}>
+                                        {linkedChild !== "—" ? `Lié à ${linkedChild}` : "Non lié"}
+                                      </span>
+                                    </span>
+                                  </div>
+                                  {parent.remarks && (
+                                    <p className="text-xs text-muted-foreground italic mt-1">📝 {parent.remarks}</p>
+                                  )}
+                                </div>
+                                <Button size="sm" variant="ghost" onClick={() => openEditParent(parent)}>
+                                  <Edit2 size={14} className="mr-1" />Gérer
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  )}
+
                   {/* HOURS */}
                   {key === "hours" && (
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Select value={thStudentId} onValueChange={setThStudentId}>
                           <SelectTrigger><SelectValue placeholder="Élève" /></SelectTrigger>
-                          <SelectContent>{profiles.map(p => <SelectItem key={p.user_id} value={p.user_id}>{p.first_name} ({p.school_level})</SelectItem>)}</SelectContent>
+                          <SelectContent>{studentProfiles.map(p => <SelectItem key={p.user_id} value={p.user_id}>{p.first_name} ({p.school_level})</SelectItem>)}</SelectContent>
                         </Select>
                         <Input type="date" value={thDate} onChange={e => setThDate(e.target.value)} />
                         <Input type="number" step="0.5" value={thDuration} onChange={e => setThDuration(e.target.value)} placeholder="Durée (h)" />
@@ -607,6 +737,47 @@ const DashboardPage = () => {
                 <Send size={14} className="mr-2" />Envoyer la relance
               </Button>
             </div>
+          </DialogContent>
+        </Dialog>
+        {/* Parent edit/link dialog */}
+        <Dialog open={!!editingParent} onOpenChange={(open) => { if (!open) setEditingParent(null); }}>
+          <DialogContent className="max-w-md">
+            <DialogHeader><DialogTitle>Gérer le parent — {editingParent?.first_name}</DialogTitle></DialogHeader>
+            {editingParent && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Prénom</Label>
+                    <Input value={editParentName} onChange={e => setEditParentName(e.target.value)} />
+                  </div>
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Email</Label>
+                    <Input value={editParentEmail} disabled className="bg-muted" />
+                  </div>
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Prénom de l'enfant (déclaré)</Label>
+                  <Input value={editParentChildName} onChange={e => setEditParentChildName(e.target.value)} />
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground flex items-center gap-1"><Link2 size={12} /> Lier à un élève inscrit</Label>
+                  <Select value={linkStudentId} onValueChange={setLinkStudentId}>
+                    <SelectTrigger><SelectValue placeholder="Sélectionner un élève..." /></SelectTrigger>
+                    <SelectContent>
+                      {studentProfiles.map(s => (
+                        <SelectItem key={s.user_id} value={s.user_id}>{s.first_name} ({s.school_level})</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-muted-foreground mt-1">Ce lien permet au parent de voir les RDV et recevoir les notifications de son enfant</p>
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Remarques</Label>
+                  <Textarea value={editParentRemarks} onChange={e => setEditParentRemarks(e.target.value)} rows={2} placeholder="Notes sur ce parent..." />
+                </div>
+                <Button onClick={saveParentEdit} className="w-full bg-gradient-primary">Sauvegarder</Button>
+              </div>
+            )}
           </DialogContent>
         </Dialog>
       </main>

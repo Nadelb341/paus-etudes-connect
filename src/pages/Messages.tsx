@@ -3,10 +3,11 @@ import AppHeader from "@/components/layout/AppHeader";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Send, ArrowLeft, Search, Users, MessageSquarePlus } from "lucide-react";
+import { Send, ArrowLeft, Search, Users, MessageSquarePlus, UserPlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ADMIN_EMAIL } from "@/lib/constants";
@@ -29,6 +30,9 @@ const MessagesPage = () => {
   const [showBroadcast, setShowBroadcast] = useState(false);
   const [broadcastContent, setBroadcastContent] = useState("");
   const [broadcastSubject, setBroadcastSubject] = useState("");
+  const [ccParent, setCcParent] = useState(false);
+  const [linkedParentId, setLinkedParentId] = useState<string | null>(null);
+  const [linkedParentName, setLinkedParentName] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -48,6 +52,24 @@ const MessagesPage = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, selectedPartnerId]);
+
+  // Fetch linked parent when admin selects a student conversation
+  useEffect(() => {
+    if (!isAdmin || !selectedPartnerId) { setLinkedParentId(null); setLinkedParentName(""); setCcParent(false); return; }
+    const fetchLinkedParent = async () => {
+      // Get student's profile.id
+      const { data: studentProfile } = await supabase.from("profiles").select("id").eq("user_id", selectedPartnerId).single();
+      if (!studentProfile) { setLinkedParentId(null); setLinkedParentName(""); return; }
+      // Find parent link
+      const { data: link } = await supabase.from("parent_child_cards").select("parent_user_id").eq("child_profile_id", studentProfile.id).maybeSingle();
+      if (!link) { setLinkedParentId(null); setLinkedParentName(""); return; }
+      // Get parent name
+      const { data: parentProfile } = await supabase.from("profiles").select("first_name").eq("user_id", link.parent_user_id).single();
+      setLinkedParentId(link.parent_user_id);
+      setLinkedParentName(parentProfile?.first_name || "Parent");
+    };
+    fetchLinkedParent();
+  }, [isAdmin, selectedPartnerId]);
 
   const fetchMessages = async () => {
     const { data } = await supabase.from("messages").select("*").order("created_at", { ascending: true });
@@ -106,15 +128,23 @@ const MessagesPage = () => {
 
   const sendReply = async () => {
     if (!newMessage.trim() || !selectedPartnerId || !user) return;
+    const recipients = [selectedPartnerId];
+    // If CC parent is enabled, also send to linked parent
+    if (ccParent && linkedParentId) {
+      recipients.push(linkedParentId);
+    }
     await supabase.from("messages").insert({
       sender_id: user.id,
       sender_name: user.user_metadata?.first_name || "Utilisateur",
       recipient_type: "individual",
-      recipient_ids: [selectedPartnerId],
+      recipient_ids: recipients,
       subject: "",
       content: newMessage.trim(),
     });
     setNewMessage("");
+    if (ccParent && linkedParentId) {
+      toast.success(`Message envoyé (copie à ${linkedParentName})`);
+    }
   };
 
   const sendBroadcast = async () => {
@@ -187,6 +217,14 @@ const MessagesPage = () => {
           <div ref={messagesEndRef} />
         </div>
         <div className="border-t border-border bg-card p-3 max-w-2xl mx-auto w-full">
+          {isAdmin && linkedParentId && (
+            <div className="flex items-center gap-2 mb-2 px-1">
+              <Checkbox id="cc-parent" checked={ccParent} onCheckedChange={(v) => setCcParent(!!v)} />
+              <label htmlFor="cc-parent" className="text-xs text-muted-foreground flex items-center gap-1 cursor-pointer">
+                <UserPlus size={12} /> Copie à {linkedParentName} (parent)
+              </label>
+            </div>
+          )}
           <div className="flex gap-2">
             <Input
               value={newMessage}
