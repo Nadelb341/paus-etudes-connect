@@ -90,7 +90,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
     const { data } = await supabase
       .from("appointments")
       .select("*")
-      .order("appointment_date", { ascending: true });
+      .order("created_at", { ascending: false });
     if (data) setAppointments(data as Appointment[]);
   };
 
@@ -163,6 +163,30 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
       created_by: user?.id,
     });
     if (error) { toast.error("Erreur lors de la création"); return; }
+
+    // Si un parent est sélectionné, s'assurer que le lien parent_child_cards existe
+    if (selectedParent) {
+      const { data: studentProfile } = await supabase
+        .from("profiles").select("id").eq("user_id", selectedStudent).single();
+      if (studentProfile) {
+        // Vérifier si le lien existe déjà
+        const { data: existingLink } = await supabase
+          .from("parent_child_cards")
+          .select("id")
+          .eq("parent_user_id", selectedParent)
+          .eq("child_profile_id", studentProfile.id)
+          .maybeSingle();
+        if (!existingLink) {
+          // Créer le lien parent → enfant
+          await supabase.from("parent_child_cards").insert({
+            parent_user_id: selectedParent,
+            child_profile_id: studentProfile.id,
+            child_name: student?.first_name || "",
+          });
+        }
+      }
+    }
+
     toast.success("RDV créé !");
     setShowForm(false);
     resetForm();
