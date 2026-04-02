@@ -53,6 +53,10 @@ const DashboardPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
   const [editingRemarks, setEditingRemarks] = useState("");
+  const [editStudentName, setEditStudentName] = useState("");
+  const [editStudentGender, setEditStudentGender] = useState("");
+  const [editStudentLevel, setEditStudentLevel] = useState("");
+  const [editStudentBirthDate, setEditStudentBirthDate] = useState("");
 
   // Homework form
   const [hwSubject, setHwSubject] = useState("");
@@ -155,10 +159,16 @@ const DashboardPage = () => {
     fetchProfiles();
   };
 
-  const saveRemarks = async () => {
+  const saveStudentProfile = async () => {
     if (!selectedProfile) return;
-    await supabase.from("profiles").update({ remarks: editingRemarks }).eq("id", selectedProfile.id);
-    toast.success("Remarques sauvegardées");
+    await supabase.from("profiles").update({
+      first_name: editStudentName,
+      gender: editStudentGender,
+      school_level: editStudentLevel,
+      birth_date: editStudentBirthDate || null,
+      remarks: editingRemarks,
+    }).eq("id", selectedProfile.id);
+    toast.success("Profil élève mis à jour !");
     setSelectedProfile(null);
     fetchProfiles();
   };
@@ -425,7 +435,7 @@ const DashboardPage = () => {
                               <p className="font-medium text-sm">{p.first_name}</p>
                               <p className="text-xs text-muted-foreground">{p.email}</p>
                             </div>
-                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditingRemarks(p.remarks || ""); }}>
+                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); }}>
                               <Eye size={14} className="mr-1" />Détails
                             </Button>
                           </div>
@@ -679,25 +689,62 @@ const DashboardPage = () => {
           ))}
         </div>
 
-        {/* Student detail dialog */}
+        {/* Student detail/edit dialog */}
         <Dialog open={!!selectedProfile} onOpenChange={(open) => { if (!open) setSelectedProfile(null); }}>
-          <DialogContent>
-            <DialogHeader><DialogTitle>{selectedProfile?.first_name}</DialogTitle></DialogHeader>
+          <DialogContent className="max-w-md">
+            <DialogHeader><DialogTitle>Modifier l'élève</DialogTitle></DialogHeader>
             {selectedProfile && (
-              <div className="space-y-3">
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div><Label className="text-xs text-muted-foreground">Email</Label><p>{selectedProfile.email}</p></div>
-                  <div><Label className="text-xs text-muted-foreground">Genre</Label><p>{selectedProfile.gender}</p></div>
-                  <div><Label className="text-xs text-muted-foreground">Niveau</Label><p>{selectedProfile.school_level}</p></div>
-                  <div><Label className="text-xs text-muted-foreground">Date de naissance</Label><p>{selectedProfile.birth_date || "—"}</p></div>
-                  <div><Label className="text-xs text-muted-foreground">Inscription</Label><p>{new Date(selectedProfile.created_at).toLocaleDateString("fr-FR")}</p></div>
-                  <div><Label className="text-xs text-muted-foreground">Tarif</Label><p>{getHourlyRate(selectedProfile.school_level)}€/h</p></div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Prénom</Label>
+                    <Input value={editStudentName} onChange={e => setEditStudentName(e.target.value)} />
+                  </div>
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Email</Label>
+                    <Input value={selectedProfile.email} disabled className="bg-muted" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Genre</Label>
+                    <Select value={editStudentGender} onValueChange={setEditStudentGender}>
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Garçon">Garçon</SelectItem>
+                        <SelectItem value="Fille">Fille</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Niveau scolaire</Label>
+                    <Select value={editStudentLevel} onValueChange={setEditStudentLevel}>
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        {SCHOOL_LEVELS.map(l => <SelectItem key={l} value={l}>{l}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Date de naissance</Label>
+                    <Input type="date" value={editStudentBirthDate} onChange={e => setEditStudentBirthDate(e.target.value)} />
+                  </div>
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Tarif calculé</Label>
+                    <p className="text-sm font-medium mt-2">{getHourlyRate(editStudentLevel)}€/h</p>
+                  </div>
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Inscription</Label>
+                  <p className="text-sm text-muted-foreground">{new Date(selectedProfile.created_at).toLocaleDateString("fr-FR")}</p>
                 </div>
                 <div>
                   <Label className="text-xs text-muted-foreground">Remarques</Label>
                   <Textarea value={editingRemarks} onChange={e => setEditingRemarks(e.target.value)} rows={3} placeholder="Remarques sur l'élève..." />
                 </div>
-                <Button onClick={saveRemarks} className="bg-gradient-primary">Sauvegarder</Button>
+                <Button onClick={saveStudentProfile} className="w-full bg-gradient-primary">Sauvegarder</Button>
               </div>
             )}
           </DialogContent>
