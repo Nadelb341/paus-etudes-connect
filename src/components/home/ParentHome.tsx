@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminView } from "@/hooks/useAdminView";
 import { ADMIN_EMAIL } from "@/lib/constants";
+import AppointmentsCard from "@/components/home/AppointmentsCard";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,7 @@ const ParentHome = () => {
   const [noteText, setNoteText] = useState("");
   const [studentProfiles, setStudentProfiles] = useState<{ user_id: string; first_name: string }[]>([]);
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
+  const [linkedStudentUserIds, setLinkedStudentUserIds] = useState<string[]>([]);
 
   // For admin: load parent profiles
   useEffect(() => {
