@@ -77,6 +77,12 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
   // Status change state
   const [statusAction, setStatusAction] = useState<{ appt: Appointment; action: "postponed" | "cancelled" } | null>(null);
   const [statusNote, setStatusNote] = useState("");
+  const [postponeDate, setPostponeDate] = useState<Date>();
+  const [postponeTime, setPostponeTime] = useState("14:00");
+
+  // Parent selection state (for creation)
+  const [parentProfiles, setParentProfiles] = useState<{ user_id: string; first_name: string; email: string }[]>([]);
+  const [selectedParent, setSelectedParentId] = useState("");
 
   const fetchAppointments = async () => {
     if (!user) return;
@@ -97,10 +103,46 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
     if (data) setStudents(data);
   };
 
+  // Fetch parents linked to selected student
+  const fetchParentsForStudent = async (studentUserId: string) => {
+    // Get the profile.id for this student
+    const { data: profileData } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("user_id", studentUserId)
+      .single();
+    if (!profileData) { setParentProfiles([]); return; }
+
+    // Find parent_child_cards linked to this profile
+    const { data: cards } = await supabase
+      .from("parent_child_cards")
+      .select("parent_user_id")
+      .eq("child_profile_id", profileData.id);
+    if (!cards || cards.length === 0) { setParentProfiles([]); return; }
+
+    const parentIds = cards.map((c: any) => c.parent_user_id);
+    const { data: parents } = await supabase
+      .from("profiles")
+      .select("user_id, first_name, email")
+      .in("user_id", parentIds);
+    if (parents) setParentProfiles(parents);
+    else setParentProfiles([]);
+  };
+
   useEffect(() => {
     fetchAppointments();
     if (isAdmin) fetchStudents();
   }, [user]);
+
+  // When selected student changes, fetch linked parents
+  useEffect(() => {
+    if (selectedStudent) {
+      fetchParentsForStudent(selectedStudent);
+    } else {
+      setParentProfiles([]);
+    }
+    setSelectedParentId("");
+  }, [selectedStudent]);
 
   const handleCreate = async () => {
     if (!selectedStudent || !appointmentDate) {
@@ -133,6 +175,8 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
     setSelectedSubjects([]);
     setDuration("1h");
     setItemsToBring("");
+    setSelectedParentId("");
+    setParentProfiles([]);
   };
 
   const handleDelete = async (id: string) => {
@@ -185,14 +229,26 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
   // Status change (postpone / cancel)
   const handleStatusChange = async () => {
     if (!statusAction) return;
-    const { error } = await supabase.from("appointments").update({
+    if (statusAction.action === "postponed" && !postponeDate) {
+      toast.error("Veuillez choisir une nouvelle date pour le report");
+      return;
+    }
+    const updateData: any = {
       status: statusAction.action,
       status_note: statusNote,
-    }).eq("id", statusAction.appt.id);
+    };
+    // If postponed, update the appointment date and time
+    if (statusAction.action === "postponed" && postponeDate) {
+      updateData.appointment_date = format(postponeDate, "yyyy-MM-dd");
+      updateData.start_time = postponeTime;
+    }
+    const { error } = await supabase.from("appointments").update(updateData).eq("id", statusAction.appt.id);
     if (error) { toast.error("Erreur"); return; }
-    toast.success(statusAction.action === "postponed" ? "RDV reporté" : "RDV annulé");
+    toast.success(statusAction.action === "postponed" ? "RDV reporté à la nouvelle date" : "RDV annulé");
     setStatusAction(null);
     setStatusNote("");
+    setPostponeDate(undefined);
+    setPostponeTime("14:00");
     fetchAppointments();
   };
 
@@ -348,6 +404,20 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
                 </SelectContent>
               </Select>
             </div>
+            {parentProfiles.length > 0 && (
+              <div>
+                <label className="text-sm font-medium">Parent associé (optionnel)</label>
+                <Select value={selectedParent} onValueChange={setSelectedParentId}>
+                  <SelectTrigger><SelectValue placeholder="Sélectionner un parent" /></SelectTrigger>
+                  <SelectContent>
+                    {parentProfiles.map(p => (
+                      <SelectItem key={p.user_id} value={p.user_id}>{p.first_name} ({p.email})</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground mt-1">Le parent recevra aussi les notifications du RDV</p>
+              </div>
+            )}
             <div>
               <label className="text-sm font-medium">Date du cours</label>
               <Popover>
@@ -477,8 +547,8 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
       </Dialog>
 
       {/* Status change dialog (postpone/cancel) */}
-      <Dialog open={!!statusAction} onOpenChange={open => { if (!open) setStatusAction(null); }}>
-        <DialogContent>
+      <Dialog open={!!statusAction} onOpenChange={open => { if (!open) { setStatusAction(null); setPostponeDate(undefined); setPostponeTime("14:00"); } }}>
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
               {statusAction?.action === "postponed" ? "📅 Reporter le RDV" : "❌ Annuler le RDV"}
@@ -487,9 +557,31 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
               {statusAction?.action === "postponed"
-                ? "Ce RDV sera marqué comme reporté. L'élève et le parent seront notifiés."
+                ? "Choisissez la nouvelle date et heure. L'élève et le parent seront notifiés."
                 : "Ce RDV sera marqué comme annulé. L'élève et le parent seront notifiés."}
             </p>
+            {statusAction?.action === "postponed" && (
+              <>
+                <div>
+                  <label className="text-sm font-medium">Nouvelle date</label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline" className={cn("w-full justify-start text-left", !postponeDate && "text-muted-foreground")}>
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {postponeDate ? format(postponeDate, "PPP", { locale: fr }) : "Choisir une nouvelle date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar mode="single" selected={postponeDate} onSelect={setPostponeDate} className={cn("p-3 pointer-events-auto")} />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Nouvelle heure</label>
+                  <Input type="time" value={postponeTime} onChange={e => setPostponeTime(e.target.value)} />
+                </div>
+              </>
+            )}
             <div>
               <label className="text-sm font-medium">Note (optionnelle)</label>
               <Textarea
@@ -500,7 +592,7 @@ const AppointmentsCard = ({ forParentStudentId }: AppointmentsCardProps) => {
               />
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={() => setStatusAction(null)} className="flex-1">Annuler</Button>
+              <Button variant="outline" onClick={() => { setStatusAction(null); setPostponeDate(undefined); setPostponeTime("14:00"); }} className="flex-1">Annuler</Button>
               <Button onClick={handleStatusChange} className="flex-1" variant={statusAction?.action === "cancelled" ? "destructive" : "default"}>
                 Confirmer
               </Button>
