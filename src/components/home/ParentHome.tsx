@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminView } from "@/hooks/useAdminView";
 import { ADMIN_EMAIL } from "@/lib/constants";
+import AppointmentsCard from "@/components/home/AppointmentsCard";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,7 @@ const ParentHome = () => {
   const [noteText, setNoteText] = useState("");
   const [studentProfiles, setStudentProfiles] = useState<{ user_id: string; first_name: string }[]>([]);
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
+  const [linkedStudentUserIds, setLinkedStudentUserIds] = useState<string[]>([]);
 
   // For admin: load parent profiles
   useEffect(() => {
@@ -110,7 +112,17 @@ const ParentHome = () => {
       .select("*")
       .eq("parent_user_id", parentUserId)
       .order("created_at");
-    if (data) setChildCards(data as ChildCard[]);
+    if (data) {
+      setChildCards(data as ChildCard[]);
+      // Resolve linked student user IDs for appointments
+      const profileIds = data.filter((c: any) => c.child_profile_id).map((c: any) => c.child_profile_id);
+      if (profileIds.length > 0) {
+        const { data: profiles } = await supabase.from("profiles").select("user_id").in("id", profileIds);
+        if (profiles) setLinkedStudentUserIds(profiles.map((p: any) => p.user_id));
+      } else {
+        setLinkedStudentUserIds([]);
+      }
+    }
   };
 
   const createChildCard = async () => {
@@ -268,6 +280,11 @@ const ParentHome = () => {
         </h2>
         <p className="text-sm text-muted-foreground font-medium">Suivi familial</p>
       </div>
+
+      {/* Appointments for linked children */}
+      {linkedStudentUserIds.map(studentId => (
+        <AppointmentsCard key={studentId} forParentStudentId={studentId} />
+      ))}
 
       {/* Admin: select parent */}
       {isAdmin && (

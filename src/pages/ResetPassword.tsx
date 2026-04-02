@@ -66,7 +66,7 @@ const ResetPassword = () => {
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col items-center mb-6"
         >
-          <img src={logo} alt="Paus'études" width={80} height={80} className="mb-2" />
+          <img src={logo} alt="My Study Way" width={80} height={80} className="mb-2" />
         </motion.div>
         <div className="w-full max-w-md bg-card rounded-lg shadow-elevated p-6 text-center">
           <p className="text-muted-foreground">Vérification en cours...</p>
@@ -88,7 +88,7 @@ const ResetPassword = () => {
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col items-center mb-6"
       >
-        <img src={logo} alt="Paus'études" width={80} height={80} className="mb-2" />
+        <img src={logo} alt="My Study Way" width={80} height={80} className="mb-2" />
       </motion.div>
 
       <motion.div

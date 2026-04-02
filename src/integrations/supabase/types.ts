@@ -25,6 +25,8 @@ export type Database = {
           items_to_bring: string | null
           seen_by_student: boolean | null
           start_time: string
+          status: string
+          status_note: string | null
           student_id: string
           student_name: string
           subjects: string[]
@@ -40,6 +42,8 @@ export type Database = {
           items_to_bring?: string | null
           seen_by_student?: boolean | null
           start_time: string
+          status?: string
+          status_note?: string | null
           student_id: string
           student_name?: string
           subjects?: string[]
@@ -55,6 +59,8 @@ export type Database = {
           items_to_bring?: string | null
           seen_by_student?: boolean | null
           start_time?: string
+          status?: string
+          status_note?: string | null
           student_id?: string
           student_name?: string
           subjects?: string[]

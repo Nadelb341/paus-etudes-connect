@@ -61,7 +61,7 @@ const Index = () => {
       <AppHeader />
       <main className="max-w-5xl mx-auto px-4 py-4 space-y-5 pb-8">
         <div className="flex flex-col items-center pt-2">
-          <img src={logo} alt="Paus'études" width={192} height={192} className="w-48 h-48 object-contain" />
+          <img src={logo} alt="My Study Way" width={192} height={192} className="w-48 h-48 object-contain" />
         </div>
 
         {showParentView ? (
