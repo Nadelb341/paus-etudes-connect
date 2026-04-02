@@ -53,7 +53,7 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
               >
                 <Icon size={20} className={color} />
                 <span className={`text-[10px] font-medium hidden sm:block ${isActive ? "text-primary" : "text-muted-foreground"}`}>{label}</span>
-                {count && count > 0 && (
+                {count > 0 && (
                   <span className="badge-notification">{count}</span>
                 )}
               </button>
@@ -96,7 +96,7 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
               >
                 <Icon size={20} className={color} />
                 <span className={`text-[10px] font-medium hidden sm:block ${isActive ? "text-primary" : "text-muted-foreground"}`}>{label}</span>
-                {count && count > 0 && (
+                {count > 0 && (
                   <span className="badge-notification">{count}</span>
                 )}
               </button>
