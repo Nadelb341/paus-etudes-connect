@@ -18,8 +18,10 @@ import { Badge } from "@/components/ui/badge";
 interface Profile {
   id: string; user_id: string; first_name: string; email: string; gender: string;
   birth_date: string | null; school_level: string; remarks: string; is_approved: boolean; created_at: string;
-  status: string; child_name: string | null;
+  status: string; child_name: string | null; custom_hourly_rate: number | null;
 }
+
+interface HourlyRates { primaire: number; college: number; lycee: number; }
 interface ParentChildLink {
   id: string; parent_user_id: string; child_profile_id: string | null; child_name: string;
 }
@@ -35,12 +37,13 @@ interface Completion { homework_id: string; user_id: string; completed: boolean;
 
 const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
 
-const getHourlyRate = (level: string): number => {
+const getHourlyRate = (level: string, rates?: HourlyRates): number => {
+  const r = rates || { primaire: HOURLY_RATES.maternelle_primaire, college: HOURLY_RATES.college, lycee: HOURLY_RATES.lycee };
   const primary = ["Maternelle", "CP", "CE1", "CE2", "CM1", "CM2"];
   const college = ["6ème", "5ème", "4ème", "3ème"];
-  if (primary.includes(level)) return HOURLY_RATES.maternelle_primaire;
-  if (college.includes(level)) return HOURLY_RATES.college;
-  return HOURLY_RATES.lycee;
+  if (primary.includes(level)) return r.primaire;
+  if (college.includes(level)) return r.college;
+  return r.lycee;
 };
 
 const DashboardPage = () => {
@@ -91,6 +94,14 @@ const DashboardPage = () => {
   const [relanceStudentId, setRelanceStudentId] = useState("");
   const [relanceMessage, setRelanceMessage] = useState("");
 
+  // Barème des tarifs horaires
+  const [dbRates, setDbRates] = useState<HourlyRates>({ primaire: HOURLY_RATES.maternelle_primaire, college: HOURLY_RATES.college, lycee: HOURLY_RATES.lycee });
+  const [showRatesDialog, setShowRatesDialog] = useState(false);
+  const [editRates, setEditRates] = useState<HourlyRates>({ primaire: 10, college: 13, lycee: 16 });
+
+  // Tarif personnalisé élève
+  const [editStudentCustomRate, setEditStudentCustomRate] = useState("");
+
   // Parent management
   const [parentChildLinks, setParentChildLinks] = useState<ParentChildLink[]>([]);
   const [editingParent, setEditingParent] = useState<Profile | null>(null);
@@ -116,6 +127,7 @@ const DashboardPage = () => {
       fetchAllHomework();
       fetchAllCompletions();
       fetchParentChildLinks();
+      fetchHourlyRates();
       const channel = supabase.channel("profiles-realtime").on(
         "postgres_changes", { event: "*", schema: "public", table: "profiles" },
         () => fetchProfiles()
@@ -130,6 +142,32 @@ const DashboardPage = () => {
       setProfiles(data.filter(p => p.is_approved));
       setPendingProfiles(data.filter(p => !p.is_approved));
     }
+  };
+
+  const fetchHourlyRates = async () => {
+    const { data } = await (supabase as any).from("hourly_rate_settings").select("id, rate");
+    if (data && data.length > 0) {
+      const map: any = {};
+      data.forEach((r: any) => { map[r.id] = r.rate; });
+      const rates = {
+        primaire: map.primaire ?? HOURLY_RATES.maternelle_primaire,
+        college: map.college ?? HOURLY_RATES.college,
+        lycee: map.lycee ?? HOURLY_RATES.lycee,
+      };
+      setDbRates(rates);
+      setEditRates(rates);
+    }
+  };
+
+  const saveHourlyRates = async () => {
+    await Promise.all([
+      (supabase as any).from("hourly_rate_settings").update({ rate: editRates.primaire }).eq("id", "primaire"),
+      (supabase as any).from("hourly_rate_settings").update({ rate: editRates.college }).eq("id", "college"),
+      (supabase as any).from("hourly_rate_settings").update({ rate: editRates.lycee }).eq("id", "lycee"),
+    ]);
+    setDbRates({ ...editRates });
+    setShowRatesDialog(false);
+    toast.success("Barème mis à jour !");
   };
 
   const fetchTutoringHours = async () => {
@@ -167,7 +205,8 @@ const DashboardPage = () => {
       school_level: editStudentLevel,
       birth_date: editStudentBirthDate || null,
       remarks: editingRemarks,
-    }).eq("id", selectedProfile.id);
+      custom_hourly_rate: editStudentCustomRate !== "" ? parseFloat(editStudentCustomRate) : null,
+    } as any).eq("id", selectedProfile.id);
     toast.success("Profil élève mis à jour !");
     setSelectedProfile(null);
     fetchProfiles();
@@ -187,7 +226,7 @@ const DashboardPage = () => {
   const addTutoringHour = async () => {
     if (!thStudentId || !thDate || !thDuration) { toast.error("Remplissez tous les champs"); return; }
     const student = profiles.find(p => p.user_id === thStudentId);
-    const rate = student ? getHourlyRate(student.school_level) : HOURLY_RATES.lycee;
+    const rate = student?.custom_hourly_rate ?? (student ? getHourlyRate(student.school_level, dbRates) : dbRates.lycee);
     await supabase.from("tutoring_hours").insert({
       student_id: thStudentId, session_date: thDate, duration_hours: parseFloat(thDuration),
       hourly_rate: rate, subject: thSubject, notes: thNotes, created_by: user?.id,
@@ -435,7 +474,7 @@ const DashboardPage = () => {
                               <p className="font-medium text-sm">{p.first_name}</p>
                               <p className="text-xs text-muted-foreground">{p.email}</p>
                             </div>
-                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); }}>
+                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); setEditStudentCustomRate(p.custom_hourly_rate?.toString() ?? ""); }}>
                               <Eye size={14} className="mr-1" />Détails
                             </Button>
                           </div>
@@ -490,6 +529,11 @@ const DashboardPage = () => {
                   {/* HOURS */}
                   {key === "hours" && (
                     <div className="space-y-4">
+                      <div className="flex justify-end">
+                        <Button size="sm" variant="outline" onClick={() => { setEditRates({ ...dbRates }); setShowRatesDialog(true); }} className="gap-1 text-xs">
+                          💶 Barème du montant des heures par niveau
+                        </Button>
+                      </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Select value={thStudentId} onValueChange={setThStudentId}>
                           <SelectTrigger><SelectValue placeholder="Élève" /></SelectTrigger>
@@ -732,8 +776,17 @@ const DashboardPage = () => {
                     <Input type="date" value={editStudentBirthDate} onChange={e => setEditStudentBirthDate(e.target.value)} />
                   </div>
                   <div>
-                    <Label className="text-xs text-muted-foreground">Tarif calculé</Label>
-                    <p className="text-sm font-medium mt-2">{getHourlyRate(editStudentLevel)}€/h</p>
+                    <Label className="text-xs text-muted-foreground">Tarif personnalisé (€/h)</Label>
+                    <Input
+                      type="number"
+                      step="0.5"
+                      value={editStudentCustomRate}
+                      onChange={e => setEditStudentCustomRate(e.target.value)}
+                      placeholder={`Par défaut : ${getHourlyRate(editStudentLevel, dbRates)}€/h`}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Laisser vide pour appliquer le barème par niveau ({getHourlyRate(editStudentLevel, dbRates)}€/h)
+                    </p>
                   </div>
                 </div>
                 <div>
@@ -747,6 +800,38 @@ const DashboardPage = () => {
                 <Button onClick={saveStudentProfile} className="w-full bg-gradient-primary">Sauvegarder</Button>
               </div>
             )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Barème des tarifs horaires */}
+        <Dialog open={showRatesDialog} onOpenChange={setShowRatesDialog}>
+          <DialogContent className="max-w-sm">
+            <DialogHeader><DialogTitle>💶 Barème du montant des heures par niveau</DialogTitle></DialogHeader>
+            <div className="space-y-4 py-2">
+              <div>
+                <Label className="text-sm font-medium">Maternelle → CM2 (primaire)</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input type="number" step="0.5" value={editRates.primaire} onChange={e => setEditRates(r => ({ ...r, primaire: parseFloat(e.target.value) || 0 }))} className="w-28" />
+                  <span className="text-sm text-muted-foreground">€/h</span>
+                </div>
+              </div>
+              <div>
+                <Label className="text-sm font-medium">6ème → 3ème (collège)</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input type="number" step="0.5" value={editRates.college} onChange={e => setEditRates(r => ({ ...r, college: parseFloat(e.target.value) || 0 }))} className="w-28" />
+                  <span className="text-sm text-muted-foreground">€/h</span>
+                </div>
+              </div>
+              <div>
+                <Label className="text-sm font-medium">Seconde → Terminale (lycée)</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input type="number" step="0.5" value={editRates.lycee} onChange={e => setEditRates(r => ({ ...r, lycee: parseFloat(e.target.value) || 0 }))} className="w-28" />
+                  <span className="text-sm text-muted-foreground">€/h</span>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground italic">Ces tarifs s'appliquent aux nouvelles heures enregistrées. Les heures existantes ne sont pas modifiées.</p>
+            </div>
+            <Button onClick={saveHourlyRates} className="w-full bg-gradient-primary">Sauvegarder le barème</Button>
           </DialogContent>
         </Dialog>
 
