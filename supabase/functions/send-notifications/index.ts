@@ -78,7 +78,7 @@ async function sendPush(sub: { endpoint: string; p256dh: string; auth_key: strin
     const res = await fetch(sub.endpoint, {
       method: "POST",
       headers: { Authorization: authorization, "Content-Encoding": "aes128gcm", "Content-Type": "application/octet-stream", TTL: "86400", Urgency: "high" },
-      body,
+      body: body.buffer as ArrayBuffer,
     });
     const detail = await res.text().catch(() => "");
     return { ok: res.status >= 200 && res.status < 300, status: res.status, detail };
