@@ -281,11 +281,6 @@ const ParentHome = () => {
         <p className="text-sm text-muted-foreground font-medium">Suivi familial</p>
       </div>
 
-      {/* Appointments for linked children */}
-      {linkedStudentUserIds.map(studentId => (
-        <AppointmentsCard key={studentId} forParentStudentId={studentId} />
-      ))}
-
       {/* Admin: select parent */}
       {isAdmin && (
         <Card>
@@ -308,6 +303,11 @@ const ParentHome = () => {
           </CardContent>
         </Card>
       )}
+
+      {/* Appointments for linked children */}
+      {linkedStudentUserIds.map(studentId => (
+        <AppointmentsCard key={studentId} forParentStudentId={studentId} />
+      ))}
 
       {/* Child cards section */}
       {(isAdmin ? selectedParent : true) && (
