@@ -30,8 +30,8 @@ function concat(...bufs: Uint8Array[]): Uint8Array {
 }
 
 async function hkdf(salt: Uint8Array, ikm: Uint8Array, info: Uint8Array, len: number): Promise<Uint8Array> {
-  const key = await crypto.subtle.importKey("raw", ikm, "HKDF", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({ name: "HKDF", hash: "SHA-256", salt, info }, key, len * 8);
+  const key = await crypto.subtle.importKey("raw", ikm.buffer as ArrayBuffer, "HKDF", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({ name: "HKDF", hash: "SHA-256", salt: salt.buffer as ArrayBuffer, info: info.buffer as ArrayBuffer }, key, len * 8);
   return new Uint8Array(bits);
 }
 
