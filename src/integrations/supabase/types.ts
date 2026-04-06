@@ -257,6 +257,24 @@ export type Database = {
         }
         Relationships: []
       }
+      hourly_rate_settings: {
+        Row: {
+          id: string
+          label: string
+          rate: number
+        }
+        Insert: {
+          id: string
+          label: string
+          rate: number
+        }
+        Update: {
+          id?: string
+          label?: string
+          rate?: number
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           attachments: Json | null
@@ -432,6 +450,7 @@ export type Database = {
           birth_date: string | null
           child_name: string | null
           created_at: string
+          custom_hourly_rate: number | null
           email: string
           first_name: string
           gender: string | null
@@ -447,6 +466,7 @@ export type Database = {
           birth_date?: string | null
           child_name?: string | null
           created_at?: string
+          custom_hourly_rate?: number | null
           email?: string
           first_name?: string
           gender?: string | null
@@ -462,6 +482,7 @@ export type Database = {
           birth_date?: string | null
           child_name?: string | null
           created_at?: string
+          custom_hourly_rate?: number | null
           email?: string
           first_name?: string
           gender?: string | null
