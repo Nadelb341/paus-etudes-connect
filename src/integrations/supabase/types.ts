@@ -14,6 +14,32 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointment_views: {
+        Row: {
+          appointment_id: string
+          user_id: string
+          viewed_at: string
+        }
+        Insert: {
+          appointment_id: string
+          user_id: string
+          viewed_at?: string
+        }
+        Update: {
+          appointment_id?: string
+          user_id?: string
+          viewed_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointment_views_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       appointments: {
         Row: {
           appointment_date: string
@@ -233,9 +259,11 @@ export type Database = {
       }
       messages: {
         Row: {
+          attachments: Json | null
           content: string
           created_at: string
           id: string
+          reactions: Json | null
           recipient_group: string | null
           recipient_ids: string[] | null
           recipient_type: string
@@ -245,9 +273,11 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          attachments?: Json | null
           content?: string
           created_at?: string
           id?: string
+          reactions?: Json | null
           recipient_group?: string | null
           recipient_ids?: string[] | null
           recipient_type?: string
@@ -257,9 +287,11 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          attachments?: Json | null
           content?: string
           created_at?: string
           id?: string
+          reactions?: Json | null
           recipient_group?: string | null
           recipient_ids?: string[] | null
           recipient_type?: string
