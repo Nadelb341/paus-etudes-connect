@@ -114,7 +114,7 @@ const MessagesPage = () => {
 
   const fetchMessages = async () => {
     const { data } = await supabase.from("messages").select("*").order("created_at", { ascending: true });
-    if (data) setMessages(data as Message[]);
+    if (data) setMessages(data as unknown as Message[]);
   };
 
   const fetchProfiles = async () => {
@@ -272,7 +272,7 @@ const MessagesPage = () => {
   // --- Auto-select for non-admin with single conversation ---
   const conversations = getConversations();
   const threadMessages = getThreadMessages();
-  const broadcastMessages = messages.filter(m => m.recipient_type === "all").sort((a, b) => new Date(b.lastDate).getTime() - new Date(a.lastDate).getTime());
+  const broadcastMessages = messages.filter(m => m.recipient_type === "all").sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   const filteredConversations = conversations.filter(c => c.displayName.toLowerCase().includes(searchTerm.toLowerCase()));
 
   // For non-admin: if only 1 conversation, auto-select it
