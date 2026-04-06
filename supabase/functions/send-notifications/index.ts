@@ -30,8 +30,8 @@ function concat(...bufs: Uint8Array[]): Uint8Array {
 }
 
 async function hkdf(salt: Uint8Array, ikm: Uint8Array, info: Uint8Array, len: number): Promise<Uint8Array> {
-  const key = await crypto.subtle.importKey("raw", ikm, "HKDF", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({ name: "HKDF", hash: "SHA-256", salt, info }, key, len * 8);
+  const key = await crypto.subtle.importKey("raw", ikm.buffer as ArrayBuffer, "HKDF", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({ name: "HKDF", hash: "SHA-256", salt: salt.buffer as ArrayBuffer, info: info.buffer as ArrayBuffer }, key, len * 8);
   return new Uint8Array(bits);
 }
 
@@ -40,7 +40,7 @@ async function encryptPayload(clientPubB64: string, clientAuthB64: string, paylo
   const clientAuth = b64urlDecode(clientAuthB64);
   const serverKP = await crypto.subtle.generateKey({ name: "ECDH", namedCurve: "P-256" }, true, ["deriveBits"]);
   const serverPub = new Uint8Array(await crypto.subtle.exportKey("raw", serverKP.publicKey));
-  const clientKey = await crypto.subtle.importKey("raw", clientPub, { name: "ECDH", namedCurve: "P-256" }, false, []);
+  const clientKey = await crypto.subtle.importKey("raw", clientPub.buffer as ArrayBuffer, { name: "ECDH", namedCurve: "P-256" }, false, []);
   const shared = new Uint8Array(await crypto.subtle.deriveBits({ name: "ECDH", public: clientKey }, serverKP.privateKey, 256));
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const enc = new TextEncoder();
@@ -49,8 +49,8 @@ async function encryptPayload(clientPubB64: string, clientAuthB64: string, paylo
   const cek = await hkdf(salt, ikm, enc.encode("Content-Encoding: aes128gcm\0"), 16);
   const nonce = await hkdf(salt, ikm, enc.encode("Content-Encoding: nonce\0"), 12);
   const plain = concat(enc.encode(payload), new Uint8Array([2]));
-  const aesKey = await crypto.subtle.importKey("raw", cek, "AES-GCM", false, ["encrypt"]);
-  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv: nonce }, aesKey, plain));
+  const aesKey = await crypto.subtle.importKey("raw", cek.buffer as ArrayBuffer, "AES-GCM", false, ["encrypt"]);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv: nonce.buffer as ArrayBuffer }, aesKey, plain.buffer as ArrayBuffer));
   const rs = new Uint8Array([0, 0, 16, 0]);
   const idlen = new Uint8Array([serverPub.length]);
   return { body: concat(salt, rs, idlen, serverPub, ct) };
@@ -78,7 +78,7 @@ async function sendPush(sub: { endpoint: string; p256dh: string; auth_key: strin
     const res = await fetch(sub.endpoint, {
       method: "POST",
       headers: { Authorization: authorization, "Content-Encoding": "aes128gcm", "Content-Type": "application/octet-stream", TTL: "86400", Urgency: "high" },
-      body,
+      body: body.buffer as ArrayBuffer,
     });
     const detail = await res.text().catch(() => "");
     return { ok: res.status >= 200 && res.status < 300, status: res.status, detail };
