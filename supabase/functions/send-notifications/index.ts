@@ -40,7 +40,7 @@ async function encryptPayload(clientPubB64: string, clientAuthB64: string, paylo
   const clientAuth = b64urlDecode(clientAuthB64);
   const serverKP = await crypto.subtle.generateKey({ name: "ECDH", namedCurve: "P-256" }, true, ["deriveBits"]);
   const serverPub = new Uint8Array(await crypto.subtle.exportKey("raw", serverKP.publicKey));
-  const clientKey = await crypto.subtle.importKey("raw", clientPub, { name: "ECDH", namedCurve: "P-256" }, false, []);
+  const clientKey = await crypto.subtle.importKey("raw", clientPub.buffer as ArrayBuffer, { name: "ECDH", namedCurve: "P-256" }, false, []);
   const shared = new Uint8Array(await crypto.subtle.deriveBits({ name: "ECDH", public: clientKey }, serverKP.privateKey, 256));
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const enc = new TextEncoder();
@@ -49,8 +49,8 @@ async function encryptPayload(clientPubB64: string, clientAuthB64: string, paylo
   const cek = await hkdf(salt, ikm, enc.encode("Content-Encoding: aes128gcm\0"), 16);
   const nonce = await hkdf(salt, ikm, enc.encode("Content-Encoding: nonce\0"), 12);
   const plain = concat(enc.encode(payload), new Uint8Array([2]));
-  const aesKey = await crypto.subtle.importKey("raw", cek, "AES-GCM", false, ["encrypt"]);
-  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv: nonce }, aesKey, plain));
+  const aesKey = await crypto.subtle.importKey("raw", cek.buffer as ArrayBuffer, "AES-GCM", false, ["encrypt"]);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv: nonce.buffer as ArrayBuffer }, aesKey, plain.buffer as ArrayBuffer));
   const rs = new Uint8Array([0, 0, 16, 0]);
   const idlen = new Uint8Array([serverPub.length]);
   return { body: concat(salt, rs, idlen, serverPub, ct) };
