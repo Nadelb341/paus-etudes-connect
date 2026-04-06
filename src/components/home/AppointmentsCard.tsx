@@ -85,6 +85,10 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
   const [parentProfiles, setParentProfiles] = useState<{ user_id: string; first_name: string; email: string }[]>([]);
   const [selectedParent, setSelectedParentId] = useState("");
 
+  // Flash message : RDV non encore vus par l'utilisateur
+  const [unseenAppts, setUnseenAppts] = useState<Appointment[]>([]);
+  const [showFlashDialog, setShowFlashDialog] = useState(false);
+
   const fetchAppointments = async () => {
     if (!user) return;
     const { data } = await supabase
@@ -133,7 +137,57 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
   useEffect(() => {
     fetchAppointments();
     if (isAdmin) fetchStudents();
+    if (!isAdmin) fetchUnseenAppointments();
   }, [user]);
+
+  const fetchUnseenAppointments = async () => {
+    if (!user || isAdmin) return;
+
+    // Récupérer les RDV visibles et actifs pour cet utilisateur
+    const { data: appts } = await supabase
+      .from("appointments")
+      .select("*")
+      .eq("is_visible", true)
+      .eq("status", "active");
+
+    if (!appts || appts.length === 0) return;
+
+    // Filtrer selon le contexte : parent (forParentStudentId) ou élève (user.id)
+    const relevant = forParentStudentId
+      ? appts.filter(a => a.student_id === forParentStudentId)
+      : appts.filter(a => a.student_id === user.id);
+
+    if (relevant.length === 0) return;
+
+    // Récupérer ceux déjà vus
+    const { data: views } = await (supabase as any)
+      .from("appointment_views")
+      .select("appointment_id")
+      .eq("user_id", user.id)
+      .in("appointment_id", relevant.map((a: Appointment) => a.id));
+
+    const viewedIds = new Set((views || []).map((v: any) => v.appointment_id));
+    const unseen = relevant.filter(a => !viewedIds.has(a.id));
+
+    if (unseen.length > 0) {
+      setUnseenAppts(unseen as Appointment[]);
+      setShowFlashDialog(true);
+    }
+  };
+
+  const handleAcknowledge = async () => {
+    if (!user) return;
+    await Promise.all(
+      unseenAppts.map(appt =>
+        (supabase as any).from("appointment_views").upsert(
+          { appointment_id: appt.id, user_id: user.id },
+          { onConflict: "appointment_id,user_id" }
+        )
+      )
+    );
+    setShowFlashDialog(false);
+    setUnseenAppts([]);
+  };
 
   // When selected student changes, fetch linked parents
   useEffect(() => {
@@ -573,6 +627,44 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
             </div>
             <Button onClick={handleSaveEdit} className="w-full">Enregistrer</Button>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Message flash : nouveau(x) RDV non encore vus */}
+      <Dialog open={showFlashDialog} onOpenChange={() => {}}>
+        <DialogContent
+          className="max-w-sm"
+          onPointerDownOutside={e => e.preventDefault()}
+          onEscapeKeyDown={e => e.preventDefault()}
+        >
+          <DialogHeader>
+            <DialogTitle className="text-center text-lg">
+              📅 {unseenAppts.length > 1 ? "Nouveaux RDV !" : "Nouveau RDV !"}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3 max-h-72 overflow-y-auto">
+            {unseenAppts.map(appt => (
+              <div key={appt.id} className="bg-primary/5 border border-primary/20 rounded-lg p-3 space-y-1 text-sm">
+                <p className="font-semibold text-primary">
+                  📅 {format(new Date(appt.appointment_date), "EEEE d MMMM yyyy", { locale: fr })}
+                </p>
+                <p className="text-muted-foreground">🕐 {appt.start_time?.slice(0, 5)}</p>
+                <p className="text-muted-foreground">
+                  📚 {appt.subjects.map(s => ALL_SUBJECTS.find(sub => sub.id === s)?.label || s).join(", ")}
+                </p>
+                <p className="text-muted-foreground">⏱️ {appt.estimated_duration}</p>
+                {appt.items_to_bring && (
+                  <div className="bg-secondary/50 rounded p-2 text-xs mt-1">
+                    <p className="font-medium mb-1">🎒 Affaires à prendre :</p>
+                    <p className="whitespace-pre-line">{appt.items_to_bring}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <Button onClick={handleAcknowledge} className="w-full mt-2">
+            OK, j'ai vu !
+          </Button>
         </DialogContent>
       </Dialog>
 
