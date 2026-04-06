@@ -139,8 +139,9 @@ const DashboardPage = () => {
   const fetchProfiles = async () => {
     const { data } = await supabase.from("profiles").select("*").order("created_at", { ascending: false });
     if (data) {
-      setProfiles(data.filter(p => p.is_approved));
-      setPendingProfiles(data.filter(p => !p.is_approved));
+      const typed = data as unknown as Profile[];
+      setProfiles(typed.filter(p => p.is_approved));
+      setPendingProfiles(typed.filter(p => !p.is_approved));
     }
   };
 
