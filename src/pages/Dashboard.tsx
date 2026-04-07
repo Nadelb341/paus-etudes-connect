@@ -37,6 +37,12 @@ interface Completion { homework_id: string; user_id: string; completed: boolean;
 
 const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
 
+// Formate un montant en euros : entier → "13€", décimal → "19.50€"
+const formatEur = (n: number): string => {
+  const rounded = Math.round(n * 100) / 100;
+  return Number.isInteger(rounded) ? `${rounded}€` : `${rounded.toFixed(2)}€`;
+};
+
 const getHourlyRate = (level: string, rates?: HourlyRates): number => {
   const r = rates || { primaire: HOURLY_RATES.maternelle_primaire, college: HOURLY_RATES.college, lycee: HOURLY_RATES.lycee };
   const primary = ["Maternelle", "CP", "CE1", "CE2", "CM1", "CM2"];
@@ -455,7 +461,7 @@ const DashboardPage = () => {
                         <p className="text-xs text-muted-foreground">Sessions totales</p>
                       </div>
                       <div className="p-4 bg-secondary/30 rounded-lg text-center">
-                        <p className="text-2xl font-bold text-primary">{tutoringHours.reduce((sum, h) => sum + h.duration_hours * h.hourly_rate, 0).toFixed(0)}€</p>
+                        <p className="text-2xl font-bold text-primary">{formatEur(tutoringHours.reduce((sum, h) => sum + h.duration_hours * h.hourly_rate, 0))}</p>
                         <p className="text-xs text-muted-foreground">Revenus totaux</p>
                       </div>
                     </div>
@@ -555,7 +561,7 @@ const DashboardPage = () => {
                           <div key={h.id} className="flex items-center justify-between p-3 bg-secondary/30 rounded-lg text-sm">
                             <div className="flex-1">
                               <p className="font-medium">{getStudentName(h.student_id)} — {ALL_SUBJECTS.find(s => s.id === h.subject)?.label || h.subject}</p>
-                              <p className="text-xs text-muted-foreground">{new Date(h.session_date).toLocaleDateString("fr-FR")} · {h.duration_hours}h · {h.hourly_rate}€/h = {(h.duration_hours * h.hourly_rate).toFixed(0)}€</p>
+                              <p className="text-xs text-muted-foreground">{new Date(h.session_date).toLocaleDateString("fr-FR")} · {h.duration_hours}h · {h.hourly_rate}€/h = {formatEur(h.duration_hours * h.hourly_rate)}</p>
                             </div>
                             <div className="flex gap-1">
                               <Button

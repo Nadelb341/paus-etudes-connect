@@ -21,6 +21,11 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 
+const formatEur = (n: number): string => {
+  const rounded = Math.round(n * 100) / 100;
+  return Number.isInteger(rounded) ? `${rounded}€` : `${rounded.toFixed(2)}€`;
+};
+
 interface ChildCard {
   id: string;
   parent_user_id: string;
@@ -419,11 +424,11 @@ const ParentHome = () => {
                 </div>
                 <div className="p-2 bg-secondary/30 rounded-lg">
                   <p className="text-xs text-muted-foreground">Montant total</p>
-                  <p className="font-bold text-sm">{totalAmount}€</p>
+                  <p className="font-bold text-sm">{formatEur(totalAmount)}</p>
                 </div>
                 <div className="p-2 bg-green-500/10 rounded-lg">
                   <p className="text-xs text-muted-foreground">Payé</p>
-                  <p className="font-bold text-sm text-green-600">{totalPaid}€</p>
+                  <p className="font-bold text-sm text-green-600">{formatEur(totalPaid)}</p>
                 </div>
               </div>
 
@@ -454,7 +459,7 @@ const ParentHome = () => {
                           </TableCell>
                           <TableCell className="text-xs">{row.duration_hours}h</TableCell>
                           <TableCell className="text-xs font-medium">
-                            {(row.duration_hours * row.hourly_rate).toFixed(0)}€
+                            {formatEur(row.duration_hours * row.hourly_rate)}
                           </TableCell>
                           <TableCell>
                             {isAdmin ? (
