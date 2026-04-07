@@ -15,7 +15,9 @@ const Auth = () => {
         transition={{ duration: 0.5 }}
         className="flex flex-col items-center mb-6"
       >
-        <img src={logo} alt="Paus'étude" width={80} height={80} className="mb-2" />
+        <div className="overflow-hidden h-[60px] w-20 mx-auto">
+          <img src={logo} alt="Paus'étude" width={80} height={80} className="w-20 h-20 object-contain object-top" />
+        </div>
         <h1 className="text-2xl font-heading font-bold text-foreground">Paus'étude</h1>
         <p className="text-sm text-muted-foreground">Votre assistant scolaire</p>
       </motion.div>

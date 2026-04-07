@@ -127,13 +127,16 @@ const Index = () => {
       <AppHeader notificationCounts={{ messages: badges.messages }} />
       <main className="max-w-5xl mx-auto px-4 py-4 space-y-5 pb-8">
         <div className="flex flex-col items-center pt-2 relative">
-          <div className="relative inline-block">
-            <img src={logo} alt="Paus'étude" width={192} height={192} className="w-48 h-48 object-contain" />
-            {totalBadge > 0 && (
-              <span className="absolute top-2 right-2 bg-destructive text-destructive-foreground text-sm font-bold rounded-full min-w-[28px] h-7 flex items-center justify-center px-1.5 shadow-lg animate-pulse">
-                {totalBadge}
-              </span>
-            )}
+          <div className="relative inline-flex flex-col items-center">
+            <div className="overflow-hidden h-32 w-48 relative">
+              <img src={logo} alt="Paus'étude" width={192} height={192} className="w-48 h-48 object-contain object-top" />
+              {totalBadge > 0 && (
+                <span className="absolute top-2 right-2 bg-destructive text-destructive-foreground text-sm font-bold rounded-full min-w-[28px] h-7 flex items-center justify-center px-1.5 shadow-lg animate-pulse">
+                  {totalBadge}
+                </span>
+              )}
+            </div>
+            <p className="text-xl font-heading font-bold text-primary mt-1">Paus'étude</p>
           </div>
         </div>
 
