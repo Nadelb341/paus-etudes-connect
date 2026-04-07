@@ -249,9 +249,15 @@ const MessagesPage = () => {
     } else {
       reactions[emoji] = [...users, user.id];
     }
-    await supabase.from("messages").update({ reactions } as any).eq("id", msgId);
+    // Mise à jour optimiste : affiche immédiatement sans attendre la base
+    setMessages(prev => prev.map(m => m.id === msgId ? { ...m, reactions } : m));
     setShowReactionPicker(null);
-    fetchMessages();
+    // Sauvegarde en base (en arrière-plan)
+    const { error } = await supabase.from("messages").update({ reactions } as any).eq("id", msgId);
+    if (error) {
+      console.error("Erreur sauvegarde réaction:", error);
+      fetchMessages(); // Rollback si erreur
+    }
   };
 
   const sendBroadcast = async () => {
