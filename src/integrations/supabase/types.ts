@@ -49,6 +49,7 @@ export type Database = {
           id: string
           is_visible: boolean | null
           items_to_bring: string | null
+          planned_work: string | null
           seen_by_student: boolean | null
           start_time: string
           status: string
@@ -66,6 +67,7 @@ export type Database = {
           id?: string
           is_visible?: boolean | null
           items_to_bring?: string | null
+          planned_work?: string | null
           seen_by_student?: boolean | null
           start_time: string
           status?: string
@@ -83,6 +85,7 @@ export type Database = {
           id?: string
           is_visible?: boolean | null
           items_to_bring?: string | null
+          planned_work?: string | null
           seen_by_student?: boolean | null
           start_time?: string
           status?: string
@@ -402,29 +405,38 @@ export type Database = {
       }
       payment_tracking: {
         Row: {
+          amount_paid: number | null
           created_at: string
           id: string
           is_paid: boolean | null
           parent_card_id: string | null
           payment_date: string | null
+          payment_entries: Json | null
+          payment_note: string | null
           tutoring_hour_id: string | null
           updated_at: string
         }
         Insert: {
+          amount_paid?: number | null
           created_at?: string
           id?: string
           is_paid?: boolean | null
           parent_card_id?: string | null
           payment_date?: string | null
+          payment_entries?: Json | null
+          payment_note?: string | null
           tutoring_hour_id?: string | null
           updated_at?: string
         }
         Update: {
+          amount_paid?: number | null
           created_at?: string
           id?: string
           is_paid?: boolean | null
           parent_card_id?: string | null
           payment_date?: string | null
+          payment_entries?: Json | null
+          payment_note?: string | null
           tutoring_hour_id?: string | null
           updated_at?: string
         }
