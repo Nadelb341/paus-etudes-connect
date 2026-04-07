@@ -98,7 +98,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
       .from("appointments")
       .select("*")
       .order("created_at", { ascending: false });
-    if (data) setAppointments(data as Appointment[]);
+    if (data) setAppointments(data as unknown as Appointment[]);
   };
 
   const fetchStudents = async () => {
@@ -208,7 +208,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
       return;
     }
     const student = students.find(s => s.user_id === selectedStudent);
-    const { error } = await supabase.from("appointments").insert({
+    const { error } = await (supabase as any).from("appointments").insert({
       student_id: selectedStudent,
       student_name: student?.first_name || "",
       appointment_date: format(appointmentDate, "yyyy-MM-dd"),
@@ -298,7 +298,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
 
   const handleSaveEdit = async () => {
     if (!editingAppt || !editDate) return;
-    const { error } = await supabase.from("appointments").update({
+    const { error } = await (supabase as any).from("appointments").update({
       appointment_date: format(editDate, "yyyy-MM-dd"),
       start_time: editTime,
       subjects: editSubjects,

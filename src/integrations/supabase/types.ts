@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_quick_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_validated: boolean
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_validated?: boolean
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_validated?: boolean
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       appointment_views: {
         Row: {
           appointment_id: string
@@ -49,6 +76,7 @@ export type Database = {
           id: string
           is_visible: boolean | null
           items_to_bring: string | null
+          planned_work: string | null
           seen_by_student: boolean | null
           start_time: string
           status: string
@@ -66,6 +94,7 @@ export type Database = {
           id?: string
           is_visible?: boolean | null
           items_to_bring?: string | null
+          planned_work?: string | null
           seen_by_student?: boolean | null
           start_time: string
           status?: string
@@ -83,6 +112,7 @@ export type Database = {
           id?: string
           is_visible?: boolean | null
           items_to_bring?: string | null
+          planned_work?: string | null
           seen_by_student?: boolean | null
           start_time?: string
           status?: string
@@ -402,29 +432,38 @@ export type Database = {
       }
       payment_tracking: {
         Row: {
+          amount_paid: number | null
           created_at: string
           id: string
           is_paid: boolean | null
           parent_card_id: string | null
           payment_date: string | null
+          payment_entries: Json | null
+          payment_note: string | null
           tutoring_hour_id: string | null
           updated_at: string
         }
         Insert: {
+          amount_paid?: number | null
           created_at?: string
           id?: string
           is_paid?: boolean | null
           parent_card_id?: string | null
           payment_date?: string | null
+          payment_entries?: Json | null
+          payment_note?: string | null
           tutoring_hour_id?: string | null
           updated_at?: string
         }
         Update: {
+          amount_paid?: number | null
           created_at?: string
           id?: string
           is_paid?: boolean | null
           parent_card_id?: string | null
           payment_date?: string | null
+          payment_entries?: Json | null
+          payment_note?: string | null
           tutoring_hour_id?: string | null
           updated_at?: string
         }

@@ -9,6 +9,7 @@ import CahierDeTexte from "@/components/home/CahierDeTexte";
 import AppointmentsCard from "@/components/home/AppointmentsCard";
 import SubjectsGrid from "@/components/home/SubjectsGrid";
 import ParentHome from "@/components/home/ParentHome";
+import QuickNotes from "@/components/home/QuickNotes";
 import logo from "@/assets/logo.png";
 
 interface Reminder {
@@ -145,6 +146,9 @@ const Index = () => {
         ) : (
           <>
             <WelcomeBanner firstName={firstName} />
+
+            {/* Notes rapides admin */}
+            {isAdmin && viewMode !== "parent" && <QuickNotes />}
 
             {/* Reminders from admin */}
             {reminders.length > 0 && (
