@@ -113,8 +113,7 @@ const QuickNotes = () => {
     setIsOpen(false);
   };
 
-  const validatedNotes = notes.filter(n => n.is_validated);
-  const groupedByStudent = validatedNotes.reduce((acc, note) => {
+  const groupedByStudent = notes.reduce((acc, note) => {
     const name = getStudentName(note.student_id);
     if (!acc[name]) acc[name] = [];
     acc[name].push(note);
@@ -133,7 +132,6 @@ const QuickNotes = () => {
         </Button>
       </CardHeader>
       <CardContent className="pt-0">
-        {/* Aperçu des notes validées */}
         {Object.keys(groupedByStudent).length > 0 ? (
           <div className="space-y-2">
             {Object.entries(groupedByStudent).map(([studentName, studentNotes]) => (
@@ -141,8 +139,29 @@ const QuickNotes = () => {
                 <p className="font-semibold text-sm text-primary mb-1">📌 {studentName}</p>
                 <ul className="list-decimal list-inside space-y-0.5">
                   {studentNotes.map(note => (
-                    <li key={note.id} className="text-sm text-muted-foreground">
-                      {note.content}
+                    <li key={note.id} className="text-sm text-muted-foreground flex items-start gap-1">
+                      <span className="flex-1">{note.content}</span>
+                      <div className="flex items-center gap-0.5 shrink-0">
+                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => handleEdit(note)}>
+                          <Edit2 className="h-3 w-3" />
+                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button size="icon" variant="ghost" className="h-6 w-6 text-destructive">
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Supprimer cette note ?</AlertDialogTitle>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Annuler</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => handleDelete(note.id)}>Supprimer</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -150,19 +169,7 @@ const QuickNotes = () => {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground italic">Aucune note validée pour le moment.</p>
-        )}
-
-        {/* Bouton voir toutes les notes */}
-        {notes.length > 0 && (
-          <NotesListDialog
-            notes={notes}
-            students={students}
-            getStudentName={getStudentName}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onValidate={handleValidate}
-          />
+          <p className="text-sm text-muted-foreground italic">Aucune note pour le moment.</p>
         )}
       </CardContent>
 
