@@ -247,18 +247,18 @@ const ParentHome = () => {
     const newTotal = updatedEntries.reduce((s, e) => s + e.amount, 0);
 
     if (paymentRow.payment_id) {
-      await supabase.from("payment_tracking").update({
-        payment_entries: updatedEntries,
+      await (supabase as any).from("payment_tracking").update({
+        payment_entries: updatedEntries as any,
         amount_paid: newTotal,
         updated_at: new Date().toISOString(),
       }).eq("id", paymentRow.payment_id);
     } else {
-      await supabase.from("payment_tracking").insert({
+      await (supabase as any).from("payment_tracking").insert({
         tutoring_hour_id: paymentRow.id,
         parent_card_id: selectedCard.id,
         is_paid: false,
         amount_paid: newTotal,
-        payment_entries: updatedEntries,
+        payment_entries: updatedEntries as any,
       });
     }
 
