@@ -337,27 +337,6 @@ const MessagesPage = () => {
     );
   };
 
-  const renderReactions = (msg: Message, showAddButton: boolean) => {
-    const reactions = msg.reactions || {};
-    const entries = Object.entries(reactions).filter(([, users]) => (users as string[]).length > 0);
-    if (entries.length === 0 && !showAddButton) return null;
-    return (
-      <div className="flex flex-wrap gap-1 mt-1">
-        {entries.map(([emoji, users]) => (
-          <button key={emoji} onClick={() => toggleReaction(msg.id, emoji)}
-            className={`text-xs px-1.5 py-0.5 rounded-full border transition-all ${(users as string[]).includes(user?.id || "") ? "bg-primary/20 border-primary/40" : "bg-secondary/50 border-border hover:bg-secondary"}`}>
-            {emoji} {(users as string[]).length}
-          </button>
-        ))}
-        {showAddButton && (
-          <button onClick={() => setShowReactionPicker(showReactionPicker === msg.id ? null : msg.id)}
-            className="text-xs px-1.5 py-0.5 rounded-full border border-border bg-secondary/30 hover:bg-secondary transition-all">
-            ☺️
-          </button>
-        )}
-      </div>
-    );
-  };
 
   const hiddenInputs = (
     <>
@@ -393,6 +372,8 @@ const MessagesPage = () => {
           )}
           {threadMessages.map(msg => {
             const isMe = msg.sender_id === user?.id;
+            const reactions = msg.reactions || {};
+            const reactionEntries = Object.entries(reactions).filter(([, users]) => (users as string[]).length > 0);
             return (
               <div key={msg.id} className={`flex ${isMe ? "justify-end" : "justify-start"}`}>
                 <div className="max-w-[80%] space-y-1">
@@ -400,14 +381,35 @@ const MessagesPage = () => {
                   {selectedConvo.isGroup && !isMe && (
                     <p className="text-[10px] font-semibold text-primary ml-1">{msg.sender_name}</p>
                   )}
-                  <div className={`rounded-2xl px-4 py-2.5 ${isMe ? "bg-primary text-primary-foreground rounded-br-md" : "bg-secondary text-foreground rounded-bl-md"}`}>
-                    {renderContent(msg.content)}
-                    {renderAttachments(msg.attachments)}
-                    <p className={`text-[10px] mt-1 ${isMe ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                      {new Date(msg.created_at).toLocaleString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
-                    </p>
+                  {/* Message bubble — relative pour positionner la réaction en haut à droite */}
+                  <div className="relative">
+                    <div className={`rounded-2xl px-4 py-2.5 ${isMe ? "bg-primary text-primary-foreground rounded-br-md" : "bg-secondary text-foreground rounded-bl-md"}`}>
+                      {renderContent(msg.content)}
+                      {renderAttachments(msg.attachments)}
+                      <p className={`text-[10px] mt-1 ${isMe ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                        {new Date(msg.created_at).toLocaleString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                      </p>
+                    </div>
+                    {/* Emojis de réaction — badge en haut à droite du message */}
+                    {reactionEntries.length > 0 && (
+                      <div className="absolute -top-2 -right-2 flex gap-0.5">
+                        {reactionEntries.map(([emoji, users]) => (
+                          <button key={emoji} onClick={() => toggleReaction(msg.id, emoji)}
+                            title={`${(users as string[]).length} réaction(s)`}
+                            className="w-7 h-7 flex items-center justify-center text-base bg-card border border-border rounded-full shadow-sm hover:bg-secondary transition-all">
+                            {emoji}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  {renderReactions(msg, !isMe)}
+                  {/* Bouton ☺️ grisé — uniquement sur les messages des autres */}
+                  {!isMe && (
+                    <button onClick={() => setShowReactionPicker(showReactionPicker === msg.id ? null : msg.id)}
+                      className="text-muted-foreground/50 text-xs px-1.5 py-0.5 rounded-full border border-border/30 hover:text-muted-foreground hover:border-border transition-all">
+                      ☺️
+                    </button>
+                  )}
                   {showReactionPicker === msg.id && (
                     <div className="flex flex-wrap gap-1 p-2 bg-card border border-border rounded-xl shadow-lg max-w-[280px]">
                       {EMOJI_PANEL.map(emoji => (
