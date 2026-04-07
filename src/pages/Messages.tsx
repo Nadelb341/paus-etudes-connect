@@ -403,11 +403,11 @@ const MessagesPage = () => {
                       </div>
                     )}
                   </div>
-                  {/* Bouton ☺️ grisé — uniquement sur les messages des autres */}
+                  {/* Bouton réaction grisé — uniquement sur les messages des autres */}
                   {!isMe && (
                     <button onClick={() => setShowReactionPicker(showReactionPicker === msg.id ? null : msg.id)}
-                      className="text-muted-foreground/50 text-xs px-1.5 py-0.5 rounded-full border border-border/30 hover:text-muted-foreground hover:border-border transition-all">
-                      ☺️
+                      className="text-muted-foreground/40 p-1 rounded-full hover:text-muted-foreground hover:bg-secondary/50 transition-all">
+                      <Smile size={14} />
                     </button>
                   )}
                   {showReactionPicker === msg.id && (
