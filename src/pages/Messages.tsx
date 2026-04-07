@@ -337,9 +337,10 @@ const MessagesPage = () => {
     );
   };
 
-  const renderReactions = (msg: Message) => {
+  const renderReactions = (msg: Message, showAddButton: boolean) => {
     const reactions = msg.reactions || {};
     const entries = Object.entries(reactions).filter(([, users]) => (users as string[]).length > 0);
+    if (entries.length === 0 && !showAddButton) return null;
     return (
       <div className="flex flex-wrap gap-1 mt-1">
         {entries.map(([emoji, users]) => (
@@ -348,10 +349,12 @@ const MessagesPage = () => {
             {emoji} {(users as string[]).length}
           </button>
         ))}
-        <button onClick={() => setShowReactionPicker(showReactionPicker === msg.id ? null : msg.id)}
-          className="text-xs px-1.5 py-0.5 rounded-full border border-border bg-secondary/30 hover:bg-secondary transition-all">
-          😊
-        </button>
+        {showAddButton && (
+          <button onClick={() => setShowReactionPicker(showReactionPicker === msg.id ? null : msg.id)}
+            className="text-xs px-1.5 py-0.5 rounded-full border border-border bg-secondary/30 hover:bg-secondary transition-all">
+            ☺️
+          </button>
+        )}
       </div>
     );
   };
@@ -404,7 +407,7 @@ const MessagesPage = () => {
                       {new Date(msg.created_at).toLocaleString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>
-                  {renderReactions(msg)}
+                  {renderReactions(msg, !isMe)}
                   {showReactionPicker === msg.id && (
                     <div className="flex flex-wrap gap-1 p-2 bg-card border border-border rounded-xl shadow-lg max-w-[280px]">
                       {EMOJI_PANEL.map(emoji => (
