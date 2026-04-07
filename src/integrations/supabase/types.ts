@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_quick_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_validated: boolean
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_validated?: boolean
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_validated?: boolean
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       appointment_views: {
         Row: {
           appointment_id: string
