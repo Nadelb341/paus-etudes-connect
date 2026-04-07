@@ -30,6 +30,7 @@ interface Appointment {
   start_time: string;
   subjects: string[];
   estimated_duration: string;
+  planned_work: string;
   items_to_bring: string;
   seen_by_student: boolean;
   is_visible: boolean;
@@ -65,6 +66,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
   const [startTime, setStartTime] = useState("14:00");
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [duration, setDuration] = useState("1h");
+  const [plannedWork, setPlannedWork] = useState("");
   const [itemsToBring, setItemsToBring] = useState("");
 
   // Edit state
@@ -73,6 +75,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
   const [editTime, setEditTime] = useState("");
   const [editSubjects, setEditSubjects] = useState<string[]>([]);
   const [editDuration, setEditDuration] = useState("");
+  const [editPlannedWork, setEditPlannedWork] = useState("");
   const [editItems, setEditItems] = useState("");
 
   // Status change state
@@ -212,6 +215,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
       start_time: startTime,
       subjects: selectedSubjects,
       estimated_duration: duration,
+      planned_work: plannedWork,
       items_to_bring: itemsToBring,
       is_visible: isVisible,
       created_by: user?.id,
@@ -253,6 +257,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
     setStartTime("14:00");
     setSelectedSubjects([]);
     setDuration("1h");
+    setPlannedWork("");
     setItemsToBring("");
     setSelectedParentId("");
     setParentProfiles([]);
@@ -287,6 +292,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
     setEditTime(appt.start_time?.slice(0, 5) || "14:00");
     setEditSubjects([...appt.subjects]);
     setEditDuration(appt.estimated_duration);
+    setEditPlannedWork(appt.planned_work || "");
     setEditItems(appt.items_to_bring || "");
   };
 
@@ -297,6 +303,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
       start_time: editTime,
       subjects: editSubjects,
       estimated_duration: editDuration,
+      planned_work: editPlannedWork,
       items_to_bring: editItems,
     }).eq("id", editingAppt.id);
     if (error) { toast.error("Erreur"); return; }
@@ -450,6 +457,12 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
                 📚 {appt.subjects.map(s => ALL_SUBJECTS.find(sub => sub.id === s)?.label || s).join(", ")}
                 {" · "}⏱️ {appt.estimated_duration}
               </p>
+              {appt.planned_work && (
+                <div className="bg-secondary/50 rounded p-2 text-xs">
+                  <p className="font-medium mb-1">📖 Travail prévu :</p>
+                  <p className="whitespace-pre-line">{appt.planned_work}</p>
+                </div>
+              )}
               {appt.items_to_bring && (
                 <div className="bg-secondary/50 rounded p-2 text-xs">
                   <p className="font-medium mb-1">🎒 Affaires à prendre :</p>
@@ -552,6 +565,15 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
               </Select>
             </div>
             <div>
+              <label className="text-sm font-medium">Travail prévu</label>
+              <Textarea
+                value={plannedWork}
+                onChange={e => setPlannedWork(e.target.value)}
+                placeholder={"- Chapitre 3 : la Révolution française\n- Leçon sur les fractions\n- Exercices p. 42"}
+                rows={3}
+              />
+            </div>
+            <div>
               <label className="text-sm font-medium">Affaires à prendre</label>
               <Textarea
                 value={itemsToBring}
@@ -622,6 +644,10 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
               </Select>
             </div>
             <div>
+              <label className="text-sm font-medium">Travail prévu</label>
+              <Textarea value={editPlannedWork} onChange={e => setEditPlannedWork(e.target.value)} rows={3} />
+            </div>
+            <div>
               <label className="text-sm font-medium">Affaires à prendre</label>
               <Textarea value={editItems} onChange={e => setEditItems(e.target.value)} rows={4} />
             </div>
@@ -653,6 +679,12 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
                   📚 {appt.subjects.map(s => ALL_SUBJECTS.find(sub => sub.id === s)?.label || s).join(", ")}
                 </p>
                 <p className="text-muted-foreground">⏱️ {appt.estimated_duration}</p>
+                {appt.planned_work && (
+                  <div className="bg-secondary/50 rounded p-2 text-xs mt-1">
+                    <p className="font-medium mb-1">📖 Travail prévu :</p>
+                    <p className="whitespace-pre-line">{appt.planned_work}</p>
+                  </div>
+                )}
                 {appt.items_to_bring && (
                   <div className="bg-secondary/50 rounded p-2 text-xs mt-1">
                     <p className="font-medium mb-1">🎒 Affaires à prendre :</p>
