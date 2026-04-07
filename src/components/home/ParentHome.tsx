@@ -25,6 +25,12 @@ const formatEur = (n: number): string => {
   return Number.isInteger(rounded) ? `${rounded}€` : `${rounded.toFixed(2)}€`;
 };
 
+interface PaymentEntry {
+  date: string;
+  amount: number;
+  note: string;
+}
+
 interface ChildCard {
   id: string;
   parent_user_id: string;
@@ -41,8 +47,7 @@ interface HourRow {
   subject: string;
   notes: string;
   amount_paid: number;
-  payment_note: string;
-  payment_date: string | null;
+  payment_entries: PaymentEntry[];
   payment_id: string | null;
 }
 
@@ -70,12 +75,13 @@ const ParentHome = () => {
   const [studentProfiles, setStudentProfiles] = useState<{ user_id: string; first_name: string }[]>([]);
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
   const [linkedStudentUserIds, setLinkedStudentUserIds] = useState<string[]>([]);
-  const [draftAmounts, setDraftAmounts] = useState<Record<string, string>>({});
-  const [histRow, setHistRow] = useState<HourRow | null>(null);
-  const [histDate, setHistDate] = useState<Date | undefined>();
-  const [histNote, setHistNote] = useState("");
 
-  // For admin: load parent profiles
+  // Paiement
+  const [paymentRow, setPaymentRow] = useState<HourRow | null>(null);
+  const [newEntryAmount, setNewEntryAmount] = useState("");
+  const [newEntryDate, setNewEntryDate] = useState<Date | undefined>(new Date());
+  const [newEntryNote, setNewEntryNote] = useState("");
+
   useEffect(() => {
     if (isAdmin && viewMode === "parent") {
       fetchParents();
@@ -83,14 +89,12 @@ const ParentHome = () => {
     }
   }, [isAdmin, viewMode]);
 
-  // For parent (non-admin): load their own cards
   useEffect(() => {
     if (!isAdmin && user) {
       fetchChildCards(user.id);
     }
   }, [isAdmin, user]);
 
-  // When admin selects a parent, load cards
   useEffect(() => {
     if (selectedParent) {
       fetchChildCards(selectedParent);
@@ -123,7 +127,6 @@ const ParentHome = () => {
       .order("created_at");
     if (data) {
       setChildCards(data as ChildCard[]);
-      // Resolve linked student user IDs for appointments
       const profileIds = data.filter((c: any) => c.child_profile_id).map((c: any) => c.child_profile_id);
       if (profileIds.length > 0) {
         const { data: profiles } = await supabase.from("profiles").select("user_id").in("id", profileIds);
@@ -139,26 +142,15 @@ const ParentHome = () => {
     const parentId = isAdmin ? selectedParent : user?.id;
     if (!parentId) return;
 
-    const insertData: any = {
-      parent_user_id: parentId,
-      child_name: newChildName.trim(),
-    };
+    const insertData: any = { parent_user_id: parentId, child_name: newChildName.trim() };
     if (selectedStudentId) {
-      insertData.child_profile_id = selectedStudentId;
-      // Find matching profile id
       const { data: profileData } = await supabase
-        .from("profiles")
-        .select("id")
-        .eq("user_id", selectedStudentId)
-        .single();
+        .from("profiles").select("id").eq("user_id", selectedStudentId).single();
       if (profileData) insertData.child_profile_id = profileData.id;
     }
 
     const { error } = await supabase.from("parent_child_cards").insert(insertData);
-    if (error) {
-      toast.error("Erreur lors de la création");
-      return;
-    }
+    if (error) { toast.error("Erreur lors de la création"); return; }
     toast.success("Carte enfant créée !");
     setNewChildName("");
     setSelectedStudentId("");
@@ -183,40 +175,27 @@ const ParentHome = () => {
   };
 
   const fetchHourRows = async (card: ChildCard) => {
-    // Get student user_id from child_profile_id
     let studentUserId: string | null = null;
     if (card.child_profile_id) {
       const { data: profile } = await supabase
-        .from("profiles")
-        .select("user_id")
-        .eq("id", card.child_profile_id)
-        .single();
+        .from("profiles").select("user_id").eq("id", card.child_profile_id).single();
       if (profile) studentUserId = profile.user_id;
     }
-
-    if (!studentUserId) {
-      setHourRows([]);
-      return;
-    }
+    if (!studentUserId) { setHourRows([]); return; }
 
     const { data: hours } = await supabase
-      .from("tutoring_hours")
-      .select("*")
+      .from("tutoring_hours").select("*")
       .eq("student_id", studentUserId)
       .order("session_date", { ascending: false });
 
-    // Get payment tracking
     const { data: payments } = await supabase
-      .from("payment_tracking")
-      .select("*")
-      .eq("parent_card_id", card.id);
+      .from("payment_tracking").select("*").eq("parent_card_id", card.id);
 
-    const paymentMap: Record<string, { amount_paid: number; payment_date: string | null; payment_note: string; id: string }> = {};
+    const paymentMap: Record<string, { amount_paid: number; payment_entries: PaymentEntry[]; id: string }> = {};
     payments?.forEach((p: any) => {
       paymentMap[p.tutoring_hour_id] = {
         amount_paid: p.amount_paid || 0,
-        payment_date: p.payment_date,
-        payment_note: p.payment_note || "",
+        payment_entries: p.payment_entries || [],
         id: p.id,
       };
     });
@@ -229,21 +208,16 @@ const ParentHome = () => {
       subject: h.subject || "",
       notes: h.notes || "",
       amount_paid: paymentMap[h.id]?.amount_paid || 0,
-      payment_note: paymentMap[h.id]?.payment_note || "",
-      payment_date: paymentMap[h.id]?.payment_date || null,
+      payment_entries: paymentMap[h.id]?.payment_entries || [],
       payment_id: paymentMap[h.id]?.id || null,
     }));
 
     setHourRows(rows);
-    const drafts: Record<string, string> = {};
-    rows.forEach(r => { drafts[r.id] = r.amount_paid > 0 ? String(r.amount_paid) : ""; });
-    setDraftAmounts(drafts);
   };
 
   const saveNote = async () => {
     if (!selectedCard) return;
-    await supabase
-      .from("parent_child_cards")
+    await supabase.from("parent_child_cards")
       .update({ general_note: noteText, updated_at: new Date().toISOString() })
       .eq("id", selectedCard.id);
     toast.success("Note sauvegardée");
@@ -251,52 +225,65 @@ const ParentHome = () => {
     setSelectedCard(prev => prev ? { ...prev, general_note: noteText } : null);
   };
 
-  const saveAmountPaid = async (row: HourRow, amountStr: string) => {
-    if (!isAdmin || !selectedCard) return;
-    const amount = parseFloat(amountStr) || 0;
-    if (row.payment_id) {
-      await supabase.from("payment_tracking")
-        .update({ amount_paid: amount, updated_at: new Date().toISOString() })
-        .eq("id", row.payment_id);
-    } else {
-      await supabase.from("payment_tracking").insert({
-        tutoring_hour_id: row.id,
-        parent_card_id: selectedCard.id,
-        is_paid: amount > 0,
-        amount_paid: amount,
-      });
-    }
-    await fetchHourRows(selectedCard);
+  const openPaymentDialog = (row: HourRow) => {
+    setPaymentRow(row);
+    setNewEntryAmount("");
+    setNewEntryDate(new Date());
+    setNewEntryNote("");
   };
 
-  const openHistorique = (row: HourRow) => {
-    setHistRow(row);
-    setHistDate(row.payment_date ? new Date(row.payment_date) : undefined);
-    setHistNote(row.payment_note || "");
-  };
+  const addPaymentEntry = async () => {
+    if (!isAdmin || !selectedCard || !paymentRow) return;
+    const amount = parseFloat(newEntryAmount) || 0;
+    if (amount <= 0) { toast.error("Montant invalide"); return; }
 
-  const saveHistorique = async () => {
-    if (!isAdmin || !selectedCard || !histRow) return;
-    const updateData: any = {
-      payment_date: histDate ? format(histDate, "yyyy-MM-dd") : null,
-      payment_note: histNote,
-      updated_at: new Date().toISOString(),
+    const newEntry: PaymentEntry = {
+      date: newEntryDate ? format(newEntryDate, "yyyy-MM-dd") : format(new Date(), "yyyy-MM-dd"),
+      amount,
+      note: newEntryNote,
     };
-    if (histRow.payment_id) {
-      await supabase.from("payment_tracking").update(updateData).eq("id", histRow.payment_id);
+
+    const updatedEntries = [...paymentRow.payment_entries, newEntry];
+    const newTotal = updatedEntries.reduce((s, e) => s + e.amount, 0);
+
+    if (paymentRow.payment_id) {
+      await supabase.from("payment_tracking").update({
+        payment_entries: updatedEntries,
+        amount_paid: newTotal,
+        updated_at: new Date().toISOString(),
+      }).eq("id", paymentRow.payment_id);
     } else {
       await supabase.from("payment_tracking").insert({
-        tutoring_hour_id: histRow.id,
+        tutoring_hour_id: paymentRow.id,
         parent_card_id: selectedCard.id,
         is_paid: false,
-        amount_paid: histRow.amount_paid,
-        ...updateData,
+        amount_paid: newTotal,
+        payment_entries: updatedEntries,
       });
     }
-    setHistRow(null);
-    setHistDate(undefined);
-    setHistNote("");
+
+    toast.success("Règlement enregistré !");
+    setPaymentRow(null);
     await fetchHourRows(selectedCard);
+  };
+
+  const deletePaymentEntry = async (entryIndex: number) => {
+    if (!isAdmin || !selectedCard || !paymentRow) return;
+    const updatedEntries = paymentRow.payment_entries.filter((_, i) => i !== entryIndex);
+    const newTotal = updatedEntries.reduce((s, e) => s + e.amount, 0);
+
+    if (paymentRow.payment_id) {
+      await supabase.from("payment_tracking").update({
+        payment_entries: updatedEntries,
+        amount_paid: newTotal,
+        updated_at: new Date().toISOString(),
+      }).eq("id", paymentRow.payment_id);
+    }
+
+    // Mettre à jour le paymentRow local pour que le dialog se rafraîchisse
+    setPaymentRow(prev => prev ? { ...prev, payment_entries: updatedEntries, amount_paid: newTotal } : null);
+    await fetchHourRows(selectedCard);
+    toast.success("Entrée supprimée");
   };
 
   const totalHours = hourRows.reduce((s, r) => s + r.duration_hours, 0);
@@ -376,45 +363,97 @@ const ParentHome = () => {
         </div>
       )}
 
-      {/* Historique dialog */}
-      <Dialog open={!!histRow} onOpenChange={open => { if (!open) { setHistRow(null); setHistDate(undefined); setHistNote(""); } }}>
-        <DialogContent className="max-w-sm">
+      {/* Dialog paiement partiel */}
+      <Dialog open={!!paymentRow} onOpenChange={open => { if (!open) setPaymentRow(null); }}>
+        <DialogContent className="max-w-sm max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>📋 Historique du règlement</DialogTitle>
+            <DialogTitle>💰 Règlements</DialogTitle>
           </DialogHeader>
-          {histRow && (
+          {paymentRow && (
             <div className="space-y-4">
-              <div className="bg-secondary/30 rounded p-2 text-xs">
-                <p>Cours du {new Date(histRow.session_date).toLocaleDateString("fr-FR")} — {formatEur(histRow.duration_hours * histRow.hourly_rate)}</p>
-                {histRow.amount_paid > 0 && <p className="text-primary font-medium">Somme payée : {formatEur(histRow.amount_paid)}</p>}
+              {/* Résumé du cours */}
+              <div className="bg-secondary/30 rounded-lg p-3 text-sm space-y-1">
+                <p className="font-medium">
+                  Cours du {new Date(paymentRow.session_date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+                </p>
+                <p className="text-muted-foreground">
+                  {paymentRow.duration_hours}h · {formatEur(paymentRow.duration_hours * paymentRow.hourly_rate)}
+                </p>
+                <div className="flex gap-4 pt-1">
+                  <span className="text-green-600 font-medium text-xs">Réglé : {formatEur(paymentRow.amount_paid)}</span>
+                  <span className={cn("font-medium text-xs", (paymentRow.duration_hours * paymentRow.hourly_rate - paymentRow.amount_paid) > 0 ? "text-orange-600" : "text-green-600")}>
+                    Reste : {formatEur(paymentRow.duration_hours * paymentRow.hourly_rate - paymentRow.amount_paid)}
+                  </span>
+                </div>
               </div>
-              <div>
-                <Label className="text-sm font-medium">Date du règlement</Label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button variant="outline" className={cn("w-full justify-start text-left mt-1", !histDate && "text-muted-foreground")}>
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {histDate ? format(histDate, "d MMMM yyyy", { locale: fr }) : "Choisir une date"}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar mode="single" selected={histDate} onSelect={setHistDate} className={cn("p-3 pointer-events-auto")} />
-                  </PopoverContent>
-                </Popover>
-              </div>
-              <div>
-                <Label className="text-sm font-medium">Note (optionnelle)</Label>
-                <Input
-                  value={histNote}
-                  onChange={e => setHistNote(e.target.value)}
-                  placeholder="Ex : espèces, virement..."
-                  className="mt-1"
-                />
-              </div>
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={() => { setHistRow(null); setHistDate(undefined); setHistNote(""); }} className="flex-1">Annuler</Button>
-                <Button onClick={saveHistorique} className="flex-1">Enregistrer</Button>
-              </div>
+
+              {/* Historique des versements */}
+              {paymentRow.payment_entries.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Versements enregistrés</p>
+                  {paymentRow.payment_entries.map((entry, i) => (
+                    <div key={i} className="flex items-center justify-between bg-green-500/5 border border-green-500/20 rounded p-2 text-xs">
+                      <div>
+                        <span className="font-medium text-green-700 dark:text-green-400">{formatEur(entry.amount)}</span>
+                        <span className="text-muted-foreground ml-2">
+                          {new Date(entry.date).toLocaleDateString("fr-FR")}
+                        </span>
+                        {entry.note && <p className="text-muted-foreground italic mt-0.5">{entry.note}</p>}
+                      </div>
+                      {isAdmin && (
+                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => deletePaymentEntry(i)}>
+                          <Trash2 size={12} className="text-destructive" />
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Formulaire nouveau versement */}
+              {isAdmin && (
+                <div className="space-y-3 border-t pt-3">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Ajouter un versement</p>
+                  <div>
+                    <Label className="text-sm">Montant (€)</Label>
+                    <Input
+                      type="number"
+                      min="0"
+                      step="0.5"
+                      value={newEntryAmount}
+                      onChange={e => setNewEntryAmount(e.target.value)}
+                      placeholder="Ex : 13"
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-sm">Date du règlement</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" className={cn("w-full justify-start text-left mt-1", !newEntryDate && "text-muted-foreground")}>
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {newEntryDate ? format(newEntryDate, "d MMMM yyyy", { locale: fr }) : "Choisir une date"}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar mode="single" selected={newEntryDate} onSelect={setNewEntryDate} className={cn("p-3 pointer-events-auto")} />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  <div>
+                    <Label className="text-sm">Note (optionnelle)</Label>
+                    <Input
+                      value={newEntryNote}
+                      onChange={e => setNewEntryNote(e.target.value)}
+                      placeholder="Ex : espèces, virement..."
+                      className="mt-1"
+                    />
+                  </div>
+                  <Button onClick={addPaymentEntry} className="w-full">
+                    <Plus size={14} className="mr-2" /> Enregistrer ce versement
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </DialogContent>
@@ -449,7 +488,7 @@ const ParentHome = () => {
 
       {/* Child detail dialog */}
       <Dialog open={!!selectedCard} onOpenChange={open => { if (!open) setSelectedCard(null); }}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-lg w-full max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <span className="text-2xl">👧</span> {selectedCard?.child_name}
@@ -463,7 +502,7 @@ const ParentHome = () => {
 
           {selectedCard && (
             <div className="space-y-5">
-              {/* General note */}
+              {/* Note générale */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <h4 className="font-semibold text-sm flex items-center gap-2">
@@ -487,7 +526,7 @@ const ParentHome = () => {
                 )}
               </div>
 
-              {/* Summary */}
+              {/* Résumé */}
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="p-2 bg-secondary/30 rounded-lg">
                   <p className="text-xs text-muted-foreground">Total heures</p>
@@ -503,22 +542,22 @@ const ParentHome = () => {
                 </div>
               </div>
 
-              {/* Hours table */}
+              {/* Tableau des heures — compact, sans scroll horizontal */}
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-xs px-2">Date</TableHead>
-                    <TableHead className="text-xs px-2">Heures</TableHead>
-                    <TableHead className="text-xs px-2">Total</TableHead>
-                    <TableHead className="text-xs px-2">Somme payée</TableHead>
-                    <TableHead className="text-xs px-2">Reste dû</TableHead>
-                    <TableHead className="text-xs px-2">Historique</TableHead>
+                    <TableHead className="text-xs p-2">Date</TableHead>
+                    <TableHead className="text-xs p-2">Durée</TableHead>
+                    <TableHead className="text-xs p-2">Total</TableHead>
+                    <TableHead className="text-xs p-2">Réglé</TableHead>
+                    <TableHead className="text-xs p-2">Reste dû</TableHead>
+                    {isAdmin && <TableHead className="p-2 w-8"></TableHead>}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {hourRows.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center text-sm text-muted-foreground italic">
+                      <TableCell colSpan={isAdmin ? 6 : 5} className="text-center text-sm text-muted-foreground italic">
                         Aucune heure enregistrée
                       </TableCell>
                     </TableRow>
@@ -528,50 +567,33 @@ const ParentHome = () => {
                       const reste = total - (row.amount_paid || 0);
                       return (
                         <TableRow key={row.id}>
-                          <TableCell className="text-xs px-2">
-                            {new Date(row.session_date).toLocaleDateString("fr-FR")}
+                          <TableCell className="text-xs p-2 whitespace-nowrap">
+                            {new Date(row.session_date).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit" })}
                           </TableCell>
-                          <TableCell className="text-xs px-2">{row.duration_hours}h</TableCell>
-                          <TableCell className="text-xs font-medium px-2">
-                            {formatEur(total)}
+                          <TableCell className="text-xs p-2">{row.duration_hours}h</TableCell>
+                          <TableCell className="text-xs font-medium p-2">{formatEur(total)}</TableCell>
+                          <TableCell className="text-xs p-2">
+                            <span className="text-green-600 font-medium">
+                              {row.amount_paid > 0 ? formatEur(row.amount_paid) : "—"}
+                            </span>
                           </TableCell>
-                          <TableCell className="px-2">
-                            {isAdmin ? (
-                              <Input
-                                type="number"
-                                min="0"
-                                step="0.5"
-                                value={draftAmounts[row.id] ?? ""}
-                                onChange={e => setDraftAmounts(prev => ({ ...prev, [row.id]: e.target.value }))}
-                                onBlur={() => saveAmountPaid(row, draftAmounts[row.id] ?? "")}
-                                className="h-7 w-20 text-xs px-2"
-                                placeholder="0"
-                              />
-                            ) : (
-                              <span className="text-xs">{row.amount_paid > 0 ? formatEur(row.amount_paid) : "—"}</span>
-                            )}
-                          </TableCell>
-                          <TableCell className="text-xs px-2">
+                          <TableCell className="text-xs p-2">
                             <span className={reste > 0 ? "text-orange-600 font-medium" : "text-green-600 font-medium"}>
                               {formatEur(reste)}
                             </span>
                           </TableCell>
-                          <TableCell className="px-2">
-                            {isAdmin ? (
+                          {isAdmin && (
+                            <TableCell className="p-2">
                               <Button
                                 variant="ghost"
-                                size="sm"
-                                className="h-7 w-7 p-0"
-                                onClick={() => openHistorique(row)}
+                                size="icon"
+                                className="h-6 w-6"
+                                onClick={() => openPaymentDialog(row)}
                               >
-                                <CalendarIcon size={13} className={row.payment_date ? "text-primary" : "text-muted-foreground"} />
+                                <Plus size={13} className="text-primary" />
                               </Button>
-                            ) : (
-                              <span className="text-xs text-muted-foreground">
-                                {row.payment_date ? new Date(row.payment_date).toLocaleDateString("fr-FR") : "—"}
-                              </span>
-                            )}
-                          </TableCell>
+                            </TableCell>
+                          )}
                         </TableRow>
                       );
                     })
