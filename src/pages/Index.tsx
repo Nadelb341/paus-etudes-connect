@@ -136,7 +136,7 @@ const Index = () => {
                 </span>
               )}
             </div>
-            <p className="text-xl font-heading font-bold text-primary mt-1">Paus'étude</p>
+            <p className="text-xl font-heading font-bold text-primary -mt-3">Paus'étude</p>
           </div>
         </div>
 
