@@ -1,13 +1,13 @@
 # My Study Way (ex Paus'Etudes Connect)
 
 ## Description
-Plateforme educative pour le soutien scolaire. Creee par Nadia (nad341@live.fr) via Lovable.
+Plateforme educative pour le soutien scolaire. Creee par Nadia (nad341@live.fr).
 Gestion des devoirs, cours, quiz, RDV de tutorat, messagerie enrichie et suivi de paiement.
 
 ## Utilisateurs
 - **Admin unique** : nad341@live.fr (hardcode dans constants.ts, auto-approve)
 - **Eleves** : s'inscrivent, attendent approbation admin
-- **Parents** : suivent les enfants via parent_child_cards, voient RDV, recoivent notifications
+- **Parents** : suivent les enfants via parent_child_cards, voient RDV, heures de cours, recoivent notifications
 
 ## Stack technique
 - React 18 + TypeScript + Vite
@@ -16,6 +16,12 @@ Gestion des devoirs, cours, quiz, RDV de tutorat, messagerie enrichie et suivi d
 - TanStack React Query
 - React Hook Form + Zod
 - Date-fns (formatage dates FR)
+
+## Deploiement
+- **Vercel** : projet "my-study-way" (nadelb341s-projects)
+- **GitHub** : https://github.com/Nadelb341/paus-etudes-connect
+- Auto-deploy : chaque push sur `main` declenche un redeploy Vercel automatiquement
+- Variables d'environnement Supabase configurees dans Vercel
 
 ## Architecture
 ```
@@ -40,7 +46,11 @@ chapter_documents, subject_comments, homework, homework_completions, homework_re
 appointments (status, status_note), quizzes, quiz_questions, quiz_responses,
 messages (reactions jsonb, attachments jsonb), notifications,
 tutoring_hours, parent_child_cards, payment_tracking, family_accounts,
-push_subscriptions, scheduled_notifications
+push_subscriptions, scheduled_notifications,
+appointment_views (suivi accusés réception RDV),
+hourly_rate_settings (barème tarifs horaires par niveau)
+
+Colonne ajoutee : profiles.custom_hourly_rate (tarif personnalise par eleve, NULL = barème par niveau)
 
 Storage bucket : `subject-files` (public) — aussi utilise pour les pieces jointes messages
 
@@ -64,6 +74,9 @@ Storage bucket : `subject-files` (public) — aussi utilise pour les pieces join
 - Report : calendrier + heure pour choisir la nouvelle date
 - Annulation : avec note optionnelle
 - Notifications auto (triggers SQL) : eleve + parents lies
+- **Flash message** : a la premiere connexion apres creation d'un nouveau RDV, un dialog
+  s'affiche (non dismissable par clic exterieur, bouton OK uniquement). Tracking via
+  table `appointment_views` (persistant multi-appareils).
 
 ## Messagerie (Messages.tsx)
 - **Conversations 1-a-1** : admin <-> eleve, admin <-> parent
@@ -71,7 +84,13 @@ Storage bucket : `subject-files` (public) — aussi utilise pour les pieces join
 - Conversations identifiees par ensemble trie des participants
 - Copie parent dans 1-a-1 cree une conversation de groupe persistante
 - Tous les participants voient et repondent dans le meme fil
-- **Reactions emoji** : 30 emojis, bouton 😊 sur chaque message (ancien ou nouveau)
+- **Reactions emoji** :
+  - Bouton icone Smile (monochrome, grise) sous les messages des AUTRES uniquement
+  - Clic ouvre un panneau de 30 emojis
+  - L'emoji choisi s'affiche en badge rond en haut a droite du message
+  - Mise a jour optimiste (affichage immediat) + sauvegarde DB en arriere-plan
+  - Clic sur le badge supprime la reaction (toggle)
+  - RLS UPDATE autorise pour expediteur, destinataires et admin
 - **Pieces jointes** : upload PDF, images, prise de photo (Supabase storage)
 - **Liens YouTube** : detection auto + miniature avec bouton play
 - **Historique** : toutes les conversations sont conservees
@@ -83,13 +102,23 @@ Sections (cartes accordeon) :
 2. Monitoring (stats)
 3. Eleves (liste, recherche, edition complete du profil)
 4. **Parents** (liste, recherche, edition, liaison parent-enfant)
-5. Registre des heures
+5. **Registre des heures** :
+   - Bouton "Bareme" pour modifier les tarifs horaires par niveau (primaire/college/lycee)
+   - Tarifs stockes en base dans `hourly_rate_settings` (modifiables par admin)
+   - Tarif personnalise par eleve possible (custom_hourly_rate sur profiles)
+   - Calcul montant : formatEur() — arrondi 2 decimales, sans .00 inutile (ex: 19.50€ et non 20€)
 6. Suivi des notes en attente
 7. Notifications
 8. Cahier de texte (creation devoirs, suivi completion)
 
-Edition eleve : prenom, genre, niveau, date naissance, remarques (email lecture seule)
+Edition eleve : prenom, genre, niveau, date naissance, remarques, tarif horaire personnalise
 Edition parent : prenom, enfant declare, liaison eleve inscrit, remarques
+
+## Vue Parent (ParentHome.tsx)
+- Affiche les RDV de l'enfant lie
+- Affiche les heures de cours et montants dus
+- Calcul monetaire correct via formatEur() (ex: 1.5h x 13€ = 19.50€)
+- Ordre des sections : selecteur admin PUIS rendez-vous (pas l'inverse)
 
 ## Notifications Push (PWA)
 - Service Worker : public/sw.js
@@ -106,7 +135,12 @@ Edition parent : prenom, enfant declare, liaison eleve inscrit, remarques
 ## RLS (Row Level Security)
 - Admin : acces total sur toutes les tables
 - Eleves : lecture propres RDV (is_visible=true), mise a jour propres RDV
-- Parents : lecture RDV de leurs enfants lies (via parent_child_cards)
+- Parents :
+  - Lecture RDV de leurs enfants lies (via parent_child_cards)
+  - Lecture profils des eleves lies
+  - Lecture heures de cours des eleves lies (tutoring_hours)
+  - Lecture et creation dans appointment_views (accusés réception)
+- Messages : tout participant (expediteur ou destinataire) peut UPDATE les reactions
 
 ## Commandes
 ```bash
@@ -120,13 +154,13 @@ npm run test:watch   # Tests en watch mode
 - Tout le contenu UI est en francais
 - Ne jamais modifier les composants shadcn/ui directement
 - Admin email hardcode : nad341@live.fr (src/lib/constants.ts)
-- Tarifs : 10EUR primaire, 13EUR college, 16EUR lycee
+- Tarifs par defaut : 10EUR primaire, 13EUR college, 16EUR lycee (modifiables en base)
 - Niveaux scolaires : Maternelle -> Terminale
 - Les migrations Supabase sont dans supabase/migrations/
-- Projet Lovable : attention a la compatibilite avec l'editeur Lovable
 - iOS PWA : jamais new Notification(), tout via Edge Function
-- Cles VAPID en dur dans le code (Lovable ecrase les env vars)
+- Cles VAPID en dur dans le code (Vercel/Lovable ecrasent les env vars)
 - Logo : livre + toque + texte "My Study Way" (src/assets/logo.png + public/logo.png)
+- formatEur(n) : utilitaire pour afficher les montants (pas de .toFixed(0) qui arrondit mal)
 
 ## Routes
 - `/auth` - Connexion / Inscription
@@ -136,12 +170,11 @@ npm run test:watch   # Tests en watch mode
 - `/settings` - Parametres profil
 - `/switch-account` - Gestion comptes famille
 
-## Collaboration Lovable
-- Nadia edite via Lovable, Mustapha assiste via Claude Code + GitHub
-- Synchro GitHub → Lovable : icone </> (editeur code) ou prompt "Pull from GitHub"
-- Le pull GitHub coute des credits sur Lovable, l'editeur de code est gratuit
-- SQL dans Lovable/Supabase : gratuit
-- Pour les petites modifs : Nadia modifie directement dans l'editeur de code Lovable
+## Collaboration
+- Nadia edite et teste l'application
+- Synchro : push GitHub -> Vercel redeploy automatique
+- SQL Supabase : via Lovable SQL Editor ou dashboard Supabase directement
+- Pour les petites modifs UI : possibilite d'editer dans l'editeur de code Lovable puis pull GitHub
 
 ## Migrations SQL (supabase/migrations/)
 - 20260327-20260330 : schema initial, tables, RLS
@@ -149,10 +182,15 @@ npm run test:watch   # Tests en watch mode
 - 20260402165949 : status/status_note sur appointments + trigger notification report/annulation
 - 20260402200000 : RLS parents sur appointments + trigger notify parents sur creation RDV
 - 20260403000001 : reactions (jsonb) et attachments (jsonb) sur messages
+- 20260406000001 : RLS parents — lecture profil eleves lies
+- 20260407000001 : table appointment_views (flash message accusé reception RDV)
+- 20260407000002 : table hourly_rate_settings + colonne custom_hourly_rate sur profiles
+- 20260407000003 : RLS parents — lecture tutoring_hours des eleves lies
+- 20260407000004 : RLS messages UPDATE reactions pour tous les participants
 
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
 - Renomme "My Study Way" (ex Paus'Etudes) le 2 avril 2026
-- Nadia gere le projet cote Lovable, Mustapha assiste cote technique
+- Deploye sur Vercel le 7 avril 2026 (remplace Lovable comme plateforme de deploy)
 - Notifications push : installees et testees OK (son + banniere) le 31 mars 2026
 - Collaborateur GitHub : badmust75-coder a acces en ecriture au repo
