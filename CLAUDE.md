@@ -187,6 +187,26 @@ npm run test:watch   # Tests en watch mode
 - 20260407000002 : table hourly_rate_settings + colonne custom_hourly_rate sur profiles
 - 20260407000003 : RLS parents — lecture tutoring_hours des eleves lies
 - 20260407000004 : RLS messages UPDATE reactions pour tous les participants
+- 20260407000005 : colonne planned_work sur appointments (travail prevu)
+- 20260407000006 : colonnes amount_paid + payment_note sur payment_tracking
+- 20260407000007 : colonne payment_entries (JSONB) sur payment_tracking (versements partiels)
+
+## RDV a venir (AppointmentsCard) — champ travail prevu
+- Champ planned_work (TEXT) ajoute sur appointments
+- Affiche un bloc "📖 Travail prevu" juste avant "🎒 Affaires a prendre"
+- Visible dans la carte RDV et dans le flash message de notification
+- Champ present dans les formulaires creation et modification
+
+## Suivi paiement (ParentHome) — refonte complete
+- Colonne "Somme payee" : supprimee du tableau (evite scroll horizontal)
+- Colonne "Historique" : supprimee du tableau
+- Tableau compact 5 colonnes : Date · Duree · Total · Regle · Reste du
+- Bouton "+" en bout de ligne ouvre un dialog de versements
+- payment_entries (JSONB) sur payment_tracking : tableau de versements {date, amount, note}
+- amount_paid = somme automatique de tous les versements
+- Paiements partiels : plusieurs versements par session possibles
+- Chaque versement peut etre supprime individuellement
+- Reste du s'affiche en orange si > 0, vert si solde
 
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
