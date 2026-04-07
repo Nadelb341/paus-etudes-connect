@@ -1,4 +1,4 @@
-# My Study Way (ex Paus'Etudes Connect)
+# Paus'étude (ex My Study Way, ex Paus'Etudes Connect)
 
 ## Description
 Plateforme educative pour le soutien scolaire. Creee par Nadia (nad341@live.fr).
@@ -211,6 +211,7 @@ npm run test:watch   # Tests en watch mode
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
 - Renomme "My Study Way" (ex Paus'Etudes) le 2 avril 2026
+- Renomme "Paus'étude" le 7 avril 2026 (retour au nom d'origine)
 - Deploye sur Vercel le 7 avril 2026 (remplace Lovable comme plateforme de deploy)
 - Notifications push : installees et testees OK (son + banniere) le 31 mars 2026
 - Collaborateur GitHub : badmust75-coder a acces en ecriture au repo

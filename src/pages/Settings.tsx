@@ -154,7 +154,7 @@ const SettingsPage = () => {
                     <span className="text-sm font-medium">Notifications bloquées</span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Les notifications ont été refusées. Pour les réactiver : Réglages → Safari → Notifications → My Study Way → Autoriser.
+                    Les notifications ont été refusées. Pour les réactiver : Réglages → Safari → Notifications → Paus'étude → Autoriser.
                   </p>
                 </div>
               ) : (
@@ -213,7 +213,7 @@ const SettingsPage = () => {
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Confirmer la déconnexion</AlertDialogTitle>
-              <AlertDialogDescription>Êtes-vous sûr(e) de vouloir vous déconnecter de My Study Way ?</AlertDialogDescription>
+              <AlertDialogDescription>Êtes-vous sûr(e) de vouloir vous déconnecter de Paus'étude ?</AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Annuler</AlertDialogCancel>

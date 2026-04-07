@@ -128,7 +128,7 @@ const Index = () => {
       <main className="max-w-5xl mx-auto px-4 py-4 space-y-5 pb-8">
         <div className="flex flex-col items-center pt-2 relative">
           <div className="relative inline-block">
-            <img src={logo} alt="My Study Way" width={192} height={192} className="w-48 h-48 object-contain" />
+            <img src={logo} alt="Paus'étude" width={192} height={192} className="w-48 h-48 object-contain" />
             {totalBadge > 0 && (
               <span className="absolute top-2 right-2 bg-destructive text-destructive-foreground text-sm font-bold rounded-full min-w-[28px] h-7 flex items-center justify-center px-1.5 shadow-lg animate-pulse">
                 {totalBadge}
