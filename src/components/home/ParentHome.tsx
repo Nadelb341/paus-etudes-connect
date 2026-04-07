@@ -13,7 +13,6 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Plus, Trash2, Edit2, CalendarIcon, User, StickyNote } from "lucide-react";
@@ -41,7 +40,8 @@ interface HourRow {
   hourly_rate: number;
   subject: string;
   notes: string;
-  is_paid: boolean;
+  amount_paid: number;
+  payment_note: string;
   payment_date: string | null;
   payment_id: string | null;
 }
@@ -70,6 +70,10 @@ const ParentHome = () => {
   const [studentProfiles, setStudentProfiles] = useState<{ user_id: string; first_name: string }[]>([]);
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
   const [linkedStudentUserIds, setLinkedStudentUserIds] = useState<string[]>([]);
+  const [draftAmounts, setDraftAmounts] = useState<Record<string, string>>({});
+  const [histRow, setHistRow] = useState<HourRow | null>(null);
+  const [histDate, setHistDate] = useState<Date | undefined>();
+  const [histNote, setHistNote] = useState("");
 
   // For admin: load parent profiles
   useEffect(() => {
@@ -207,9 +211,14 @@ const ParentHome = () => {
       .select("*")
       .eq("parent_card_id", card.id);
 
-    const paymentMap: Record<string, { is_paid: boolean; payment_date: string | null; id: string }> = {};
+    const paymentMap: Record<string, { amount_paid: number; payment_date: string | null; payment_note: string; id: string }> = {};
     payments?.forEach((p: any) => {
-      paymentMap[p.tutoring_hour_id] = { is_paid: p.is_paid, payment_date: p.payment_date, id: p.id };
+      paymentMap[p.tutoring_hour_id] = {
+        amount_paid: p.amount_paid || 0,
+        payment_date: p.payment_date,
+        payment_note: p.payment_note || "",
+        id: p.id,
+      };
     });
 
     const rows: HourRow[] = (hours || []).map((h: any) => ({
@@ -219,12 +228,16 @@ const ParentHome = () => {
       hourly_rate: h.hourly_rate,
       subject: h.subject || "",
       notes: h.notes || "",
-      is_paid: paymentMap[h.id]?.is_paid || false,
+      amount_paid: paymentMap[h.id]?.amount_paid || 0,
+      payment_note: paymentMap[h.id]?.payment_note || "",
       payment_date: paymentMap[h.id]?.payment_date || null,
       payment_id: paymentMap[h.id]?.id || null,
     }));
 
     setHourRows(rows);
+    const drafts: Record<string, string> = {};
+    rows.forEach(r => { drafts[r.id] = r.amount_paid > 0 ? String(r.amount_paid) : ""; });
+    setDraftAmounts(drafts);
   };
 
   const saveNote = async () => {
@@ -238,44 +251,58 @@ const ParentHome = () => {
     setSelectedCard(prev => prev ? { ...prev, general_note: noteText } : null);
   };
 
-  const togglePayment = async (row: HourRow, paid: boolean) => {
+  const saveAmountPaid = async (row: HourRow, amountStr: string) => {
     if (!isAdmin || !selectedCard) return;
+    const amount = parseFloat(amountStr) || 0;
     if (row.payment_id) {
-      await supabase
-        .from("payment_tracking")
-        .update({ is_paid: paid, updated_at: new Date().toISOString() })
+      await supabase.from("payment_tracking")
+        .update({ amount_paid: amount, updated_at: new Date().toISOString() })
         .eq("id", row.payment_id);
     } else {
       await supabase.from("payment_tracking").insert({
         tutoring_hour_id: row.id,
         parent_card_id: selectedCard.id,
-        is_paid: paid,
+        is_paid: amount > 0,
+        amount_paid: amount,
       });
     }
     await fetchHourRows(selectedCard);
   };
 
-  const setPaymentDate = async (row: HourRow, date: Date | undefined) => {
-    if (!isAdmin || !selectedCard || !date) return;
-    if (row.payment_id) {
-      await supabase
-        .from("payment_tracking")
-        .update({ payment_date: format(date, "yyyy-MM-dd"), updated_at: new Date().toISOString() })
-        .eq("id", row.payment_id);
+  const openHistorique = (row: HourRow) => {
+    setHistRow(row);
+    setHistDate(row.payment_date ? new Date(row.payment_date) : undefined);
+    setHistNote(row.payment_note || "");
+  };
+
+  const saveHistorique = async () => {
+    if (!isAdmin || !selectedCard || !histRow) return;
+    const updateData: any = {
+      payment_date: histDate ? format(histDate, "yyyy-MM-dd") : null,
+      payment_note: histNote,
+      updated_at: new Date().toISOString(),
+    };
+    if (histRow.payment_id) {
+      await supabase.from("payment_tracking").update(updateData).eq("id", histRow.payment_id);
     } else {
       await supabase.from("payment_tracking").insert({
-        tutoring_hour_id: row.id,
+        tutoring_hour_id: histRow.id,
         parent_card_id: selectedCard.id,
-        is_paid: true,
-        payment_date: format(date, "yyyy-MM-dd"),
+        is_paid: false,
+        amount_paid: histRow.amount_paid,
+        ...updateData,
       });
     }
+    setHistRow(null);
+    setHistDate(undefined);
+    setHistNote("");
     await fetchHourRows(selectedCard);
   };
 
   const totalHours = hourRows.reduce((s, r) => s + r.duration_hours, 0);
   const totalAmount = hourRows.reduce((s, r) => s + r.duration_hours * r.hourly_rate, 0);
-  const totalPaid = hourRows.filter(r => r.is_paid).reduce((s, r) => s + r.duration_hours * r.hourly_rate, 0);
+  const totalPaid = hourRows.reduce((s, r) => s + (r.amount_paid || 0), 0);
+  const totalDue = totalAmount - totalPaid;
 
   return (
     <div className="space-y-5">
@@ -348,6 +375,50 @@ const ParentHome = () => {
           )}
         </div>
       )}
+
+      {/* Historique dialog */}
+      <Dialog open={!!histRow} onOpenChange={open => { if (!open) { setHistRow(null); setHistDate(undefined); setHistNote(""); } }}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>📋 Historique du règlement</DialogTitle>
+          </DialogHeader>
+          {histRow && (
+            <div className="space-y-4">
+              <div className="bg-secondary/30 rounded p-2 text-xs">
+                <p>Cours du {new Date(histRow.session_date).toLocaleDateString("fr-FR")} — {formatEur(histRow.duration_hours * histRow.hourly_rate)}</p>
+                {histRow.amount_paid > 0 && <p className="text-primary font-medium">Somme payée : {formatEur(histRow.amount_paid)}</p>}
+              </div>
+              <div>
+                <Label className="text-sm font-medium">Date du règlement</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline" className={cn("w-full justify-start text-left mt-1", !histDate && "text-muted-foreground")}>
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {histDate ? format(histDate, "d MMMM yyyy", { locale: fr }) : "Choisir une date"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar mode="single" selected={histDate} onSelect={setHistDate} className={cn("p-3 pointer-events-auto")} />
+                  </PopoverContent>
+                </Popover>
+              </div>
+              <div>
+                <Label className="text-sm font-medium">Note (optionnelle)</Label>
+                <Input
+                  value={histNote}
+                  onChange={e => setHistNote(e.target.value)}
+                  placeholder="Ex : espèces, virement..."
+                  className="mt-1"
+                />
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={() => { setHistRow(null); setHistDate(undefined); setHistNote(""); }} className="flex-1">Annuler</Button>
+                <Button onClick={saveHistorique} className="flex-1">Enregistrer</Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Add child card dialog */}
       <Dialog open={showAddCard} onOpenChange={setShowAddCard}>
@@ -426,87 +497,87 @@ const ParentHome = () => {
                   <p className="text-xs text-muted-foreground">Montant total</p>
                   <p className="font-bold text-sm">{formatEur(totalAmount)}</p>
                 </div>
-                <div className="p-2 bg-green-500/10 rounded-lg">
-                  <p className="text-xs text-muted-foreground">Payé</p>
-                  <p className="font-bold text-sm text-green-600">{formatEur(totalPaid)}</p>
+                <div className="p-2 bg-orange-500/10 rounded-lg">
+                  <p className="text-xs text-muted-foreground">Reste dû</p>
+                  <p className="font-bold text-sm text-orange-600">{formatEur(totalDue)}</p>
                 </div>
               </div>
 
               {/* Hours table */}
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs px-2">Date</TableHead>
+                    <TableHead className="text-xs px-2">Heures</TableHead>
+                    <TableHead className="text-xs px-2">Total</TableHead>
+                    <TableHead className="text-xs px-2">Somme payée</TableHead>
+                    <TableHead className="text-xs px-2">Reste dû</TableHead>
+                    <TableHead className="text-xs px-2">Historique</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {hourRows.length === 0 ? (
                     <TableRow>
-                      <TableHead className="text-xs">Date</TableHead>
-                      <TableHead className="text-xs">Heures</TableHead>
-                      <TableHead className="text-xs">Total</TableHead>
-                      <TableHead className="text-xs">Payé</TableHead>
-                      <TableHead className="text-xs">Date paiement</TableHead>
+                      <TableCell colSpan={6} className="text-center text-sm text-muted-foreground italic">
+                        Aucune heure enregistrée
+                      </TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {hourRows.length === 0 ? (
-                      <TableRow>
-                        <TableCell colSpan={5} className="text-center text-sm text-muted-foreground italic">
-                          Aucune heure enregistrée
-                        </TableCell>
-                      </TableRow>
-                    ) : (
-                      hourRows.map(row => (
+                  ) : (
+                    hourRows.map(row => {
+                      const total = row.duration_hours * row.hourly_rate;
+                      const reste = total - (row.amount_paid || 0);
+                      return (
                         <TableRow key={row.id}>
-                          <TableCell className="text-xs">
+                          <TableCell className="text-xs px-2">
                             {new Date(row.session_date).toLocaleDateString("fr-FR")}
                           </TableCell>
-                          <TableCell className="text-xs">{row.duration_hours}h</TableCell>
-                          <TableCell className="text-xs font-medium">
-                            {formatEur(row.duration_hours * row.hourly_rate)}
+                          <TableCell className="text-xs px-2">{row.duration_hours}h</TableCell>
+                          <TableCell className="text-xs font-medium px-2">
+                            {formatEur(total)}
                           </TableCell>
-                          <TableCell>
+                          <TableCell className="px-2">
                             {isAdmin ? (
-                              <Checkbox
-                                checked={row.is_paid}
-                                onCheckedChange={(checked) => togglePayment(row, !!checked)}
+                              <Input
+                                type="number"
+                                min="0"
+                                step="0.5"
+                                value={draftAmounts[row.id] ?? ""}
+                                onChange={e => setDraftAmounts(prev => ({ ...prev, [row.id]: e.target.value }))}
+                                onBlur={() => saveAmountPaid(row, draftAmounts[row.id] ?? "")}
+                                className="h-7 w-20 text-xs px-2"
+                                placeholder="0"
                               />
                             ) : (
-                              <span className={`text-xs ${row.is_paid ? "text-green-600" : "text-destructive"}`}>
-                                {row.is_paid ? "✓" : "✗"}
-                              </span>
+                              <span className="text-xs">{row.amount_paid > 0 ? formatEur(row.amount_paid) : "—"}</span>
                             )}
                           </TableCell>
-                          <TableCell>
+                          <TableCell className="text-xs px-2">
+                            <span className={reste > 0 ? "text-orange-600 font-medium" : "text-green-600 font-medium"}>
+                              {formatEur(reste)}
+                            </span>
+                          </TableCell>
+                          <TableCell className="px-2">
                             {isAdmin ? (
-                              <Popover>
-                                <PopoverTrigger asChild>
-                                  <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">
-                                    <CalendarIcon size={12} className="mr-1" />
-                                    {row.payment_date
-                                      ? new Date(row.payment_date).toLocaleDateString("fr-FR")
-                                      : "—"}
-                                  </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0" align="start">
-                                  <Calendar
-                                    mode="single"
-                                    selected={row.payment_date ? new Date(row.payment_date) : undefined}
-                                    onSelect={(date) => setPaymentDate(row, date)}
-                                    className={cn("p-3 pointer-events-auto")}
-                                  />
-                                </PopoverContent>
-                              </Popover>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-7 w-7 p-0"
+                                onClick={() => openHistorique(row)}
+                              >
+                                <CalendarIcon size={13} className={row.payment_date ? "text-primary" : "text-muted-foreground"} />
+                              </Button>
                             ) : (
-                              <span className="text-xs">
-                                {row.payment_date
-                                  ? new Date(row.payment_date).toLocaleDateString("fr-FR")
-                                  : "—"}
+                              <span className="text-xs text-muted-foreground">
+                                {row.payment_date ? new Date(row.payment_date).toLocaleDateString("fr-FR") : "—"}
                               </span>
                             )}
                           </TableCell>
                         </TableRow>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
+                      );
+                    })
+                  )}
+                </TableBody>
+              </Table>
             </div>
           )}
         </DialogContent>
