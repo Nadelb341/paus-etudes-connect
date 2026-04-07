@@ -98,7 +98,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
       .from("appointments")
       .select("*")
       .order("created_at", { ascending: false });
-    if (data) setAppointments(data as Appointment[]);
+    if (data) setAppointments(data as unknown as Appointment[]);
   };
 
   const fetchStudents = async () => {
