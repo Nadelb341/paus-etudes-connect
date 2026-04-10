@@ -215,3 +215,11 @@ npm run test:watch   # Tests en watch mode
 - Deploye sur Vercel le 7 avril 2026 (remplace Lovable comme plateforme de deploy)
 - Notifications push : installees et testees OK (son + banniere) le 31 mars 2026
 - Collaborateur GitHub : badmust75-coder a acces en ecriture au repo
+
+## Regle UX - Confirmation avant suppression
+
+TOUJOURS afficher une modale de confirmation avant toute suppression definitive.
+- Utiliser un AlertDialog ou composant equivalent (useDeleteConfirm si disponible)
+- S applique a TOUS les boutons/icones poubelle, menus "Supprimer", et toute action irréversible
+- Messages adaptes au contexte : "Supprimer cet eleve ?", "Supprimer ce devoir ?", etc.
+- Ne jamais supprimer directement sans confirmation, meme pour de petits elements
