@@ -1,7 +1,7 @@
 -- =====================================================
 -- Emails automatiques Paus'Étude → nadiaelb341@hotmail.com
 -- Récapitulatifs : nouvelle séance + paiement confirmé
--- Traitement immédiat via trigger (pas de cron — pg_cron non dispo)
+-- Traitement immédiat via trigger (pg_cron non disponible)
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.email_queue (
@@ -12,9 +12,8 @@ CREATE TABLE IF NOT EXISTS public.email_queue (
   sent BOOLEAN DEFAULT false,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
-ALTER TABLE public.email_queue ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS "Service role only on email_queue" ON public.email_queue;
-CREATE POLICY "Service role only on email_queue" ON public.email_queue FOR ALL TO service_role USING (true);
+-- RLS désactivée : table interne, jamais exposée aux utilisateurs
+ALTER TABLE public.email_queue DISABLE ROW LEVEL SECURITY;
 
 CREATE OR REPLACE FUNCTION public.queue_pausetude_email(p_subject TEXT, p_html TEXT) RETURNS void AS $$
 BEGIN
@@ -55,13 +54,23 @@ CREATE TRIGGER trg_auto_process_email AFTER INSERT ON public.email_queue FOR EAC
 CREATE OR REPLACE FUNCTION public.email_new_tutoring_hour() RETURNS TRIGGER AS $$
 DECLARE student_name TEXT; niveau TEXT; montant NUMERIC; rows TEXT;
 BEGIN
-  SELECT first_name, school_level INTO student_name, niveau FROM public.profiles WHERE user_id = NEW.student_id;
-  IF student_name IS NULL THEN student_name := 'Eleve'; END IF;
-  montant := ROUND(NEW.duration_hours * NEW.hourly_rate, 2);
-  rows := '<tr><td>Eleve</td><td>' || student_name || '</td></tr><tr><td>Date</td><td>' || TO_CHAR(NEW.session_date, 'DD/MM/YYYY') || '</td></tr><tr><td>Duree</td><td>' || NEW.duration_hours || 'h</td></tr><tr><td>Tarif</td><td>' || NEW.hourly_rate || 'EUR/h</td></tr><tr><td>Montant</td><td><strong>' || montant || 'EUR</strong></td></tr>'
-       || CASE WHEN NEW.subject IS NOT NULL AND NEW.subject != '' THEN '<tr><td>Matiere</td><td>' || NEW.subject || '</td></tr>' ELSE '' END
-       || CASE WHEN niveau IS NOT NULL AND niveau != '' THEN '<tr><td>Niveau</td><td>' || niveau || '</td></tr>' ELSE '' END;
-  PERFORM public.queue_pausetude_email('Paus Etude : Nouvelle seance - ' || student_name || ' (' || TO_CHAR(NEW.session_date, 'DD/MM') || ')', public.pausetude_email_template('livre', 'Nouvelle seance enregistree', rows));
+  BEGIN
+    SELECT first_name, school_level INTO student_name, niveau FROM public.profiles WHERE user_id = NEW.student_id;
+    IF student_name IS NULL THEN student_name := 'Eleve'; END IF;
+    montant := ROUND(NEW.duration_hours * NEW.hourly_rate, 2);
+    rows := '<tr><td>Eleve</td><td>' || student_name || '</td></tr>'
+         || '<tr><td>Date</td><td>' || TO_CHAR(NEW.session_date, 'DD/MM/YYYY') || '</td></tr>'
+         || '<tr><td>Duree</td><td>' || NEW.duration_hours || 'h</td></tr>'
+         || '<tr><td>Tarif</td><td>' || NEW.hourly_rate || 'EUR/h</td></tr>'
+         || '<tr><td>Montant</td><td><strong>' || montant || 'EUR</strong></td></tr>'
+         || CASE WHEN NEW.subject IS NOT NULL AND NEW.subject != '' THEN '<tr><td>Matiere</td><td>' || NEW.subject || '</td></tr>' ELSE '' END
+         || CASE WHEN niveau IS NOT NULL AND niveau != '' THEN '<tr><td>Niveau</td><td>' || niveau || '</td></tr>' ELSE '' END;
+    PERFORM public.queue_pausetude_email(
+      'Paus Etude : Nouvelle seance - ' || student_name || ' (' || TO_CHAR(NEW.session_date, 'DD/MM') || ')',
+      public.pausetude_email_template('livre', 'Nouvelle seance enregistree', rows)
+    );
+  EXCEPTION WHEN OTHERS THEN NULL;
+  END;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
@@ -72,16 +81,19 @@ CREATE TRIGGER trg_email_tutoring_hour AFTER INSERT ON public.tutoring_hours FOR
 CREATE OR REPLACE FUNCTION public.email_payment_confirmed() RETURNS TRIGGER AS $$
 DECLARE student_name TEXT; session_date DATE; duration NUMERIC; rate NUMERIC; montant NUMERIC; rows TEXT;
 BEGIN
-  IF NEW.is_paid = true AND (OLD.is_paid = false OR OLD.is_paid IS NULL) THEN
-    SELECT p.first_name, t.session_date, t.duration_hours, t.hourly_rate INTO student_name, session_date, duration, rate FROM public.tutoring_hours t JOIN public.profiles p ON p.user_id = t.student_id WHERE t.id = NEW.tutoring_hour_id;
-    IF student_name IS NULL THEN student_name := 'Eleve'; END IF;
-    montant := ROUND(COALESCE(duration, 0) * COALESCE(rate, 0), 2);
-    rows := '<tr><td>Eleve</td><td>' || student_name || '</td></tr>'
-         || CASE WHEN session_date IS NOT NULL THEN '<tr><td>Seance du</td><td>' || TO_CHAR(session_date, 'DD/MM/YYYY') || '</td></tr>' ELSE '' END
-         || CASE WHEN montant > 0 THEN '<tr><td>Montant regle</td><td><strong>' || montant || 'EUR</strong></td></tr>' ELSE '' END
-         || CASE WHEN NEW.payment_date IS NOT NULL THEN '<tr><td>Date paiement</td><td>' || TO_CHAR(NEW.payment_date, 'DD/MM/YYYY') || '</td></tr>' ELSE '' END;
-    PERFORM public.queue_pausetude_email('Paus Etude : Paiement confirme - ' || student_name, public.pausetude_email_template('ok', 'Paiement confirme', rows));
-  END IF;
+  BEGIN
+    IF NEW.is_paid = true AND (OLD.is_paid = false OR OLD.is_paid IS NULL) THEN
+      SELECT p.first_name, t.session_date, t.duration_hours, t.hourly_rate INTO student_name, session_date, duration, rate FROM public.tutoring_hours t JOIN public.profiles p ON p.user_id = t.student_id WHERE t.id = NEW.tutoring_hour_id;
+      IF student_name IS NULL THEN student_name := 'Eleve'; END IF;
+      montant := ROUND(COALESCE(duration, 0) * COALESCE(rate, 0), 2);
+      rows := '<tr><td>Eleve</td><td>' || student_name || '</td></tr>'
+           || CASE WHEN session_date IS NOT NULL THEN '<tr><td>Seance du</td><td>' || TO_CHAR(session_date, 'DD/MM/YYYY') || '</td></tr>' ELSE '' END
+           || CASE WHEN montant > 0 THEN '<tr><td>Montant regle</td><td><strong>' || montant || 'EUR</strong></td></tr>' ELSE '' END
+           || CASE WHEN NEW.payment_date IS NOT NULL THEN '<tr><td>Date paiement</td><td>' || TO_CHAR(NEW.payment_date, 'DD/MM/YYYY') || '</td></tr>' ELSE '' END;
+      PERFORM public.queue_pausetude_email('Paus Etude : Paiement confirme - ' || student_name, public.pausetude_email_template('ok', 'Paiement confirme', rows));
+    END IF;
+  EXCEPTION WHEN OTHERS THEN NULL;
+  END;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

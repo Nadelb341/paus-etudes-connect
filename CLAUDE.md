@@ -249,6 +249,7 @@ npm run test:watch   # Tests en watch mode
   - `trg_email_payment` → UPDATE sur `payment_tracking` quand `is_paid` passe à true → "Paus Etude : Paiement confirme - [élève]"
 - Règle Outlook : sujet contient "Paus Etude" → transférer vers `pausetude@hotmail.com`
 - ⚠️ pg_cron non activé dans ce projet Supabase — traitement synchrone via trigger sur email_queue
+- ⚠️ RLS désactivée sur email_queue (table interne — si RLS activée, les triggers SECURITY DEFINER sont bloqués et font échouer toute la transaction)
 
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
