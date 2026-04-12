@@ -250,6 +250,8 @@ npm run test:watch   # Tests en watch mode
 - Règle Outlook : sujet contient "Paus Etude" → transférer vers `pausetude@hotmail.com`
 - ⚠️ pg_cron non activé dans ce projet Supabase — traitement synchrone via trigger sur email_queue
 - ⚠️ RLS désactivée sur email_queue (table interne — si RLS activée, les triggers SECURITY DEFINER sont bloqués et font échouer toute la transaction)
+- ⚠️ `trg_auto_process_email` supprimé (pg_net absent → annulait les INSERTs dans email_queue)
+- Traitement final : send-notifications Edge Function lit email_queue.sent=false toutes les 2 min via NotificationPoller
 
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
