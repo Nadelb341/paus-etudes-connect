@@ -74,9 +74,13 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
     setLoading(false);
 
     if (error) {
-      toast.error(error.message);
+      if (error.message.includes("already registered") || error.message.includes("already been registered")) {
+        toast.error("Cette adresse email est déjà utilisée.");
+      } else {
+        toast.error(error.message);
+      }
     } else {
-      toast.success("Inscription réussie ! Votre compte est en attente de validation par l'administrateur.");
+      toast.success("Inscription envoyée ! Vérifiez votre boîte mail pour confirmer votre adresse, puis attendez la validation de l'administrateur.", { duration: 8000 });
       onSwitchToLogin();
     }
   };

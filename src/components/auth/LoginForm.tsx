@@ -16,6 +16,7 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [forgotLoading, setForgotLoading] = useState(false);
+  const [emailNotConfirmed, setEmailNotConfirmed] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +30,26 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
     setLoading(false);
 
     if (error) {
-      toast.error("Identifiants incorrects. Veuillez réessayer.");
+      if (error.message.includes("Email not confirmed")) {
+        toast.error("Vous devez d'abord confirmer votre adresse email. Vérifiez votre boîte mail.", { duration: 6000 });
+        setEmailNotConfirmed(true);
+      } else {
+        toast.error("Identifiants incorrects. Veuillez réessayer.");
+        setEmailNotConfirmed(false);
+      }
+    }
+  };
+
+  const handleResendConfirmation = async () => {
+    if (!email.trim()) {
+      toast.error("Veuillez saisir votre email");
+      return;
+    }
+    const { error } = await supabase.auth.resend({ type: "signup", email });
+    if (error) {
+      toast.error("Erreur : " + error.message);
+    } else {
+      toast.success("Email de confirmation renvoyé !");
     }
   };
 
@@ -89,6 +109,19 @@ const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
         <LogIn size={18} className="mr-2" />
         {loading ? "Connexion..." : "Se connecter"}
       </Button>
+
+      {emailNotConfirmed && (
+        <div className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800 space-y-2">
+          <p>Votre adresse email n'est pas encore confirmée.</p>
+          <button
+            type="button"
+            onClick={handleResendConfirmation}
+            className="text-amber-700 font-medium underline hover:text-amber-900"
+          >
+            Renvoyer l'email de confirmation
+          </button>
+        </div>
+      )}
 
       <div className="text-center">
         <button
