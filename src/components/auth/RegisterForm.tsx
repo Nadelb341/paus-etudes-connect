@@ -50,8 +50,8 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
       return;
     }
 
-    if (formData.password.length < 4) {
-      toast.error("Le mot de passe doit contenir au moins 4 caractères");
+    if (formData.password.length < 6) {
+      toast.error("Le mot de passe doit contenir au moins 6 caractères (chiffres ou lettres, librement)");
       return;
     }
 
