@@ -111,6 +111,8 @@ const DashboardPage = () => {
   // Mot de passe élève (visible par l'admin)
   const [editStudentPassword, setEditStudentPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [newStudentPassword, setNewStudentPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   // Parent management
   const [parentChildLinks, setParentChildLinks] = useState<ParentChildLink[]>([]);
@@ -231,13 +233,13 @@ const DashboardPage = () => {
       birth_date: editStudentBirthDate || null,
       remarks: editingRemarks,
       custom_hourly_rate: editStudentCustomRate !== "" ? parseFloat(editStudentCustomRate) : null,
-      known_password: editStudentPassword || null,
+      known_password: newStudentPassword || editStudentPassword || null,
     } as any).eq("id", selectedProfile.id);
 
-    // Si un mot de passe est renseigné, on met aussi à jour le vrai compte auth
-    if (editStudentPassword) {
+    // Si un nouveau mot de passe est saisi, on met aussi à jour le vrai compte auth
+    if (newStudentPassword) {
       const { error } = await supabase.functions.invoke("admin-update-password", {
-        body: { user_id: selectedProfile.user_id, new_password: editStudentPassword },
+        body: { user_id: selectedProfile.user_id, new_password: newStudentPassword },
       });
       if (error) {
         toast.error("Profil sauvegardé, mais erreur lors du changement de mot de passe auth.");
@@ -514,7 +516,7 @@ const DashboardPage = () => {
                               <p className="font-medium text-sm">{p.first_name}</p>
                               <p className="text-xs text-muted-foreground">{p.email}</p>
                             </div>
-                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); setEditStudentCustomRate(p.custom_hourly_rate?.toString() ?? ""); setEditStudentPassword(p.known_password || ""); setShowPassword(false); }}>
+                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); setEditStudentCustomRate(p.custom_hourly_rate?.toString() ?? ""); setEditStudentPassword(p.known_password || ""); setShowPassword(false); setNewStudentPassword(""); setShowNewPassword(false); }}>
                               <Eye size={14} className="mr-1" />Détails
                             </Button>
                           </div>
@@ -775,7 +777,7 @@ const DashboardPage = () => {
 
         {/* Student detail/edit dialog */}
         <Dialog open={!!selectedProfile} onOpenChange={(open) => { if (!open) setSelectedProfile(null); }}>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
             <DialogHeader><DialogTitle>Modifier l'élève</DialogTitle></DialogHeader>
             {selectedProfile && (
               <div className="space-y-4">
@@ -833,23 +835,44 @@ const DashboardPage = () => {
                   <Label className="text-xs text-muted-foreground">Inscription</Label>
                   <p className="text-sm text-muted-foreground">{new Date(selectedProfile.created_at).toLocaleDateString("fr-FR")}</p>
                 </div>
-                <div>
-                  <Label className="text-xs text-muted-foreground">Mot de passe</Label>
-                  <div className="relative">
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      value={editStudentPassword}
-                      onChange={e => setEditStudentPassword(e.target.value)}
-                      placeholder="Mot de passe de l'élève..."
-                      className="pr-10"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(v => !v)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
+                <div className="rounded-lg border p-3 space-y-3 bg-muted/30">
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Mot de passe actuel</Label>
+                    <div className="relative mt-1">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        value={editStudentPassword}
+                        readOnly
+                        className="pr-10 bg-muted text-sm"
+                        placeholder="Aucun mot de passe enregistré"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(v => !v)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      >
+                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <Label className="text-xs text-muted-foreground">Nouveau mot de passe</Label>
+                    <div className="relative mt-1">
+                      <Input
+                        type={showNewPassword ? "text" : "password"}
+                        value={newStudentPassword}
+                        onChange={e => setNewStudentPassword(e.target.value)}
+                        placeholder="Laisser vide pour ne pas changer..."
+                        className="pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowNewPassword(v => !v)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      >
+                        {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div>
