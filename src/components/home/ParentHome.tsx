@@ -286,10 +286,17 @@ const ParentHome = () => {
     toast.success("Entrée supprimée");
   };
 
+  // Totaux admin : toutes les sessions (historique complet)
   const totalHours = hourRows.reduce((s, r) => s + r.duration_hours, 0);
   const totalAmount = hourRows.reduce((s, r) => s + r.duration_hours * r.hourly_rate, 0);
   const totalPaid = hourRows.reduce((s, r) => s + (r.amount_paid || 0), 0);
   const totalDue = totalAmount - totalPaid;
+
+  // Totaux parent : uniquement les sessions avec un reste dû > 0
+  const unpaidRows = hourRows.filter(r => (r.duration_hours * r.hourly_rate - (r.amount_paid || 0)) > 0);
+  const parentTotalHours = unpaidRows.reduce((s, r) => s + r.duration_hours, 0);
+  const parentTotalAmount = unpaidRows.reduce((s, r) => s + r.duration_hours * r.hourly_rate, 0);
+  const parentTotalDue = unpaidRows.reduce((s, r) => s + (r.duration_hours * r.hourly_rate - (r.amount_paid || 0)), 0);
 
   return (
     <div className="space-y-5">
@@ -530,15 +537,17 @@ const ParentHome = () => {
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="p-2 bg-secondary/30 rounded-lg">
                   <p className="text-xs text-muted-foreground">Total heures</p>
-                  <p className="font-bold text-sm">{totalHours}h</p>
+                  <p className="font-bold text-sm">{isAdmin ? totalHours : parentTotalHours}h</p>
                 </div>
                 <div className="p-2 bg-secondary/30 rounded-lg">
                   <p className="text-xs text-muted-foreground">Montant total</p>
-                  <p className="font-bold text-sm">{formatEur(totalAmount)}</p>
+                  <p className="font-bold text-sm">{formatEur(isAdmin ? totalAmount : parentTotalAmount)}</p>
                 </div>
                 <div className="p-2 bg-orange-500/10 rounded-lg">
                   <p className="text-xs text-muted-foreground">Reste dû</p>
-                  <p className="font-bold text-sm text-orange-600">{formatEur(totalDue)}</p>
+                  <p className={`font-bold text-sm ${(isAdmin ? totalDue : parentTotalDue) > 0 ? "text-orange-600" : "text-green-600"}`}>
+                    {formatEur(isAdmin ? totalDue : parentTotalDue)}
+                  </p>
                 </div>
               </div>
 
