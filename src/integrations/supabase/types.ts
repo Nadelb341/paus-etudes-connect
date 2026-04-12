@@ -495,6 +495,7 @@ export type Database = {
           gender: string | null
           id: string
           is_approved: boolean | null
+          known_password: string | null
           remarks: string | null
           school_level: string
           status: string
@@ -511,6 +512,7 @@ export type Database = {
           gender?: string | null
           id?: string
           is_approved?: boolean | null
+          known_password?: string | null
           remarks?: string | null
           school_level?: string
           status?: string
@@ -527,6 +529,7 @@ export type Database = {
           gender?: string | null
           id?: string
           is_approved?: boolean | null
+          known_password?: string | null
           remarks?: string | null
           school_level?: string
           status?: string
