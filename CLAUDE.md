@@ -114,7 +114,10 @@ Sections (cartes accordeon) :
 Edition eleve : prenom, genre, niveau, date naissance, remarques, tarif horaire personnalise
 Edition parent : prenom, enfant declare, liaison eleve inscrit, remarques
 
-## Vue Parent (ParentHome.tsx)
+## Vue Parent (ParentHome.tsx) — màj session 2026-04-13
+- Carte résumé : parents voient uniquement **"Reste dû"** (Total heures + Montant total cachés)
+- Admin voit les 3 cartes (Total heures, Montant total, Reste dû)
+- Tableau des heures : visible par tous, toutes colonnes affichées
 - Affiche les RDV de l'enfant lie
 - Affiche les heures de cours et montants dus
 - Calcul monetaire correct via formatEur() (ex: 1.5h x 13€ = 19.50€)
