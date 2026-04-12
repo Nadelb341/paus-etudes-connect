@@ -117,7 +117,23 @@ Deno.serve(async (req) => {
       if (delivered) sentCount++; else failCount++;
     }
     for (const ep of expired) await supabase.from("push_subscriptions").delete().eq("endpoint", ep);
-    return new Response(JSON.stringify({ success: true, sent: sentCount, failed: failCount, expiredCleaned: expired.length, errors: errors.slice(0, 5) }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+
+    let emailSent = 0, emailFailed = 0;
+    const resendKey = "re_231PpcSh_J4WCoE1n7DbD5DUtzRap9RDK";
+    const { data: emails } = await supabase.from("email_queue").select("*").eq("sent", false).order("created_at", { ascending: true }).limit(20);
+    for (const email of emails || []) {
+      try {
+        const res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ from: "Paus'Etude <onboarding@resend.dev>", to: [email.to_email], subject: email.subject, html: email.html_body }),
+        });
+        await supabase.from("email_queue").update({ sent: true }).eq("id", email.id);
+        if (res.ok) emailSent++; else emailFailed++;
+      } catch { emailFailed++; }
+    }
+
+    return new Response(JSON.stringify({ success: true, sent: sentCount, failed: failCount, expiredCleaned: expired.length, emailSent, emailFailed, errors: errors.slice(0, 5) }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (err) {
     return new Response(JSON.stringify({ error: (err as Error).message }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   }

@@ -162,6 +162,33 @@ export type Database = {
           },
         ]
       }
+      email_queue: {
+        Row: {
+          created_at: string | null
+          html_body: string
+          id: string
+          sent: boolean | null
+          subject: string
+          to_email: string
+        }
+        Insert: {
+          created_at?: string | null
+          html_body: string
+          id?: string
+          sent?: boolean | null
+          subject: string
+          to_email: string
+        }
+        Update: {
+          created_at?: string | null
+          html_body?: string
+          id?: string
+          sent?: boolean | null
+          subject?: string
+          to_email?: string
+        }
+        Relationships: []
+      }
       family_accounts: {
         Row: {
           created_at: string
@@ -905,6 +932,15 @@ export type Database = {
     Functions: {
       admin_delete_user: {
         Args: { target_user_id: string }
+        Returns: undefined
+      }
+      pausetude_email_template: {
+        Args: { p_emoji: string; p_rows: string; p_titre: string }
+        Returns: string
+      }
+      process_email_queue: { Args: never; Returns: undefined }
+      queue_pausetude_email: {
+        Args: { p_html: string; p_subject: string }
         Returns: undefined
       }
     }
