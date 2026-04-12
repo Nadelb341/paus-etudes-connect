@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, ClipboardList, Bookmark, Send, UserPlus, Link2 } from "lucide-react";
+import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, EyeOff, ClipboardList, Bookmark, Send, UserPlus, Link2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 interface Profile {
   id: string; user_id: string; first_name: string; email: string; gender: string;
   birth_date: string | null; school_level: string; remarks: string; is_approved: boolean; created_at: string;
-  status: string; child_name: string | null; custom_hourly_rate: number | null;
+  status: string; child_name: string | null; custom_hourly_rate: number | null; known_password: string | null;
 }
 
 interface HourlyRates { primaire: number; college: number; lycee: number; }
@@ -107,6 +107,10 @@ const DashboardPage = () => {
 
   // Tarif personnalisé élève
   const [editStudentCustomRate, setEditStudentCustomRate] = useState("");
+
+  // Mot de passe élève (visible par l'admin)
+  const [editStudentPassword, setEditStudentPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Parent management
   const [parentChildLinks, setParentChildLinks] = useState<ParentChildLink[]>([]);
@@ -213,7 +217,22 @@ const DashboardPage = () => {
       birth_date: editStudentBirthDate || null,
       remarks: editingRemarks,
       custom_hourly_rate: editStudentCustomRate !== "" ? parseFloat(editStudentCustomRate) : null,
+      known_password: editStudentPassword || null,
     } as any).eq("id", selectedProfile.id);
+
+    // Si un mot de passe est renseigné, on met aussi à jour le vrai compte auth
+    if (editStudentPassword) {
+      const { error } = await supabase.functions.invoke("admin-update-password", {
+        body: { user_id: selectedProfile.user_id, new_password: editStudentPassword },
+      });
+      if (error) {
+        toast.error("Profil sauvegardé, mais erreur lors du changement de mot de passe auth.");
+        setSelectedProfile(null);
+        fetchProfiles();
+        return;
+      }
+    }
+
     toast.success("Profil élève mis à jour !");
     setSelectedProfile(null);
     fetchProfiles();
@@ -481,7 +500,7 @@ const DashboardPage = () => {
                               <p className="font-medium text-sm">{p.first_name}</p>
                               <p className="text-xs text-muted-foreground">{p.email}</p>
                             </div>
-                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); setEditStudentCustomRate(p.custom_hourly_rate?.toString() ?? ""); }}>
+                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); setEditStudentCustomRate(p.custom_hourly_rate?.toString() ?? ""); setEditStudentPassword(p.known_password || ""); setShowPassword(false); }}>
                               <Eye size={14} className="mr-1" />Détails
                             </Button>
                           </div>
@@ -799,6 +818,25 @@ const DashboardPage = () => {
                 <div>
                   <Label className="text-xs text-muted-foreground">Inscription</Label>
                   <p className="text-sm text-muted-foreground">{new Date(selectedProfile.created_at).toLocaleDateString("fr-FR")}</p>
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Mot de passe</Label>
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      value={editStudentPassword}
+                      onChange={e => setEditStudentPassword(e.target.value)}
+                      placeholder="Mot de passe de l'élève..."
+                      className="pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(v => !v)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    >
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
                 </div>
                 <div>
                   <Label className="text-xs text-muted-foreground">Remarques</Label>
