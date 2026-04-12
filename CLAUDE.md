@@ -190,6 +190,8 @@ npm run test:watch   # Tests en watch mode
 - 20260407000005 : colonne planned_work sur appointments (travail prevu)
 - 20260407000006 : colonnes amount_paid + payment_note sur payment_tracking
 - 20260407000007 : colonne payment_entries (JSONB) sur payment_tracking (versements partiels)
+- 20260412000001 : colonne known_password sur profiles (mot de passe visible par admin)
+- 20260412000002 : fonction SQL admin_delete_user (SECURITY DEFINER, supprime auth.users)
 
 ## RDV a venir (AppointmentsCard) — champ travail prevu
 - Champ planned_work (TEXT) ajoute sur appointments
@@ -208,6 +210,26 @@ npm run test:watch   # Tests en watch mode
 - Chaque versement peut etre supprime individuellement
 - Reste du s'affiche en orange si > 0, vert si solde
 
+## Gestion des mots de passe eleves (Dashboard admin)
+- Colonne profiles.known_password (TEXT, nullable) : stocke le mot de passe en clair pour l'admin
+- Champ "Mot de passe" dans la carte "Modifier l'eleve" avec bouton oeil (montrer/cacher)
+- Sauvegarde dans profiles.known_password ET mise a jour du vrai compte auth via Edge Function
+- Edge Function deployee sur Supabase (via Lovable) : admin-update-password
+- Verification que l'appelant est bien l'admin (nad341@live.fr) dans l'Edge Function
+
+## Suppression d'un eleve (Dashboard admin)
+- Bouton "Supprimer cet eleve" (rouge) dans la carte "Modifier l'eleve"
+- AlertDialog de confirmation avant suppression
+- Suppression via RPC SQL : supabase.rpc("admin_delete_user", { target_user_id })
+- Fonction SQL admin_delete_user (SECURITY DEFINER) : supprime directement dans auth.users
+- Apres suppression, l'eleve peut se reinscrire avec la meme adresse email
+- Pas besoin d'Edge Function ni de cle service pour la suppression
+
+## Fonctions Edge (Supabase — deployees via Lovable chat)
+- admin-update-password : change le mot de passe auth d'un eleve (clé service)
+- Pour deployer une nouvelle Edge Function : coller le code dans le chat Lovable avec
+  "Crée et déploie une Edge Function appelée X avec ce code : ..."
+
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
 - Renomme "My Study Way" (ex Paus'Etudes) le 2 avril 2026
@@ -215,6 +237,8 @@ npm run test:watch   # Tests en watch mode
 - Deploye sur Vercel le 7 avril 2026 (remplace Lovable comme plateforme de deploy)
 - Notifications push : installees et testees OK (son + banniere) le 31 mars 2026
 - Collaborateur GitHub : badmust75-coder a acces en ecriture au repo
+- Projet Supabase gere par Lovable (pas accessible directement via compte Supabase perso)
+- Pour deployer des Edge Functions : passer par le chat Lovable (pas le CLI Supabase)
 
 ## Regle UX - Confirmation avant suppression
 
