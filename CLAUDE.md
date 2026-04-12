@@ -239,6 +239,17 @@ npm run test:watch   # Tests en watch mode
 - LoginForm : détecte "Email not confirmed" avec bouton "Renvoyer l'email de confirmation"
 - Projet Supabase sous organisation Lovable — accès dashboard limité via compte perso Nadia
 
+## Emails automatiques — màj session 2026-04-13
+- Destination : `nadiaelb341@hotmail.com` (contrainte Resend plan gratuit)
+- Service : **Resend** (clé `re_231PpcSh_...` dans la fonction SQL `process_email_queue`)
+- Table `email_queue` : `id, to_email, subject, html_body, sent, created_at`
+- Traitement immédiat via trigger `trg_auto_process_email` (pg_cron non disponible dans ce projet)
+- **Triggers** :
+  - `trg_email_tutoring_hour` → INSERT sur `tutoring_hours` → "Paus Etude : Nouvelle seance - [élève] (DD/MM)"
+  - `trg_email_payment` → UPDATE sur `payment_tracking` quand `is_paid` passe à true → "Paus Etude : Paiement confirme - [élève]"
+- Règle Outlook : sujet contient "Paus Etude" → transférer vers `pausetude@hotmail.com`
+- ⚠️ pg_cron non activé dans ce projet Supabase — traitement synchrone via trigger sur email_queue
+
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
 - Renomme "My Study Way" (ex Paus'Etudes) le 2 avril 2026
