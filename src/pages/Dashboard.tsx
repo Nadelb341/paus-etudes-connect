@@ -210,14 +210,13 @@ const DashboardPage = () => {
 
   const deleteStudent = async () => {
     if (!selectedProfile) return;
-    const { error } = await supabase.functions.invoke("admin-delete-user", {
-      body: { user_id: selectedProfile.user_id },
+    const { error } = await supabase.rpc("admin_delete_user", {
+      target_user_id: selectedProfile.user_id,
     });
     if (error) {
-      toast.error("Erreur lors de la suppression du compte.");
+      toast.error("Erreur lors de la suppression : " + error.message);
       return;
     }
-    await supabase.from("profiles").delete().eq("id", selectedProfile.id);
     toast.success(`${selectedProfile.first_name} a été supprimé(e).`);
     setSelectedProfile(null);
     fetchProfiles();
