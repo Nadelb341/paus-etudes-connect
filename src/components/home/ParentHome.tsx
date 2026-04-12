@@ -534,15 +534,19 @@ const ParentHome = () => {
               </div>
 
               {/* Résumé */}
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2 bg-secondary/30 rounded-lg">
-                  <p className="text-xs text-muted-foreground">Total heures</p>
-                  <p className="font-bold text-sm">{isAdmin ? totalHours : parentTotalHours}h</p>
-                </div>
-                <div className="p-2 bg-secondary/30 rounded-lg">
-                  <p className="text-xs text-muted-foreground">Montant total</p>
-                  <p className="font-bold text-sm">{formatEur(isAdmin ? totalAmount : parentTotalAmount)}</p>
-                </div>
+              <div className={`grid ${isAdmin ? "grid-cols-3" : "grid-cols-1"} gap-2 text-center`}>
+                {isAdmin && (
+                  <div className="p-2 bg-secondary/30 rounded-lg">
+                    <p className="text-xs text-muted-foreground">Total heures</p>
+                    <p className="font-bold text-sm">{totalHours}h</p>
+                  </div>
+                )}
+                {isAdmin && (
+                  <div className="p-2 bg-secondary/30 rounded-lg">
+                    <p className="text-xs text-muted-foreground">Montant total</p>
+                    <p className="font-bold text-sm">{formatEur(totalAmount)}</p>
+                  </div>
+                )}
                 <div className="p-2 bg-orange-500/10 rounded-lg">
                   <p className="text-xs text-muted-foreground">Reste dû</p>
                   <p className={`font-bold text-sm ${(isAdmin ? totalDue : parentTotalDue) > 0 ? "text-orange-600" : "text-green-600"}`}>
