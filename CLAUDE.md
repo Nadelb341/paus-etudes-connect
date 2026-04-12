@@ -249,7 +249,9 @@ npm run test:watch   # Tests en watch mode
 - Traitement immédiat via trigger `trg_auto_process_email` (pg_cron non disponible dans ce projet)
 - **Triggers** :
   - `trg_email_tutoring_hour` → INSERT sur `tutoring_hours` → "Paus Etude : Nouvelle seance - [élève] (DD/MM)"
-  - `trg_email_payment` → UPDATE sur `payment_tracking` quand `is_paid` passe à true → "Paus Etude : Paiement confirme - [élève]"
+  - `trg_email_payment` → UPDATE sur `payment_tracking` quand `is_paid` passe à true OU quand `payment_entries` change (nouveau versement) → tableau complet via `get_student_email_html()`
+  - Sujet selon cas : "Paus Etude : Versement recu - [élève] (DD/MM)" ou "Paus Etude : Paiement complet - [élève]"
+  - Corps du mail : tableau complet toutes séances (get_student_email_html) — pas juste la séance individuelle
 - Règle Outlook : sujet contient "Paus Etude" → transférer vers `pausetude@hotmail.com`
 - ⚠️ pg_cron non activé dans ce projet Supabase — traitement synchrone via trigger sur email_queue
 - ⚠️ RLS désactivée sur email_queue (table interne — si RLS activée, les triggers SECURITY DEFINER sont bloqués et font échouer toute la transaction)
