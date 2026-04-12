@@ -100,3 +100,11 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 DROP TRIGGER IF EXISTS trg_email_payment ON public.payment_tracking;
 CREATE TRIGGER trg_email_payment AFTER UPDATE ON public.payment_tracking FOR EACH ROW EXECUTE FUNCTION public.email_payment_confirmed();
+
+-- -------------------------------------------------------
+-- Récapitulatif complet par élève (màj session 2026-04-13)
+-- -------------------------------------------------------
+-- Fonction get_student_email_html(student_id) :
+--   génère un tableau HTML complet avec toutes les séances,
+--   total heures, montant total, reste dû
+-- Triggers mis à jour pour utiliser cette fonction
