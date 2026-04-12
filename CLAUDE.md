@@ -230,6 +230,15 @@ npm run test:watch   # Tests en watch mode
 - Pour deployer une nouvelle Edge Function : coller le code dans le chat Lovable avec
   "Crée et déploie une Edge Function appelée X avec ce code : ..."
 
+## Inscription et authentification
+- Confirmation email obligatoire avant connexion (activee via Lovable)
+- Sujet email confirmation : sujet Supabase par defaut (personnalisation necessite domaine custom)
+- Mot de passe : 6 caractères minimum (limite Supabase non modifiable via API), aucune restriction de format
+- Verification HIBP desactivee (pas de blocage "mot de passe compromis")
+- Flow : inscription → email confirmation → attente validation admin → accès appli
+- LoginForm : détecte "Email not confirmed" avec bouton "Renvoyer l'email de confirmation"
+- Projet Supabase sous organisation Lovable — accès dashboard limité via compte perso Nadia
+
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
 - Renomme "My Study Way" (ex Paus'Etudes) le 2 avril 2026
