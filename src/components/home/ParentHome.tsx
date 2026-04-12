@@ -543,14 +543,12 @@ const ParentHome = () => {
                   <p className="text-xs text-muted-foreground">Montant total</p>
                   <p className="font-bold text-sm">{formatEur(isAdmin ? totalAmount : parentTotalAmount)}</p>
                 </div>
-                {isAdmin && (
-                  <div className="p-2 bg-orange-500/10 rounded-lg">
-                    <p className="text-xs text-muted-foreground">Reste dû</p>
-                    <p className={`font-bold text-sm ${totalDue > 0 ? "text-orange-600" : "text-green-600"}`}>
-                      {formatEur(totalDue)}
-                    </p>
-                  </div>
-                )}
+                <div className="p-2 bg-orange-500/10 rounded-lg">
+                  <p className="text-xs text-muted-foreground">Reste dû</p>
+                  <p className={`font-bold text-sm ${(isAdmin ? totalDue : parentTotalDue) > 0 ? "text-orange-600" : "text-green-600"}`}>
+                    {formatEur(isAdmin ? totalDue : parentTotalDue)}
+                  </p>
+                </div>
               </div>
 
               {/* Tableau des heures — compact, sans scroll horizontal */}
@@ -561,14 +559,14 @@ const ParentHome = () => {
                     <TableHead className="text-xs p-2">Durée</TableHead>
                     <TableHead className="text-xs p-2">Total</TableHead>
                     <TableHead className="text-xs p-2">Réglé</TableHead>
-                    {isAdmin && <TableHead className="text-xs p-2">Reste dû</TableHead>}
+                    <TableHead className="text-xs p-2">Reste dû</TableHead>
                     {isAdmin && <TableHead className="p-2 w-8"></TableHead>}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {hourRows.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={isAdmin ? 6 : 4} className="text-center text-sm text-muted-foreground italic">
+                      <TableCell colSpan={isAdmin ? 6 : 5} className="text-center text-sm text-muted-foreground italic">
                         Aucune heure enregistrée
                       </TableCell>
                     </TableRow>
@@ -588,13 +586,11 @@ const ParentHome = () => {
                               {row.amount_paid > 0 ? formatEur(row.amount_paid) : "—"}
                             </span>
                           </TableCell>
-                          {isAdmin && (
                           <TableCell className="text-xs p-2">
                             <span className={reste > 0 ? "text-orange-600 font-medium" : "text-green-600 font-medium"}>
                               {formatEur(reste)}
                             </span>
                           </TableCell>
-                          )}
                           {isAdmin && (
                             <TableCell className="p-2">
                               <Button
