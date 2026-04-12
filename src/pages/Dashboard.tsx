@@ -208,6 +208,21 @@ const DashboardPage = () => {
     fetchProfiles();
   };
 
+  const deleteStudent = async () => {
+    if (!selectedProfile) return;
+    const { error } = await supabase.functions.invoke("admin-delete-user", {
+      body: { user_id: selectedProfile.user_id },
+    });
+    if (error) {
+      toast.error("Erreur lors de la suppression du compte.");
+      return;
+    }
+    await supabase.from("profiles").delete().eq("id", selectedProfile.id);
+    toast.success(`${selectedProfile.first_name} a été supprimé(e).`);
+    setSelectedProfile(null);
+    fetchProfiles();
+  };
+
   const saveStudentProfile = async () => {
     if (!selectedProfile) return;
     await supabase.from("profiles").update({
@@ -843,6 +858,25 @@ const DashboardPage = () => {
                   <Textarea value={editingRemarks} onChange={e => setEditingRemarks(e.target.value)} rows={3} placeholder="Remarques sur l'élève..." />
                 </div>
                 <Button onClick={saveStudentProfile} className="w-full bg-gradient-primary">Sauvegarder</Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive" className="w-full">Supprimer cet élève</Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Supprimer {selectedProfile?.first_name} ?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Le compte de {selectedProfile?.first_name} sera définitivement supprimé. Il pourra se réinscrire avec la même adresse email.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Annuler</AlertDialogCancel>
+                      <AlertDialogAction onClick={deleteStudent} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                        Supprimer
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             )}
           </DialogContent>
