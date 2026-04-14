@@ -56,7 +56,8 @@ Storage bucket : `subject-files` (public) — aussi utilise pour les pieces join
 
 ## Header (AppHeader)
 - Icones colorees : Parametres (gris), Comptes (bleu), Messages (vert), Accueil (ambre), Tableau de bord (violet)
-- Toggle Parents/Eleves : vue eleve = icone 🗞️, vue parent = icone 🧸
+- **Tableau de bord** : visible uniquement pour l'admin (caché pour élèves et parents)
+- Toggle Parents/Eleves : vue eleve = icone 🗞️, vue parent = icone 🧸 (admin uniquement)
 - Badges de notification sur chaque icone (count > 0 uniquement)
 
 ## Systeme de badges (pastilles)
@@ -114,10 +115,11 @@ Sections (cartes accordeon) :
 Edition eleve : prenom, genre, niveau, date naissance, remarques, tarif horaire personnalise
 Edition parent : prenom, enfant declare, liaison eleve inscrit, remarques
 
-## Vue Parent (ParentHome.tsx) — màj session 2026-04-13
+## Vue Parent (ParentHome.tsx) — màj session 2026-04-14
 - Carte résumé : parents voient uniquement **"Reste dû"** (Total heures + Montant total cachés)
 - Admin voit les 3 cartes (Total heures, Montant total, Reste dû)
 - Tableau des heures : visible par tous, toutes colonnes affichées
+- **Historique filtré côté parent** : seulement les 2 derniers mois, SAUF si reste dû > 0 (la ligne reste visible jusqu'au solde complet). L'admin voit tout depuis le premier cours.
 - Affiche les RDV de l'enfant lie
 - Affiche les heures de cours et montants dus
 - Calcul monetaire correct via formatEur() (ex: 1.5h x 13€ = 19.50€)
