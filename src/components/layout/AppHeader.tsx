@@ -79,7 +79,7 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
               </span>
             </button>
           )}
-          {navItemsAfterToggle.map(({ icon: Icon, label, path, key, color }) => {
+          {isAdmin && navItemsAfterToggle.map(({ icon: Icon, label, path, key, color }) => {
             const isActive = location.pathname === path;
             const count = notificationCounts[key as keyof typeof notificationCounts];
 
