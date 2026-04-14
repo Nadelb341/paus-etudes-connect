@@ -298,6 +298,19 @@ const ParentHome = () => {
   const parentTotalAmount = unpaidRows.reduce((s, r) => s + r.duration_hours * r.hourly_rate, 0);
   const parentTotalDue = unpaidRows.reduce((s, r) => s + (r.duration_hours * r.hourly_rate - (r.amount_paid || 0)), 0);
 
+  // Lignes affichées dans le tableau selon le rôle :
+  // - Admin : tout l'historique
+  // - Parent : seulement les 2 derniers mois, SAUF si la session a encore un reste dû
+  const twoMonthsAgo = new Date();
+  twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+  const displayedRows = isAdmin
+    ? hourRows
+    : hourRows.filter(row => {
+        const sessionDate = new Date(row.session_date);
+        const reste = row.duration_hours * row.hourly_rate - (row.amount_paid || 0);
+        return sessionDate >= twoMonthsAgo || reste > 0;
+      });
+
   return (
     <div className="space-y-5">
       <div className="text-center space-y-1">
@@ -568,14 +581,14 @@ const ParentHome = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {hourRows.length === 0 ? (
+                  {displayedRows.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={isAdmin ? 6 : 5} className="text-center text-sm text-muted-foreground italic">
                         Aucune heure enregistrée
                       </TableCell>
                     </TableRow>
                   ) : (
-                    hourRows.map(row => {
+                    displayedRows.map(row => {
                       const total = row.duration_hours * row.hourly_rate;
                       const reste = total - (row.amount_paid || 0);
                       return (
