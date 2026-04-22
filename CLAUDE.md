@@ -227,6 +227,7 @@ npm run test:watch   # Tests en watch mode
 - 20260412000001 : colonne known_password sur profiles (mot de passe visible par admin)
 - 20260412000002 : fonction SQL admin_delete_user (SECURITY DEFINER, supprime auth.users)
 - 20260422000001 : colonne bilan_data (JSONB) sur profiles (fiche bilan élève)
+- 20260423000001 : colonne target_student_ids (UUID[]) sur subject_chapters (accès par élève)
 
 ## RDV a venir (AppointmentsCard) — champ travail prevu
 - Champ planned_work (TEXT) ajoute sur appointments
@@ -321,6 +322,25 @@ npm run test:watch   # Tests en watch mode
 - Collaborateur GitHub : badmust75-coder a acces en ecriture au repo
 - Projet Supabase gere par Lovable (pas accessible directement via compte Supabase perso)
 - Pour deployer des Edge Functions : passer par le chat Lovable (pas le CLI Supabase)
+
+## Vue élève — Dialog matière (màj session 2026-04-23)
+
+- Côté élève/parent, `SubjectContentDialog` affiche **uniquement la section Commentaires** (plus de docs, vidéos, chapitres, quiz)
+- L'admin en mode gestion voit toujours le `ThemeManager` complet
+- Quand un élève poste un commentaire, il est aussi inséré dans la table `messages` :
+  - `recipient_ids` = `[user_id de l'admin]` (récupéré via `profiles.eq("email", ADMIN_EMAIL)`)
+  - `subject` = `💬 Commentaire — {nom de la matière}`
+  - Permet à l'admin de voir le commentaire dans sa messagerie avec le contexte de la matière
+- `SubjectComments` accepte un prop optionnel `subjectLabel` utilisé dans le sujet du message
+
+## Accès chapitres par élève (màj session 2026-04-23)
+
+- Colonne `subject_chapters.target_student_ids` (UUID[]) : liste des élèves autorisés
+- NULL ou tableau vide = non partagé (par défaut rien n'est coché)
+- Admin en mode gestion : carte "Accès élèves" sous chaque chapitre, liste filtrée par niveau
+- Côté élève : seuls les chapitres contenant `user.id` dans `target_student_ids` sont visibles
+- Icône 🔒 sur les chapitres restreints (admin uniquement)
+- `subjectId` composite `{subjectId}|{niveau}` → niveau extrait via `split("|")[1]` pour filtrer les élèves par niveau scolaire
 
 ## Bouton retour en haut (règle globale — màj session 2026-04-22)
 
