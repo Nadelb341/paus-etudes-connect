@@ -226,6 +226,7 @@ npm run test:watch   # Tests en watch mode
 - 20260407000007 : colonne payment_entries (JSONB) sur payment_tracking (versements partiels)
 - 20260412000001 : colonne known_password sur profiles (mot de passe visible par admin)
 - 20260412000002 : fonction SQL admin_delete_user (SECURITY DEFINER, supprime auth.users)
+- 20260422000001 : colonne bilan_data (JSONB) sur profiles (fiche bilan élève)
 
 ## RDV a venir (AppointmentsCard) — champ travail prevu
 - Champ planned_work (TEXT) ajoute sur appointments
@@ -250,6 +251,27 @@ npm run test:watch   # Tests en watch mode
 - Sauvegarde dans profiles.known_password ET mise a jour du vrai compte auth via Edge Function
 - Edge Function deployee sur Supabase (via Lovable) : admin-update-password
 - Verification que l'appelant est bien l'admin (nad341@live.fr) dans l'Edge Function
+
+## Fiche bilan élève (Dashboard admin) — màj session 2026-04-22
+
+- Bouton **"Bilan"** (icône FileText, rouge) dans chaque carte élève de la section "Élèves"
+- Composant : `src/components/home/StudentBilanDialog.tsx`
+- Stockage : `profiles.bilan_data` (JSONB) — chargement/sauvegarde par `user_id`
+- Champs du formulaire (fidèles à la fiche papier) :
+  - Date du bilan + Lieu
+  - Nom, Prénom + Age
+  - Niveau d'étude + Spé 1/2/3
+  - Situation particulière (dys...)
+  - Tableau 10 matières : Matière, Prof, Moy. 1er trim (Vert/Jaune/Rouge), Moy. 2ème trim, Préférence (1-10)
+  - Pour les 3ème : sujet de l'oral
+  - Est-il autonome : Oui / Non
+  - Objectif : Faire les devoirs / Remise à niveau / Les 2 / Autre
+  - Fréquences : 1x/semaine, 2x/semaine, Plus de 2 jours, Occasionnellement (avec jours)
+  - Note Zoom incluse
+  - Tarifs : Primaire 10€ / Collège 13€ / Lycée 15€ (cases à cocher)
+  - Observations générales (zone texte libre)
+- Impression : bouton imprimante → HTML stylé dans une nouvelle fenêtre → window.print()
+- Pré-remplissage automatique : prénom, âge (calculé depuis birth_date), niveau depuis le profil
 
 ## Suppression d'un eleve (Dashboard admin)
 - Bouton "Supprimer cet eleve" (rouge) dans la carte "Modifier l'eleve"
