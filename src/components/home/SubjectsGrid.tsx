@@ -30,9 +30,9 @@ const SubjectsGrid = () => {
 
   useEffect(() => { fetchVisibility(); }, []);
 
-  // Récupère le niveau réel de l'élève depuis la BDD
+  // Récupère le niveau réel de l'élève depuis la BDD (source de vérité — ignore les métadonnées auth qui peuvent être périmées)
   useEffect(() => {
-    if (!isAdmin && user?.id && !userLevel) {
+    if (!isAdmin && user?.id) {
       supabase
         .from("profiles")
         .select("school_level")
