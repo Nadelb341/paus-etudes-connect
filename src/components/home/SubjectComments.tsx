@@ -20,7 +20,7 @@ interface Comment {
   created_at: string;
 }
 
-const SubjectComments = ({ subjectId }: { subjectId: string }) => {
+const SubjectComments = ({ subjectId, subjectLabel }: { subjectId: string; subjectLabel?: string }) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const [comments, setComments] = useState<Comment[]>([]);
@@ -42,12 +42,30 @@ const SubjectComments = ({ subjectId }: { subjectId: string }) => {
 
   const addComment = async () => {
     if (!newComment.trim() || !user) return;
+    const text = newComment.trim();
     await supabase.from("subject_comments").insert({
       subject_id: subjectId,
       user_id: user.id,
       user_name: user.user_metadata?.first_name || "Utilisateur",
-      content: newComment.trim(),
+      content: text,
     });
+    if (!isAdmin) {
+      const { data: adminProfile } = await supabase
+        .from("profiles")
+        .select("user_id")
+        .eq("email", ADMIN_EMAIL)
+        .single();
+      if (adminProfile) {
+        await supabase.from("messages").insert({
+          sender_id: user.id,
+          sender_name: user.user_metadata?.first_name || "Élève",
+          content: text,
+          recipient_type: "individual",
+          recipient_ids: [adminProfile.user_id],
+          subject: `💬 Commentaire — ${subjectLabel || subjectId}`,
+        });
+      }
+    }
     setNewComment("");
     toast.success("Commentaire ajouté");
     fetchComments();
