@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera, Copy, ExternalLink } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { YoutubePlayer, isYoutubeUrl, extractYoutubeVideoId, extractPlaylistId, fetchPlaylistVideos } from "@/utils/youtube";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
@@ -224,12 +225,19 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
         </div>
       )}
 
+      <div className="grid grid-cols-2 gap-3">
       {chapters.map(chapter => (
-        <div key={chapter.id} className="border border-border rounded-lg overflow-hidden">
+        <div
+          key={chapter.id}
+          className={cn(
+            "bg-card rounded-xl shadow-sm border border-border overflow-hidden transition-all",
+            expandedChapter === chapter.id && "col-span-2"
+          )}
+        >
           {/* Header chapitre */}
           <button
             onClick={() => toggleExpand(chapter.id)}
-            className="w-full flex items-center justify-between p-3 hover:bg-secondary/30 transition-colors text-left"
+            className="w-full flex items-center justify-between p-4 hover:bg-secondary/30 transition-colors text-left"
           >
             <span className="font-medium text-sm">{chapter.title}</span>
             <div className="flex items-center gap-1">
@@ -257,7 +265,7 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
           </button>
 
           {expandedChapter === chapter.id && (
-            <div className="border-t border-border p-3 space-y-4">
+            <div className="border-t border-border p-4 space-y-4">
 
               {/* ── Titre (éditable en mode admin) ── */}
               {(isAdmin && manageMode) && (
@@ -457,6 +465,7 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
           )}
         </div>
       ))}
+      </div>
 
       {chapters.length === 0 && (
         <p className="text-xs text-muted-foreground italic">
