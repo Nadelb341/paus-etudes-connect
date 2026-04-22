@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera, Copy, ExternalLink } from "lucide-react";
-import { YoutubePlayer, isYoutubeUrl, extractYoutubeVideoId } from "@/utils/youtube";
+import { YoutubePlayer, isYoutubeUrl, extractYoutubeVideoId, extractPlaylistId, fetchPlaylistVideos } from "@/utils/youtube";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -50,6 +50,7 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
   const [newChapterTitle, setNewChapterTitle] = useState("");
   const [newLinkInputs, setNewLinkInputs] = useState<Record<string, string>>({});
   const [uploading, setUploading] = useState(false);
+  const [fetchingLinks, setFetchingLinks] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     fetchChapters();
@@ -138,12 +139,39 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
     fetchChapterDocs(chapterId);
   };
 
-  const addLink = (chapter: Chapter) => {
+  const addLink = async (chapter: Chapter) => {
     const link = newLinkInputs[chapter.id]?.trim();
     if (!link) return;
-    const updated = { ...chapter, youtube_links: [...(chapter.youtube_links || []), link] };
-    setChapters(prev => prev.map(c => c.id === chapter.id ? updated : c));
-    setNewLinkInputs(prev => ({ ...prev, [chapter.id]: "" }));
+
+    const playlistId = extractPlaylistId(link);
+
+    if (playlistId) {
+      // Playlist → récupère toutes les vidéos dans l'ordre
+      setFetchingLinks(prev => ({ ...prev, [chapter.id]: true }));
+      try {
+        const urls = await fetchPlaylistVideos(playlistId);
+        if (urls.length === 0) { toast.error("Aucune vidéo trouvée dans cette playlist."); return; }
+        setChapters(prev => prev.map(c =>
+          c.id === chapter.id
+            ? { ...c, youtube_links: [...(c.youtube_links || []), ...urls] }
+            : c
+        ));
+        setNewLinkInputs(prev => ({ ...prev, [chapter.id]: "" }));
+        toast.success(`${urls.length} vidéo${urls.length > 1 ? 's' : ''} ajoutée${urls.length > 1 ? 's' : ''} dans l'ordre !`);
+      } catch {
+        toast.error("Impossible de charger la playlist. Vérifie le lien et réessaie.");
+      } finally {
+        setFetchingLinks(prev => ({ ...prev, [chapter.id]: false }));
+      }
+    } else {
+      // Vidéo seule ou lien externe
+      setChapters(prev => prev.map(c =>
+        c.id === chapter.id
+          ? { ...c, youtube_links: [...(c.youtube_links || []), link] }
+          : c
+      ));
+      setNewLinkInputs(prev => ({ ...prev, [chapter.id]: "" }));
+    }
   };
 
   const removeLink = (chapter: Chapter, index: number) => {
@@ -312,12 +340,20 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
                     <Input
                       value={newLinkInputs[chapter.id] || ""}
                       onChange={e => setNewLinkInputs(prev => ({ ...prev, [chapter.id]: e.target.value }))}
-                      onKeyDown={e => e.key === "Enter" && addLink(chapter)}
-                      placeholder="Lien YouTube, site web..."
+                      onKeyDown={e => { if (e.key === "Enter") addLink(chapter); }}
+                      placeholder="Vidéo YouTube, playlist ou site web..."
                       className="flex-1 text-xs"
+                      disabled={fetchingLinks[chapter.id]}
                     />
-                    <Button onClick={() => addLink(chapter)} size="sm" variant="outline">
-                      <Plus size={12} />
+                    <Button
+                      onClick={() => addLink(chapter)}
+                      size="sm" variant="outline"
+                      disabled={fetchingLinks[chapter.id]}
+                    >
+                      {fetchingLinks[chapter.id]
+                        ? <span className="text-xs animate-pulse">...</span>
+                        : <Plus size={12} />
+                      }
                     </Button>
                   </div>
                 )}

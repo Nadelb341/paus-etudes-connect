@@ -1,3 +1,31 @@
+// Extrait l'ID d'une playlist YouTube depuis une URL
+export const extractPlaylistId = (url: string): string | null => {
+  const match = url.match(/[?&]list=([^&\s]+)/);
+  return match ? match[1] : null;
+};
+
+// Récupère toutes les vidéos d'une playlist via l'API Invidious (open source, pas de clé API)
+const INVIDIOUS_INSTANCES = [
+  'https://inv.nadeko.net',
+  'https://invidious.io',
+  'https://y.com.sb',
+];
+
+export const fetchPlaylistVideos = async (playlistId: string): Promise<string[]> => {
+  for (const instance of INVIDIOUS_INSTANCES) {
+    try {
+      const res = await fetch(`${instance}/api/v1/playlists/${playlistId}`);
+      if (!res.ok) continue;
+      const data = await res.json();
+      const urls: string[] = (data.videos || []).map(
+        (v: { videoId: string }) => `https://www.youtube.com/watch?v=${v.videoId}`
+      );
+      if (urls.length > 0) return urls;
+    } catch { /* essaie l'instance suivante */ }
+  }
+  throw new Error('Impossible de charger la playlist');
+};
+
 export const extractYoutubeVideoId = (url: string): string | null => {
   const patterns = [
     /(?:youtube\.com\/embed\/)([^?&#]+)/,
