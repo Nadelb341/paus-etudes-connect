@@ -39,9 +39,11 @@ interface ChapterManagerProps {
   subjectId: string;
   targetStudentId?: string;
   manageMode?: boolean;
+  themeId?: string;
+  filterUnthemed?: boolean;
 }
 
-const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManagerProps) => {
+const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filterUnthemed }: ChapterManagerProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const [chapters, setChapters] = useState<Chapter[]>([]);
@@ -54,12 +56,17 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
 
   useEffect(() => {
     fetchChapters();
-  }, [subjectId, targetStudentId]);
+  }, [subjectId, targetStudentId, themeId, filterUnthemed]);
 
   const fetchChapters = async () => {
     let q = supabase.from("subject_chapters").select("*").eq("subject_id", subjectId).order("order_index");
     if (isAdmin && manageMode && targetStudentId && targetStudentId !== "all") {
       q = q.or(`target_student_id.eq.${targetStudentId},target_student_id.is.null`);
+    }
+    if (themeId) {
+      q = q.eq("theme_id", themeId);
+    } else if (filterUnthemed) {
+      q = q.is("theme_id", null);
     }
     const { data } = await q;
     if (data) setChapters(data as Chapter[]);
@@ -80,6 +87,9 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
     };
     if (isAdmin && targetStudentId && targetStudentId !== "all") {
       insertData.target_student_id = targetStudentId;
+    }
+    if (themeId) {
+      insertData.theme_id = themeId;
     }
     await supabase.from("subject_chapters").insert(insertData);
     setNewChapterTitle("");
@@ -197,7 +207,9 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
 
   return (
     <div className="space-y-3">
-      <h4 className="font-semibold text-sm flex items-center gap-2">📂 Chapitres</h4>
+      {!themeId && !filterUnthemed && (
+        <h4 className="font-semibold text-sm flex items-center gap-2">📂 Chapitres</h4>
+      )}
 
       {(isAdmin && manageMode) && (
         <div className="flex gap-2">

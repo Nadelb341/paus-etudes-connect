@@ -62,6 +62,37 @@ export const SUBJECTS_LYCEE = [
   { id: "spe-lit-langues", label: "Spé Littérature et langues", icon: "📚", color: "hsl(340, 50%, 50%)" },
 ];
 
+// Extrait le subject_id de base depuis un ID composite (ex: "mathematique|3ème" → "mathematique")
+export const getBaseSubjectId = (compositeId: string): string => compositeId.split('|')[0];
+
+// Grands thèmes par défaut pour chaque matière (basés sur les programmes officiels)
+export const DEFAULT_THEMES: Record<string, string[]> = {
+  "francais": ["Méthodologie", "Grammaire", "Conjugaison", "Orthographe", "Vocabulaire", "Lecture et écriture", "Outils d'analyse"],
+  "mathematique": ["Méthodologie", "Nombres et calculs", "Fonctions", "Organisation et gestion des données", "Espace et Géométrie", "Grandeurs et Mesures", "Algorithmique et programmation"],
+  "histoire": ["Méthodologie", "Préhistoire et Antiquité", "Moyen Âge", "Temps modernes", "XIXe siècle", "XXe siècle", "Monde contemporain"],
+  "geographie": ["Méthodologie", "Habiter le monde", "Ressources et développement durable", "Population et migrations", "Europe et mondialisation", "La France"],
+  "physique-chimie": ["Méthodologie", "Mécanique", "Électricité", "Optique", "Chimie", "Thermodynamique", "Ondes et signaux"],
+  "svt": ["Méthodologie", "Le vivant", "Corps humain et santé", "Géologie et environnement", "Génétique et évolution", "Écosystèmes et biodiversité"],
+  "technologie": ["Méthodologie", "Systèmes techniques", "Matériaux et procédés", "Énergie", "Information et programmation", "Design et innovation"],
+  "anglais": ["Méthodologie", "Grammaire", "Vocabulaire", "Compréhension de l'oral", "Expression orale", "Compréhension de l'écrit", "Expression écrite"],
+  "espagnol": ["Méthodologie", "Grammaire", "Vocabulaire", "Compréhension de l'oral", "Expression orale", "Compréhension de l'écrit", "Expression écrite"],
+  "dessin": ["Méthodologie", "Pratique artistique", "Couleur et composition", "Histoire de l'art", "Techniques et supports", "Analyse d'œuvres"],
+  "musique": ["Méthodologie", "Pratique vocale", "Écoute et analyse musicale", "Histoire de la musique", "Rythme et notation", "Cultures musicales"],
+  "grand-oral": ["Méthodologie", "Choix et préparation du sujet", "Techniques orales", "Gestion du stress et présentation", "Entraînement"],
+  "snt": ["Méthodologie", "Internet et Web", "Réseaux sociaux", "Données structurées", "Localisation et cartographie", "Informatique embarquée", "Sécurité numérique"],
+  "ses": ["Méthodologie", "Science économique", "Sociologie", "Sciences politiques", "Regards croisés"],
+  "ens-scientifiques": ["Méthodologie", "Mathématiques pour les sciences", "Physique-chimie", "SVT", "Science et société"],
+  "spe-math": ["Méthodologie", "Algèbre et analyse", "Géométrie", "Probabilités et statistiques", "Algorithmique et programmation"],
+  "spe-physique": ["Méthodologie", "Mécanique", "Électricité et électromagnétisme", "Optique et ondes", "Chimie organique et inorganique"],
+  "spe-svt": ["Méthodologie", "Génétique et évolution", "Corps humain et immunologie", "Neurosciences", "Écologie et environnement"],
+  "spe-hggsp": ["Méthodologie", "Histoire et mémoires", "Gouverner un État", "Dynamiques territoriales", "Sociétés et environnement", "S'informer et analyser"],
+  "spe-hlp": ["Méthodologie", "La recherche de soi", "L'existence humaine", "Parole et langage", "La morale et le politique"],
+  "spe-nsi": ["Méthodologie", "Structures de données", "Algorithmique", "Architectures et réseaux", "Bases de données", "Langages et programmation"],
+  "spe-si": ["Méthodologie", "Analyse des systèmes", "Mécanique", "Électronique et automatique", "Informatique industrielle"],
+  "spe-ses": ["Méthodologie", "Microéconomie", "Macroéconomie", "Sociologie", "Science politique"],
+  "spe-lit-langues": ["Méthodologie", "Littérature française", "Littérature étrangère", "Traduction littéraire", "Stylistique et rhétorique"],
+};
+
 export const DAYS_OF_WEEK = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"] as const;
 
 export const HOURLY_RATES = {

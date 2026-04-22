@@ -14,6 +14,7 @@ import { Upload, Trash2, FileText, Youtube, Plus, X, Camera } from "lucide-react
 import QuizManager from "./QuizManager";
 import QuizPlayer from "./QuizPlayer";
 import ChapterManager from "./ChapterManager";
+import ThemeManager from "./ThemeManager";
 import SubjectComments from "./SubjectComments";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
@@ -182,7 +183,7 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
               </Select>
             </div>
 
-            <ChapterManager subjectId={subjectId} targetStudentId={targetStudentId} manageMode={true} />
+            <ThemeManager subjectId={subjectId} targetStudentId={targetStudentId} manageMode={true} />
           </div>
         ) : (
           /* Student/Parent view */
