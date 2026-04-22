@@ -299,6 +299,21 @@ npm run test:watch   # Tests en watch mode
 - Projet Supabase gere par Lovable (pas accessible directement via compte Supabase perso)
 - Pour deployer des Edge Functions : passer par le chat Lovable (pas le CLI Supabase)
 
+## Bouton retour en haut (règle globale — màj session 2026-04-22)
+
+Présent dans toute zone scrollable. Composants réutilisables :
+- `src/hooks/useScrollToTop.ts` → `useScrollToTop()` (conteneur/dialog) et `useWindowScrollToTop()` (page fenêtre)
+- `src/components/ui/ScrollToTopButton.tsx` → `<ScrollToTopButton show={...} onClick={...} position="absolute|fixed" />`
+
+Zones couvertes :
+- `Index.tsx` (page principale) — `position="fixed"`, window scroll
+- `SubjectContentDialog.tsx` — dialog matière
+- `LevelSubjectsDialog.tsx` — dialog niveaux
+- `QuickNotes.tsx` — dialog notes
+- `ParentHome.tsx` — dialog versements + dialog carte enfant
+
+Pattern dialog : DialogContent en `p-0 overflow-hidden`, inner div avec ref + onScroll, bouton hors du div scrollable.
+
 ## Regle UX - Confirmation avant suppression
 
 TOUJOURS afficher une modale de confirmation avant toute suppression definitive.

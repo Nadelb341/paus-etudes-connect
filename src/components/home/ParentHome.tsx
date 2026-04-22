@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
+import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminView } from "@/hooks/useAdminView";
@@ -79,6 +81,9 @@ const ParentHome = () => {
   const [studentProfiles, setStudentProfiles] = useState<{ user_id: string; first_name: string }[]>([]);
   const [selectedStudentId, setSelectedStudentId] = useState<string>("");
   const [linkedStudentUserIds, setLinkedStudentUserIds] = useState<string[]>([]);
+
+  const scrollPayment = useScrollToTop();
+  const scrollCard = useScrollToTop();
 
   // Paiement
   const [paymentRow, setPaymentRow] = useState<HourRow | null>(null);
@@ -388,7 +393,8 @@ const ParentHome = () => {
 
       {/* Dialog paiement partiel */}
       <Dialog open={!!paymentRow} onOpenChange={open => { if (!open) setPaymentRow(null); }}>
-        <DialogContent className="max-w-sm max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-sm p-0 overflow-hidden">
+          <div ref={scrollPayment.scrollRef} onScroll={scrollPayment.handleScroll} className="max-h-[85vh] overflow-y-auto p-6">
           <DialogHeader>
             <DialogTitle>💰 Règlements</DialogTitle>
           </DialogHeader>
@@ -493,6 +499,8 @@ const ParentHome = () => {
               )}
             </div>
           )}
+          </div>
+          <ScrollToTopButton show={scrollPayment.showScrollTop} onClick={scrollPayment.scrollToTop} />
         </DialogContent>
       </Dialog>
 
@@ -525,7 +533,8 @@ const ParentHome = () => {
 
       {/* Child detail dialog */}
       <Dialog open={!!selectedCard} onOpenChange={open => { if (!open) setSelectedCard(null); }}>
-        <DialogContent className="max-w-lg w-full max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-lg w-full p-0 overflow-hidden">
+          <div ref={scrollCard.scrollRef} onScroll={scrollCard.handleScroll} className="max-h-[85vh] overflow-y-auto p-6">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <span className="text-2xl">👧</span> {selectedCard?.child_name}
@@ -659,6 +668,8 @@ const ParentHome = () => {
               </Table>
             </div>
           )}
+          </div>
+          <ScrollToTopButton show={scrollCard.showScrollTop} onClick={scrollCard.scrollToTop} />
         </DialogContent>
       </Dialog>
     </div>

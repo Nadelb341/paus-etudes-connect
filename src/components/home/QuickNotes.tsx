@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
+import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -221,6 +223,7 @@ const NotesListDialog = ({
   onValidate: (n: QuickNote) => void;
 }) => {
   const [open, setOpen] = useState(false);
+  const { scrollRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop();
 
   return (
     <>
@@ -229,11 +232,12 @@ const NotesListDialog = ({
         <ChevronDown className="h-3 w-3 ml-1" />
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-h-[80vh] overflow-y-auto">
+        <DialogContent className="p-0 overflow-hidden">
+          <div ref={scrollRef} onScroll={handleScroll} className="max-h-[80vh] overflow-y-auto p-6">
           <DialogHeader>
             <DialogTitle>Toutes les notes rapides</DialogTitle>
           </DialogHeader>
-          <div className="space-y-2">
+          <div className="space-y-2 mt-4">
             {notes.map(note => (
               <div key={note.id} className={`rounded-md border p-3 ${note.is_validated ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800" : "bg-muted/30"}`}>
                 <div className="flex items-start justify-between gap-2">
@@ -272,6 +276,8 @@ const NotesListDialog = ({
               </div>
             ))}
           </div>
+          </div>
+          <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
         </DialogContent>
       </Dialog>
     </>
