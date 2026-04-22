@@ -50,18 +50,14 @@ const SubjectComments = ({ subjectId, subjectLabel }: { subjectId: string; subje
       content: text,
     });
     if (!isAdmin) {
-      const { data: adminProfile } = await supabase
-        .from("profiles")
-        .select("user_id")
-        .eq("email", ADMIN_EMAIL)
-        .single();
-      if (adminProfile) {
+      const { data: adminUserId } = await supabase.rpc("get_admin_user_id");
+      if (adminUserId) {
         await supabase.from("messages").insert({
           sender_id: user.id,
           sender_name: user.user_metadata?.first_name || "Élève",
           content: text,
           recipient_type: "individual",
-          recipient_ids: [adminProfile.user_id],
+          recipient_ids: [adminUserId],
           subject: `💬 Commentaire — ${subjectLabel || subjectId}`,
         });
       }
