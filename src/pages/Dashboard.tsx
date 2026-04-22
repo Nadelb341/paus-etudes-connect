@@ -4,7 +4,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, EyeOff, ClipboardList, Bookmark, Send, UserPlus, Link2 } from "lucide-react";
+import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, EyeOff, ClipboardList, Bookmark, Send, UserPlus, Link2, FileText } from "lucide-react";
+import StudentBilanDialog from "@/components/home/StudentBilanDialog";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,6 +62,7 @@ const DashboardPage = () => {
   const [tutoringHours, setTutoringHours] = useState<TutoringHour[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
+  const [bilanStudent, setBilanStudent] = useState<Profile | null>(null);
   const [editingRemarks, setEditingRemarks] = useState("");
   const [editStudentName, setEditStudentName] = useState("");
   const [editStudentGender, setEditStudentGender] = useState("");
@@ -516,9 +518,14 @@ const DashboardPage = () => {
                               <p className="font-medium text-sm">{p.first_name}</p>
                               <p className="text-xs text-muted-foreground">{p.email}</p>
                             </div>
-                            <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); setEditStudentCustomRate(p.custom_hourly_rate?.toString() ?? ""); setEditStudentPassword(p.known_password || ""); setShowPassword(false); setNewStudentPassword(""); setShowNewPassword(false); }}>
-                              <Eye size={14} className="mr-1" />Détails
-                            </Button>
+                            <div className="flex gap-2">
+                              <Button size="sm" variant="outline" onClick={() => setBilanStudent(p)} className="gap-1 text-xs border-destructive/40 text-destructive hover:bg-destructive/10">
+                                <FileText size={13} />Bilan
+                              </Button>
+                              <Button size="sm" variant="ghost" onClick={() => { setSelectedProfile(p); setEditStudentName(p.first_name); setEditStudentGender(p.gender); setEditStudentLevel(p.school_level); setEditStudentBirthDate(p.birth_date || ""); setEditingRemarks(p.remarks || ""); setEditStudentCustomRate(p.custom_hourly_rate?.toString() ?? ""); setEditStudentPassword(p.known_password || ""); setShowPassword(false); setNewStudentPassword(""); setShowNewPassword(false); }}>
+                                <Eye size={14} className="mr-1" />Détails
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -1013,6 +1020,14 @@ const DashboardPage = () => {
             )}
           </DialogContent>
         </Dialog>
+
+        {bilanStudent && (
+          <StudentBilanDialog
+            open={!!bilanStudent}
+            onOpenChange={(open) => { if (!open) setBilanStudent(null); }}
+            student={bilanStudent}
+          />
+        )}
       </main>
     </div>
   );
