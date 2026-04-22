@@ -513,6 +513,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          bilan_data: Json | null
           birth_date: string | null
           child_name: string | null
           created_at: string
@@ -530,6 +531,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          bilan_data?: Json | null
           birth_date?: string | null
           child_name?: string | null
           created_at?: string
@@ -547,6 +549,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          bilan_data?: Json | null
           birth_date?: string | null
           child_name?: string | null
           created_at?: string

@@ -139,7 +139,7 @@ const StudentBilanDialog = ({ open, onOpenChange, student }: StudentBilanDialogP
 
   const saveBilan = async () => {
     setSaving(true);
-    const { error } = await supabase.from("profiles").update({ bilan_data: bilan } as any).eq("user_id", student.user_id);
+    const { error } = await supabase.from("profiles").update({ bilan_data: bilan }).eq("user_id", student.user_id);
     if (error) toast.error("Erreur lors de la sauvegarde");
     else toast.success("Bilan sauvegardé !");
     setSaving(false);
