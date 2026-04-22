@@ -186,6 +186,7 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
                 isExpanded && "col-span-2"
               )}
               style={{ borderColor: color }}
+            >
               {/* Zone cliquable principale → ouvre le contenu */}
               <div
                 className="p-4 pr-10 cursor-pointer hover:bg-secondary/20 transition-colors min-h-[52px] flex items-center"
