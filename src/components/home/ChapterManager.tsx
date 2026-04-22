@@ -7,11 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera } from "lucide-react";
+import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera, Copy } from "lucide-react";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import QuizManager from "./QuizManager";
+import QuizPlayer from "./QuizPlayer";
 
 interface Chapter {
   id: string;
@@ -45,7 +47,7 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
   const [expandedChapter, setExpandedChapter] = useState<string | null>(null);
   const [chapterDocs, setChapterDocs] = useState<Record<string, ChapterDoc[]>>({});
   const [newChapterTitle, setNewChapterTitle] = useState("");
-  const [newYoutubeLinks, setNewYoutubeLinks] = useState<Record<string, string>>({});
+  const [newLinkInputs, setNewLinkInputs] = useState<Record<string, string>>({});
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -118,37 +120,10 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
       if (uploadError) throw uploadError;
       const { data: { publicUrl } } = supabase.storage.from("subject-files").getPublicUrl(filePath);
       await supabase.from("chapter_documents").insert({
-        chapter_id: chapterId,
-        file_name: file.name,
-        file_url: publicUrl,
-        file_type: file.type,
-        uploaded_by: user?.id,
+        chapter_id: chapterId, file_name: file.name,
+        file_url: publicUrl, file_type: file.type, uploaded_by: user?.id,
       });
       toast.success("Fichier téléversé !");
-      fetchChapterDocs(chapterId);
-    } catch {
-      toast.error("Erreur lors du téléversement");
-    }
-    setUploading(false);
-  };
-
-  const handlePhotoCapture = async (chapterId: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      const filePath = `chapters/${chapterId}/${Date.now()}_photo_${file.name}`;
-      const { error: uploadError } = await supabase.storage.from("subject-files").upload(filePath, file);
-      if (uploadError) throw uploadError;
-      const { data: { publicUrl } } = supabase.storage.from("subject-files").getPublicUrl(filePath);
-      await supabase.from("chapter_documents").insert({
-        chapter_id: chapterId,
-        file_name: file.name,
-        file_url: publicUrl,
-        file_type: file.type,
-        uploaded_by: user?.id,
-      });
-      toast.success("Photo téléversée !");
       fetchChapterDocs(chapterId);
     } catch {
       toast.error("Erreur lors du téléversement");
@@ -162,22 +137,27 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
     fetchChapterDocs(chapterId);
   };
 
-  const addYoutubeLink = (chapter: Chapter) => {
-    const link = newYoutubeLinks[chapter.id]?.trim();
+  const addLink = (chapter: Chapter) => {
+    const link = newLinkInputs[chapter.id]?.trim();
     if (!link) return;
     const updated = { ...chapter, youtube_links: [...(chapter.youtube_links || []), link] };
     setChapters(prev => prev.map(c => c.id === chapter.id ? updated : c));
-    setNewYoutubeLinks(prev => ({ ...prev, [chapter.id]: "" }));
+    setNewLinkInputs(prev => ({ ...prev, [chapter.id]: "" }));
   };
 
-  const removeYoutubeLink = (chapter: Chapter, index: number) => {
+  const removeLink = (chapter: Chapter, index: number) => {
     const updated = { ...chapter, youtube_links: chapter.youtube_links.filter((_, i) => i !== index) };
     setChapters(prev => prev.map(c => c.id === chapter.id ? updated : c));
   };
 
+  const copyLink = (link: string) => {
+    navigator.clipboard.writeText(link);
+    toast.success("Lien copié !");
+  };
+
   const getYoutubeEmbedUrl = (url: string) => {
     const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]+)/);
-    return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
   };
 
   const getFileIcon = (type: string) => {
@@ -194,13 +174,13 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
     <div className="space-y-3">
       <h4 className="font-semibold text-sm flex items-center gap-2">📂 Chapitres</h4>
 
-      {/* Create chapter */}
       {(isAdmin && manageMode) && (
         <div className="flex gap-2">
           <Input
             value={newChapterTitle}
             onChange={e => setNewChapterTitle(e.target.value)}
-            placeholder="Nouveau chapitre..."
+            onKeyDown={e => e.key === "Enter" && createChapter()}
+            placeholder="Nom du nouveau chapitre..."
             className="flex-1"
           />
           <Button onClick={createChapter} size="sm"><Plus size={14} className="mr-1" />Créer</Button>
@@ -209,6 +189,7 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
 
       {chapters.map(chapter => (
         <div key={chapter.id} className="border border-border rounded-lg overflow-hidden">
+          {/* Header chapitre */}
           <button
             onClick={() => toggleExpand(chapter.id)}
             className="w-full flex items-center justify-between p-3 hover:bg-secondary/30 transition-colors text-left"
@@ -239,46 +220,74 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
           </button>
 
           {expandedChapter === chapter.id && (
-            <div className="border-t border-border p-3 space-y-3">
-              {/* Description */}
+            <div className="border-t border-border p-3 space-y-4">
+
+              {/* ── Titre (éditable en mode admin) ── */}
+              {(isAdmin && manageMode) && (
+                <div>
+                  <Label className="text-xs">Titre du chapitre</Label>
+                  <Input
+                    value={chapter.title}
+                    onChange={e => setChapters(prev => prev.map(c =>
+                      c.id === chapter.id ? { ...c, title: e.target.value } : c
+                    ))}
+                    placeholder="Titre du chapitre..."
+                    className="mt-1"
+                  />
+                </div>
+              )}
+
+              {/* ── Description ── */}
               {(isAdmin && manageMode) ? (
                 <div>
-                  <Label className="text-xs">Description</Label>
+                  <Label className="text-xs">Description / Contenu</Label>
                   <Textarea
                     value={chapter.description || ""}
-                    onChange={e => setChapters(prev => prev.map(c => c.id === chapter.id ? { ...c, description: e.target.value } : c))}
-                    placeholder="Description du chapitre..."
-                    rows={3}
+                    onChange={e => setChapters(prev => prev.map(c =>
+                      c.id === chapter.id ? { ...c, description: e.target.value } : c
+                    ))}
+                    placeholder="Description du chapitre, cours, notes..."
+                    rows={4}
+                    className="mt-1"
                   />
                 </div>
               ) : (
-                chapter.description && <p className="text-sm text-muted-foreground whitespace-pre-wrap">{chapter.description}</p>
+                chapter.description && (
+                  <p className="text-sm text-muted-foreground whitespace-pre-wrap">{chapter.description}</p>
+                )
               )}
 
-              {/* Documents */}
+              {/* ── Documents ── */}
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1"><FileText size={12} />Documents</p>
+                <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
+                  <FileText size={12} />Documents
+                </p>
                 <div className="flex gap-2 flex-wrap">
                   <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
                     <Upload size={14} className="text-primary" />
                     <span className="text-muted-foreground">{uploading ? "..." : "Téléverser"}</span>
-                    <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading} accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
+                    <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
+                      accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
                   </label>
                   <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
                     <Camera size={14} className="text-primary" />
                     <span className="text-muted-foreground">Photo</span>
-                    <input type="file" className="hidden" onChange={e => handlePhotoCapture(chapter.id, e)} disabled={uploading} accept="image/*" capture="environment" />
+                    <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
+                      accept="image/*" capture="environment" />
                   </label>
                 </div>
                 {(chapterDocs[chapter.id] || []).map(doc => (
                   <div key={doc.id} className="flex items-center justify-between p-2 bg-secondary/30 rounded-lg text-xs">
-                    <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-primary truncate">
+                    <a href={doc.file_url} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-1 hover:text-primary truncate flex-1">
                       <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
                     </a>
                     {canDeleteDoc(doc) && (
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <button className="text-destructive hover:text-destructive/80 p-1"><Trash2 size={12} /></button>
+                          <button className="text-destructive hover:text-destructive/80 p-1">
+                            <Trash2 size={12} />
+                          </button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader><AlertDialogTitle>Supprimer ce document ?</AlertDialogTitle></AlertDialogHeader>
@@ -291,47 +300,97 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
                     )}
                   </div>
                 ))}
+                {(chapterDocs[chapter.id] || []).length === 0 && (
+                  <p className="text-xs text-muted-foreground italic">Aucun document</p>
+                )}
               </div>
 
-              {/* YouTube links */}
+              {/* ── Liens (YouTube, sites web...) ── */}
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1"><Youtube size={12} />Vidéos</p>
-                <div className="flex gap-2">
-                  <Input
-                    value={newYoutubeLinks[chapter.id] || ""}
-                    onChange={e => setNewYoutubeLinks(prev => ({ ...prev, [chapter.id]: e.target.value }))}
-                    placeholder="Lien YouTube..."
-                    className="flex-1 text-xs"
-                  />
-                  <Button onClick={() => addYoutubeLink(chapter)} size="sm" variant="outline"><Plus size={12} /></Button>
-                </div>
-                {(chapter.youtube_links || []).map((link, i) => (
-                  <div key={i}>
-                    <div className="flex items-center justify-between p-1 text-xs">
-                      <span className="truncate flex-1 text-muted-foreground">{link}</span>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <button className="p-1"><X size={12} /></button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader><AlertDialogTitle>Supprimer ce lien ?</AlertDialogTitle></AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Annuler</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => removeYoutubeLink(chapter, i)}>Supprimer</AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </div>
-                    <div className="aspect-video rounded-lg overflow-hidden">
-                      <iframe src={getYoutubeEmbedUrl(link)} className="w-full h-full" allowFullScreen />
-                    </div>
+                <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
+                  <Youtube size={12} />Liens & Vidéos
+                </p>
+                {(isAdmin && manageMode) && (
+                  <div className="flex gap-2">
+                    <Input
+                      value={newLinkInputs[chapter.id] || ""}
+                      onChange={e => setNewLinkInputs(prev => ({ ...prev, [chapter.id]: e.target.value }))}
+                      onKeyDown={e => e.key === "Enter" && addLink(chapter)}
+                      placeholder="Lien YouTube, site web..."
+                      className="flex-1 text-xs"
+                    />
+                    <Button onClick={() => addLink(chapter)} size="sm" variant="outline">
+                      <Plus size={12} />
+                    </Button>
                   </div>
-                ))}
+                )}
+                {(chapter.youtube_links || []).map((link, i) => {
+                  const embedUrl = getYoutubeEmbedUrl(link);
+                  return (
+                    <div key={i} className="space-y-1">
+                      <div className="flex items-center gap-1 p-1 bg-secondary/20 rounded text-xs">
+                        <span className="truncate flex-1 text-muted-foreground">{link}</span>
+                        {/* Copier le lien */}
+                        <button
+                          onClick={() => copyLink(link)}
+                          className="p-1 text-muted-foreground hover:text-foreground shrink-0"
+                          title="Copier le lien"
+                        >
+                          <Copy size={12} />
+                        </button>
+                        {/* Supprimer */}
+                        {(isAdmin && manageMode) && (
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <button className="p-1 text-muted-foreground hover:text-destructive shrink-0">
+                                <X size={12} />
+                              </button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader><AlertDialogTitle>Supprimer ce lien ?</AlertDialogTitle></AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Annuler</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => removeLink(chapter, i)}>Supprimer</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        )}
+                      </div>
+                      {/* Prévisualisation YouTube */}
+                      {embedUrl && (
+                        <div className="aspect-video rounded-lg overflow-hidden">
+                          <iframe src={embedUrl} className="w-full h-full" allowFullScreen
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
+                        </div>
+                      )}
+                      {/* Lien cliquable si pas YouTube */}
+                      {!embedUrl && (
+                        <a href={link} target="_blank" rel="noopener noreferrer"
+                          className="text-xs text-primary hover:underline break-all">
+                          {link}
+                        </a>
+                      )}
+                    </div>
+                  );
+                })}
+                {(chapter.youtube_links || []).length === 0 && (
+                  <p className="text-xs text-muted-foreground italic">Aucun lien</p>
+                )}
               </div>
 
-              {/* Save button for admin */}
+              {/* ── Quiz ── */}
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-muted-foreground">🧠 Quiz</p>
+                {(isAdmin && manageMode) ? (
+                  <QuizManager subjectId={chapter.id} />
+                ) : (
+                  <QuizPlayer subjectId={chapter.id} />
+                )}
+              </div>
+
+              {/* ── Bouton Sauvegarder (admin) ── */}
               {(isAdmin && manageMode) && (
-                <Button onClick={() => updateChapter(chapter)} size="sm" className="bg-gradient-primary">
+                <Button onClick={() => updateChapter(chapter)} size="sm" className="bg-gradient-primary w-full">
                   Sauvegarder le chapitre
                 </Button>
               )}
@@ -340,7 +399,11 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
         </div>
       ))}
 
-      {chapters.length === 0 && <p className="text-xs text-muted-foreground italic">Aucun chapitre</p>}
+      {chapters.length === 0 && (
+        <p className="text-xs text-muted-foreground italic">
+          {(isAdmin && manageMode) ? "Aucun chapitre — créez-en un ci-dessus." : "Aucun chapitre disponible."}
+        </p>
+      )}
     </div>
   );
 };
