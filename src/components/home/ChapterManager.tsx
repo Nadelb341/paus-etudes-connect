@@ -69,6 +69,8 @@ const CHAPTER_PALETTE = [
 const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: ChapterManagerProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
+  // Extraire le niveau scolaire du subjectId composite (ex: "mathematique|3ème" → "3ème")
+  const niveau = subjectId.includes("|") ? subjectId.split("|")[1] : null;
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [expandedChapter, setExpandedChapter] = useState<string | null>(null);
   const [actionsChapter, setActionsChapter] = useState<string | null>(null);
@@ -94,9 +96,9 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
 
   const fetchChapters = async () => {
     let q = supabase.from("subject_chapters").select("*").eq("subject_id", subjectId).order("order_index");
-    // Élève : ne voir que les chapitres généraux (null) OU ciblés à soi
+    // Élève : ne voir que les chapitres où il est explicitement listé
     if (!isAdmin && user) {
-      q = q.or(`target_student_ids.is.null,target_student_ids.cs.{${user.id}}`);
+      q = q.contains("target_student_ids", [user.id]);
     }
     if (themeId) {
       q = q.eq("theme_id", themeId);
@@ -108,22 +110,15 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
   };
 
   const toggleChapterStudent = async (chapter: Chapter, studentId: string) => {
-    let updated: string[] | null;
-    if (studentId === "all") {
-      updated = null;
+    const current = chapter.target_student_ids || [];
+    let updated: string[];
+    if (current.includes(studentId)) {
+      updated = current.filter(id => id !== studentId);
     } else {
-      const current = chapter.target_student_ids || [];
-      if (current.includes(studentId)) {
-        const filtered = current.filter(id => id !== studentId);
-        updated = filtered.length === 0 ? null : filtered;
-      } else {
-        updated = [...current, studentId];
-      }
+      updated = [...current, studentId];
     }
     await supabase.from("subject_chapters").update({ target_student_ids: updated }).eq("id", chapter.id);
     setChapters(prev => prev.map(c => c.id === chapter.id ? { ...c, target_student_ids: updated } : c));
-    if (updated === null) toast.success("Chapitre visible par tous");
-    else toast.success(`Accès mis à jour (${updated.length} élève${updated.length > 1 ? "s" : ""})`);
   };
 
   const fetchChapterDocs = async (chapterId: string) => {
@@ -336,6 +331,49 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
                 {showActions ? <ChevronUp size={14} className="text-muted-foreground" /> : <ChevronDown size={14} className="text-muted-foreground" />}
               </button>
 
+              {/* Carte "Accès élèves" — visible directement sous le titre (admin seulement) */}
+              {(isAdmin && manageMode) && (() => {
+                const levelProfiles = niveau ? profiles.filter(p => p.school_level === niveau) : profiles;
+                const isOpen = chapterAccessOpen === chapter.id;
+                const sharedCount = chapter.target_student_ids?.length ?? 0;
+                return (
+                  <div className="border-t border-border/30 mx-3 mb-2" onClick={e => e.stopPropagation()}>
+                    <button
+                      className="w-full flex items-center justify-between px-2 py-1.5 hover:bg-secondary/30 rounded transition-colors"
+                      onClick={() => setChapterAccessOpen(isOpen ? null : chapter.id)}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <Users size={12} className="text-muted-foreground" />
+                        <span className="text-xs font-medium text-muted-foreground">Accès élèves</span>
+                        {sharedCount > 0 ? (
+                          <span className="bg-primary/15 text-primary text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                            {sharedCount} élève{sharedCount > 1 ? "s" : ""}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-muted-foreground italic">non partagé</span>
+                        )}
+                      </div>
+                      {isOpen ? <ChevronUp size={12} className="text-muted-foreground" /> : <ChevronDown size={12} className="text-muted-foreground" />}
+                    </button>
+                    {isOpen && (
+                      <div className="pb-2 px-2 space-y-0.5">
+                        {levelProfiles.length === 0 ? (
+                          <p className="text-xs text-muted-foreground italic py-1">Aucun élève de ce niveau</p>
+                        ) : levelProfiles.map(p => (
+                          <label key={p.user_id} className="flex items-center gap-2 text-xs cursor-pointer p-1.5 rounded hover:bg-secondary/40">
+                            <Checkbox
+                              checked={chapter.target_student_ids?.includes(p.user_id) ?? false}
+                              onCheckedChange={() => toggleChapterStudent(chapter, p.user_id)}
+                            />
+                            <span className="font-medium">{p.first_name}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
+
               {/* Panneau actions (admin) */}
               {showActions && (isAdmin && manageMode) && (
                 <div className="border-t border-border/40" onClick={e => e.stopPropagation()}>
@@ -346,16 +384,6 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
                       onClick={() => { setEditingChapterId(chapter.id); setEditingChapterTitle(chapter.title); setActionsChapter(null); }}
                     >
                       <Pencil size={12} />Renommer
-                    </Button>
-                    <Button
-                      variant="ghost" size="sm"
-                      className={`h-7 gap-1 text-xs ${chapterAccessOpen === chapter.id ? "text-primary" : "text-muted-foreground hover:text-foreground"}`}
-                      onClick={() => setChapterAccessOpen(chapterAccessOpen === chapter.id ? null : chapter.id)}
-                    >
-                      <Users size={12} />Accès élèves
-                      {chapter.target_student_ids && chapter.target_student_ids.length > 0 && (
-                        <span className="ml-0.5 bg-primary text-primary-foreground rounded-full text-[10px] px-1">{chapter.target_student_ids.length}</span>
-                      )}
                     </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
@@ -375,32 +403,6 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
                       </AlertDialogContent>
                     </AlertDialog>
                   </div>
-                  {/* Panneau sélection élèves */}
-                  {chapterAccessOpen === chapter.id && (
-                    <div className="px-4 pb-3 border-t border-border/20 pt-2 space-y-1">
-                      <p className="text-xs text-muted-foreground font-medium mb-2">
-                        {chapter.target_student_ids && chapter.target_student_ids.length > 0
-                          ? `🔒 Restreint à ${chapter.target_student_ids.length} élève(s) — décocher pour rouvrir`
-                          : "🌍 Visible par tous les élèves"}
-                      </p>
-                      <label className="flex items-center gap-2 text-xs cursor-pointer p-1.5 rounded hover:bg-secondary/40">
-                        <Checkbox
-                          checked={!chapter.target_student_ids || chapter.target_student_ids.length === 0}
-                          onCheckedChange={() => toggleChapterStudent(chapter, "all")}
-                        />
-                        <span className="font-medium">Tous les élèves</span>
-                      </label>
-                      {profiles.map(p => (
-                        <label key={p.user_id} className="flex items-center gap-2 text-xs cursor-pointer p-1.5 rounded hover:bg-secondary/40">
-                          <Checkbox
-                            checked={chapter.target_student_ids?.includes(p.user_id) ?? false}
-                            onCheckedChange={() => toggleChapterStudent(chapter, p.user_id)}
-                          />
-                          <span>{p.first_name} <span className="text-muted-foreground">({p.school_level})</span></span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
                 </div>
               )}
 
