@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { toast } from "sonner";
-import { Upload, Trash2, FileText, Youtube, Plus, X, Camera } from "lucide-react";
+import { Upload, Trash2, FileText, Youtube, Plus, X, Camera, ChevronUp } from "lucide-react";
 import QuizManager from "./QuizManager";
 import QuizPlayer from "./QuizPlayer";
 import ChapterManager from "./ChapterManager";
@@ -46,6 +46,8 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   const [activeTab, setActiveTab] = useState("content");
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [targetStudentId, setTargetStudentId] = useState<string>("all");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (open) {
@@ -159,7 +161,12 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl p-0 overflow-hidden">
+        <div
+          ref={scrollRef}
+          onScroll={() => setShowScrollTop((scrollRef.current?.scrollTop ?? 0) > 200)}
+          className="max-h-[85vh] overflow-y-auto p-6 space-y-4"
+        >
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <span className="text-2xl">{subjectIcon}</span>
@@ -250,6 +257,18 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
               <p className="text-center text-muted-foreground text-sm py-8">Aucun contenu pour cette matière</p>
             )}
           </div>
+        )}
+        </div>
+
+        {/* Bouton retour en haut */}
+        {showScrollTop && (
+          <button
+            onClick={() => scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" })}
+            className="absolute bottom-4 right-4 z-50 bg-primary text-primary-foreground rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-primary/90 transition-all"
+            title="Retour en haut"
+          >
+            <ChevronUp size={20} />
+          </button>
         )}
       </DialogContent>
     </Dialog>

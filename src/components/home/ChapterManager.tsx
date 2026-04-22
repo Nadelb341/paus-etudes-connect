@@ -431,9 +431,27 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
 
               {/* ── Bouton Sauvegarder (admin) ── */}
               {(isAdmin && manageMode) && (
-                <Button onClick={() => updateChapter(chapter)} size="sm" className="bg-gradient-primary w-full">
-                  Sauvegarder le chapitre
-                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button size="sm" className="bg-gradient-primary w-full">
+                      Sauvegarder le chapitre
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Sauvegarder les modifications ?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Les modifications du chapitre « {chapter.title} » seront enregistrées.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Annuler</AlertDialogCancel>
+                      <AlertDialogAction onClick={() => updateChapter(chapter)}>
+                        Confirmer
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               )}
             </div>
           )}
