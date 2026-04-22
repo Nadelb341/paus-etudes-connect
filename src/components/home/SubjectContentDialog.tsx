@@ -4,6 +4,7 @@ import { ADMIN_EMAIL } from "@/lib/constants";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
 import ThemeManager from "./ThemeManager";
+import ChapterManager from "./ChapterManager";
 import SubjectComments from "./SubjectComments";
 
 interface SubjectContentDialogProps {
@@ -42,7 +43,7 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
             </div>
           ) : (
             <div className="space-y-6">
-              <ThemeManager subjectId={subjectId} />
+              <ChapterManager subjectId={subjectId} />
               <SubjectComments subjectId={subjectId} subjectLabel={subjectLabel} />
             </div>
           )}
