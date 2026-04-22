@@ -117,7 +117,7 @@ const StudentBilanDialog = ({ open, onOpenChange, student }: StudentBilanDialogP
   const loadBilan = async () => {
     const { data } = await supabase.from("profiles").select("bilan_data").eq("user_id", student.user_id).single();
     if (data?.bilan_data) {
-      const loaded = data.bilan_data as BilanData;
+      const loaded = data.bilan_data as unknown as BilanData;
       // S'assurer que la liste matières a bien 10 entrées
       if (!loaded.matieres || loaded.matieres.length < 10) {
         loaded.matieres = MATIERES_DEFAULT.map((nom, i) => loaded.matieres?.[i] ?? emptyMatiere(nom));
@@ -139,7 +139,7 @@ const StudentBilanDialog = ({ open, onOpenChange, student }: StudentBilanDialogP
 
   const saveBilan = async () => {
     setSaving(true);
-    const { error } = await supabase.from("profiles").update({ bilan_data: bilan }).eq("user_id", student.user_id);
+    const { error } = await supabase.from("profiles").update({ bilan_data: bilan as any }).eq("user_id", student.user_id);
     if (error) toast.error("Erreur lors de la sauvegarde");
     else toast.success("Bilan sauvegardé !");
     setSaving(false);

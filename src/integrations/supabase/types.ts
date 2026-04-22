@@ -746,6 +746,7 @@ export type Database = {
           order_index: number | null
           subject_id: string
           target_student_id: string | null
+          theme_id: string | null
           title: string
           updated_at: string
           youtube_links: string[] | null
@@ -758,6 +759,7 @@ export type Database = {
           order_index?: number | null
           subject_id: string
           target_student_id?: string | null
+          theme_id?: string | null
           title?: string
           updated_at?: string
           youtube_links?: string[] | null
@@ -770,11 +772,20 @@ export type Database = {
           order_index?: number | null
           subject_id?: string
           target_student_id?: string | null
+          theme_id?: string | null
           title?: string
           updated_at?: string
           youtube_links?: string[] | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "subject_chapters_theme_id_fkey"
+            columns: ["theme_id"]
+            isOneToOne: false
+            referencedRelation: "subject_themes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subject_comments: {
         Row: {
@@ -886,6 +897,36 @@ export type Database = {
         }
         Relationships: []
       }
+      subject_themes: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          id: string
+          order_index: number | null
+          subject_id: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          order_index?: number | null
+          subject_id: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          order_index?: number | null
+          subject_id?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       tutoring_hours: {
         Row: {
           created_at: string
@@ -936,6 +977,10 @@ export type Database = {
       admin_delete_user: {
         Args: { target_user_id: string }
         Returns: undefined
+      }
+      get_student_email_html: {
+        Args: { p_student_id: string }
+        Returns: string
       }
       pausetude_email_template: {
         Args: { p_emoji: string; p_rows: string; p_titre: string }
