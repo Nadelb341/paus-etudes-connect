@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera, Copy } from "lucide-react";
+import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera, Copy, ExternalLink } from "lucide-react";
+import { YoutubePlayer, isYoutubeUrl, extractYoutubeVideoId } from "@/utils/youtube";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -155,10 +156,6 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
     toast.success("Lien copié !");
   };
 
-  const getYoutubeEmbedUrl = (url: string) => {
-    const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]+)/);
-    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
-  };
 
   const getFileIcon = (type: string) => {
     if (type.includes("pdf")) return "📄";
@@ -325,21 +322,21 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
                   </div>
                 )}
                 {(chapter.youtube_links || []).map((link, i) => {
-                  const embedUrl = getYoutubeEmbedUrl(link);
+                  const ytId = isYoutubeUrl(link) ? extractYoutubeVideoId(link) : null;
                   return (
                     <div key={i} className="space-y-1">
-                      <div className="flex items-center gap-1 p-1 bg-secondary/20 rounded text-xs">
-                        <span className="truncate flex-1 text-muted-foreground">{link}</span>
-                        {/* Copier le lien */}
-                        <button
-                          onClick={() => copyLink(link)}
-                          className="p-1 text-muted-foreground hover:text-foreground shrink-0"
-                          title="Copier le lien"
-                        >
-                          <Copy size={12} />
-                        </button>
-                        {/* Supprimer */}
-                        {(isAdmin && manageMode) && (
+                      {/* Barre URL — visible uniquement pour l'admin */}
+                      {(isAdmin && manageMode) && (
+                        <div className="flex items-center gap-1 p-1 bg-secondary/20 rounded text-xs">
+                          {ytId
+                            ? <Youtube size={12} className="text-destructive shrink-0" />
+                            : <ExternalLink size={12} className="text-primary shrink-0" />
+                          }
+                          <span className="truncate flex-1 text-muted-foreground">{link}</span>
+                          <button onClick={() => copyLink(link)}
+                            className="p-1 text-muted-foreground hover:text-foreground shrink-0" title="Copier le lien">
+                            <Copy size={12} />
+                          </button>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <button className="p-1 text-muted-foreground hover:text-destructive shrink-0">
@@ -354,19 +351,15 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode }: ChapterManag
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
-                        )}
-                      </div>
-                      {/* Prévisualisation YouTube */}
-                      {embedUrl && (
-                        <div className="aspect-video rounded-lg overflow-hidden">
-                          <iframe src={embedUrl} className="w-full h-full" allowFullScreen
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
                         </div>
                       )}
-                      {/* Lien cliquable si pas YouTube */}
-                      {!embedUrl && (
+                      {/* YouTube → lecteur sécurisé (admin + élève) */}
+                      {ytId && <YoutubePlayer videoId={ytId} />}
+                      {/* Lien non-YouTube → cliquable pour tous */}
+                      {!ytId && (
                         <a href={link} target="_blank" rel="noopener noreferrer"
-                          className="text-xs text-primary hover:underline break-all">
+                          className="flex items-center gap-1 text-xs text-primary hover:underline break-all">
+                          <ExternalLink size={11} />
                           {link}
                         </a>
                       )}
