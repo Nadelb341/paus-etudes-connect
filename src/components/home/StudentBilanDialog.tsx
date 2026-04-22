@@ -27,7 +27,9 @@ interface MatiereBilan {
   nom: string;
   prof: string;
   moy1: string;
+  moy1_note: string;
   moy2: string;
+  moy2_note: string;
   pref: string;
 }
 
@@ -71,7 +73,7 @@ const MATIERES_DEFAULT: string[] = [
   "SVT", "Techno", "Anglais", "Espagnol", "Option 1", "",
 ];
 
-const emptyMatiere = (nom: string): MatiereBilan => ({ nom, prof: "", moy1: "", moy2: "", pref: "" });
+const emptyMatiere = (nom: string): MatiereBilan => ({ nom, prof: "", moy1: "", moy1_note: "", moy2: "", moy2_note: "", pref: "" });
 
 const defaultBilan = (student: StudentProfile): BilanData => ({
   date_bilan: new Date().toLocaleDateString("fr-FR"),
@@ -122,6 +124,10 @@ const StudentBilanDialog = ({ open, onOpenChange, student }: StudentBilanDialogP
       if (!loaded.matieres || loaded.matieres.length < 10) {
         loaded.matieres = MATIERES_DEFAULT.map((nom, i) => loaded.matieres?.[i] ?? emptyMatiere(nom));
       }
+      // Compatibilité ascendante : ajouter les champs note si absents
+      loaded.matieres = loaded.matieres.map(m => ({
+        moy1_note: "", moy2_note: "", ...m,
+      }));
       setBilan(loaded);
     } else {
       setBilan(defaultBilan(student));
@@ -188,8 +194,10 @@ Spé 1 : ${bilan.spe1}, &nbsp;Spé 2 : ${bilan.spe2}, &nbsp;Spé 3 : ${bilan.spe
 </tr></thead>
 <tbody>
 ${bilan.matieres.map(m => `<tr>
-  <td>${m.nom}</td><td>${m.prof}</td><td style="text-align:center">${m.moy1}</td>
-  <td style="text-align:center">${m.moy2}</td><td style="text-align:center">${m.pref}</td>
+  <td>${m.nom}</td><td>${m.prof}</td>
+  <td style="text-align:center">${[m.moy1 && m.moy1 !== "—" ? m.moy1 : "", m.moy1_note ? m.moy1_note + "/20" : ""].filter(Boolean).join(" — ") || "—"}</td>
+  <td style="text-align:center">${[m.moy2 && m.moy2 !== "—" ? m.moy2 : "", m.moy2_note ? m.moy2_note + "/20" : ""].filter(Boolean).join(" — ") || "—"}</td>
+  <td style="text-align:center">${m.pref}</td>
 </tr>`).join("")}
 </tbody></table>
 
@@ -310,11 +318,11 @@ Autre : ${bilan.objectif_autre}</p>
                 <tr className="bg-secondary/40">
                   <th className="text-left p-2 text-destructive border-r border-border w-28">Matières</th>
                   <th className="p-2 text-destructive border-r border-border w-24">Profs</th>
-                  <th className="p-2 text-destructive border-r border-border w-24">
-                    Moy. 1er trim<br /><span className="font-normal text-muted-foreground">Vert/Jaune/Rouge</span>
+                  <th className="p-2 text-destructive border-r border-border w-32">
+                    Moy. 1er trim<br /><span className="font-normal text-muted-foreground">Couleur ou /20</span>
                   </th>
-                  <th className="p-2 text-destructive border-r border-border w-24">
-                    Moy. 2ème trim<br /><span className="font-normal text-muted-foreground">Vert/Jaune/Rouge</span>
+                  <th className="p-2 text-destructive border-r border-border w-32">
+                    Moy. 2ème trim<br /><span className="font-normal text-muted-foreground">Couleur ou /20</span>
                   </th>
                   <th className="p-2 text-destructive w-20">
                     Préférence<br /><span className="font-normal text-muted-foreground">1=top 10=bof</span>
@@ -346,6 +354,12 @@ Autre : ${bilan.objectif_autre}</p>
                           ))}
                         </SelectContent>
                       </Select>
+                      <Input
+                        value={m.moy1_note}
+                        onChange={e => setMatiere(i, "moy1_note", e.target.value)}
+                        className="h-6 text-xs border-0 p-1 bg-transparent text-center mt-0.5"
+                        placeholder="/20"
+                      />
                     </td>
                     <td className="p-1 border-r border-border">
                       <Select value={m.moy2} onValueChange={v => setMatiere(i, "moy2", v)}>
@@ -358,6 +372,12 @@ Autre : ${bilan.objectif_autre}</p>
                           ))}
                         </SelectContent>
                       </Select>
+                      <Input
+                        value={m.moy2_note}
+                        onChange={e => setMatiere(i, "moy2_note", e.target.value)}
+                        className="h-6 text-xs border-0 p-1 bg-transparent text-center mt-0.5"
+                        placeholder="/20"
+                      />
                     </td>
                     <td className="p-1">
                       <Input value={m.pref} onChange={e => setMatiere(i, "pref", e.target.value)} className="h-7 text-xs border-0 p-1 bg-transparent text-center" placeholder="1-10" />
