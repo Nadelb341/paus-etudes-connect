@@ -41,7 +41,10 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
               <ThemeManager subjectId={subjectId} manageMode={true} />
             </div>
           ) : (
-            <SubjectComments subjectId={subjectId} subjectLabel={subjectLabel} />
+            <div className="space-y-6">
+              <ThemeManager subjectId={subjectId} />
+              <SubjectComments subjectId={subjectId} subjectLabel={subjectLabel} />
+            </div>
           )}
         </div>
 
