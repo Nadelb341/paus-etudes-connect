@@ -33,11 +33,27 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
 
   const [themes, setThemes] = useState<Theme[]>([]);
   const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
+  const [actionsTheme, setActionsTheme] = useState<string | null>(null);
   const [showUnthemed, setShowUnthemed] = useState(false);
   const [newThemeTitle, setNewThemeTitle] = useState("");
   const [editingThemeId, setEditingThemeId] = useState<string | null>(null);
   const [editingTitle, setEditingTitle] = useState("");
   const [hasThemesTable, setHasThemesTable] = useState(true);
+
+  const THEME_PALETTE = [
+    "hsl(32, 80%, 50%)",
+    "hsl(217, 91%, 60%)",
+    "hsl(142, 71%, 45%)",
+    "hsl(280, 60%, 50%)",
+    "hsl(0, 60%, 50%)",
+    "hsl(45, 80%, 45%)",
+    "hsl(200, 60%, 45%)",
+    "hsl(330, 60%, 55%)",
+    "hsl(25, 70%, 45%)",
+    "hsl(160, 50%, 40%)",
+    "hsl(260, 50%, 55%)",
+    "hsl(350, 65%, 50%)",
+  ];
 
   useEffect(() => {
     fetchThemes();
@@ -74,6 +90,7 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
     await supabase.from("subject_themes").delete().eq("id", id);
     toast.success("Grand thème supprimé");
     if (expandedTheme === id) setExpandedTheme(null);
+    if (actionsTheme === id) setActionsTheme(null);
     fetchThemes();
   };
 
@@ -156,22 +173,27 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
 
       {/* Grille des thèmes — 2 par ligne */}
       <div className="grid grid-cols-2 gap-3">
-        {themes.map(theme => (
-          <div
-            key={theme.id}
-            className={cn(
-              "bg-card rounded-xl shadow-sm border border-border overflow-hidden transition-all",
-              expandedTheme === theme.id && "col-span-2"
-            )}
-          >
-            {/* Header thème */}
-            <button
-              onClick={() => setExpandedTheme(expandedTheme === theme.id ? null : theme.id)}
-              className="w-full flex items-center justify-between p-4 hover:bg-secondary/30 transition-colors text-left"
+        {themes.map((theme, idx) => {
+          const color = THEME_PALETTE[idx % THEME_PALETTE.length];
+          const isExpanded = expandedTheme === theme.id;
+          const showActions = actionsTheme === theme.id;
+
+          return (
+            <div
+              key={theme.id}
+              className={cn(
+                "bg-card rounded-xl shadow-sm border-2 overflow-hidden transition-all relative",
+                isExpanded && "col-span-2"
+              )}
+              style={{ borderColor: color }}
             >
-              <div className="flex items-center gap-2 flex-1 min-w-0" onClick={e => editingThemeId === theme.id && e.stopPropagation()}>
+              {/* Zone cliquable principale → ouvre le contenu */}
+              <div
+                className="p-4 pr-10 cursor-pointer hover:bg-secondary/20 transition-colors min-h-[52px] flex items-center"
+                onClick={() => setExpandedTheme(isExpanded ? null : theme.id)}
+              >
                 {editingThemeId === theme.id ? (
-                  <div className="flex items-center gap-1 flex-1" onClick={e => e.stopPropagation()}>
+                  <div className="flex items-center gap-2 flex-1" onClick={e => e.stopPropagation()}>
                     <Input
                       value={editingTitle}
                       onChange={e => setEditingTitle(e.target.value)}
@@ -182,32 +204,43 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
                       className="h-7 text-sm flex-1"
                       autoFocus
                     />
-                    <button onClick={() => saveEdit(theme.id)} className="p-1 text-green-600 hover:text-green-700">
+                    <button onClick={() => saveEdit(theme.id)} className="p-1 text-green-600 hover:text-green-700 shrink-0">
                       <Check size={14} />
                     </button>
-                    <button onClick={cancelEdit} className="p-1 text-muted-foreground hover:text-foreground">
+                    <button onClick={cancelEdit} className="p-1 text-muted-foreground hover:text-foreground shrink-0">
                       <X size={14} />
                     </button>
                   </div>
                 ) : (
-                  <span className="font-medium text-sm truncate">{theme.title}</span>
+                  <span className="font-semibold text-sm leading-tight" style={{ color }}>{theme.title}</span>
                 )}
               </div>
 
-              <div className="flex items-center gap-1 shrink-0 ml-2">
-                {(isAdmin && manageMode) && editingThemeId !== theme.id && (
+              {/* Flèche ▼ en haut à droite → révèle crayon + poubelle */}
+              <button
+                className="absolute top-3 right-3 p-1 rounded hover:bg-secondary/40 transition-colors"
+                onClick={e => { e.stopPropagation(); setActionsTheme(showActions ? null : theme.id); }}
+              >
+                {showActions ? <ChevronUp size={14} className="text-muted-foreground" /> : <ChevronDown size={14} className="text-muted-foreground" />}
+              </button>
+
+              {/* Panneau actions (crayon + poubelle) — visible après clic sur ▼ */}
+              {showActions && (isAdmin && manageMode) && (
+                <div
+                  className="flex gap-2 px-4 pb-3 border-t border-border/40 pt-2"
+                  onClick={e => e.stopPropagation()}
+                >
                   <Button
-                    variant="ghost" size="icon" className="h-6 w-6"
-                    onClick={e => { e.stopPropagation(); startEdit(theme); }}
+                    variant="ghost" size="sm"
+                    className="h-7 gap-1 text-xs text-muted-foreground hover:text-foreground"
+                    onClick={() => { startEdit(theme); setActionsTheme(null); }}
                   >
-                    <Pencil size={11} className="text-muted-foreground" />
+                    <Pencil size={12} />Renommer
                   </Button>
-                )}
-                {(isAdmin && manageMode) && (
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-6 w-6" onClick={e => e.stopPropagation()}>
-                        <Trash2 size={11} className="text-destructive" />
+                      <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-destructive hover:text-destructive/80">
+                        <Trash2 size={12} />Supprimer
                       </Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
@@ -223,24 +256,23 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
-                )}
-                {expandedTheme === theme.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-              </div>
-            </button>
+                </div>
+              )}
 
-            {/* Chapitres du thème (pleine largeur quand ouvert) */}
-            {expandedTheme === theme.id && (
-              <div className="border-t border-border p-4 bg-secondary/10">
-                <ChapterManager
-                  subjectId={subjectId}
-                  targetStudentId={targetStudentId}
-                  manageMode={manageMode}
-                  themeId={theme.id}
-                />
-              </div>
-            )}
-          </div>
-        ))}
+              {/* Chapitres du thème — pleine largeur quand ouvert */}
+              {isExpanded && (
+                <div className="border-t border-border p-4 bg-secondary/10">
+                  <ChapterManager
+                    subjectId={subjectId}
+                    targetStudentId={targetStudentId}
+                    manageMode={manageMode}
+                    themeId={theme.id}
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {themes.length === 0 && (
