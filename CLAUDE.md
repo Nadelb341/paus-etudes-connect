@@ -115,6 +115,35 @@ Sections (cartes accordeon) :
 Edition eleve : prenom, genre, niveau, date naissance, remarques, tarif horaire personnalise
 Edition parent : prenom, enfant declare, liaison eleve inscrit, remarques
 
+## Navigation par niveaux (admin) — màj session 2026-04-22
+
+Architecture inversée : l'admin ne voit plus les matières en page d'accueil
+mais les niveaux scolaires regroupés en 4 cartes empilées.
+
+**Composants** :
+- `AdminLevelView.tsx` : affiche les 4 groupes (Maternelle/Primaire/Collège/Lycée)
+  avec sous-niveaux comme boutons cliquables
+- `LevelSubjectsDialog.tsx` : dialog des cartes matières pour un sous-niveau
+- `SubjectsGrid.tsx` : routeur admin/élève — admin → AdminLevelView, élève → grille matières
+
+**Groupes et sous-niveaux** :
+- Maternelle : PS, MS, GS
+- Primaire : CP, CE1, CE2, CM1, CM2
+- Collège : 6ème, 5ème, 4ème, 3ème
+- Lycée : Seconde, Première, Terminale
+
+**Matières par niveau** (défini dans `getSubjectsForLevel` — constants.ts) :
+- Tous les niveaux (sauf exceptions) : 13 matières (Français → Option 2)
+- 3ème uniquement : + Grand Oral
+- Seconde : + SNT, SES, Enseignements scientifiques
+- Première / Terminale : + Enseignements scientifiques + 9 Spé (Spé Math → Spé Lit.)
+
+**SubjectId composite** : `${subjectId}|${niveau}` ex: `mathematique|6ème`
+— chaque niveau a son espace de contenu indépendant dans Supabase.
+
+**Côté élève** : aucun changement visuel, le subjectId composite est calculé
+automatiquement à partir de leur `school_level`.
+
 ## Vue Parent (ParentHome.tsx) — màj session 2026-04-14
 - Carte résumé : parents voient uniquement **"Reste dû"** (Total heures + Montant total cachés)
 - Admin voit les 3 cartes (Total heures, Montant total, Reste dû)
