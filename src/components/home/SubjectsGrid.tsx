@@ -1,25 +1,48 @@
 import { useState, useEffect } from "react";
 import SubjectCard from "./SubjectCard";
 import SubjectContentDialog from "./SubjectContentDialog";
-import { SUBJECTS_GENERAL, SUBJECTS_LYCEE, ADMIN_EMAIL } from "@/lib/constants";
+import SubjectLevelDialog from "./SubjectLevelDialog";
+import { SUBJECTS_GENERAL, SUBJECTS_LYCEE, ADMIN_EMAIL, levelSubjectId } from "@/lib/constants";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 interface SubjectVisibility { [key: string]: boolean; }
 
+type Subject = typeof SUBJECTS_GENERAL[0];
+
 const LYCEE_LEVELS = ["Seconde", "Première", "Terminale"];
 
 const SubjectsGrid = () => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
-  const userLevel = user?.user_metadata?.school_level || "";
+  const [userLevel, setUserLevel] = useState<string>(user?.user_metadata?.school_level || "");
   const showLycee = isAdmin || LYCEE_LEVELS.includes(userLevel);
   const [visibility, setVisibility] = useState<SubjectVisibility>({});
-  const [selectedSubject, setSelectedSubject] = useState<typeof SUBJECTS_GENERAL[0] | null>(null);
+
+  // Sélecteur de niveau (admin uniquement)
+  const [levelDialogSubject, setLevelDialogSubject] = useState<Subject | null>(null);
+
+  // Dialog contenu
+  const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [manageMode, setManageMode] = useState(false);
 
   useEffect(() => { fetchVisibility(); }, []);
+
+  // Récupère le niveau réel de l'élève depuis la BDD (plus fiable que user_metadata)
+  useEffect(() => {
+    if (!isAdmin && user?.id && !userLevel) {
+      supabase
+        .from("profiles")
+        .select("school_level")
+        .eq("user_id", user.id)
+        .maybeSingle()
+        .then(({ data }) => {
+          if (data?.school_level) setUserLevel(data.school_level);
+        });
+    }
+  }, [user?.id, isAdmin]);
 
   const fetchVisibility = async () => {
     const { data } = await supabase.from("subject_content").select("subject_id, is_visible");
@@ -40,12 +63,56 @@ const SubjectsGrid = () => {
     toast.success(!current ? "Matière affichée" : "Matière masquée");
   };
 
-  const openSubject = (subject: typeof SUBJECTS_GENERAL[0], manage = false) => {
-    setSelectedSubject(subject);
-    setManageMode(manage);
+  const handleSubjectClick = (subject: Subject) => {
+    if (isAdmin) {
+      // Admin → sélecteur de niveau (vue lecture)
+      setManageMode(false);
+      setLevelDialogSubject(subject);
+    } else {
+      // Élève → ouvre directement son niveau
+      const level = userLevel || "";
+      setSelectedSubject(subject);
+      setSelectedLevel(level || null);
+      setManageMode(false);
+    }
   };
 
-  const allSubjects = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
+  const handleManageContent = (subject: Subject) => {
+    // Admin uniquement → sélecteur de niveau en mode gestion
+    setLevelDialogSubject(subject);
+    setManageMode(true);
+  };
+
+  const handleLevelSelected = (level: string) => {
+    if (!levelDialogSubject) return;
+    setLevelDialogSubject(null);
+    setSelectedSubject(levelDialogSubject);
+    setSelectedLevel(level);
+    // manageMode déjà positionné dans handleManageContent ou false par défaut
+  };
+
+  const handleCloseLevelDialog = (open: boolean) => {
+    if (!open) {
+      setLevelDialogSubject(null);
+      setManageMode(false);
+    }
+  };
+
+  const handleCloseContentDialog = (open: boolean) => {
+    if (!open) {
+      setSelectedSubject(null);
+      setSelectedLevel(null);
+      setManageMode(false);
+    }
+  };
+
+  const compositeSubjectId = selectedSubject && selectedLevel
+    ? levelSubjectId(selectedSubject.id, selectedLevel)
+    : selectedSubject?.id ?? "";
+
+  const compositeSubjectLabel = selectedSubject && selectedLevel
+    ? `${selectedSubject.label} — ${selectedLevel}`
+    : selectedSubject?.label ?? "";
 
   return (
     <div className="space-y-6">
@@ -56,8 +123,8 @@ const SubjectsGrid = () => {
             <SubjectCard
               key={subject.id} {...subject} index={i}
               isVisible={visibility[subject.id] !== false}
-              onClick={() => openSubject(subject)}
-              onManageContent={() => openSubject(subject, true)}
+              onClick={() => handleSubjectClick(subject)}
+              onManageContent={() => handleManageContent(subject)}
               onToggleVisibility={() => toggleVisibility(subject.id)}
             />
           ))}
@@ -77,8 +144,8 @@ const SubjectsGrid = () => {
               <SubjectCard
                 key={subject.id} {...subject} index={i + SUBJECTS_GENERAL.length}
                 isVisible={visibility[subject.id] !== false}
-                onClick={() => openSubject(subject)}
-                onManageContent={() => openSubject(subject, true)}
+                onClick={() => handleSubjectClick(subject)}
+                onManageContent={() => handleManageContent(subject)}
                 onToggleVisibility={() => toggleVisibility(subject.id)}
               />
             ))}
@@ -86,12 +153,21 @@ const SubjectsGrid = () => {
         </>
       )}
 
+      {/* Sélecteur de niveau (admin) */}
+      <SubjectLevelDialog
+        open={!!levelDialogSubject}
+        onOpenChange={handleCloseLevelDialog}
+        subject={levelDialogSubject}
+        onSelectLevel={handleLevelSelected}
+      />
+
+      {/* Dialog de contenu */}
       {selectedSubject && (
         <SubjectContentDialog
           open={!!selectedSubject}
-          onOpenChange={(open) => { if (!open) setSelectedSubject(null); }}
-          subjectId={selectedSubject.id}
-          subjectLabel={selectedSubject.label}
+          onOpenChange={handleCloseContentDialog}
+          subjectId={compositeSubjectId}
+          subjectLabel={compositeSubjectLabel}
           subjectIcon={selectedSubject.icon}
           subjectColor={selectedSubject.color}
           manageMode={manageMode}

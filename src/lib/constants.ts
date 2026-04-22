@@ -6,6 +6,13 @@ export const SCHOOL_LEVELS = [
   "Seconde", "Première", "Terminale",
 ] as const;
 
+export const PRIMARY_LEVELS = ["CP", "CE1", "CE2", "CM1", "CM2"] as const;
+export const COLLEGE_LEVELS = ["6ème", "5ème", "4ème", "3ème"] as const;
+export const LYCEE_MAIN_LEVELS = ["Seconde", "Première", "Terminale"] as const;
+
+export const levelSubjectId = (subjectId: string, level: string): string =>
+  `${subjectId}|${level}`;
+
 export const SUBJECTS_GENERAL = [
   { id: "francais", label: "Français", icon: "📖", color: "hsl(32, 80%, 50%)" },
   { id: "mathematique", label: "Mathématique", icon: "🔢", color: "hsl(217, 91%, 60%)" },
