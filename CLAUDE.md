@@ -1,5 +1,13 @@
 # Paus'étude (ex My Study Way, ex Paus'Etudes Connect)
 
+## 🔴 Format obligatoire — Texte à copier-coller (SQL, config...)
+
+🔴 DÉBUT DE LA COPIE
+```
+(texte à copier)
+```
+🔴 FIN DE LA COPIE
+
 ## Description
 Plateforme educative pour le soutien scolaire. Creee par Nadia (nad341@live.fr).
 Gestion des devoirs, cours, quiz, RDV de tutorat, messagerie enrichie et suivi de paiement.
