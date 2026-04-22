@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera, Copy, ExternalLink } from "lucide-react";
+import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Camera, Copy, ExternalLink, Pencil, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { YoutubePlayer, isYoutubeUrl, extractYoutubeVideoId, extractPlaylistId, fetchPlaylistVideos } from "@/utils/youtube";
 import {
@@ -44,13 +44,31 @@ interface ChapterManagerProps {
   filterUnthemed?: boolean;
 }
 
+const CHAPTER_PALETTE = [
+  "hsl(32, 80%, 50%)",
+  "hsl(217, 91%, 60%)",
+  "hsl(142, 71%, 45%)",
+  "hsl(280, 60%, 50%)",
+  "hsl(0, 60%, 50%)",
+  "hsl(45, 80%, 45%)",
+  "hsl(200, 60%, 45%)",
+  "hsl(330, 60%, 55%)",
+  "hsl(25, 70%, 45%)",
+  "hsl(160, 50%, 40%)",
+  "hsl(260, 50%, 55%)",
+  "hsl(350, 65%, 50%)",
+];
+
 const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filterUnthemed }: ChapterManagerProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [expandedChapter, setExpandedChapter] = useState<string | null>(null);
+  const [actionsChapter, setActionsChapter] = useState<string | null>(null);
   const [chapterDocs, setChapterDocs] = useState<Record<string, ChapterDoc[]>>({});
   const [newChapterTitle, setNewChapterTitle] = useState("");
+  const [editingChapterId, setEditingChapterId] = useState<string | null>(null);
+  const [editingChapterTitle, setEditingChapterTitle] = useState("");
   const [newLinkInputs, setNewLinkInputs] = useState<Record<string, string>>({});
   const [uploading, setUploading] = useState(false);
   const [fetchingLinks, setFetchingLinks] = useState<Record<string, boolean>>({});
@@ -101,6 +119,8 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
   const deleteChapter = async (id: string) => {
     await supabase.from("subject_chapters").delete().eq("id", id);
     toast.success("Chapitre supprimé");
+    if (expandedChapter === id) setExpandedChapter(null);
+    if (actionsChapter === id) setActionsChapter(null);
     fetchChapters();
   };
 
@@ -112,6 +132,14 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
       updated_at: new Date().toISOString(),
     }).eq("id", chapter.id);
     toast.success("Chapitre sauvegardé !");
+  };
+
+  const saveChapterTitle = async (id: string) => {
+    if (!editingChapterTitle.trim()) return;
+    await supabase.from("subject_chapters").update({ title: editingChapterTitle.trim() }).eq("id", id);
+    setChapters(prev => prev.map(c => c.id === id ? { ...c, title: editingChapterTitle.trim() } : c));
+    setEditingChapterId(null);
+    toast.success("Chapitre renommé !");
   };
 
   const toggleExpand = (chapterId: string) => {
@@ -153,19 +181,14 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
   const addLink = async (chapter: Chapter) => {
     const link = newLinkInputs[chapter.id]?.trim();
     if (!link) return;
-
     const playlistId = extractPlaylistId(link);
-
     if (playlistId) {
-      // Playlist → récupère toutes les vidéos dans l'ordre
       setFetchingLinks(prev => ({ ...prev, [chapter.id]: true }));
       try {
         const urls = await fetchPlaylistVideos(playlistId);
         if (urls.length === 0) { toast.error("Aucune vidéo trouvée dans cette playlist."); return; }
         setChapters(prev => prev.map(c =>
-          c.id === chapter.id
-            ? { ...c, youtube_links: [...(c.youtube_links || []), ...urls] }
-            : c
+          c.id === chapter.id ? { ...c, youtube_links: [...(c.youtube_links || []), ...urls] } : c
         ));
         setNewLinkInputs(prev => ({ ...prev, [chapter.id]: "" }));
         toast.success(`${urls.length} vidéo${urls.length > 1 ? 's' : ''} ajoutée${urls.length > 1 ? 's' : ''} dans l'ordre !`);
@@ -175,26 +198,23 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
         setFetchingLinks(prev => ({ ...prev, [chapter.id]: false }));
       }
     } else {
-      // Vidéo seule ou lien externe
       setChapters(prev => prev.map(c =>
-        c.id === chapter.id
-          ? { ...c, youtube_links: [...(c.youtube_links || []), link] }
-          : c
+        c.id === chapter.id ? { ...c, youtube_links: [...(c.youtube_links || []), link] } : c
       ));
       setNewLinkInputs(prev => ({ ...prev, [chapter.id]: "" }));
     }
   };
 
   const removeLink = (chapter: Chapter, index: number) => {
-    const updated = { ...chapter, youtube_links: chapter.youtube_links.filter((_, i) => i !== index) };
-    setChapters(prev => prev.map(c => c.id === chapter.id ? updated : c));
+    setChapters(prev => prev.map(c =>
+      c.id === chapter.id ? { ...c, youtube_links: c.youtube_links.filter((_, i) => i !== index) } : c
+    ));
   };
 
   const copyLink = (link: string) => {
     navigator.clipboard.writeText(link);
     toast.success("Lien copié !");
   };
-
 
   const getFileIcon = (type: string) => {
     if (type.includes("pdf")) return "📄";
@@ -226,245 +246,250 @@ const ChapterManager = ({ subjectId, targetStudentId, manageMode, themeId, filte
       )}
 
       <div className="grid grid-cols-2 gap-3">
-      {chapters.map(chapter => (
-        <div
-          key={chapter.id}
-          className={cn(
-            "bg-card rounded-xl shadow-sm border border-border overflow-hidden transition-all",
-            expandedChapter === chapter.id && "col-span-2"
-          )}
-        >
-          {/* Header chapitre */}
-          <button
-            onClick={() => toggleExpand(chapter.id)}
-            className="w-full flex items-center justify-between p-4 hover:bg-secondary/30 transition-colors text-left"
-          >
-            <span className="font-medium text-sm">{chapter.title}</span>
-            <div className="flex items-center gap-1">
-              {isAdmin && manageMode && (
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-6 w-6" onClick={e => e.stopPropagation()}>
-                      <Trash2 size={12} className="text-destructive" />
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Supprimer ce chapitre ?</AlertDialogTitle>
-                      <AlertDialogDescription>Tous les documents associés seront aussi supprimés.</AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Annuler</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => deleteChapter(chapter.id)}>Supprimer</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+        {chapters.map((chapter, idx) => {
+          const color = CHAPTER_PALETTE[idx % CHAPTER_PALETTE.length];
+          const isExpanded = expandedChapter === chapter.id;
+          const showActions = actionsChapter === chapter.id;
+
+          return (
+            <div
+              key={chapter.id}
+              className={cn(
+                "bg-card rounded-xl shadow-sm border-2 overflow-hidden transition-all relative min-h-[64px]",
+                isExpanded && "col-span-2"
               )}
-              {expandedChapter === chapter.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </div>
-          </button>
-
-          {expandedChapter === chapter.id && (
-            <div className="border-t border-border p-4 space-y-4">
-
-              {/* ── Titre (éditable en mode admin) ── */}
-              {(isAdmin && manageMode) && (
-                <div>
-                  <Label className="text-xs">Titre du chapitre</Label>
-                  <Input
-                    value={chapter.title}
-                    onChange={e => setChapters(prev => prev.map(c =>
-                      c.id === chapter.id ? { ...c, title: e.target.value } : c
-                    ))}
-                    placeholder="Titre du chapitre..."
-                    className="mt-1"
-                  />
-                </div>
-              )}
-
-              {/* ── Description ── */}
-              {(isAdmin && manageMode) ? (
-                <div>
-                  <Label className="text-xs">Description / Contenu</Label>
-                  <Textarea
-                    value={chapter.description || ""}
-                    onChange={e => setChapters(prev => prev.map(c =>
-                      c.id === chapter.id ? { ...c, description: e.target.value } : c
-                    ))}
-                    placeholder="Description du chapitre, cours, notes..."
-                    rows={4}
-                    className="mt-1"
-                  />
-                </div>
-              ) : (
-                chapter.description && (
-                  <p className="text-sm text-muted-foreground whitespace-pre-wrap">{chapter.description}</p>
-                )
-              )}
-
-              {/* ── Documents ── */}
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
-                  <FileText size={12} />Documents
-                </p>
-                <div className="flex gap-2 flex-wrap">
-                  <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
-                    <Upload size={14} className="text-primary" />
-                    <span className="text-muted-foreground">{uploading ? "..." : "Téléverser"}</span>
-                    <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
-                      accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
-                  </label>
-                  <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
-                    <Camera size={14} className="text-primary" />
-                    <span className="text-muted-foreground">Photo</span>
-                    <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
-                      accept="image/*" capture="environment" />
-                  </label>
-                </div>
-                {(chapterDocs[chapter.id] || []).map(doc => (
-                  <div key={doc.id} className="flex items-center justify-between p-2 bg-secondary/30 rounded-lg text-xs">
-                    <a href={doc.file_url} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1 hover:text-primary truncate flex-1">
-                      <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
-                    </a>
-                    {canDeleteDoc(doc) && (
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <button className="text-destructive hover:text-destructive/80 p-1">
-                            <Trash2 size={12} />
-                          </button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader><AlertDialogTitle>Supprimer ce document ?</AlertDialogTitle></AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Annuler</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => deleteDoc(doc.id, chapter.id)}>Supprimer</AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    )}
+              style={{ borderColor: color }}
+            >
+              {/* Zone cliquable → ouvre le contenu */}
+              <div
+                className="p-4 pr-10 cursor-pointer hover:bg-secondary/20 transition-colors min-h-[64px] flex items-center"
+                onClick={() => toggleExpand(chapter.id)}
+              >
+                {editingChapterId === chapter.id ? (
+                  <div className="flex items-center gap-2 flex-1" onClick={e => e.stopPropagation()}>
+                    <Input
+                      value={editingChapterTitle}
+                      onChange={e => setEditingChapterTitle(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === "Enter") saveChapterTitle(chapter.id);
+                        if (e.key === "Escape") setEditingChapterId(null);
+                      }}
+                      className="h-7 text-sm flex-1"
+                      autoFocus
+                    />
+                    <button onClick={() => saveChapterTitle(chapter.id)} className="p-1 text-green-600 hover:text-green-700 shrink-0">
+                      <Check size={14} />
+                    </button>
+                    <button onClick={() => setEditingChapterId(null)} className="p-1 text-muted-foreground hover:text-foreground shrink-0">
+                      <X size={14} />
+                    </button>
                   </div>
-                ))}
-                {(chapterDocs[chapter.id] || []).length === 0 && (
-                  <p className="text-xs text-muted-foreground italic">Aucun document</p>
+                ) : (
+                  <span className="font-semibold text-sm leading-tight" style={{ color }}>{chapter.title}</span>
                 )}
               </div>
 
-              {/* ── Liens (YouTube, sites web...) ── */}
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
-                  <Youtube size={12} />Liens & Vidéos
-                </p>
-                {(isAdmin && manageMode) && (
-                  <div className="flex gap-2">
-                    <Input
-                      value={newLinkInputs[chapter.id] || ""}
-                      onChange={e => setNewLinkInputs(prev => ({ ...prev, [chapter.id]: e.target.value }))}
-                      onKeyDown={e => { if (e.key === "Enter") addLink(chapter); }}
-                      placeholder="Vidéo YouTube, playlist ou site web..."
-                      className="flex-1 text-xs"
-                      disabled={fetchingLinks[chapter.id]}
-                    />
-                    <Button
-                      onClick={() => addLink(chapter)}
-                      size="sm" variant="outline"
-                      disabled={fetchingLinks[chapter.id]}
-                    >
-                      {fetchingLinks[chapter.id]
-                        ? <span className="text-xs animate-pulse">...</span>
-                        : <Plus size={12} />
-                      }
-                    </Button>
-                  </div>
-                )}
-                {(chapter.youtube_links || []).map((link, i) => {
-                  const ytId = isYoutubeUrl(link) ? extractYoutubeVideoId(link) : null;
-                  return (
-                    <div key={i} className="space-y-1">
-                      {/* Barre URL — visible uniquement pour l'admin */}
-                      {(isAdmin && manageMode) && (
-                        <div className="flex items-center gap-1 p-1 bg-secondary/20 rounded text-xs">
-                          {ytId
-                            ? <Youtube size={12} className="text-destructive shrink-0" />
-                            : <ExternalLink size={12} className="text-primary shrink-0" />
-                          }
-                          <span className="truncate flex-1 text-muted-foreground">{link}</span>
-                          <button onClick={() => copyLink(link)}
-                            className="p-1 text-muted-foreground hover:text-foreground shrink-0" title="Copier le lien">
-                            <Copy size={12} />
-                          </button>
+              {/* Flèche ▼ → révèle les actions */}
+              <button
+                className="absolute top-3 right-3 p-1 rounded hover:bg-secondary/40 transition-colors"
+                onClick={e => { e.stopPropagation(); setActionsChapter(showActions ? null : chapter.id); }}
+              >
+                {showActions ? <ChevronUp size={14} className="text-muted-foreground" /> : <ChevronDown size={14} className="text-muted-foreground" />}
+              </button>
+
+              {/* Panneau actions (admin) */}
+              {showActions && (isAdmin && manageMode) && (
+                <div className="flex gap-2 px-4 pb-3 border-t border-border/40 pt-2" onClick={e => e.stopPropagation()}>
+                  <Button
+                    variant="ghost" size="sm"
+                    className="h-7 gap-1 text-xs text-muted-foreground hover:text-foreground"
+                    onClick={() => { setEditingChapterId(chapter.id); setEditingChapterTitle(chapter.title); setActionsChapter(null); }}
+                  >
+                    <Pencil size={12} />Renommer
+                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-destructive hover:text-destructive/80">
+                        <Trash2 size={12} />Supprimer
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Supprimer ce chapitre ?</AlertDialogTitle>
+                        <AlertDialogDescription>Tous les documents associés seront aussi supprimés.</AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Annuler</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => deleteChapter(chapter.id)}>Supprimer</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              )}
+
+              {/* Contenu étendu */}
+              {isExpanded && (
+                <div className="border-t border-border p-4 space-y-4">
+
+                  {/* ── Description ── */}
+                  {(isAdmin && manageMode) ? (
+                    <div>
+                      <Label className="text-xs">Description / Contenu</Label>
+                      <Textarea
+                        value={chapter.description || ""}
+                        onChange={e => setChapters(prev => prev.map(c =>
+                          c.id === chapter.id ? { ...c, description: e.target.value } : c
+                        ))}
+                        placeholder="Description du chapitre, cours, notes..."
+                        rows={4}
+                        className="mt-1"
+                      />
+                    </div>
+                  ) : (
+                    chapter.description && (
+                      <p className="text-sm text-muted-foreground whitespace-pre-wrap">{chapter.description}</p>
+                    )
+                  )}
+
+                  {/* ── Documents ── */}
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
+                      <FileText size={12} />Documents
+                    </p>
+                    <div className="flex gap-2 flex-wrap">
+                      <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
+                        <Upload size={14} className="text-primary" />
+                        <span className="text-muted-foreground">{uploading ? "..." : "Téléverser"}</span>
+                        <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
+                          accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
+                      </label>
+                      <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
+                        <Camera size={14} className="text-primary" />
+                        <span className="text-muted-foreground">Photo</span>
+                        <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
+                          accept="image/*" capture="environment" />
+                      </label>
+                    </div>
+                    {(chapterDocs[chapter.id] || []).map(doc => (
+                      <div key={doc.id} className="flex items-center justify-between p-2 bg-secondary/30 rounded-lg text-xs">
+                        <a href={doc.file_url} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center gap-1 hover:text-primary truncate flex-1">
+                          <span>{getFileIcon(doc.file_type)}</span>{doc.file_name}
+                        </a>
+                        {canDeleteDoc(doc) && (
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
-                              <button className="p-1 text-muted-foreground hover:text-destructive shrink-0">
-                                <X size={12} />
+                              <button className="text-destructive hover:text-destructive/80 p-1">
+                                <Trash2 size={12} />
                               </button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
-                              <AlertDialogHeader><AlertDialogTitle>Supprimer ce lien ?</AlertDialogTitle></AlertDialogHeader>
+                              <AlertDialogHeader><AlertDialogTitle>Supprimer ce document ?</AlertDialogTitle></AlertDialogHeader>
                               <AlertDialogFooter>
                                 <AlertDialogCancel>Annuler</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => removeLink(chapter, i)}>Supprimer</AlertDialogAction>
+                                <AlertDialogAction onClick={() => deleteDoc(doc.id, chapter.id)}>Supprimer</AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
+                        )}
+                      </div>
+                    ))}
+                    {(chapterDocs[chapter.id] || []).length === 0 && (
+                      <p className="text-xs text-muted-foreground italic">Aucun document</p>
+                    )}
+                  </div>
+
+                  {/* ── Liens & Vidéos ── */}
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
+                      <Youtube size={12} />Liens & Vidéos
+                    </p>
+                    {(isAdmin && manageMode) && (
+                      <div className="flex gap-2">
+                        <Input
+                          value={newLinkInputs[chapter.id] || ""}
+                          onChange={e => setNewLinkInputs(prev => ({ ...prev, [chapter.id]: e.target.value }))}
+                          onKeyDown={e => { if (e.key === "Enter") addLink(chapter); }}
+                          placeholder="Vidéo YouTube, playlist ou site web..."
+                          className="flex-1 text-xs"
+                          disabled={fetchingLinks[chapter.id]}
+                        />
+                        <Button onClick={() => addLink(chapter)} size="sm" variant="outline" disabled={fetchingLinks[chapter.id]}>
+                          {fetchingLinks[chapter.id] ? <span className="text-xs animate-pulse">...</span> : <Plus size={12} />}
+                        </Button>
+                      </div>
+                    )}
+                    {(chapter.youtube_links || []).map((link, i) => {
+                      const ytId = isYoutubeUrl(link) ? extractYoutubeVideoId(link) : null;
+                      return (
+                        <div key={i} className="space-y-1">
+                          {(isAdmin && manageMode) && (
+                            <div className="flex items-center gap-1 p-1 bg-secondary/20 rounded text-xs">
+                              {ytId ? <Youtube size={12} className="text-destructive shrink-0" /> : <ExternalLink size={12} className="text-primary shrink-0" />}
+                              <span className="truncate flex-1 text-muted-foreground">{link}</span>
+                              <button onClick={() => copyLink(link)} className="p-1 text-muted-foreground hover:text-foreground shrink-0" title="Copier">
+                                <Copy size={12} />
+                              </button>
+                              <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                  <button className="p-1 text-muted-foreground hover:text-destructive shrink-0"><X size={12} /></button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader><AlertDialogTitle>Supprimer ce lien ?</AlertDialogTitle></AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>Annuler</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => removeLink(chapter, i)}>Supprimer</AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                            </div>
+                          )}
+                          {ytId && <YoutubePlayer videoId={ytId} />}
+                          {!ytId && (
+                            <a href={link} target="_blank" rel="noopener noreferrer"
+                              className="flex items-center gap-1 text-xs text-primary hover:underline break-all">
+                              <ExternalLink size={11} />{link}
+                            </a>
+                          )}
                         </div>
-                      )}
-                      {/* YouTube → lecteur sécurisé (admin + élève) */}
-                      {ytId && <YoutubePlayer videoId={ytId} />}
-                      {/* Lien non-YouTube → cliquable pour tous */}
-                      {!ytId && (
-                        <a href={link} target="_blank" rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-xs text-primary hover:underline break-all">
-                          <ExternalLink size={11} />
-                          {link}
-                        </a>
-                      )}
-                    </div>
-                  );
-                })}
-                {(chapter.youtube_links || []).length === 0 && (
-                  <p className="text-xs text-muted-foreground italic">Aucun lien</p>
-                )}
-              </div>
+                      );
+                    })}
+                    {(chapter.youtube_links || []).length === 0 && (
+                      <p className="text-xs text-muted-foreground italic">Aucun lien</p>
+                    )}
+                  </div>
 
-              {/* ── Quiz ── */}
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground">🧠 Quiz</p>
-                {(isAdmin && manageMode) ? (
-                  <QuizManager subjectId={chapter.id} />
-                ) : (
-                  <QuizPlayer subjectId={chapter.id} />
-                )}
-              </div>
+                  {/* ── Quiz ── */}
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-muted-foreground">🧠 Quiz</p>
+                    {(isAdmin && manageMode) ? <QuizManager subjectId={chapter.id} /> : <QuizPlayer subjectId={chapter.id} />}
+                  </div>
 
-              {/* ── Bouton Sauvegarder (admin) ── */}
-              {(isAdmin && manageMode) && (
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button size="sm" className="bg-gradient-primary w-full">
-                      Sauvegarder le chapitre
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Sauvegarder les modifications ?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Les modifications du chapitre « {chapter.title} » seront enregistrées.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Annuler</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => updateChapter(chapter)}>
-                        Confirmer
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+                  {/* ── Sauvegarder (admin) ── */}
+                  {(isAdmin && manageMode) && (
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button size="sm" className="bg-gradient-primary w-full">Sauvegarder le chapitre</Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Sauvegarder les modifications ?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Les modifications du chapitre « {chapter.title} » seront enregistrées.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Annuler</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => updateChapter(chapter)}>Confirmer</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  )}
+                </div>
               )}
             </div>
-          )}
-        </div>
-      ))}
+          );
+        })}
       </div>
 
       {chapters.length === 0 && (

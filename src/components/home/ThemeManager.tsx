@@ -182,11 +182,10 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
             <div
               key={theme.id}
               className={cn(
-                "bg-card rounded-xl shadow-sm border-2 overflow-hidden transition-all relative",
+                "bg-card rounded-xl shadow-sm border-2 overflow-hidden transition-all relative min-h-[64px]",
                 isExpanded && "col-span-2"
               )}
               style={{ borderColor: color }}
-            >
               {/* Zone cliquable principale → ouvre le contenu */}
               <div
                 className="p-4 pr-10 cursor-pointer hover:bg-secondary/20 transition-colors min-h-[52px] flex items-center"
