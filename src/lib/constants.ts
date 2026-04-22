@@ -6,12 +6,29 @@ export const SCHOOL_LEVELS = [
   "Seconde", "Première", "Terminale",
 ] as const;
 
+export const MATERNELLE_LEVELS = ["PS", "MS", "GS"] as const;
 export const PRIMARY_LEVELS = ["CP", "CE1", "CE2", "CM1", "CM2"] as const;
 export const COLLEGE_LEVELS = ["6ème", "5ème", "4ème", "3ème"] as const;
 export const LYCEE_MAIN_LEVELS = ["Seconde", "Première", "Terminale"] as const;
 
 export const levelSubjectId = (subjectId: string, level: string): string =>
   `${subjectId}|${level}`;
+
+// Retourne les matières disponibles pour un niveau donné
+export const getSubjectsForLevel = (level: string) => {
+  // 13 matières communes : Français → Option 2 (sans Grand Oral)
+  const base = SUBJECTS_GENERAL.slice(0, 13);
+
+  if (level === "3ème") return [...base, SUBJECTS_GENERAL[13]]; // + Grand Oral
+
+  if (level === "Seconde")
+    return [...base, SUBJECTS_LYCEE[0], SUBJECTS_LYCEE[1], SUBJECTS_LYCEE[2]]; // + SNT, SES, Ens. sci.
+
+  if (level === "Première" || level === "Terminale")
+    return [...base, ...SUBJECTS_LYCEE.slice(2)]; // + Ens. sci. + toutes Spé (sans SNT/SES)
+
+  return base;
+};
 
 export const SUBJECTS_GENERAL = [
   { id: "francais", label: "Français", icon: "📖", color: "hsl(32, 80%, 50%)" },
