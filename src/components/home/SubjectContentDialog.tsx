@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
@@ -35,7 +34,6 @@ interface SubjectContentDialogProps {
 
 interface ContentData { id?: string; title: string; description: string; youtube_links: string[]; }
 interface DocFile { id: string; file_name: string; file_url: string; file_type: string; uploaded_by: string | null; }
-interface Profile { user_id: string; first_name: string; email: string; school_level: string; }
 
 const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, subjectIcon, subjectColor, manageMode }: SubjectContentDialogProps) => {
   const { user } = useAuth();
@@ -46,28 +44,17 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState("content");
-  const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [targetStudentId, setTargetStudentId] = useState<string>("all");
   const { scrollRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop();
 
   useEffect(() => {
     if (open) {
       fetchContent();
       fetchDocuments();
-      if (isAdmin && manageMode) fetchProfiles();
     }
-  }, [open, subjectId, targetStudentId]);
-
-  const fetchProfiles = async () => {
-    const { data } = await supabase.from("profiles").select("user_id, first_name, email, school_level").eq("is_approved", true);
-    if (data) setProfiles(data.filter(p => p.email !== ADMIN_EMAIL));
-  };
+  }, [open, subjectId]);
 
   const fetchContent = async () => {
-    const studentFilter = isAdmin && manageMode && targetStudentId !== "all" ? targetStudentId : null;
-    let q: any = supabase.from("subject_content").select("*").eq("subject_id", subjectId);
-    if (studentFilter) q = q.eq("target_student_id", studentFilter);
-    else if (isAdmin && manageMode) q = q.is("target_student_id", null);
+    let q: any = supabase.from("subject_content").select("*").eq("subject_id", subjectId).is("target_student_id", null);
     const { data } = await q.maybeSingle();
     if (data) {
       setContent({ id: data.id, title: data.title || "", description: data.description || "", youtube_links: data.youtube_links || [] });
@@ -77,29 +64,23 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
   };
 
   const fetchDocuments = async () => {
-    const studentFilter = isAdmin && manageMode && targetStudentId !== "all" ? targetStudentId : null;
-    let dq: any = supabase.from("subject_documents").select("*").eq("subject_id", subjectId).order("created_at", { ascending: false });
-    if (studentFilter) dq = dq.eq("target_student_id", studentFilter);
-    const { data } = await dq;
+    const { data } = await supabase.from("subject_documents").select("*").eq("subject_id", subjectId).is("target_student_id", null).order("created_at", { ascending: false });
     if (data) setDocuments(data);
   };
 
   const saveContent = async () => {
     setSaving(true);
     try {
-      const studentId = targetStudentId === "all" ? null : targetStudentId;
       if (content.id) {
         await supabase.from("subject_content").update({
           title: content.title, description: content.description,
           youtube_links: content.youtube_links, updated_at: new Date().toISOString(),
         }).eq("id", content.id);
       } else {
-        const insertData: any = {
+        const { data } = await supabase.from("subject_content").insert({
           subject_id: subjectId, title: content.title, description: content.description,
           youtube_links: content.youtube_links, created_by: user?.id,
-        };
-        if (studentId) insertData.target_student_id = studentId;
-        const { data } = await supabase.from("subject_content").insert(insertData).select().single();
+        }).select().single();
         if (data) setContent(prev => ({ ...prev, id: data.id }));
       }
       toast.success("Contenu sauvegardé !");
@@ -131,7 +112,6 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
         subject_id: subjectId, file_name: file.name, file_url: publicUrl,
         file_type: file.type, uploaded_by: user?.id,
       };
-      if (isAdmin && targetStudentId !== "all") insertData.target_student_id = targetStudentId;
       await supabase.from("subject_documents").insert(insertData);
       toast.success("Fichier téléversé !");
       fetchDocuments();
@@ -177,21 +157,7 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
 
         {isAdmin && manageMode ? (
           <div className="space-y-4">
-            {/* Student selector */}
-            <div className="bg-secondary/30 rounded-lg p-3">
-              <Label className="text-xs text-muted-foreground mb-2 block">Élève concerné</Label>
-              <Select value={targetStudentId} onValueChange={setTargetStudentId}>
-                <SelectTrigger><SelectValue placeholder="Choisir un élève" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tous les élèves (contenu général)</SelectItem>
-                  {profiles.map(p => (
-                    <SelectItem key={p.user_id} value={p.user_id}>{p.first_name} ({p.school_level})</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <ThemeManager subjectId={subjectId} targetStudentId={targetStudentId} manageMode={true} />
+            <ThemeManager subjectId={subjectId} manageMode={true} />
           </div>
         ) : (
           /* Student/Parent view */

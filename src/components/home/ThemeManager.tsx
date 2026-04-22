@@ -22,11 +22,10 @@ interface Theme {
 
 interface ThemeManagerProps {
   subjectId: string;
-  targetStudentId?: string;
   manageMode?: boolean;
 }
 
-const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerProps) => {
+const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const baseSubjectId = getBaseSubjectId(subjectId);
@@ -134,7 +133,6 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
     return (
       <ChapterManager
         subjectId={subjectId}
-        targetStudentId={targetStudentId}
         manageMode={manageMode}
       />
     );
@@ -264,8 +262,7 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
                 <div className="border-t border-border p-4 bg-secondary/10">
                   <ChapterManager
                     subjectId={subjectId}
-                    targetStudentId={targetStudentId}
-                    manageMode={manageMode}
+                                manageMode={manageMode}
                     themeId={theme.id}
                   />
                 </div>
@@ -297,8 +294,7 @@ const ThemeManager = ({ subjectId, targetStudentId, manageMode }: ThemeManagerPr
             <div className="border-t border-border p-3">
               <ChapterManager
                 subjectId={subjectId}
-                targetStudentId={targetStudentId}
-                manageMode={manageMode}
+                        manageMode={manageMode}
                 filterUnthemed
               />
             </div>
