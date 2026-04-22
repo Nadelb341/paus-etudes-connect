@@ -262,16 +262,17 @@ npm run test:watch   # Tests en watch mode
   - Nom, Prénom + Age
   - Niveau d'étude + Spé 1/2/3
   - Situation particulière (dys...)
-  - Tableau 10 matières : Matière, Prof, Moy. 1er trim (Vert/Jaune/Rouge), Moy. 2ème trim, Préférence (1-10)
+  - Tableau 10 matières : Matière, Prof, Moy. 1er/2ème trim (Vert/Jaune/Rouge + note /20 optionnelle), Préférence (1-10)
   - Pour les 3ème : sujet de l'oral
-  - Est-il autonome : Oui / Non
-  - Objectif : Faire les devoirs / Remise à niveau / Les 2 / Autre
-  - Fréquences : 1x/semaine, 2x/semaine, Plus de 2 jours, Occasionnellement (avec jours)
+  - **Caractéristiques de l'élève** : liste dynamique (ajouter/modifier/supprimer), chaque item a un libellé + Oui/Non
+  - Objectif : Faire les devoirs / Remise à niveau / Les 2 / Autre (case à cocher + champ texte inline)
+  - **Fréquences** : boutons radio (1 seul choix), jours en menus déroulants (Lundi→Dimanche), sous-champs conditionnels
   - Note Zoom incluse
   - Tarifs : Primaire 10€ / Collège 13€ / Lycée 15€ (cases à cocher)
   - Observations générales (zone texte libre)
 - Impression : bouton imprimante → HTML stylé dans une nouvelle fenêtre → window.print()
 - Pré-remplissage automatique : prénom, âge (calculé depuis birth_date), niveau depuis le profil
+- Compatibilité ascendante : conversion automatique des anciens bilans (freq booleans → freq_type, est_autonome → caracteristiques)
 
 ## Suppression d'un eleve (Dashboard admin)
 - Bouton "Supprimer cet eleve" (rouge) dans la carte "Modifier l'eleve"
@@ -335,6 +336,14 @@ Zones couvertes :
 - `ParentHome.tsx` — dialog versements + dialog carte enfant
 
 Pattern dialog : DialogContent en `p-0 overflow-hidden`, inner div avec ref + onScroll, bouton hors du div scrollable.
+
+## Règle UX — Touche Entrée pour valider (session 2026-04-23)
+
+Sur TOUS les champs `<Input>`, ajouter `onKeyDown` pour qu'Enter valide et passe au suivant :
+```tsx
+onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); (e.target as HTMLInputElement).blur(); } }}
+```
+S'applique à tous les projets React (Paus'Étude, Dinislam, Agenda Nadia, etc.)
 
 ## Regle UX - Confirmation avant suppression
 
