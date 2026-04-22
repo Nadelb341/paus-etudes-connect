@@ -435,20 +435,22 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
                     <p className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
                       <FileText size={12} />Documents
                     </p>
-                    <div className="flex gap-2 flex-wrap">
-                      <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
-                        <Upload size={14} className="text-primary" />
-                        <span className="text-muted-foreground">{uploading ? "..." : "Téléverser"}</span>
-                        <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
-                          accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
-                      </label>
-                      <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
-                        <Camera size={14} className="text-primary" />
-                        <span className="text-muted-foreground">Photo</span>
-                        <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
-                          accept="image/*" capture="environment" />
-                      </label>
-                    </div>
+                    {(isAdmin && manageMode) && (
+                      <div className="flex gap-2 flex-wrap">
+                        <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
+                          <Upload size={14} className="text-primary" />
+                          <span className="text-muted-foreground">{uploading ? "..." : "Téléverser"}</span>
+                          <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
+                            accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp" />
+                        </label>
+                        <label className="flex items-center gap-1 px-3 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors text-xs">
+                          <Camera size={14} className="text-primary" />
+                          <span className="text-muted-foreground">Photo</span>
+                          <input type="file" className="hidden" onChange={e => handleFileUpload(chapter.id, e)} disabled={uploading}
+                            accept="image/*" capture="environment" />
+                        </label>
+                      </div>
+                    )}
                     {(chapterDocs[chapter.id] || []).map(doc => (
                       <div key={doc.id} className="flex items-center justify-between p-2 bg-secondary/30 rounded-lg text-xs">
                         <a href={doc.file_url} target="_blank" rel="noopener noreferrer"
