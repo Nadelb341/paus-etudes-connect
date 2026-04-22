@@ -140,7 +140,21 @@ const QuizManager = ({ subjectId }: { subjectId: string }) => {
             <div key={qIdx} className="p-4 border border-border rounded-lg space-y-3 bg-secondary/20">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted-foreground">Question {qIdx + 1}</span>
-                <Button variant="ghost" size="icon" onClick={() => removeQuestion(qIdx)}><Trash2 size={12} className="text-destructive" /></Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="ghost" size="icon"><Trash2 size={12} className="text-destructive" /></Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Supprimer cette question ?</AlertDialogTitle>
+                      <AlertDialogDescription>La question {qIdx + 1} sera retirée du quiz.</AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Annuler</AlertDialogCancel>
+                      <AlertDialogAction onClick={() => removeQuestion(qIdx)}>Supprimer</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
               <Textarea value={q.question} onChange={(e) => updateQuestion(qIdx, "question", e.target.value)} placeholder="Question..." rows={2} />
               <div className="grid grid-cols-2 gap-2">

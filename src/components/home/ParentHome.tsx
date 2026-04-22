@@ -11,6 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -159,7 +163,6 @@ const ParentHome = () => {
   };
 
   const deleteChildCard = async (cardId: string) => {
-    if (!confirm("Supprimer cette carte enfant ?")) return;
     await supabase.from("parent_child_cards").delete().eq("id", cardId);
     toast.success("Carte supprimée");
     setSelectedCard(null);
@@ -421,9 +424,23 @@ const ParentHome = () => {
                         {entry.note && <p className="text-muted-foreground italic mt-0.5">{entry.note}</p>}
                       </div>
                       {isAdmin && (
-                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => deletePaymentEntry(i)}>
-                          <Trash2 size={12} className="text-destructive" />
-                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-6 w-6">
+                              <Trash2 size={12} className="text-destructive" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Supprimer ce versement ?</AlertDialogTitle>
+                              <AlertDialogDescription>Le versement de {formatEur(entry.amount)} sera retiré définitivement.</AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Annuler</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => deletePaymentEntry(i)}>Supprimer</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       )}
                     </div>
                   ))}
@@ -513,9 +530,23 @@ const ParentHome = () => {
             <DialogTitle className="flex items-center gap-2">
               <span className="text-2xl">👧</span> {selectedCard?.child_name}
               {isAdmin && selectedCard && (
-                <Button variant="ghost" size="icon" className="ml-auto" onClick={() => deleteChildCard(selectedCard.id)}>
-                  <Trash2 size={16} className="text-destructive" />
-                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="ghost" size="icon" className="ml-auto">
+                      <Trash2 size={16} className="text-destructive" />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Supprimer cette carte enfant ?</AlertDialogTitle>
+                      <AlertDialogDescription>La carte de {selectedCard.child_name} sera définitivement supprimée.</AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Annuler</AlertDialogCancel>
+                      <AlertDialogAction onClick={() => deleteChildCard(selectedCard.id)}>Supprimer</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               )}
             </DialogTitle>
           </DialogHeader>
