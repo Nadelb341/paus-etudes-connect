@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Printer, Save, Plus, Trash2 } from "lucide-react";
+import { Printer, Save, Plus, Trash2, Pencil, Check, X } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
@@ -52,8 +52,7 @@ interface BilanData {
   objectif_devoirs: boolean;
   objectif_remise_niveau: boolean;
   objectif_les2: boolean;
-  objectif_autre_checked: boolean;
-  objectif_autre: string;
+  objectif_autres: string[];
   freq_type: string;
   freq_1fois_jour: string;
   freq_2fois_j1: string;
@@ -92,7 +91,7 @@ const defaultBilan = (student: StudentProfile): BilanData => ({
   sujet_oral: "",
   caracteristiques: [{ label: "Est-il autonome ?", value: "" }],
   objectif_devoirs: false, objectif_remise_niveau: false,
-  objectif_les2: false, objectif_autre_checked: false, objectif_autre: "",
+  objectif_les2: false, objectif_autres: [],
   freq_type: "",
   freq_1fois_jour: "",
   freq_2fois_j1: "", freq_2fois_j2: "",
@@ -115,6 +114,9 @@ const StudentBilanDialog = ({ open, onOpenChange, student }: StudentBilanDialogP
   const { scrollRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop();
   const [bilan, setBilan] = useState<BilanData>(() => defaultBilan(student));
   const [saving, setSaving] = useState(false);
+  const [newObjectifAutre, setNewObjectifAutre] = useState("");
+  const [editingObjectifIdx, setEditingObjectifIdx] = useState<number | null>(null);
+  const [editingObjectifText, setEditingObjectifText] = useState("");
 
   useEffect(() => {
     if (open) loadBilan();
@@ -144,9 +146,12 @@ const StudentBilanDialog = ({ open, onOpenChange, student }: StudentBilanDialogP
         else if (l.freq_1fois) loaded.freq_type = "1fois";
         else loaded.freq_type = "";
       }
-      // Compat : objectif_autre_checked
-      if (loaded.objectif_autre_checked === undefined) {
-        loaded.objectif_autre_checked = !!(loaded as any).objectif_autre;
+      // Compat : objectif_autre_checked + objectif_autre → objectif_autres[]
+      if (!loaded.objectif_autres) {
+        const old = (loaded as any);
+        loaded.objectif_autres = (old.objectif_autre_checked && old.objectif_autre)
+          ? [old.objectif_autre]
+          : [];
       }
       setBilan(loaded);
     } else {
@@ -174,6 +179,24 @@ const StudentBilanDialog = ({ open, onOpenChange, student }: StudentBilanDialogP
 
   const removeCarac = (idx: number) =>
     setBilan(prev => ({ ...prev, caracteristiques: prev.caracteristiques.filter((_, i) => i !== idx) }));
+
+  const addObjectifAutre = () => {
+    if (!newObjectifAutre.trim()) return;
+    setBilan(prev => ({ ...prev, objectif_autres: [...prev.objectif_autres, newObjectifAutre.trim()] }));
+    setNewObjectifAutre("");
+  };
+
+  const removeObjectifAutre = (idx: number) =>
+    setBilan(prev => ({ ...prev, objectif_autres: prev.objectif_autres.filter((_, i) => i !== idx) }));
+
+  const saveObjectifAutre = (idx: number) => {
+    if (!editingObjectifText.trim()) return;
+    setBilan(prev => ({
+      ...prev,
+      objectif_autres: prev.objectif_autres.map((item, i) => i === idx ? editingObjectifText.trim() : item),
+    }));
+    setEditingObjectifIdx(null);
+  };
 
   const enterNext = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") { e.preventDefault(); (e.target as HTMLInputElement).blur(); }
@@ -245,7 +268,7 @@ ${bilan.caracteristiques.map(c => `<p class="indent">${checked(c.value === "oui"
 <p><span class="red">Objectif de l'élève et/ou du parent</span> :
 Faire les devoirs en cours${checked(bilan.objectif_devoirs)} -
 Remise à niveau${checked(bilan.objectif_remise_niveau)} -
-Les 2${checked(bilan.objectif_les2)}${bilan.objectif_autre_checked ? ` - Autre : ${bilan.objectif_autre}` : ""}</p>
+Les 2${checked(bilan.objectif_les2)}${bilan.objectif_autres.length > 0 ? " - " + bilan.objectif_autres.join(" - ") : ""}</p>
 
 <p class="section"><span class="red">Quelles fréquences souhaitent le parent</span> :</p>
 <p class="indent">${checked(bilan.freq_type === "1fois")} <strong>1 fois par semaine</strong> : Jour : ${bilan.freq_1fois_jour}</p>
@@ -485,20 +508,58 @@ Les 2${checked(bilan.objectif_les2)}${bilan.objectif_autre_checked ? ` - Autre :
               <Checkbox checked={bilan.objectif_les2} onCheckedChange={v => set("objectif_les2", !!v)} />
               <span className="text-orange-600 font-medium">Les 2</span>
             </label>
-            <label className="flex items-center gap-1.5 cursor-pointer">
-              <Checkbox checked={bilan.objectif_autre_checked} onCheckedChange={v => set("objectif_autre_checked", !!v)} />
-              <span className="text-orange-600 font-medium">Autre</span>
-            </label>
-            {bilan.objectif_autre_checked && (
-              <Input
-                value={bilan.objectif_autre}
-                onChange={e => set("objectif_autre", e.target.value)}
-                onKeyDown={enterNext}
-                className="h-7 text-sm w-40"
-                placeholder="Préciser..."
-                autoFocus
-              />
-            )}
+            {bilan.objectif_autres.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-1">
+                {editingObjectifIdx === idx ? (
+                  <>
+                    <Input
+                      value={editingObjectifText}
+                      onChange={e => setEditingObjectifText(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === "Enter") { e.preventDefault(); saveObjectifAutre(idx); }
+                        if (e.key === "Escape") setEditingObjectifIdx(null);
+                      }}
+                      className="h-7 text-sm w-36"
+                      autoFocus
+                    />
+                    <button onClick={() => saveObjectifAutre(idx)} className="p-1 text-green-600 hover:text-green-700">
+                      <Check size={13} />
+                    </button>
+                    <button onClick={() => setEditingObjectifIdx(null)} className="p-1 text-muted-foreground hover:text-foreground">
+                      <X size={13} />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-orange-600 font-medium">{item}</span>
+                    <button onClick={() => { setEditingObjectifIdx(idx); setEditingObjectifText(item); }} className="p-1 text-muted-foreground hover:text-foreground">
+                      <Pencil size={11} />
+                    </button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <button className="p-1 text-destructive hover:text-destructive/80"><Trash2 size={11} /></button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader><AlertDialogTitle>Supprimer cet objectif ?</AlertDialogTitle></AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Annuler</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => removeObjectifAutre(idx)}>Supprimer</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 ml-2 mt-1">
+            <Input
+              value={newObjectifAutre}
+              onChange={e => setNewObjectifAutre(e.target.value)}
+              onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); addObjectifAutre(); } }}
+              className="h-7 text-sm w-48"
+              placeholder="+ Autre (Entrée pour ajouter)..."
+            />
           </div>
 
           {/* ── Fréquences ── */}
