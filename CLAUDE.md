@@ -236,6 +236,8 @@ npm run test:watch   # Tests en watch mode
 - 20260412000002 : fonction SQL admin_delete_user (SECURITY DEFINER, supprime auth.users)
 - 20260422000001 : colonne bilan_data (JSONB) sur profiles (fiche bilan élève)
 - 20260423000001 : colonne target_student_ids (UUID[]) sur subject_chapters (accès par élève)
+- 20260423000002 : RLS subject_chapters mise à jour (utilise target_student_ids au lieu de target_student_id)
+- 20260423000003 : fonction SQL get_admin_user_id() SECURITY DEFINER (retourne user_id admin sans exposer le profil)
 
 ## RDV a venir (AppointmentsCard) — champ travail prevu
 - Champ planned_work (TEXT) ajoute sur appointments
@@ -330,6 +332,23 @@ npm run test:watch   # Tests en watch mode
 - Collaborateur GitHub : badmust75-coder a acces en ecriture au repo
 - Projet Supabase gere par Lovable (pas accessible directement via compte Supabase perso)
 - Pour deployer des Edge Functions : passer par le chat Lovable (pas le CLI Supabase)
+
+## Vue élève — Dialog matière (màj session 2026-04-23, complétée)
+
+- Côté élève : **liste plate des chapitres autorisés** (ChapterManager direct, sans ThemeManager)
+- Seuls les chapitres où l'élève est dans `target_student_ids` sont visibles
+- Boutons Téléverser/Photo masqués côté élève (lecture seule uniquement)
+- Section Commentaires affichée sous les chapitres
+- Commentaire élève → insertion automatique dans `messages` via RPC `get_admin_user_id()` (SECURITY DEFINER, contourne la RLS pour lire l'user_id admin)
+- Le subject_id composite utilise TOUJOURS l'`id` sans accent depuis constants.ts (ex: `"mathematique|3ème"`)
+- Bug corrigé : doublon de chapitres causé par un fetch avec subjectId vide avant que userLevel soit chargé — le clic est bloqué si `userLevel` n'est pas encore disponible
+- ChapterManager vide son état avant chaque fetch pour éviter l'accumulation
+
+## Niveau scolaire élève — source de vérité (màj session 2026-04-23)
+
+- `userLevel` dans SubjectsGrid : initialisé à `""`, TOUJOURS chargé depuis `profiles.school_level` (jamais depuis `user_metadata`)
+- Si l'admin change le niveau d'un élève dans le Dashboard, le changement est effectif dès la prochaine ouverture de la grille des matières
+- RPC SQL : `get_admin_user_id()` — retourne l'user_id de l'admin sans exposer son profil complet
 
 ## Vue élève — Dialog matière (màj session 2026-04-23)
 
