@@ -276,7 +276,7 @@ npm run test:watch   # Tests en watch mode
   - Tableau 10 matières : Matière, Prof, Moy. 1er/2ème trim (Vert/Jaune/Rouge + note /20 optionnelle), Préférence (1-10)
   - Pour les 3ème : sujet de l'oral
   - **Caractéristiques de l'élève** : liste dynamique (ajouter/modifier/supprimer), chaque item a un libellé + Oui/Non
-  - Objectif : Faire les devoirs / Remise à niveau / Les 2 / Autre (case à cocher + champ texte inline)
+  - Objectif : 3 options fixes (Faire les devoirs / Remise à niveau / Les 2) + **liste dynamique "Autre"** : saisie + Entrée ajoute un item ; chaque item a un bouton crayon (modifier) et poubelle (supprimer). Stocké dans `objectif_autres: string[]` (anciens bilans convertis automatiquement au chargement).
   - **Fréquences** : boutons radio (1 seul choix), jours en menus déroulants (Lundi→Dimanche), sous-champs conditionnels
   - Note Zoom incluse
   - Tarifs : Primaire 10€ / Collège 13€ / Lycée 15€ (cases à cocher)
@@ -349,16 +349,6 @@ npm run test:watch   # Tests en watch mode
 - `userLevel` dans SubjectsGrid : initialisé à `""`, TOUJOURS chargé depuis `profiles.school_level` (jamais depuis `user_metadata`)
 - Si l'admin change le niveau d'un élève dans le Dashboard, le changement est effectif dès la prochaine ouverture de la grille des matières
 - RPC SQL : `get_admin_user_id()` — retourne l'user_id de l'admin sans exposer son profil complet
-
-## Vue élève — Dialog matière (màj session 2026-04-23)
-
-- Côté élève/parent, `SubjectContentDialog` affiche **uniquement la section Commentaires** (plus de docs, vidéos, chapitres, quiz)
-- L'admin en mode gestion voit toujours le `ThemeManager` complet
-- Quand un élève poste un commentaire, il est aussi inséré dans la table `messages` :
-  - `recipient_ids` = `[user_id de l'admin]` (récupéré via `profiles.eq("email", ADMIN_EMAIL)`)
-  - `subject` = `💬 Commentaire — {nom de la matière}`
-  - Permet à l'admin de voir le commentaire dans sa messagerie avec le contexte de la matière
-- `SubjectComments` accepte un prop optionnel `subjectLabel` utilisé dans le sujet du message
 
 ## Accès chapitres par élève (màj session 2026-04-23)
 
