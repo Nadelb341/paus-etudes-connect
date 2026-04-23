@@ -95,6 +95,7 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
   };
 
   const fetchChapters = async () => {
+    setChapters([]);
     let q = supabase.from("subject_chapters").select("*").eq("subject_id", subjectId).order("order_index");
     // Élève : ne voir que les chapitres où il est explicitement listé
     if (!isAdmin && user) {

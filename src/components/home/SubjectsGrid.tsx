@@ -81,8 +81,10 @@ const SubjectsGrid = () => {
   };
 
   // Élève : clic sur une matière → ouvre le contenu de son niveau
+  // On attend que userLevel soit chargé depuis la BDD avant d'ouvrir
   const handleStudentSubjectClick = (subject: Subject) => {
-    openContentDialog(subject, userLevel || null, false);
+    if (!userLevel) return;
+    openContentDialog(subject, userLevel, false);
   };
 
   const compositeSubjectId = selectedSubject
