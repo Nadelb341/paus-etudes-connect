@@ -8,6 +8,12 @@
 ```
 🔴 FIN DE LA COPIE
 
+## 🚫 Pas de chevauchement d'icônes / boutons
+Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
+- Tous les boutons d'action doivent être **frères directs** dans le même conteneur flex
+- Ne jamais placer un bouton dans un enfant flex si un autre bouton d'action est dans le parent
+- Tester avec un titre très long à chaque nouveau composant liste/carte
+
 ## 📱 Responsive — téléphone / tablette / ordinateur
 Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
 - **Téléphone** (base) : 1 colonne, navigation compacte, devoirs/quiz lisibles sur petit écran
