@@ -8,6 +8,12 @@
 ```
 🔴 FIN DE LA COPIE
 
+## 📦 Pas de débordement de texte hors de son conteneur
+Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
+- `overflow-hidden` sur tout conteneur de liste/carte
+- `[overflow-wrap:anywhere]` sur les spans de texte — coupe même les longues chaînes sans espaces
+- `min-w-0` sur tout élément `flex-1` dans un flex container
+
 ## 🚫 Pas de chevauchement d'icônes / boutons
 Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
 - Tous les boutons d'action doivent être **frères directs** dans le même conteneur flex
