@@ -8,6 +8,13 @@
 ```
 🔴 FIN DE LA COPIE
 
+## 📱 Responsive — téléphone / tablette / ordinateur
+Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
+- **Téléphone** (base) : 1 colonne, navigation compacte, devoirs/quiz lisibles sur petit écran
+- **Tablette** (`md:` ≥ 768px) : 2 colonnes pour les listes devoirs/cours, dialogs centrés
+- **Ordinateur** (`lg:` ≥ 1024px) : sidebar fixe, tableau de bord 3 colonnes, layout spacieux
+- Toute nouvelle page ou composant doit avoir les 3 niveaux testés
+
 ## Description
 Plateforme educative pour le soutien scolaire. Creee par Nadia (nad341@live.fr).
 Gestion des devoirs, cours, quiz, RDV de tutorat, messagerie enrichie et suivi de paiement.
