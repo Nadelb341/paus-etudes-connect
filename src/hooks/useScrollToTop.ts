@@ -11,7 +11,7 @@ export function useScrollToTop() {
     if (!el) return;
     const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
     setShowTop(el.scrollTop > 200);
-    setShowBottom(el.scrollTop < 200 && !atBottom);
+    setShowBottom(!atBottom);
   }, []);
 
   const scrollToTop = useCallback(() => {
@@ -38,7 +38,7 @@ export function useWindowScrollToTop() {
     const onScroll = () => {
       const atBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight - 20;
       setShowTop(window.scrollY > 200);
-      setShowBottom(window.scrollY < 200 && !atBottom);
+      setShowBottom(!atBottom);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();

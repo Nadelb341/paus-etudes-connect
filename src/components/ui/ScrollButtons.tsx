@@ -16,35 +16,31 @@ export function ScrollButtons({
   onScrollBottom,
   position = "absolute",
 }: ScrollButtonsProps) {
-  const base = cn(
-    "w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95",
-    "bg-primary text-primary-foreground hover:bg-primary/90",
-    position === "fixed" ? "fixed right-4 z-50" : "absolute right-4 z-10"
-  );
-
   if (!showTop && !showBottom) return null;
 
+  const containerClass = position === "fixed"
+    ? "fixed bottom-20 right-4 z-50 flex flex-col gap-2"
+    : "absolute bottom-4 right-4 z-10 flex flex-col gap-2";
+
+  const btnClass = cn(
+    "w-10 h-10 rounded-full shadow-lg flex items-center justify-center",
+    "bg-primary text-primary-foreground hover:bg-primary/90",
+    "transition-all duration-200 active:scale-95"
+  );
+
   return (
-    <>
+    <div className={containerClass}>
       {showTop && (
-        <button
-          onClick={onScrollTop}
-          className={cn(base, position === "fixed" ? "bottom-20" : "bottom-4")}
-          aria-label="Retour en haut"
-        >
+        <button onClick={onScrollTop} className={btnClass} aria-label="Retour en haut">
           <ArrowUp className="h-5 w-5" />
         </button>
       )}
       {showBottom && (
-        <button
-          onClick={onScrollBottom}
-          className={cn(base, position === "fixed" ? "bottom-20" : "bottom-4")}
-          aria-label="Aller en bas"
-        >
+        <button onClick={onScrollBottom} className={btnClass} aria-label="Aller en bas">
           <ArrowDown className="h-5 w-5" />
         </button>
       )}
-    </>
+    </div>
   );
 }
 
