@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
-import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
+import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminView } from "@/hooks/useAdminView";
 import { ADMIN_EMAIL } from "@/lib/constants";
@@ -21,7 +21,7 @@ interface Reminder {
 const Index = () => {
   const { user } = useAuth();
   const { viewMode } = useAdminView();
-  const { showScrollTop, handleScroll, scrollToTop } = useWindowScrollToTop();
+  const { showTop, showBottom, scrollToTop, scrollToBottom } = useWindowScrollToTop();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const firstName = user?.user_metadata?.first_name || "Élève";
   const userStatus = user?.user_metadata?.status;
@@ -126,10 +126,6 @@ const Index = () => {
     return () => { supabase.removeChannel(channel); };
   }, [user, isAdmin]);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -176,7 +172,7 @@ const Index = () => {
           </>
         )}
       </main>
-      <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} position="fixed" />
+      <ScrollButtons showTop={showTop} showBottom={showBottom} onScrollTop={scrollToTop} onScrollBottom={scrollToBottom} position="fixed" />
     </div>
   );
 };

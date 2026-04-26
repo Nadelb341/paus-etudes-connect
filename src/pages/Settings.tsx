@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import AppHeader from "@/components/layout/AppHeader";
+import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
+import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,6 +19,7 @@ import {
 
 const SettingsPage = () => {
   const { user, signOut } = useAuth();
+  const { showTop, showBottom, scrollToTop, scrollToBottom } = useWindowScrollToTop();
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(document.documentElement.classList.contains("dark"));
   const [showPasswordForm, setShowPasswordForm] = useState(false);
@@ -222,6 +225,7 @@ const SettingsPage = () => {
           </AlertDialogContent>
         </AlertDialog>
       </main>
+      <ScrollButtons showTop={showTop} showBottom={showBottom} onScrollTop={scrollToTop} onScrollBottom={scrollToBottom} position="fixed" />
     </div>
   );
 };

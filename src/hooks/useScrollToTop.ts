@@ -1,31 +1,56 @@
-import { useRef, useState, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
-export const useScrollToTop = (threshold = 200) => {
+// Pour les conteneurs / dialogs (ref + onScroll)
+export function useScrollToTop() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showTop, setShowTop] = useState(false);
+  const [showBottom, setShowBottom] = useState(false);
 
   const handleScroll = useCallback(() => {
-    setShowScrollTop((scrollRef.current?.scrollTop ?? 0) > threshold);
-  }, [threshold]);
+    const el = scrollRef.current;
+    if (!el) return;
+    const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
+    setShowTop(el.scrollTop > 200);
+    setShowBottom(el.scrollTop < 200 && !atBottom);
+  }, []);
 
   const scrollToTop = useCallback(() => {
     scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  return { scrollRef, showScrollTop, handleScroll, scrollToTop };
-};
-
-// Pour le scroll de la fenêtre (pages entières)
-export const useWindowScrollToTop = (threshold = 200) => {
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    setShowScrollTop(window.scrollY > threshold);
-  }, [threshold]);
-
-  const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToBottom = useCallback(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, []);
 
-  return { showScrollTop, handleScroll, scrollToTop };
-};
+  // Compat ancien nom
+  const showScrollTop = showTop;
+
+  return { scrollRef, handleScroll, showTop, showBottom, showScrollTop, scrollToTop, scrollToBottom };
+}
+
+// Pour les pages entières (window.scroll)
+export function useWindowScrollToTop() {
+  const [showTop, setShowTop] = useState(false);
+  const [showBottom, setShowBottom] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const atBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight - 20;
+      setShowTop(window.scrollY > 200);
+      setShowBottom(window.scrollY < 200 && !atBottom);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = useCallback(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
+  const scrollToBottom = useCallback(() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }), []);
+
+  // Compat ancien nom
+  const showScrollTop = showTop;
+  const handleScroll = () => {};
+
+  return { showTop, showBottom, showScrollTop, handleScroll, scrollToTop, scrollToBottom };
+}

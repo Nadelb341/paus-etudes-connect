@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import AppHeader from "@/components/layout/AppHeader";
+import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
+import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
@@ -56,6 +58,7 @@ const getHourlyRate = (level: string, rates?: HourlyRates): number => {
 const DashboardPage = () => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
+  const { showTop, showBottom, scrollToTop, scrollToBottom } = useWindowScrollToTop();
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [pendingProfiles, setPendingProfiles] = useState<Profile[]>([]);
@@ -1029,6 +1032,7 @@ const DashboardPage = () => {
           />
         )}
       </main>
+      <ScrollButtons showTop={showTop} showBottom={showBottom} onScrollTop={scrollToTop} onScrollBottom={scrollToBottom} position="fixed" />
     </div>
   );
 };
