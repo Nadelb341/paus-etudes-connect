@@ -378,20 +378,22 @@ npm run test:watch   # Tests en watch mode
 - Icône 🔒 sur les chapitres restreints (admin uniquement)
 - `subjectId` composite `{subjectId}|{niveau}` → niveau extrait via `split("|")[1]` pour filtrer les élèves par niveau scolaire
 
-## Bouton retour en haut (règle globale — màj session 2026-04-22)
+## ⬆️⬇️ Boutons scroll haut/bas — règle acquise (màj 2026-04-26)
 
-Présent dans toute zone scrollable. Composants réutilisables :
-- `src/hooks/useScrollToTop.ts` → `useScrollToTop()` (conteneur/dialog) et `useWindowScrollToTop()` (page fenêtre)
-- `src/components/ui/ScrollToTopButton.tsx` → `<ScrollToTopButton show={...} onClick={...} position="absolute|fixed" />`
+Présents dans **toutes** les zones scrollables.
 
-Zones couvertes :
-- `Index.tsx` (page principale) — `position="fixed"`, window scroll
-- `SubjectContentDialog.tsx` — dialog matière
-- `LevelSubjectsDialog.tsx` — dialog niveaux
-- `QuickNotes.tsx` — dialog notes
-- `ParentHome.tsx` — dialog versements + dialog carte enfant
+**Composants réutilisables :**
+- `src/hooks/useScrollToTop.ts` → `useScrollToTop()` (dialog/conteneur) et `useWindowScrollToTop()` (page fenêtre)
+- `src/components/ui/ScrollButtons.tsx` → `<ScrollButtons showTop showBottom onScrollTop onScrollBottom position="absolute|fixed" />`
+- `src/components/ui/ScrollToTopButton.tsx` — ancien composant (⬆️ seulement), gardé pour compat
 
-Pattern dialog : DialogContent en `p-0 overflow-hidden`, inner div avec ref + onScroll, bouton hors du div scrollable.
+**Zones couvertes (pages — window scroll) :**
+- `Index.tsx`, `Dashboard.tsx`, `Settings.tsx` : `useWindowScrollToTop` + `ScrollButtons position="fixed"`
+
+**Zones couvertes (dialogs — container scroll) :**
+- `SubjectContentDialog.tsx`, `LevelSubjectsDialog.tsx`, `QuickNotes.tsx`, `ParentHome.tsx`
+
+**Pattern dialog :** DialogContent en `p-0 overflow-hidden`, inner div avec ref + onScroll, boutons hors du div scrollable.
 
 ## Règle UX — Touche Entrée pour valider (session 2026-04-23)
 
