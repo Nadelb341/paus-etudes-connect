@@ -260,7 +260,7 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
         <h4 className="font-semibold text-sm flex items-center gap-2">📂 Chapitres</h4>
       )}
 
-      {(isAdmin && manageMode) && (
+      {(isAdmin && manageMode) && !expandedChapter && (
         <div className="flex gap-2">
           <Input
             value={newChapterTitle}
@@ -274,7 +274,7 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
       )}
 
       <div className="grid grid-cols-2 gap-3">
-        {chapters.map((chapter, idx) => {
+        {chapters.filter(chapter => !expandedChapter || chapter.id === expandedChapter).map((chapter, idx) => {
           const color = CHAPTER_PALETTE[idx % CHAPTER_PALETTE.length];
           const isExpanded = expandedChapter === chapter.id;
           const showActions = actionsChapter === chapter.id;
