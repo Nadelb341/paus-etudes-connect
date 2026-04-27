@@ -155,8 +155,8 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
         )}
       </div>
 
-      {/* Créer un nouveau thème (admin) */}
-      {(isAdmin && manageMode) && (
+      {/* Créer un nouveau thème (admin) — masqué quand un thème est ouvert */}
+      {(isAdmin && manageMode) && !expandedTheme && (
         <div className="flex gap-2">
           <Input
             value={newThemeTitle}
@@ -171,7 +171,7 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
 
       {/* Grille des thèmes — 2 par ligne */}
       <div className="grid grid-cols-2 gap-3">
-        {themes.map((theme, idx) => {
+        {themes.filter(theme => !expandedTheme || theme.id === expandedTheme).map((theme, idx) => {
           const color = THEME_PALETTE[idx % THEME_PALETTE.length];
           const isExpanded = expandedTheme === theme.id;
           const showActions = actionsTheme === theme.id;
@@ -280,8 +280,8 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
         </p>
       )}
 
-      {/* Chapitres sans thème (admin uniquement ou si des chapitres sans thème existent) */}
-      {(isAdmin && manageMode) && themes.length > 0 && (
+      {/* Chapitres sans thème — masqué quand un thème est ouvert */}
+      {(isAdmin && manageMode) && themes.length > 0 && !expandedTheme && (
         <div className="border border-dashed border-border rounded-lg overflow-hidden opacity-70">
           <button
             onClick={() => setShowUnthemed(!showUnthemed)}
