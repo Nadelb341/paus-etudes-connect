@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
+import ThemeManager from "./ThemeManager";
 import ChapterManager from "./ChapterManager";
 import SubjectComments from "./SubjectComments";
 
@@ -38,7 +39,7 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
 
           {isAdmin && manageMode ? (
             <div className="space-y-4">
-              <ChapterManager subjectId={subjectId} manageMode={true} />
+              <ThemeManager subjectId={subjectId} manageMode={true} />
             </div>
           ) : (
             <div className="space-y-6">
