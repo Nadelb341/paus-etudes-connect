@@ -378,6 +378,29 @@ npm run test:watch   # Tests en watch mode
 - Icône 🔒 sur les chapitres restreints (admin uniquement)
 - `subjectId` composite `{subjectId}|{niveau}` → niveau extrait via `split("|")[1]` pour filtrer les élèves par niveau scolaire
 
+## Chapitres Mathématiques 5ème — insérés via SQL (session 2026-04-27/28)
+
+Tous les chapitres des 7 grands thèmes de Mathématiques 5ème sont insérés dans `subject_chapters` avec `subject_id = 'mathematique|5ème'` et leur `theme_id` respectif :
+
+| Grand thème | Chapitres |
+|---|---|
+| Méthodologie | 6 (lire un énoncé, chercher, rédiger, vérifier, instruments, logiciel) |
+| Nombres et calculs | 9 (fractions, relatifs, puissances, calcul littéral...) |
+| Fonctions | 7 (notion, image/antécédent, tableau de valeurs, graphique, linéaires, affines, proportionnalité) |
+| Organisation et gestion des données | 6 (effectifs, moyenne/médiane, diagrammes, probabilités, fréquence) |
+| Espace et Géométrie | 7 (symétrie centrale, triangles, Pythagore, réciproque, droites, cercle, prismes) |
+| Grandeurs et Mesures | 6 (aires, volume prisme, volume cylindre, conversions, vitesse/distance/durée, proportionnalité) |
+| Algorithmique et programmation | 6 (notions, variables, conditionnelles, boucles, Scratch, Python) |
+
+⚠️ Bug Lovable SQL Editor : traduit AND → ET dans les sous-requêtes. Solution : utiliser les UUID hardcodés (pas de sous-requêtes avec AND). Les apostrophes dans les titres `d''algo` posent aussi problème — reformuler les titres sans apostrophe si nécessaire.
+
+## Comportement accordéon — ThemeManager et ChapterManager (session 2026-04-27/28)
+
+Quand un grand thème OU un chapitre est ouvert (expandedTheme / expandedChapter) :
+- Les autres cartes sont masquées (`filter(x => !expanded || x.id === expanded)`)
+- Le formulaire de création est masqué (`!expandedTheme` / `!expandedChapter`)
+- Pour ThemeManager : la section "Chapitres sans thème" est aussi masquée
+
 ## ⬆️⬇️ Boutons scroll haut/bas — règle acquise (màj 2026-04-26)
 
 Présents dans **toutes** les zones scrollables.
