@@ -1,4 +1,10 @@
 import { useState, useEffect } from "react";
+import { saveDraft, loadDraft, clearDraft } from "@/hooks/useDraftRecovery";
+
+const DRAFT_KEY_APPT = "pausetude_appointment";
+type ApptDraft = { selectedStudent: string; startTime: string; selectedSubjects: string[]; duration: string; plannedWork: string; itemsToBring: string; };
+
+
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constants";
@@ -77,6 +83,20 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
   const [editDuration, setEditDuration] = useState("");
   const [editPlannedWork, setEditPlannedWork] = useState("");
   const [editItems, setEditItems] = useState("");
+
+  // Brouillon — récupération action inachevée
+  const [apptDraft, setApptDraft] = useState<ApptDraft | null>(null);
+
+  useEffect(() => {
+    if (!isAdmin) return;
+    const draft = loadDraft<ApptDraft>(DRAFT_KEY_APPT);
+    if (draft && draft.selectedStudent) setApptDraft(draft);
+  }, [isAdmin]);
+
+  useEffect(() => {
+    if (!showForm || !selectedStudent) return;
+    saveDraft(DRAFT_KEY_APPT, { selectedStudent, startTime, selectedSubjects, duration, plannedWork, itemsToBring });
+  }, [showForm, selectedStudent, startTime, selectedSubjects, duration, plannedWork, itemsToBring]);
 
   // Status change state
   const [statusAction, setStatusAction] = useState<{ appt: Appointment; action: "postponed" | "cancelled" } | null>(null);
@@ -252,6 +272,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
   };
 
   const resetForm = () => {
+    clearDraft(DRAFT_KEY_APPT);
     setSelectedStudent("");
     setAppointmentDate(undefined);
     setStartTime("14:00");
@@ -484,7 +505,7 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
       </CardContent>
 
       {/* Admin creation dialog */}
-      <Dialog open={showForm} onOpenChange={setShowForm}>
+      <Dialog open={showForm} onOpenChange={(open) => { if (!open) resetForm(); setShowForm(open); }}>
         <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Nouveau RDV</DialogTitle>
@@ -754,6 +775,41 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
           </div>
         </DialogContent>
       </Dialog>
+    {/* Dialog récupération brouillon RDV */}
+    <AlertDialog open={!!apptDraft} onOpenChange={(open) => { if (!open) { clearDraft(DRAFT_KEY_APPT); setApptDraft(null); } }}>
+      <AlertDialogContent className="max-w-sm">
+        <AlertDialogHeader>
+          <AlertDialogTitle>⏳ Action inachevée</AlertDialogTitle>
+          <AlertDialogDescription className="text-sm">
+            Tu as commencé à créer un RDV pour l'élève sélectionné. Souhaites-tu continuer ?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="flex gap-2 flex-row justify-end">
+          <button
+            onClick={() => { clearDraft(DRAFT_KEY_APPT); setApptDraft(null); }}
+            className="px-4 py-2 text-sm rounded-md border border-destructive text-destructive hover:bg-destructive/10 transition-colors"
+          >
+            Supprimer
+          </button>
+          <button
+            onClick={() => {
+              if (!apptDraft) return;
+              setSelectedStudent(apptDraft.selectedStudent);
+              setStartTime(apptDraft.startTime);
+              setSelectedSubjects(apptDraft.selectedSubjects);
+              setDuration(apptDraft.duration);
+              setPlannedWork(apptDraft.plannedWork);
+              setItemsToBring(apptDraft.itemsToBring);
+              setShowForm(true);
+              setApptDraft(null);
+            }}
+            className="px-4 py-2 text-sm rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            Continuer
+          </button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
     </Card>
   );
 };
