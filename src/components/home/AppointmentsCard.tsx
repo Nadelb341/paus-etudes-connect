@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
 import { saveDraft, loadDraft, clearDraft } from "@/hooks/useDraftRecovery";
-
-const DRAFT_KEY_APPT = "pausetude_appointment";
-type ApptDraft = { selectedStudent: string; startTime: string; selectedSubjects: string[]; duration: string; plannedWork: string; itemsToBring: string; };
-
-
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constants";
@@ -27,6 +22,9 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+
+const DRAFT_KEY_APPT = "pausetude_appointment";
+type ApptDraft = { selectedStudent: string; startTime: string; selectedSubjects: string[]; duration: string; plannedWork: string; itemsToBring: string; };
 
 interface Appointment {
   id: string;
