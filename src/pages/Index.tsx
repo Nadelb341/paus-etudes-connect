@@ -3,6 +3,7 @@ import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
 import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminView } from "@/hooks/useAdminView";
+import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import AppHeader from "@/components/layout/AppHeader";
@@ -27,6 +28,7 @@ const Index = () => {
   const userStatus = user?.user_metadata?.status;
   const [reminders, setReminders] = useState<Reminder[]>([]);
   const [badges, setBadges] = useState({ appointments: 0, homework: 0, messages: 0 });
+  const dashboardBadge = useAdminDashboardBadge();
 
   // --- Badge computation ---
   const computeBadges = useCallback(async () => {
@@ -129,7 +131,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <AppHeader notificationCounts={{ messages: badges.messages }} />
+      <AppHeader notificationCounts={{ messages: badges.messages, dashboard: dashboardBadge }} />
       <main className="max-w-5xl mx-auto px-4 py-4 space-y-5 pb-8">
         <div className="flex flex-col items-center pt-2 relative">
           <div className="relative inline-flex flex-col items-center">

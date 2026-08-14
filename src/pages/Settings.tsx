@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import AppHeader from "@/components/layout/AppHeader";
 import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
 import { ScrollButtons } from "@/components/ui/ScrollButtons";
@@ -19,6 +20,7 @@ import {
 
 const SettingsPage = () => {
   const { user, signOut } = useAuth();
+  const dashboardBadge = useAdminDashboardBadge();
   const { showTop, showBottom, scrollToTop, scrollToBottom } = useWindowScrollToTop();
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(document.documentElement.classList.contains("dark"));
@@ -60,7 +62,7 @@ const SettingsPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <AppHeader />
+      <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-lg mx-auto px-4 py-6 space-y-6">
         <h1 className="text-xl font-heading font-bold text-foreground">Paramètres</h1>
 

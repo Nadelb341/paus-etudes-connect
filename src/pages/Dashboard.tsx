@@ -3,6 +3,7 @@ import AppHeader from "@/components/layout/AppHeader";
 import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
 import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -57,6 +58,7 @@ const getHourlyRate = (level: string, rates?: HourlyRates): number => {
 
 const DashboardPage = () => {
   const { user } = useAuth();
+  const dashboardBadge = useAdminDashboardBadge();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const { showTop, showBottom, scrollToTop, scrollToBottom } = useWindowScrollToTop();
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -433,7 +435,7 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <AppHeader />
+      <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-4">
         <div className="flex items-center gap-2">
           <Shield size={24} className="text-primary" />

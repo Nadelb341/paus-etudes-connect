@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import AppHeader from "@/components/layout/AppHeader";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Send, ArrowLeft, Search, Users, MessageSquarePlus, UserPlus, Smile, Paperclip, Camera, FileText, Image as ImageIcon, X, Play } from "lucide-react";
@@ -53,6 +54,7 @@ const getConversationKey = (msg: Message): string => {
 
 const MessagesPage = () => {
   const { user } = useAuth();
+  const dashboardBadge = useAdminDashboardBadge();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const [messages, setMessages] = useState<Message[]>([]);
   const [profiles, setProfiles] = useState<Profile[]>([]);
@@ -355,7 +357,7 @@ const MessagesPage = () => {
   if (selectedConvo) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
-        <AppHeader />
+        <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
         {hiddenInputs}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-card">
           {(isAdmin || conversations.length > 1) && (
@@ -500,7 +502,7 @@ const MessagesPage = () => {
   // ===================== CONVERSATION LIST =====================
   return (
     <div className="min-h-screen bg-background">
-      <AppHeader />
+      <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-4">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-heading font-bold text-foreground">Messages</h1>

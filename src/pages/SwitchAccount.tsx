@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AppHeader from "@/components/layout/AppHeader";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Users, Lock, UserPlus, LogIn } from "lucide-react";
@@ -16,6 +17,7 @@ interface FamilyMember {
 
 const SwitchAccountPage = () => {
   const { user } = useAuth();
+  const dashboardBadge = useAdminDashboardBadge();
   const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([]);
   const [switchEmail, setSwitchEmail] = useState("");
   const [switchPassword, setSwitchPassword] = useState("");
@@ -78,7 +80,7 @@ const SwitchAccountPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <AppHeader />
+      <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-lg mx-auto px-4 py-6 space-y-6">
         <div className="flex items-center gap-2">
           <Users size={24} className="text-primary" />

@@ -95,6 +95,15 @@ Storage bucket : `subject-files` (public) — aussi utilise pour les pieces join
 - **Logo** : pastille animee avec total de toutes les actions en attente
 - Badges disparaissent quand l'utilisateur valide l'action ou ouvre la carte
 
+### Pastille "Tableau de bord" en cascade — màj session 2026-08-14
+Nouvelle règle globale ajoutée cette session dans `~/Projets Claude Code/CLAUDE.md` : une pastille rouge de niveau 1 doit toujours avoir sa cascade jusqu'à l'élément précis non validé, avec des chiffres cohérents partout.
+
+**Diagnostic** : le Dashboard admin (`Dashboard.tsx`) affiche déjà des pastilles niveau 2 sur ses sections accordéon ("Inscriptions en attente (N)", "Suivi des notes en attente (N)"), et les listes qu'elles déplient montrent déjà le nom de l'élève/parent concerné (niveau 3 déjà satisfait). Mais l'icône "Tableau de bord" 🛡️ du header (`AppHeader.tsx`, clé `dashboard`) n'affichait **jamais aucune pastille**, ni dans `Index.tsx` ni dans `Dashboard.tsx` lui-même (`<AppHeader />` toujours appelé sans `notificationCounts`) — l'admin ne pouvait pas savoir depuis le header qu'il y avait des inscriptions ou notes en attente.
+
+- Nouveau hook `src/hooks/useAdminDashboardBadge.ts` : total = inscriptions en attente (`profiles.is_approved = false`) + notes en attente de suivi (`tutoring_hours.track_note = true`) — exactement les 2 compteurs déjà utilisés dans les sections accordéon du Dashboard, realtime via Supabase channels
+- Branché sur l'icône "Tableau de bord" du header dans **toutes** les pages qui l'affichent (sans exception) : `Index.tsx`, `Dashboard.tsx`, `Settings.tsx`, `SwitchAccount.tsx`, `Messages.tsx` — `<AppHeader notificationCounts={{ dashboard: dashboardBadge, ... }} />`
+- Le hook renvoie `0` pour un non-admin (vérifie `user?.email === ADMIN_EMAIL`), donc sans effet/risque pour les élèves et parents
+
 ## RDV a venir (AppointmentsCard)
 - Tri par date de creation decroissante (derniers crees en haut)
 - Creation : selection eleve + parent (optionnel)
