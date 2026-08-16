@@ -439,6 +439,10 @@ S'applique à tous les projets React (Paus'Étude, Dinislam, Agenda Nadia, etc.)
 
 Règle globale (`~/Projets Claude Code/CLAUDE.md`) : toute suppression doit passer par une corbeille récupérable, qui vit dans "Paramètres", à vie, sur toutes les applis de Nadia.
 
+### ⚠️ ACTION EN ATTENTE — SQL pas encore appliqué en base (bloquant, à vérifier en priorité)
+Le code (table `trash_items`, `src/lib/trash.ts`, section Corbeille dans Settings) est **déjà écrit et poussé sur GitHub** (commit `5798a29`, 2026-08-16), mais **Nadia n'a pas encore pu exécuter le SQL de création de la table** — bloquée par un souci de connexion à son compte Lovable ("activité suspecte", pas un problème côté code). Tant que ce SQL n'est pas passé, la Corbeille de Paus'Étude plante silencieusement (table inexistante) dès qu'on essaie de supprimer quelque chose.
+**Au début de toute prochaine session sur Paus'Étude : demander à Nadia si elle a pu se reconnecter à Lovable et coller ce SQL.** Le bloc exact est dans l'historique de conversation du 2026-08-16 (table `trash_items` + 3 policies RLS, identique à celui déjà passé avec succès sur Planning Girl).
+
 ### Infrastructure
 - Table `trash_items` (id, user_id, item_type, item_data jsonb, original_id, label, deleted_at) — RLS : chacun voit/gère uniquement ses propres éléments
 - `src/lib/trash.ts` : fonctions simples (pas de hook/contexte) — `moveToTrash(userId, type, originalId, label, data)`, `fetchTrash(userId)`, `restoreTrashItem(item)`, `permanentlyDeleteTrashItem(id)`, `emptyTrash(userId)`
