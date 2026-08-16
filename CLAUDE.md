@@ -435,6 +435,23 @@ onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); (e.target as HTML
 ```
 S'applique à tous les projets React (Paus'Étude, Dinislam, Agenda Nadia, etc.)
 
+## 🗑️ Corbeille — nouveau système (màj 2026-08-16)
+
+Règle globale (`~/Projets Claude Code/CLAUDE.md`) : toute suppression doit passer par une corbeille récupérable, qui vit dans "Paramètres", à vie, sur toutes les applis de Nadia.
+
+### Infrastructure
+- Table `trash_items` (id, user_id, item_type, item_data jsonb, original_id, label, deleted_at) — RLS : chacun voit/gère uniquement ses propres éléments
+- `src/lib/trash.ts` : fonctions simples (pas de hook/contexte) — `moveToTrash(userId, type, originalId, label, data)`, `fetchTrash(userId)`, `restoreTrashItem(item)`, `permanentlyDeleteTrashItem(id)`, `emptyTrash(userId)`
+- Section "Corbeille" dans `Settings.tsx`, entre "Apparence" et "Se déconnecter" — chaque élément a 2 actions avec confirmation dédiée (Restaurer / Supprimer définitivement), "Vider" affiche le nombre d'éléments dans sa confirmation
+
+### Modules connectés
+`quick_note` (`QuickNotes.tsx`) | `quiz` (`QuizManager.tsx` — restaure le quiz mais pas ses questions, gérées séparément) | `subject_comment` (`SubjectComments.tsx`, élève ou admin) | `subject_theme` (`ThemeManager.tsx`) | `appointment` (`AppointmentsCard.tsx`) | `parent_child_card` (`ParentHome.tsx`) | `subject_chapter` + `chapter_document` (`ChapterManager.tsx`) | `tutoring_hour` (`Dashboard.tsx`)
+
+### Volontairement non connectés (pas du contenu utilisateur)
+- `quiz_questions` (remplacement en bloc à chaque sauvegarde d'un quiz, pas une suppression ponctuelle)
+- `homework_completions` (coche "fait/pas fait" d'un devoir, pas une suppression de contenu)
+- `push_subscriptions` (désabonnement notifications d'un appareil)
+
 ## Regle UX - Confirmation avant suppression
 
 TOUJOURS afficher une modale de confirmation avant toute suppression definitive.

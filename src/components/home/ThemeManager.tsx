@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Plus, Trash2, ChevronDown, ChevronUp, Pencil, Check, X, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { moveToTrash } from "@/lib/trash";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -86,6 +87,8 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
   };
 
   const deleteTheme = async (id: string) => {
+    const theme = themes.find(t => t.id === id);
+    if (theme && user) await moveToTrash(user.id, "subject_theme", id, theme.title, theme);
     await supabase.from("subject_themes").delete().eq("id", id);
     toast.success("Grand thème supprimé");
     if (expandedTheme === id) setExpandedTheme(null);

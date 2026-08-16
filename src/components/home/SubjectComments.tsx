@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Send, Trash2, MessageCircle } from "lucide-react";
+import { moveToTrash } from "@/lib/trash";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -68,6 +69,8 @@ const SubjectComments = ({ subjectId, subjectLabel }: { subjectId: string; subje
   };
 
   const deleteComment = async (id: string) => {
+    const comment = comments.find(c => c.id === id);
+    if (comment && user) await moveToTrash(user.id, "subject_comment", id, comment.content.slice(0, 40), comment);
     await supabase.from("subject_comments").delete().eq("id", id);
     toast.success("Commentaire supprimé");
     fetchComments();

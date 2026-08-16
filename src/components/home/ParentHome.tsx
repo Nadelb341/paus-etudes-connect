@@ -25,6 +25,7 @@ import { Plus, Trash2, Edit2, CalendarIcon, User, StickyNote } from "lucide-reac
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { cn } from "@/lib/utils";
+import { moveToTrash } from "@/lib/trash";
 
 const formatEur = (n: number): string => {
   const rounded = Math.round(n * 100) / 100;
@@ -168,6 +169,8 @@ const ParentHome = () => {
   };
 
   const deleteChildCard = async (cardId: string) => {
+    const card = childCards.find(c => c.id === cardId);
+    if (card && user) await moveToTrash(user.id, "parent_child_card", cardId, card.child_name, card);
     await supabase.from("parent_child_cards").delete().eq("id", cardId);
     toast.success("Carte supprimée");
     setSelectedCard(null);

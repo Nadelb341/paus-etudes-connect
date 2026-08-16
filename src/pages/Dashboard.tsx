@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
+import { moveToTrash } from "@/lib/trash";
 import { toast } from "sonner";
 import { Shield, Users, Clock, Bell, BookOpen, Activity, Plus, ChevronDown, ChevronUp, Trash2, Edit2, Check, X, Search, UserCheck, UserX, Eye, EyeOff, ClipboardList, Bookmark, Send, UserPlus, Link2, FileText } from "lucide-react";
 import StudentBilanDialog from "@/components/home/StudentBilanDialog";
@@ -297,6 +298,8 @@ const DashboardPage = () => {
   };
 
   const deleteTutoringHour = async (id: string) => {
+    const hour = tutoringHours.find(h => h.id === id);
+    if (hour && user) await moveToTrash(user.id, "tutoring_hour", id, `${getStudentName(hour.student_id)} — ${hour.session_date}`, hour);
     await supabase.from("tutoring_hours").delete().eq("id", id);
     toast.success("Heure supprimée");
     fetchTutoringHours();

@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { StickyNote, Plus, Check, Edit2, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
+import { moveToTrash } from "@/lib/trash";
 
 interface QuickNote {
   id: string;
@@ -29,6 +31,7 @@ interface Profile {
 }
 
 const QuickNotes = () => {
+  const { user } = useAuth();
   const [notes, setNotes] = useState<QuickNote[]>([]);
   const [students, setStudents] = useState<Profile[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -96,6 +99,8 @@ const QuickNotes = () => {
   };
 
   const handleDelete = async (noteId: string) => {
+    const note = notes.find(n => n.id === noteId);
+    if (note && user) await moveToTrash(user.id, "quick_note", noteId, note.content.slice(0, 40), note);
     await (supabase as any).from("admin_quick_notes").delete().eq("id", noteId);
     toast.success("Note supprimée");
     fetchNotes();

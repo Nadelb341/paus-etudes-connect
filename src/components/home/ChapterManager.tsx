@@ -11,6 +11,7 @@ import { Plus, Trash2, ChevronDown, ChevronUp, Upload, Youtube, X, FileText, Cam
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { YoutubePlayer, isYoutubeUrl, extractYoutubeVideoId, extractPlaylistId, fetchPlaylistVideos } from "@/utils/youtube";
+import { moveToTrash } from "@/lib/trash";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -145,6 +146,8 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
   };
 
   const deleteChapter = async (id: string) => {
+    const chapter = chapters.find(c => c.id === id);
+    if (chapter && user) await moveToTrash(user.id, "subject_chapter", id, chapter.title, chapter);
     await supabase.from("subject_chapters").delete().eq("id", id);
     toast.success("Chapitre supprimé");
     if (expandedChapter === id) setExpandedChapter(null);
@@ -201,6 +204,8 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
   };
 
   const deleteDoc = async (docId: string, chapterId: string) => {
+    const doc = chapterDocs[chapterId]?.find(d => d.id === docId);
+    if (doc && user) await moveToTrash(user.id, "chapter_document", docId, doc.file_name, doc);
     await supabase.from("chapter_documents").delete().eq("id", docId);
     toast.success("Document supprimé");
     fetchChapterDocs(chapterId);

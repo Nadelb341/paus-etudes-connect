@@ -13,6 +13,10 @@ import { LogOut, Moon, Sun, Bell, Lock, User, Eye, EyeOff, CheckCircle2, XCircle
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { requestNotificationPermission, subscribeToPush, getPushSubscriptionStatus } from "@/hooks/useNotifications";
+import { RotateCcw, Trash2 } from "lucide-react";
+import {
+  fetchTrash, restoreTrashItem, permanentlyDeleteTrashItem, emptyTrash as emptyTrashItems, type TrashItem,
+} from "@/lib/trash";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -31,10 +35,20 @@ const SettingsPage = () => {
   const [changingPassword, setChangingPassword] = useState(false);
   const [pushStatus, setPushStatus] = useState<"subscribed" | "not-subscribed" | "unsupported" | "loading">("loading");
   const [activatingPush, setActivatingPush] = useState(false);
+  const [trashItems, setTrashItems] = useState<TrashItem[]>([]);
+  const [restoreTargetId, setRestoreTargetId] = useState<string | null>(null);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
+  const [emptyTrashConfirm, setEmptyTrashConfirm] = useState(false);
 
   useEffect(() => {
     getPushSubscriptionStatus().then(setPushStatus);
   }, []);
+
+  const loadTrash = () => { if (user) fetchTrash(user.id).then(setTrashItems); };
+  useEffect(() => { loadTrash(); }, [user?.id]);
+
+  const restoreTarget = trashItems.find(i => i.id === restoreTargetId) || null;
+  const deleteTarget = trashItems.find(i => i.id === deleteTargetId) || null;
 
   const handleSignOut = async () => {
     await signOut();
@@ -207,6 +221,37 @@ const SettingsPage = () => {
           </div>
         </div>
 
+        <div className="bg-card rounded-lg border border-border shadow-card p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Trash2 size={20} className="text-primary" />
+              <h2 className="font-heading font-semibold">Corbeille</h2>
+            </div>
+            {trashItems.length > 0 && (
+              <Button variant="destructive" size="sm" onClick={() => setEmptyTrashConfirm(true)}>Vider</Button>
+            )}
+          </div>
+          {trashItems.length === 0 ? (
+            <p className="text-sm text-muted-foreground text-center py-2">La corbeille est vide</p>
+          ) : (
+            <div className="space-y-2">
+              {trashItems.map(item => (
+                <div key={item.id} className="flex items-center justify-between gap-2 rounded-md border border-border px-3 py-2">
+                  <span className="text-sm truncate">{item.label}</span>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button onClick={() => setRestoreTargetId(item.id)} className="p-1.5 rounded-full hover:bg-accent text-primary" title="Restaurer">
+                      <RotateCcw size={16} />
+                    </button>
+                    <button onClick={() => setDeleteTargetId(item.id)} className="p-1.5 rounded-full hover:bg-accent text-destructive" title="Supprimer définitivement">
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         <Separator />
 
         <AlertDialog>
@@ -223,6 +268,63 @@ const SettingsPage = () => {
             <AlertDialogFooter>
               <AlertDialogCancel>Annuler</AlertDialogCancel>
               <AlertDialogAction onClick={handleSignOut}>Se déconnecter</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <AlertDialog open={!!restoreTargetId} onOpenChange={o => { if (!o) setRestoreTargetId(null); }}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Restaurer « {restoreTarget?.label} » ?</AlertDialogTitle>
+              <AlertDialogDescription>Cet élément retournera à son emplacement d'origine.</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction onClick={async () => {
+                if (restoreTarget) {
+                  const ok = await restoreTrashItem(restoreTarget);
+                  if (ok) { toast.success("Élément restauré !"); loadTrash(); } else toast.error("Erreur lors de la restauration");
+                }
+                setRestoreTargetId(null);
+              }}>
+                Restaurer
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <AlertDialog open={!!deleteTargetId} onOpenChange={o => { if (!o) setDeleteTargetId(null); }}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Supprimer définitivement « {deleteTarget?.label} » ?</AlertDialogTitle>
+              <AlertDialogDescription>Cette action est irréversible.</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                onClick={async () => { if (deleteTargetId) await permanentlyDeleteTrashItem(deleteTargetId); setDeleteTargetId(null); loadTrash(); }}
+              >
+                Supprimer définitivement
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <AlertDialog open={emptyTrashConfirm} onOpenChange={setEmptyTrashConfirm}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Vider la corbeille</AlertDialogTitle>
+              <AlertDialogDescription>Tous les éléments ({trashItems.length}) seront définitivement supprimés.</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                onClick={async () => { if (user) await emptyTrashItems(user.id); setEmptyTrashConfirm(false); loadTrash(); }}
+              >
+                Supprimer définitivement
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

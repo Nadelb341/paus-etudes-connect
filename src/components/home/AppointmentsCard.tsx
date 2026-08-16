@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { saveDraft, loadDraft, clearDraft } from "@/hooks/useDraftRecovery";
+import { moveToTrash } from "@/lib/trash";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constants";
@@ -283,6 +284,8 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
   };
 
   const handleDelete = async (id: string) => {
+    const appt = appointments.find(a => a.id === id);
+    if (appt && user) await moveToTrash(user.id, "appointment", id, `${appt.student_name} — ${appt.appointment_date}`, appt);
     await supabase.from("appointments").delete().eq("id", id);
     toast.success("RDV supprimé");
     fetchAppointments();

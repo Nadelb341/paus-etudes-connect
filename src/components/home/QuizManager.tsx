@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Plus, Trash2, Save, GripVertical } from "lucide-react";
+import { moveToTrash } from "@/lib/trash";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -48,6 +49,8 @@ const QuizManager = ({ subjectId }: { subjectId: string }) => {
   };
 
   const deleteQuiz = async (id: string) => {
+    const quiz = quizzes.find(q => q.id === id);
+    if (quiz && user) await moveToTrash(user.id, "quiz", id, quiz.title, quiz);
     await supabase.from("quizzes").delete().eq("id", id);
     setQuizzes(prev => prev.filter(q => q.id !== id));
     if (editingQuiz?.id === id) { setEditingQuiz(null); setQuestions([]); }
