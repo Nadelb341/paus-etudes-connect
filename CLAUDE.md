@@ -8,6 +8,9 @@
 ```
 🔴 FIN DE LA COPIE
 
+## ⏳ RÈGLE ABSOLUE — Ne jamais compter sur Nadia pour relancer / rappeler / redemander
+Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 2026-08-31). Toute suite à donner — blocage côté Nadia **OU** une amélioration/vérification que JE propose pour plus tard — doit être notée par moi dans une section **"⚠️ ACTION EN ATTENTE"** de ce fichier et reprise par moi au début de chaque session, jamais en attendant qu'elle m'en reparle. Nadia oublie tout : *"n'attends plus que je te dise de faire les choses à venir ou des sortes de rappels"*.
+
 ## 📦 Pas de débordement de texte hors de son conteneur
 Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
 - `overflow-hidden` sur tout conteneur de liste/carte
@@ -442,6 +445,21 @@ Règle globale (`~/Projets Claude Code/CLAUDE.md`) : toute suppression doit pass
 ### ⚠️ ACTION EN ATTENTE — SQL pas encore appliqué en base (bloquant, à vérifier en priorité)
 Le code (table `trash_items`, `src/lib/trash.ts`, section Corbeille dans Settings) est **déjà écrit et poussé sur GitHub** (commit `5798a29`, 2026-08-16), mais **Nadia n'a pas encore pu exécuter le SQL de création de la table** — bloquée par un souci de connexion à son compte Lovable ("activité suspecte", pas un problème côté code). Tant que ce SQL n'est pas passé, la Corbeille de Paus'Étude plante silencieusement (table inexistante) dès qu'on essaie de supprimer quelque chose.
 **Au début de toute prochaine session sur Paus'Étude : demander à Nadia si elle a pu se reconnecter à Lovable et coller ce SQL.** Le bloc exact est dans l'historique de conversation du 2026-08-16 (table `trash_items` + 3 policies RLS, identique à celui déjà passé avec succès sur Planning Girl).
+
+### ➗ ⚠️ ACTION EN ATTENTE — Ne jamais couper un mot en plein milieu (demandé 2026-09-01)
+Nouvelle règle absolue (voir `~/Projets Claude Code/CLAUDE.md`). Un mot trop long se coupe à la syllabe avec un trait d'union, jamais lettre par lettre. `index.html` a déjà `lang="fr"` — reste à ajouter `hyphens: auto` + `-webkit-hyphens: auto` sur `body` dans le CSS global (réf. `Agenda Nadia/src/index.css`), puis vérifier sur mobile.
+
+### 🖼️ Un contenu incohérent avec son rôle → s'arrêter et demander (ajoutée 2026-09-01)
+Voir règle complète dans `~/Projets Claude Code/CLAUDE.md` (section "❓ Demander en cas de doute" → "🖼️ Cas particulier"). Quand une image/un champ/un libellé/une valeur montré par Nadia ne colle pas à ce qu'il devrait être (ex : écriture manuscrite scannée là où on attend une photo de plat), **le signaler et demander AVANT d'exécuter la demande à la lettre**.
+
+### ❌ ⚠️ ACTION EN ATTENTE — Croix "Fermer" rouge et bien visible (demandé 2026-09-01)
+Règle absolue (voir `~/Projets Claude Code/CLAUDE.md`, section "❌ Croix Fermer ROUGE"). Toute croix `X` de fermeture = **rouge `text-destructive`, `h-5 w-5`, `strokeWidth={2.75}`**. Reste à faire : passer la croix par défaut de `src/components/ui/dialog.tsx` + `sheet.tsx` en rouge (+ prop `hideCloseButton`), puis auditer les croix custom (réf. `Agenda Nadia/src/components/ui/dialog.tsx`).
+
+### ✂️ ⚠️ ACTION EN ATTENTE — Titres/sous-titres jamais tronqués par "..." (demandé 2026-08-19)
+Nadia a demandé que tous les titres/sous-titres de cartes (pas les descriptions/contenus en aperçu, ni les noms de fichiers/URLs/emails) soient toujours visibles en entier, sans "...". Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (section "✂️ Titres et sous-titres jamais tronqués"). Déjà fait sur Agenda Nadia. Pas encore fait sur Paus'Étude — à auditer à la prochaine session (`grep -rn "truncate\|line-clamp-1\b" src`, classer titre vs contenu, corriger).
+
+### 🖼️ ⚠️ ACTION EN ATTENTE — Compression automatique des images avant upload (demandé 2026-08-18)
+Nadia a demandé que toute photo envoyée par un utilisateur soit compressée côté client avant l'upload (sans perte de qualité visible), pour garder l'appli légère. Déjà fait sur Agenda Nadia (`src/lib/compressImage.ts`, utilitaire sans dépendance, `compressPhoto`/`compressDocument`) — voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (section "🖼️ Compression automatique des images avant upload"). Pas encore fait sur Paus'Étude. À la prochaine session : copier/adapter `compressImage.ts`, câbler dans tous les points d'upload (`.storage.from(...).upload(`), sans toucher aux photos déjà stockées, vérifier `tsc --noEmit` avant de proposer le commit/push.
 
 ### Infrastructure
 - Table `trash_items` (id, user_id, item_type, item_data jsonb, original_id, label, deleted_at) — RLS : chacun voit/gère uniquement ses propres éléments
