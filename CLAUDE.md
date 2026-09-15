@@ -1,5 +1,8 @@
 # Paus'étude (ex My Study Way, ex Paus'Etudes Connect)
 
+## 🚨🚨 RÈGLE ABSOLUE — L'application doit TOUJOURS pouvoir s'ouvrir (voir CLAUDE.md global)
+Règle née le 2026-09-15 sur Agenda Nadia (un hook mal placé a fait planter toute l'appli pour tout le monde) — s'applique aussi ici. Règle complète (priorité maximale) dans `~/Projets Claude Code/CLAUDE.md`, tout en haut du fichier : `tsc` ET `npx eslint` (règles React des Hooks, si `eslint-plugin-react-hooks` est installé dans ce projet) obligatoires avant chaque push, vigilance renforcée sur tout composant affiché sans condition sur l'écran d'accueil/la mise en page globale.
+
 ## 🔴 Format obligatoire — Texte à copier-coller (SQL, config...)
 
 🔴 DÉBUT DE LA COPIE
