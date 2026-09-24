@@ -14,6 +14,10 @@ Règle née le 2026-09-15 sur Agenda Nadia (un hook mal placé a fait planter to
 ## ⏳ RÈGLE ABSOLUE — Ne jamais compter sur Nadia pour relancer / rappeler / redemander
 Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 2026-08-31). Toute suite à donner — blocage côté Nadia **OU** une amélioration/vérification que JE propose pour plus tard — doit être notée par moi dans une section **"⚠️ ACTION EN ATTENTE"** de ce fichier et reprise par moi au début de chaque session, jamais en attendant qu'elle m'en reparle. Nadia oublie tout : *"n'attends plus que je te dise de faire les choses à venir ou des sortes de rappels"*.
 
+## ⚠️ ACTION EN ATTENTE — Couper le lien Lovable ↔ GitHub (demande de Nadia du 2026-09-24)
+À vérifier au début de la prochaine séance : si l'appli est bien publiée par Vercel (« push GitHub → Vercel ») et plus par Lovable, guider Nadia dans Lovable › projet › ⚙️ Settings › Git › GitHub › « Connected » › **Disconnect** pour le dépôt `Nadelb341/paus-etudes-connect`. Si elle dépend encore de Lovable (base « Lovable Cloud », publication Lovable) : faire d'abord la bascule complète vers Vercel + Supabase indépendant, puis couper le lien dans la même séance.
+Règle générale : voir « 🔌 Couper le lien Lovable ↔ GitHub » dans `~/Projets Claude Code/CLAUDE.md`. Une fois fait : cocher ✅ ici, dans le CLAUDE.md global (tableau de suivi) et dans la mémoire.
+
 ## 📦 Pas de débordement de texte hors de son conteneur
 Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
 - `overflow-hidden` sur tout conteneur de liste/carte
