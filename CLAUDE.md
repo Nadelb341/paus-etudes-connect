@@ -24,7 +24,7 @@ Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 202
 
 ## ⚠️ ACTION EN ATTENTE (2026-11-07) — à reprendre en début de séance
 1. **Nadia** : Supabase › Authentication › URL Configuration : Site URL `https://my-study-way.vercel.app` + Redirect URL `https://my-study-way.vercel.app/**` (sinon les e-mails de confirmation et « mot de passe oublié » renvoient vers localhost).
-2. **Nadia** : SQL dans Lovable pour supprimer l'accès temporaire `nadia_migration` + schéma `migration_tmp` (mot de passe dans le trousseau « Lovable Paus'Étude migration (temporaire) », à supprimer ensuite).
+2. ✅ Accès temporaire `nadia_migration` + schéma `migration_tmp` supprimés le 2026-11-08 (SQL Lovable : `DROP OWNED` refusé → REVOKE un par un puis DROP ROLE ; vérifié : reste = 0, connexion refusée) ; entrée du trousseau supprimée.
 3. ✅ Lien Lovable ↔ GitHub coupé le 2026-11-08 (connexion workspace « Nadelb341 » supprimée dans Lovable ; ne PAS toucher à « Configure on GitHub » : l'appli GitHub Lovable sert peut-être aussi à Planning Girl).
 4. **Nadia** : se reconnecter sur téléphone + test réel (admin, puis compte parent).
 5. **Moi** : audit « tout en direct » des écrans (publication = 7 tables, comme avant).
