@@ -18,6 +18,7 @@ import { CalendarIcon, MoreVertical, Plus, Trash2, Eye, EyeOff, Pin, Edit2, Cale
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+  AlertDialogDescription,
 } from "@/components/ui/alert-dialog";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
