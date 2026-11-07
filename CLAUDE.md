@@ -14,9 +14,22 @@ Règle née le 2026-09-15 sur Agenda Nadia (un hook mal placé a fait planter to
 ## ⏳ RÈGLE ABSOLUE — Ne jamais compter sur Nadia pour relancer / rappeler / redemander
 Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 2026-08-31). Toute suite à donner — blocage côté Nadia **OU** une amélioration/vérification que JE propose pour plus tard — doit être notée par moi dans une section **"⚠️ ACTION EN ATTENTE"** de ce fichier et reprise par moi au début de chaque session, jamais en attendant qu'elle m'en reparle. Nadia oublie tout : *"n'attends plus que je te dise de faire les choses à venir ou des sortes de rappels"*.
 
-## ⚠️ ACTION EN ATTENTE — Couper le lien Lovable ↔ GitHub (demande de Nadia du 2026-09-24)
-À vérifier au début de la prochaine séance : si l'appli est bien publiée par Vercel (« push GitHub → Vercel ») et plus par Lovable, guider Nadia dans Lovable › projet › ⚙️ Settings › Git › GitHub › « Connected » › **Disconnect** pour le dépôt `Nadelb341/paus-etudes-connect`. Si elle dépend encore de Lovable (base « Lovable Cloud », publication Lovable) : faire d'abord la bascule complète vers Vercel + Supabase indépendant, puis couper le lien dans la même séance.
-Règle générale : voir « 🔌 Couper le lien Lovable ↔ GitHub » dans `~/Projets Claude Code/CLAUDE.md`. Une fois fait : cocher ✅ ici, dans le CLAUDE.md global (tableau de suivi) et dans la mémoire.
+## 🔄 ✅ BASCULE TERMINÉE — Lovable Cloud → Supabase indépendant (2026-11-07)
+- **Ancienne base** : Lovable Cloud `xgyggsgcgqbekowiuvgk` (Irlande). Laissée intacte (copie de secours), plus utilisée par l'appli.
+- **Nouvelle base** : Supabase `dauchoulkrqwmkvklyiq` « Paus'Étude », compte **nadelb341@hotmail.com** (organisation « nadelb341@hotmail.com's Org », Francfort). Mot de passe base : trousseau du Mac « Supabase DB Paus'Étude » (utilisateur postgres). Connexion : `host=aws-1-eu-central-1.pooler.supabase.com user=postgres.dauchoulkrqwmkvklyiq` (psql : `/opt/homebrew/opt/libpq/bin/psql`). La CLI (compte nadiaelb341, rôle Developer) peut déployer les fonctions et générer les types, mais PAS créer de projet.
+- **Copié et vérifié** : schéma public (26 tables, 15 fonctions, 75 règles RLS, 7 déclencheurs), données (contenu identique table par table, empreinte md5), 4 comptes avec mots de passe. Recréés à la main : déclencheur `on_auth_user_created`, bucket `subject-files` + 3 règles, publication realtime (7 tables), table `trash_items` (corbeille) — migration `20261107200000_bascule_supabase_independant.sql`. Aucun fichier dans le stockage (0 objet). 3 Edge Functions déployées par la CLI.
+- **Vercel** : `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY` mises à jour (clé anon), `.env` versionné aussi. Site vérifié en ligne (bundle → `dauchoulkrqwmkvklyiq`).
+- ⚠️ Le robot Lovable a poussé 2 commits le 2026-11-07 (quand Nadia a ouvert le projet Lovable) : retirés (`previewAuthStorage`). Tant que le lien Lovable ↔ GitHub n'est pas coupé, NE PAS ouvrir le projet dans Lovable.
+- Tous les utilisateurs doivent se reconnecter une fois (même mot de passe) : la session est liée à l'adresse de la base.
+
+## ⚠️ ACTION EN ATTENTE (2026-11-07) — à reprendre en début de séance
+1. **Nadia** : Supabase › Authentication › URL Configuration : Site URL `https://my-study-way.vercel.app` + Redirect URL `https://my-study-way.vercel.app/**` (sinon les e-mails de confirmation et « mot de passe oublié » renvoient vers localhost).
+2. **Nadia** : SQL dans Lovable pour supprimer l'accès temporaire `nadia_migration` + schéma `migration_tmp` (mot de passe dans le trousseau « Lovable Paus'Étude migration (temporaire) », à supprimer ensuite).
+3. **Nadia** : couper le lien Lovable ↔ GitHub (Lovable › ⚙️ Settings › Git › GitHub › Connected › Disconnect, dépôt `Nadelb341/paus-etudes-connect`).
+4. **Nadia** : se reconnecter sur téléphone + test réel (admin, puis compte parent).
+5. **Moi** : audit « tout en direct » des écrans (publication = 7 tables, comme avant).
+6. ⚠️ **Sécurité** : la clé Resend `re_231PpcSh_…` est écrite en clair dans le dépôt GitHub (migration `20260413000001_email_paiements.sql`, `send-notifications`, ce fichier) et dans la fonction SQL `process_email_queue`. À révoquer dans Resend par Nadia puis remplacer par un secret de fonction. Les e-mails ne partent plus de toute façon depuis avril (pg_net absent, `trg_auto_process_email` supprimé).
+7. ⚠️ Règle de stockage : seul l'admin peut envoyer un fichier dans `subject-files` → la pièce jointe d'un élève/parent dans Messages échoue (constaté dans les règles, pas encore testé à l'écran). À décider avec Nadia.
 
 ## 📦 Pas de débordement de texte hors de son conteneur
 Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
@@ -361,6 +374,9 @@ npm run test:watch   # Tests en watch mode
 - ⚠️ `trg_auto_process_email` supprimé (pg_net absent → annulait les INSERTs dans email_queue)
 - Traitement final : send-notifications Edge Function lit email_queue.sent=false toutes les 2 min via NotificationPoller
 
+## 📡 Hors connexion — ✅ fait et testé le 2026-11-07
+Modèle Dinislam : `public/sw.js` (précache écrit par le plugin `offlinePrecache` de `vite.config.ts`, `ignoreVary`, données par personne), `src/lib/offlineAuth.ts`, `useAuth`, `ProtectedRoute`, `ErrorBoundary`, `OfflineBanner` + `useOnlineStatus`, polices @fontsource, `vercel.json`. Fausse session hors ligne = 180 s (auth-js récent juge expiré tout jeton < 90 s → boucle avec 60 s). Test réel sur my-study-way.vercel.app (Playwright) : mode avion 0,16 s, page jamais ouverte → connexion, jeton expiré → accueil 0,29 s + bandeau, wifi sans Internet 3,2 s + bandeau. Non testé : iPhone/Safari, notifications push après changement de service worker.
+
 ## Contexte
 - Projet cree fin mars 2026, en developpement actif
 - Renomme "My Study Way" (ex Paus'Etudes) le 2 avril 2026
@@ -449,23 +465,23 @@ S'applique à tous les projets React (Paus'Étude, Dinislam, Agenda Nadia, etc.)
 
 Règle globale (`~/Projets Claude Code/CLAUDE.md`) : toute suppression doit passer par une corbeille récupérable, qui vit dans "Paramètres", à vie, sur toutes les applis de Nadia.
 
-### ⚠️ ACTION EN ATTENTE — SQL pas encore appliqué en base (bloquant, à vérifier en priorité)
+### ✅ Table trash_items créée le 2026-11-07 (lors de la bascule) — ancienne note :
 Le code (table `trash_items`, `src/lib/trash.ts`, section Corbeille dans Settings) est **déjà écrit et poussé sur GitHub** (commit `5798a29`, 2026-08-16), mais **Nadia n'a pas encore pu exécuter le SQL de création de la table** — bloquée par un souci de connexion à son compte Lovable ("activité suspecte", pas un problème côté code). Tant que ce SQL n'est pas passé, la Corbeille de Paus'Étude plante silencieusement (table inexistante) dès qu'on essaie de supprimer quelque chose.
 **Au début de toute prochaine session sur Paus'Étude : demander à Nadia si elle a pu se reconnecter à Lovable et coller ce SQL.** Le bloc exact est dans l'historique de conversation du 2026-08-16 (table `trash_items` + 3 policies RLS, identique à celui déjà passé avec succès sur Planning Girl).
 
-### ➗ ⚠️ ACTION EN ATTENTE — Ne jamais couper un mot en plein milieu (demandé 2026-09-01)
+### ➗ ✅ FAIT 2026-11-07 — Aucune césure (`hyphens: none` sur body, règle révisée du 2026-09-21) — ancienne note :
 Nouvelle règle absolue (voir `~/Projets Claude Code/CLAUDE.md`). Un mot trop long se coupe à la syllabe avec un trait d'union, jamais lettre par lettre. `index.html` a déjà `lang="fr"` — reste à ajouter `hyphens: auto` + `-webkit-hyphens: auto` sur `body` dans le CSS global (réf. `Agenda Nadia/src/index.css`), puis vérifier sur mobile.
 
 ### 🖼️ Un contenu incohérent avec son rôle → s'arrêter et demander (ajoutée 2026-09-01)
 Voir règle complète dans `~/Projets Claude Code/CLAUDE.md` (section "❓ Demander en cas de doute" → "🖼️ Cas particulier"). Quand une image/un champ/un libellé/une valeur montré par Nadia ne colle pas à ce qu'il devrait être (ex : écriture manuscrite scannée là où on attend une photo de plat), **le signaler et demander AVANT d'exécuter la demande à la lettre**.
 
-### ❌ ⚠️ ACTION EN ATTENTE — Croix "Fermer" rouge et bien visible (demandé 2026-09-01)
+### ❌ ✅ FAIT 2026-11-07 — Croix « Fermer » rouge (dialog.tsx + sheet.tsx repris de l'Agenda, prop `hideCloseButton`, croix d'annulation rouges) — ancienne note :
 Règle absolue (voir `~/Projets Claude Code/CLAUDE.md`, section "❌ Croix Fermer ROUGE"). Toute croix `X` de fermeture = **rouge `text-destructive`, `h-5 w-5`, `strokeWidth={2.75}`**. Reste à faire : passer la croix par défaut de `src/components/ui/dialog.tsx` + `sheet.tsx` en rouge (+ prop `hideCloseButton`), puis auditer les croix custom (réf. `Agenda Nadia/src/components/ui/dialog.tsx`).
 
-### ✂️ ⚠️ ACTION EN ATTENTE — Titres/sous-titres jamais tronqués par "..." (demandé 2026-08-19)
+### ✂️ ✅ FAIT 2026-11-07 — Titres jamais tronqués (SubjectCard, corbeille ; restent tronqués : noms de fichiers, aperçu du dernier message) — ancienne note :
 Nadia a demandé que tous les titres/sous-titres de cartes (pas les descriptions/contenus en aperçu, ni les noms de fichiers/URLs/emails) soient toujours visibles en entier, sans "...". Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (section "✂️ Titres et sous-titres jamais tronqués"). Déjà fait sur Agenda Nadia. Pas encore fait sur Paus'Étude — à auditer à la prochaine session (`grep -rn "truncate\|line-clamp-1\b" src`, classer titre vs contenu, corriger).
 
-### 🖼️ ⚠️ ACTION EN ATTENTE — Compression automatique des images avant upload (demandé 2026-08-18)
+### 🖼️ ✅ FAIT 2026-11-07 — Compression (`src/lib/compressImage.ts`, `compressDocument` dans ChapterManager + Messages) — ancienne note :
 Nadia a demandé que toute photo envoyée par un utilisateur soit compressée côté client avant l'upload (sans perte de qualité visible), pour garder l'appli légère. Déjà fait sur Agenda Nadia (`src/lib/compressImage.ts`, utilitaire sans dépendance, `compressPhoto`/`compressDocument`) — voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (section "🖼️ Compression automatique des images avant upload"). Pas encore fait sur Paus'Étude. À la prochaine session : copier/adapter `compressImage.ts`, câbler dans tous les points d'upload (`.storage.from(...).upload(`), sans toucher aux photos déjà stockées, vérifier `tsc --noEmit` avant de proposer le commit/push.
 
 ### Infrastructure
