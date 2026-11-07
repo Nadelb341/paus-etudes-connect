@@ -3,6 +3,7 @@ import AppHeader from "@/components/layout/AppHeader";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { supabase } from "@/integrations/supabase/client";
+import { compressDocument } from "@/lib/compressImage";
 import { toast } from "sonner";
 import { Send, ArrowLeft, Search, Users, MessageSquarePlus, UserPlus, Smile, Paperclip, Camera, FileText, Image as ImageIcon, X, Play } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -172,7 +173,9 @@ const MessagesPage = () => {
     const files = e.target.files;
     if (!files || !user) return;
     setUploading(true);
-    for (const file of Array.from(files)) {
+    for (const original of Array.from(files)) {
+      // Photo compressée avant envoi (souvent un devoir photographié : lisibilité d'abord)
+      const file = await compressDocument(original);
       const path = `messages/${user.id}/${Date.now()}_${file.name}`;
       const { error } = await supabase.storage.from("subject-files").upload(path, file);
       if (error) { toast.error(`Erreur upload : ${file.name}`); continue; }
@@ -461,7 +464,7 @@ const MessagesPage = () => {
           {showYoutubeInput && (
             <div className="flex items-center gap-2 px-1">
               <Input value={youtubeLink} onChange={e => setYoutubeLink(e.target.value)} placeholder="https://youtube.com/watch?v=..." className="flex-1 h-8 text-xs" />
-              <button onClick={() => { setShowYoutubeInput(false); setYoutubeLink(""); }} className="text-muted-foreground hover:text-foreground"><X size={14} /></button>
+              <button onClick={() => { setShowYoutubeInput(false); setYoutubeLink(""); }} className="text-destructive hover:text-destructive/80" aria-label="Fermer"><X size={16} strokeWidth={2.75} /></button>
             </div>
           )}
 

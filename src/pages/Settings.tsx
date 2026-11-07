@@ -237,7 +237,7 @@ const SettingsPage = () => {
             <div className="space-y-2">
               {trashItems.map(item => (
                 <div key={item.id} className="flex items-center justify-between gap-2 rounded-md border border-border px-3 py-2">
-                  <span className="text-sm truncate">{item.label}</span>
+                  <span className="text-sm min-w-0 flex-1">{item.label}</span>
                   <div className="flex items-center gap-1 shrink-0">
                     <button onClick={() => setRestoreTargetId(item.id)} className="p-1.5 rounded-full hover:bg-accent text-primary" title="Restaurer">
                       <RotateCcw size={16} />

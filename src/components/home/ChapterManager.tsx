@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { compressDocument } from "@/lib/compressImage";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
@@ -183,10 +184,12 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
   };
 
   const handleFileUpload = async (chapterId: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const original = e.target.files?.[0];
+    if (!original) return;
     setUploading(true);
     try {
+      // Photo compressée avant envoi (lisibilité d'abord : c'est un document de cours)
+      const file = await compressDocument(original);
       const filePath = `chapters/${chapterId}/${Date.now()}_${file.name}`;
       const { error: uploadError } = await supabase.storage.from("subject-files").upload(filePath, file);
       if (uploadError) throw uploadError;
@@ -313,7 +316,7 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
                     <button onClick={() => saveChapterTitle(chapter.id)} className="p-1 text-green-600 hover:text-green-700 shrink-0">
                       <Check size={14} />
                     </button>
-                    <button onClick={() => setEditingChapterId(null)} className="p-1 text-muted-foreground hover:text-foreground shrink-0">
+                    <button onClick={() => setEditingChapterId(null)} className="p-1 text-destructive hover:text-destructive/80 shrink-0" aria-label="Annuler">
                       <X size={14} />
                     </button>
                   </div>

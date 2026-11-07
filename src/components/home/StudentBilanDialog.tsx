@@ -525,7 +525,7 @@ Les 2${checked(bilan.objectif_les2)}${bilan.objectif_autres.length > 0 ? " - " +
                     <button onClick={() => saveObjectifAutre(idx)} className="p-1 text-green-600 hover:text-green-700">
                       <Check size={13} />
                     </button>
-                    <button onClick={() => setEditingObjectifIdx(null)} className="p-1 text-muted-foreground hover:text-foreground">
+                    <button onClick={() => setEditingObjectifIdx(null)} className="p-1 text-destructive hover:text-destructive/80" aria-label="Annuler">
                       <X size={13} />
                     </button>
                   </>

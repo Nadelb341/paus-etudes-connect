@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useAdminView } from "@/hooks/useAdminView";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { toast } from "sonner";
+import OfflineBanner from "@/components/shared/OfflineBanner";
 
 interface AppHeaderProps {
   notificationCounts?: {
@@ -104,6 +105,8 @@ const AppHeader = ({ notificationCounts = {} }: AppHeaderProps) => {
           })}
         </nav>
       </div>
+      {/* 📡 Hors connexion (2026-11-07) : dans l'en-tête collant, juste sous les icônes → jamais de chevauchement */}
+      <OfflineBanner />
     </header>
   );
 };

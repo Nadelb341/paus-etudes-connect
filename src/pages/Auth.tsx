@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 import LoginForm from "@/components/auth/LoginForm";
 import RegisterForm from "@/components/auth/RegisterForm";
+import OfflineBanner from "@/components/shared/OfflineBanner";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,6 +22,9 @@ const Auth = () => {
         <h1 className="text-2xl font-heading font-bold text-foreground">Paus'étude</h1>
         <p className="text-sm text-muted-foreground">Votre assistant scolaire</p>
       </motion.div>
+
+      {/* 📡 Hors connexion (2026-11-07) */}
+      <OfflineBanner variant="card" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}

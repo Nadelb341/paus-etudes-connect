@@ -208,7 +208,7 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
                     <button onClick={() => saveEdit(theme.id)} className="p-1 text-green-600 hover:text-green-700 shrink-0">
                       <Check size={14} />
                     </button>
-                    <button onClick={cancelEdit} className="p-1 text-muted-foreground hover:text-foreground shrink-0">
+                    <button onClick={cancelEdit} className="p-1 text-destructive hover:text-destructive/80 shrink-0" aria-label="Annuler">
                       <X size={14} />
                     </button>
                   </div>

@@ -40,7 +40,7 @@ const SubjectCard = ({ label, icon, color, index, isVisible = true, notification
       <div className="h-1 w-full" style={{ background: color }} />
       <div className="p-3 flex flex-col items-center text-center gap-2">
         <span className="text-2xl">{icon}</span>
-        <span className="text-xs font-medium text-foreground leading-tight line-clamp-2">{label}</span>
+        <span className="text-xs font-medium text-foreground leading-tight">{label}</span>
       </div>
 
       {isAdmin && (

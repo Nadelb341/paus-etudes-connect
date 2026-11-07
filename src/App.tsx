@@ -15,6 +15,7 @@ import SwitchAccount from "./pages/SwitchAccount";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import NotificationPoller from "./components/NotificationPoller";
+import ErrorBoundary from "./components/shared/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const AuthRedirect = () => {
 };
 
 const App = () => (
+  <ErrorBoundary>
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <AdminViewProvider>
@@ -34,21 +36,23 @@ const App = () => (
           <Sonner />
           <NotificationPoller />
           <BrowserRouter>
+            {/* 🛟 Un filet d'erreur par page (clé = page : il repart à zéro quand on change de page) */}
             <Routes>
-              <Route path="/auth" element={<AuthRedirect />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-              <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-              <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
-              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/switch-account" element={<ProtectedRoute><SwitchAccount /></ProtectedRoute>} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/auth" element={<ErrorBoundary key="/auth" scope="page"><AuthRedirect /></ErrorBoundary>} />
+              <Route path="/reset-password" element={<ErrorBoundary key="/reset-password" scope="page"><ResetPassword /></ErrorBoundary>} />
+              <Route path="/" element={<ErrorBoundary key="/" scope="page"><ProtectedRoute><Index /></ProtectedRoute></ErrorBoundary>} />
+              <Route path="/settings" element={<ErrorBoundary key="/settings" scope="page"><ProtectedRoute><Settings /></ProtectedRoute></ErrorBoundary>} />
+              <Route path="/messages" element={<ErrorBoundary key="/messages" scope="page"><ProtectedRoute><Messages /></ProtectedRoute></ErrorBoundary>} />
+              <Route path="/dashboard" element={<ErrorBoundary key="/dashboard" scope="page"><ProtectedRoute><Dashboard /></ProtectedRoute></ErrorBoundary>} />
+              <Route path="/switch-account" element={<ErrorBoundary key="/switch-account" scope="page"><ProtectedRoute><SwitchAccount /></ProtectedRoute></ErrorBoundary>} />
+              <Route path="*" element={<ErrorBoundary key="*" scope="page"><NotFound /></ErrorBoundary>} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
       </AdminViewProvider>
     </AuthProvider>
   </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;
