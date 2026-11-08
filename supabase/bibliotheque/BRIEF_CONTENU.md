@@ -21,10 +21,11 @@ Pour CHAQUE chapitre : contenu original (jamais recopié d'un site commercial ; 
 - "flashcards" : 6 à 10 {"front","back"}.
 - "quiz" : 5 {"question","options":[4],"correct":0-3,"explanation"} (bonne réponse à des places variées).
 - "exercises" : 3 {"title","statement","solution","difficulty":1|2|3} (un de chaque), corrigés détaillés.
+- "defis" : 2 défis {"title","statement","solution","difficulty":3} : problèmes plus ambitieux (problème ouvert, question de réflexion, mini-enquête, défi de logique), corrigés détaillés. CP–CE2 : défis ludiques et courts.
 Chapitres « Préparer le brevet / le bac » : méthode d'épreuve + exercices type examen ORIGINAUX. Philosophie : notions, repères, méthodes (dissertation/explication), pas de citations longues. Œuvres au programme : présentation et pistes d'analyse originales, citations très courtes seulement.
 Pas de tableaux Markdown complexes (préférer des listes). Pas d'images.
 
 Organisation : traite matière par matière ; tu peux répartir le travail entre des sous-agents (max 5 en même temps). Écris UN fichier par matière :
-contenu/<NIVEAU>/<subject>.json = [{"level":"<NIVEAU>","subject","theme","chapter","cours","revision","flashcards","quiz","exercises"}, …]
+contenu/<NIVEAU>/<subject>.json = [{"level":"<NIVEAU>","subject","theme","chapter","cours","revision","flashcards","quiz","exercises","defis"}, …]
 avec theme/chapter EXACTEMENT comme dans todo/<NIVEAU>.json. Valide chaque fichier avec python3 (json.load) et vérifie qu'aucun chapitre de la liste ne manque (relance ceux qui manquent). Relis les calculs et les faits.
 Rapport final court : nombre de chapitres rédigés / attendus par matière, doutes.

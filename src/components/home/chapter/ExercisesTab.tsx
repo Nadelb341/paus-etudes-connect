@@ -18,7 +18,7 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { AttachedFile, Chapter, DoneEntry, Exercise, StudentProfile, blurOnEnter, getFileIcon, isImage, uploadChapterFile } from "./chapterShared";
+import { AttachedFile, Chapter, DoneEntry, Exercise, ExerciseKind, StudentProfile, blurOnEnter, getFileIcon, isImage, uploadChapterFile } from "./chapterShared";
 import { RichTextEditor, RichTextView } from "./SimpleRichText";
 import AttachmentViewer from "./AttachmentViewer";
 import CopyExerciseDialog from "./CopyExerciseDialog";
@@ -31,12 +31,31 @@ const Stars = ({ n, color }: { n: number; color: string }) => (
   </span>
 );
 
+// ─── Textes selon le type : ✏️ exercice ou 🏆 défi (exercice plus ambitieux) ──
+const TEXTS = {
+  exercice: {
+    Nom: "Exercice", un: "un exercice", le: "l'exercice", ce: "cet exercice", au: "à l'exercice", du: "de l'exercice",
+    titlePh: "Ex. : Exercice 1 — Calculer une fraction",
+    statementPh: "Écris la consigne de l'exercice…",
+    emptyIcon: "✏️",
+    empty: "Pas encore d'exercice. Ajoute un énoncé, un corrigé et une difficulté ★ à ★★★.",
+  },
+  defi: {
+    Nom: "Défi", un: "un défi", le: "le défi", ce: "ce défi", au: "au défi", du: "du défi",
+    titlePh: "Ex. : Défi — Le nombre mystère",
+    statementPh: "Écris le problème : une question ouverte, une énigme type olympiade, un sujet de réflexion…",
+    emptyIcon: "🏆",
+    empty: "Pas encore de défi. Propose un problème plus ambitieux (question ouverte, énigme type olympiade, sujet de réflexion) avec son corrigé et sa difficulté ★ à ★★★.",
+  },
+} as const;
+type Texts = typeof TEXTS[ExerciseKind];
+
 interface FormValues { title: string; statement: string; solution: string; difficulty: number; files: AttachedFile[]; }
 const EMPTY: FormValues = { title: "", statement: "", solution: "", difficulty: 1, files: [] };
 
 // ─── Formulaire commun (création ET modification) ─────────────────────────────
-const ExerciseForm = ({ chapterId, initial, color, draftKey, onSubmit, onCancel, submitLabel }: {
-  chapterId: string; initial: FormValues; color: string; draftKey?: string;
+const ExerciseForm = ({ chapterId, initial, color, draftKey, onSubmit, onCancel, submitLabel, t }: {
+  chapterId: string; initial: FormValues; color: string; draftKey?: string; t: Texts;
   onSubmit: (v: FormValues) => Promise<boolean>; onCancel: () => void; submitLabel: string;
 }) => {
   const [v, setV] = useState<FormValues>(initial);
@@ -64,7 +83,7 @@ const ExerciseForm = ({ chapterId, initial, color, draftKey, onSubmit, onCancel,
   };
 
   const submit = async () => {
-    if (!v.title.trim()) { toast.error("Donne un titre à l'exercice"); return; }
+    if (!v.title.trim()) { toast.error(`Donne un titre ${t.au}`); return; }
     setSaving(true);
     const ok = await onSubmit({ ...v, title: v.title.trim() });
     setSaving(false);
@@ -76,7 +95,7 @@ const ExerciseForm = ({ chapterId, initial, color, draftKey, onSubmit, onCancel,
       <div className="space-y-1">
         <Label className="text-xs">Titre</Label>
         <Input value={v.title} onChange={e => setV({ ...v, title: e.target.value })} onKeyDown={blurOnEnter}
-          placeholder="Ex. : Exercice 1 — Calculer une fraction" autoFocus />
+          placeholder={t.titlePh} autoFocus />
       </div>
       <div className="space-y-1">
         <Label className="text-xs">Difficulté</Label>
@@ -92,7 +111,7 @@ const ExerciseForm = ({ chapterId, initial, color, draftKey, onSubmit, onCancel,
       </div>
       <div className="space-y-1">
         <Label className="text-xs">Énoncé</Label>
-        <RichTextEditor value={v.statement} onChange={t => setV({ ...v, statement: t })} rows={5} placeholder="Écris la consigne de l'exercice…" />
+        <RichTextEditor value={v.statement} onChange={t => setV({ ...v, statement: t })} rows={5} placeholder={t.statementPh} />
       </div>
       <div className="space-y-1">
         <Label className="text-xs">Corrigé</Label>
@@ -125,9 +144,9 @@ const ExerciseForm = ({ chapterId, initial, color, draftKey, onSubmit, onCancel,
       <AlertDialog open={removeFileIdx !== null} onOpenChange={o => { if (!o) setRemoveFileIdx(null); }}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Retirer ce fichier de l'exercice ?</AlertDialogTitle>
+            <AlertDialogTitle>Retirer ce fichier {t.du} ?</AlertDialogTitle>
             <AlertDialogDescription className="[overflow-wrap:anywhere]">
-              « {removeFileIdx !== null ? v.files[removeFileIdx]?.name : ""} » ne sera plus joint à l'exercice (le fichier reste gardé dans le stockage).
+              « {removeFileIdx !== null ? v.files[removeFileIdx]?.name : ""} » ne sera plus joint {t.au} (le fichier reste gardé dans le stockage).
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -140,8 +159,10 @@ const ExerciseForm = ({ chapterId, initial, color, draftKey, onSubmit, onCancel,
   );
 };
 
-// ─── Onglet Exercices ─────────────────────────────────────────────────────────
+// ─── Onglet Exercices / Défis ─────────────────────────────────────────────────────────
 interface Props {
+  /** « exercice » (onglet ✏️ Exercices) ou « defi » (onglet 🏆 Défis) : même fonctionnement, textes adaptés */
+  kind: ExerciseKind;
   chapter: Chapter;
   exercises: Exercise[];
   manage: boolean;
@@ -152,9 +173,10 @@ interface Props {
   onShareChapter: (studentId: string) => void;
 }
 
-const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau, onChanged, onShareChapter }: Props) => {
+const ExercisesTab = ({ kind, chapter, exercises, manage, color, levelProfiles, niveau, onChanged, onShareChapter }: Props) => {
   const { user } = useAuth();
-  const draftKey = `pausetude_exercise_${chapter.id}`;
+  const t = TEXTS[kind];
+  const draftKey = kind === "defi" ? `pausetude_defi_${chapter.id}` : `pausetude_exercise_${chapter.id}`;
   const [createInitial, setCreateInitial] = useState<FormValues | null>(null);
   const [draftRecovery, setDraftRecovery] = useState<FormValues | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -175,17 +197,17 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
   const create = async (v: FormValues) => {
     const { data: created, error } = await supabase.from("chapter_exercises").insert({
       chapter_id: chapter.id, title: v.title, statement: v.statement,
-      difficulty: v.difficulty, files: v.files as unknown as Json, order_index: exercises.length, created_by: user?.id,
+      difficulty: v.difficulty, kind, files: v.files as unknown as Json, order_index: exercises.length, created_by: user?.id,
     }).select("id").single();
-    if (error || !created) { toast.error("Impossible d'ajouter l'exercice"); return false; }
+    if (error || !created) { toast.error(`Impossible d'ajouter ${t.le}`); return false; }
     // Le corrigé va dans la table secrète (jamais lisible par les élèves via l'API)
     if (v.solution.trim() && !(await saveExerciseSecret(created.id, { solution: v.solution }))) {
-      toast.error("Exercice ajouté, mais le corrigé n'a pas pu être enregistré : ouvre « Modifier » pour le remettre");
+      toast.error(`${t.Nom} ajouté, mais le corrigé n'a pas pu être enregistré : ouvre « Modifier » pour le remettre`);
       setCreateInitial(null);
       onChanged();
       return true;
     }
-    toast.success("Exercice ajouté !");
+    toast.success(`${t.Nom} ajouté !`);
     setCreateInitial(null);
     onChanged();
     return true;
@@ -202,7 +224,7 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
       files: v.files as unknown as Json, updated_at: new Date().toISOString(),
     }).eq("id", ex.id);
     if (error) { toast.error("Impossible d'enregistrer"); return false; }
-    toast.success("Exercice enregistré !");
+    toast.success(`${t.Nom} enregistré !`);
     setEditingId(null);
     onChanged();
     return true;
@@ -241,11 +263,11 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
     // Copie complète pour la corbeille : la ligne + le corrigé et l'historique (table secrète)
     const { data: full } = await supabase.from("chapter_exercises").select("*").eq("id", ex.id).maybeSingle();
     const [withSecret] = await withSecretsForTrash([full || ex]);
-    if (!(await moveToTrash(user.id, "chapter_exercise", ex.id, ex.title, withSecret))) {
-      toast.error("La mise en corbeille a échoué : l'exercice n'a pas été supprimé"); return;
+    if (!(await moveToTrash(user.id, "chapter_exercise", ex.id, kind === "defi" ? `Défi : ${ex.title}` : ex.title, withSecret))) {
+      toast.error(`La mise en corbeille a échoué : ${t.le} n'a pas été supprimé`); return;
     }
     await supabase.from("chapter_exercises").delete().eq("id", ex.id);
-    toast.success("Exercice mis dans la corbeille");
+    toast.success(`${t.Nom} mis dans la corbeille`);
     onChanged();
   };
 
@@ -255,25 +277,25 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
     <div className="space-y-3">
       {manage && !createInitial && (
         <Button size="sm" variant="outline" onClick={() => setCreateInitial(EMPTY)} className="gap-1" style={{ borderColor: color, color }}>
-          <Plus size={14} />Ajouter un exercice
+          <Plus size={14} />Ajouter {t.un}
         </Button>
       )}
       {manage && createInitial && (
-        <ExerciseForm chapterId={chapter.id} initial={createInitial} color={color} draftKey={draftKey} submitLabel="Ajouter l'exercice"
+        <ExerciseForm chapterId={chapter.id} initial={createInitial} color={color} draftKey={draftKey} t={t} submitLabel={`Ajouter ${t.le}`}
           onSubmit={create} onCancel={() => { clearDraft(draftKey); setCreateInitial(null); }} />
       )}
 
       {exercises.length === 0 && !createInitial && (
         <div className="text-center py-6 px-3 rounded-xl border border-dashed" style={{ borderColor: color }}>
-          <p className="text-2xl mb-1">✏️</p>
-          <p className="text-xs text-muted-foreground">Pas encore d'exercice. Ajoute un énoncé, un corrigé et une difficulté ★ à ★★★.</p>
+          <p className="text-2xl mb-1">{t.emptyIcon}</p>
+          <p className="text-xs text-muted-foreground">{t.empty}</p>
         </div>
       )}
 
       {exercises.map((ex, idx) => {
         if (manage && editingId === ex.id) {
           return (
-            <ExerciseForm key={ex.id} chapterId={chapter.id} color={color} submitLabel="Enregistrer"
+            <ExerciseForm key={ex.id} chapterId={chapter.id} color={color} t={t} submitLabel="Enregistrer"
               initial={{ title: ex.title, statement: ex.statement, solution: ex.solution || "", difficulty: ex.difficulty, files: ex.files || [] }}
               onSubmit={v => update(ex, v)} onCancel={() => setEditingId(null)} />
           );
@@ -340,7 +362,7 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
               {manage && (
                 <>
                   <label className="flex items-center justify-between gap-2 text-xs px-1 cursor-pointer">
-                    <span className="min-w-0">Corrigé visible par les élèves à qui l'exercice est donné</span>
+                    <span className="min-w-0">Corrigé visible par les élèves à qui {t.le} est donné</span>
                     <Switch checked={ex.solution_visible_to_students}
                       onCheckedChange={c => patch(ex, { solution_visible_to_students: c }, c ? "Corrigé visible par les élèves" : "Corrigé masqué aux élèves")} />
                   </label>
@@ -373,7 +395,7 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
                             </label>
                             {on && !chapterShared && (
                               <div className="flex flex-wrap items-center gap-2 pl-8 pb-1 text-[11px] text-amber-700 dark:text-amber-400">
-                                <span>⚠️ Le chapitre n'est pas encore partagé avec {p.first_name} : il ne verra pas l'exercice.</span>
+                                <span>⚠️ Le chapitre n'est pas encore partagé avec {p.first_name} : il ne verra pas {t.le}.</span>
                                 <button className="underline font-medium" onClick={() => onShareChapter(p.user_id)}>Partager aussi le chapitre</button>
                               </div>
                             )}
@@ -426,7 +448,7 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
       <AlertDialog open={!!deleteTarget} onOpenChange={o => { if (!o) setDeleteTarget(null); }}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Supprimer cet exercice ?</AlertDialogTitle>
+            <AlertDialogTitle>Supprimer {t.ce} ?</AlertDialogTitle>
             <AlertDialogDescription className="[overflow-wrap:anywhere]">
               « {deleteTarget?.title} » ira dans la corbeille (Paramètres), d'où tu pourras le restaurer.
             </AlertDialogDescription>
@@ -443,7 +465,7 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
           <AlertDialogHeader>
             <AlertDialogTitle>⏳ Action inachevée</AlertDialogTitle>
             <AlertDialogDescription className="[overflow-wrap:anywhere]">
-              Tu as commencé à créer l'exercice « {draftRecovery?.title || "sans titre"} ». Souhaites-tu continuer ?
+              Tu as commencé à créer {t.le} « {draftRecovery?.title || "sans titre"} ». Souhaites-tu continuer ?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

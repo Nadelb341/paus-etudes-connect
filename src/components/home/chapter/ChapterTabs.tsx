@@ -20,15 +20,16 @@ import DocumentsTab from "./DocumentsTab";
 import ExercisesTab from "./ExercisesTab";
 import FlashcardsTab from "./FlashcardsTab";
 
-type TabKey = "cours" | "videos" | "revision" | "fiches" | "quiz" | "exercices" | "flashcards" | "documents";
+type TabKey = "cours" | "videos" | "revision" | "fiches" | "quiz" | "exercices" | "defis" | "flashcards" | "documents";
 
 const TABS: { key: TabKey; icon: string; label: string }[] = [
   { key: "cours", icon: "📖", label: "Cours" },
-  { key: "videos", icon: "🎬", label: "Vidéos & liens" },
+  { key: "videos", icon: "▶️", label: "Vidéo" },
   { key: "revision", icon: "📝", label: "Révision" },
   { key: "fiches", icon: "🖼️", label: "Fiches visuelles" },
   { key: "quiz", icon: "🧠", label: "Quiz" },
   { key: "exercices", icon: "✏️", label: "Exercices" },
+  { key: "defis", icon: "🏆", label: "Défis" },
   { key: "flashcards", icon: "🃏", label: "Flashcards" },
   { key: "documents", icon: "📄", label: "Documents" },
 ];
@@ -46,7 +47,7 @@ interface Props {
 }
 
 // Jamais solution/done_log ici (vides en base de toute façon) : ils vivent dans chapter_exercise_secrets
-const EXERCISE_STUDENT_COLUMNS = "id, chapter_id, title, statement, difficulty, files, order_index, target_student_ids, solution_visible_to_students, created_at";
+const EXERCISE_STUDENT_COLUMNS = "id, chapter_id, title, statement, difficulty, files, order_index, kind, target_student_ids, solution_visible_to_students, created_at";
 
 const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onChapterChange, onDocsChanged, onShareChapter }: Props) => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -58,6 +59,7 @@ const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onCh
   const [active, setActive] = useState<TabKey | null>(() => {
     // Un brouillon en cours sur ce chapitre → on ouvre directement le bon onglet (reprise)
     if (manage && loadDraft(`pausetude_exercise_${chapter.id}`)) return "exercices";
+    if (manage && loadDraft(`pausetude_defi_${chapter.id}`)) return "defis";
     if (manage && loadDraft(`pausetude_flashcard_${chapter.id}`)) return "flashcards";
     return manage ? "cours" : null;
   });
@@ -106,6 +108,9 @@ const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onCh
   const fiches = docs.filter(d => d.category === "fiche");
   const plainDocs = docs.filter(d => d.category !== "fiche");
   const links = chapter.youtube_links || [];
+  // Exercices et défis vivent dans la même table (colonne kind) : deux listes séparées
+  const exoList = useMemo(() => exercises.filter(e => e.kind !== "defi"), [exercises]);
+  const defiList = useMemo(() => exercises.filter(e => e.kind === "defi"), [exercises]);
 
   const counts: Record<TabKey, number> = useMemo(() => ({
     cours: (chapter.description || "").trim() ? 1 : 0,
@@ -113,10 +118,11 @@ const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onCh
     revision: (chapter.revision || "").trim() ? 1 : 0,
     fiches: fiches.length,
     quiz: quizCount,
-    exercices: exercises.length,
+    exercices: exoList.length,
+    defis: defiList.length,
     flashcards: flashcards.length,
     documents: plainDocs.length,
-  }), [chapter.description, chapter.revision, links.length, fiches.length, quizCount, exercises.length, flashcards.length, plainDocs.length]);
+  }), [chapter.description, chapter.revision, links.length, fiches.length, quizCount, exoList.length, defiList.length, flashcards.length, plainDocs.length]);
 
   // Côté élève : un onglet vide est masqué
   const visibleTabs = manage ? TABS : TABS.filter(t => counts[t.key] > 0);
@@ -216,7 +222,7 @@ const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onCh
               </Button>
             </div>
           )}
-          {links.length === 0 && emptyText("🎬", "Pas encore de vidéo ni de lien. Colle une vidéo YouTube, une playlist ou un site utile.")}
+          {links.length === 0 && emptyText("▶️", "Pas encore de vidéo ni de lien. Colle une vidéo YouTube, une playlist ou un site utile.")}
           {links.map((link, i) => {
             const ytId = isYoutubeUrl(link) ? extractYoutubeVideoId(link) : null;
             return (
@@ -262,11 +268,21 @@ const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onCh
       )}
 
       {current === "quiz" && (
-        manage ? <QuizManager subjectId={chapter.id} /> : <QuizPlayer subjectId={chapter.id} />
+        manage ? (
+          <div className="space-y-2">
+            {quizCount === 0 && emptyText("🧠", "Pas encore de quiz. Donne un titre ci-dessous puis appuie sur « Créer » pour ajouter les questions.")}
+            <QuizManager subjectId={chapter.id} />
+          </div>
+        ) : <QuizPlayer subjectId={chapter.id} />
       )}
 
       {current === "exercices" && (
-        <ExercisesTab chapter={chapter} exercises={exercises} manage={manage} color={color}
+        <ExercisesTab key="exercices" kind="exercice" chapter={chapter} exercises={exoList} manage={manage} color={color}
+          levelProfiles={levelProfiles} niveau={niveau} onChanged={fetchExercises} onShareChapter={onShareChapter} />
+      )}
+
+      {current === "defis" && (
+        <ExercisesTab key="defis" kind="defi" chapter={chapter} exercises={defiList} manage={manage} color={color}
           levelProfiles={levelProfiles} niveau={niveau} onChanged={fetchExercises} onShareChapter={onShareChapter} />
       )}
 

@@ -231,6 +231,7 @@ export type Database = {
           done_log: Json
           files: Json
           id: string
+          kind: string
           order_index: number
           solution: string
           solution_visible_to_students: boolean
@@ -247,6 +248,7 @@ export type Database = {
           done_log?: Json
           files?: Json
           id?: string
+          kind?: string
           order_index?: number
           solution?: string
           solution_visible_to_students?: boolean
@@ -263,6 +265,7 @@ export type Database = {
           done_log?: Json
           files?: Json
           id?: string
+          kind?: string
           order_index?: number
           solution?: string
           solution_visible_to_students?: boolean

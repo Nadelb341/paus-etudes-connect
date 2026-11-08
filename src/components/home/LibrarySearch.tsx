@@ -7,7 +7,7 @@ import { SUBJECTS_EXTRA, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constant
 type Subject = typeof SUBJECTS_GENERAL[0];
 
 interface Hit {
-  kind: "theme" | "chapter" | "exercise" | "document";
+  kind: "theme" | "chapter" | "exercise" | "defi" | "document";
   item_id: string;
   item_title: string;
   chapter_id: string | null;
@@ -28,12 +28,13 @@ const KIND: Record<Hit["kind"], { icon: string; label: string }> = {
   theme: { icon: "🗂️", label: "Thème" },
   chapter: { icon: "📂", label: "Chapitre" },
   exercise: { icon: "✏️", label: "Exercice" },
+  defi: { icon: "🏆", label: "Défi" },
   document: { icon: "📄", label: "Document" },
 };
 
 const ALL_SUBJECTS: Subject[] = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE, ...SUBJECTS_EXTRA];
 
-/** Recherche (admin) dans les titres de thèmes, chapitres, exercices et documents — insensible aux accents. */
+/** Recherche (admin) dans les titres de thèmes, chapitres, exercices, défis et documents — insensible aux accents. */
 const LibrarySearch = ({ onOpen }: { onOpen: (t: LibraryTarget) => void }) => {
   const [q, setQ] = useState("");
   const [hits, setHits] = useState<Hit[]>([]);
@@ -116,7 +117,7 @@ const LibrarySearch = ({ onOpen }: { onOpen: (t: LibraryTarget) => void }) => {
                     <span className="block text-[11px] text-muted-foreground [overflow-wrap:anywhere]">
                       {KIND[h.kind].label}
                       {h.kind !== "theme" && ` · ${h.theme_title || "Sans thème"}`}
-                      {(h.kind === "exercise" || h.kind === "document") && h.chapter_title && ` › ${h.chapter_title}`}
+                      {(h.kind === "exercise" || h.kind === "defi" || h.kind === "document") && h.chapter_title && ` › ${h.chapter_title}`}
                     </span>
                   </span>
                 </button>

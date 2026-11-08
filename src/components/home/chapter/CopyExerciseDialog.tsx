@@ -19,7 +19,7 @@ interface Props {
 const selectCls = "w-full h-10 rounded-md border border-input bg-background px-3 text-sm";
 const NO_THEME = "__sans_theme__";
 
-/** « Copier vers… » : niveau → matière → thème → chapitre. Copie énoncé, corrigé, fichiers et difficulté. */
+/** « Copier vers… » : niveau → matière → thème → chapitre. Copie énoncé, corrigé, fichiers, difficulté et type (exercice ou défi). */
 const CopyExerciseDialog = ({ exercise, onClose, defaultLevel }: Props) => {
   const { user } = useAuth();
   const [level, setLevel] = useState("");
@@ -53,13 +53,16 @@ const CopyExerciseDialog = ({ exercise, onClose, defaultLevel }: Props) => {
 
   const doCopy = async () => {
     if (!exercise || !chapter) return;
+    const kind = exercise.kind === "defi" ? "defi" : "exercice";
+    const nom = kind === "defi" ? "Défi" : "Exercice";
     setSaving(true);
-    const { count } = await supabase.from("chapter_exercises").select("id", { count: "exact", head: true }).eq("chapter_id", chapter);
+    const { count } = await supabase.from("chapter_exercises").select("id", { count: "exact", head: true }).eq("chapter_id", chapter).eq("kind", kind);
     const { data: created, error } = await supabase.from("chapter_exercises").insert({
       chapter_id: chapter,
       title: exercise.title,
       statement: exercise.statement,
       difficulty: exercise.difficulty,
+      kind, // un défi reste un défi, un exercice reste un exercice
       files: exercise.files as unknown as Json,
       order_index: count ?? 0,
       created_by: user?.id,
@@ -69,9 +72,9 @@ const CopyExerciseDialog = ({ exercise, onClose, defaultLevel }: Props) => {
     const solution = (await fetchExerciseSecrets([exercise.id])).get(exercise.id)?.solution ?? exercise.solution ?? "";
     const solOk = !solution.trim() || await saveExerciseSecret(created.id, { solution });
     setSaving(false);
-    if (!solOk) { toast.error("Exercice copié, mais pas son corrigé : ouvre « Modifier » dans le chapitre d'arrivée pour le remettre"); onClose(); return; }
+    if (!solOk) { toast.error(`${nom} copié, mais pas son corrigé : ouvre « Modifier » dans le chapitre d'arrivée pour le remettre`); onClose(); return; }
     const chTitle = chapters.find(c => c.id === chapter)?.title || "";
-    toast.success(`Exercice copié dans « ${chTitle} »`);
+    toast.success(`${nom} copié dans « ${chTitle} »`);
     onClose();
   };
 

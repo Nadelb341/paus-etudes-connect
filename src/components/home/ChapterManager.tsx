@@ -192,7 +192,7 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed, themeC
       ]);
       await Promise.all([
         ...(docs || []).map(d => moveToTrash(user.id, "chapter_document", d.id, `${d.file_name} (chapitre « ${chapter.title} »)`, d)),
-        ...(exs || []).map(e => moveToTrash(user.id, "chapter_exercise", e.id, `${e.title} (chapitre « ${chapter.title} »)`, e)),
+        ...(exs || []).map(e => moveToTrash(user.id, "chapter_exercise", e.id, `${e.kind === "defi" ? "Défi : " : ""}${e.title} (chapitre « ${chapter.title} »)`, e)),
         ...(cards || []).map(f => moveToTrash(user.id, "chapter_flashcard", f.id, `Flashcard : ${f.front.slice(0, 60)} (chapitre « ${chapter.title} »)`, f)),
       ]);
     }
@@ -387,7 +387,7 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed, themeC
                       <AlertDialogContent>
                         <AlertDialogHeader>
                           <AlertDialogTitle>Supprimer ce chapitre ?</AlertDialogTitle>
-                          <AlertDialogDescription>Le chapitre et tout son contenu (documents, exercices, flashcards) iront dans la corbeille (Paramètres), d'où tu pourras les restaurer.</AlertDialogDescription>
+                          <AlertDialogDescription>Le chapitre et tout son contenu (documents, exercices, défis, flashcards) iront dans la corbeille (Paramètres), d'où tu pourras les restaurer.</AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel>Annuler</AlertDialogCancel>
@@ -399,7 +399,7 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed, themeC
                 </div>
               )}
 
-              {/* Contenu étendu : onglets (Cours, Vidéos, Révision, Fiches, Quiz, Exercices, Flashcards, Documents) */}
+              {/* Contenu étendu : onglets (Cours, Vidéo, Révision, Fiches visuelles, Quiz, Exercices, Défis, Flashcards, Documents) */}
               {isExpanded && (
                 <div className="border-t border-border p-3 sm:p-4 space-y-4" onClick={e => e.stopPropagation()}>
                   <ChapterTabs

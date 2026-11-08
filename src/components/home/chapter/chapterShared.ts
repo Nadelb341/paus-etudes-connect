@@ -44,6 +44,8 @@ export interface DoneEntry {
   note: string;
 }
 
+export type ExerciseKind = "exercice" | "defi";
+
 export interface Exercise {
   id: string;
   chapter_id: string;
@@ -51,6 +53,8 @@ export interface Exercise {
   statement: string;
   solution?: string;
   difficulty: number;
+  /** « exercice » (onglet ✏️ Exercices) ou « defi » (onglet 🏆 Défis) */
+  kind: ExerciseKind;
   files: AttachedFile[];
   order_index: number;
   target_student_ids: string[] | null;

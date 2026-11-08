@@ -55,10 +55,17 @@ export async function restoreTrashItem(item: TrashItem): Promise<boolean> {
   // déplacés automatiquement par un déclencheur en base.
   const secret = item.item_type === "chapter_exercise" ? rest.secret : undefined;
   if (item.item_type === "chapter_exercise") delete rest.secret;
+  // Quiz : ses questions sont gardées dans la même entrée de corbeille et recréées après le quiz
+  const quizQuestions = item.item_type === "quiz" && Array.isArray(rest.questions) ? rest.questions : null;
+  if (item.item_type === "quiz") delete rest.questions;
   const { error } = await supabase.from(table as any).insert({ ...rest, id: item.original_id } as any);
   // Nouvel essai après un corrigé non recréé : l'exercice est déjà revenu (doublon 23505), on finit le travail
   const alreadyBack = !!error && error.code === "23505" && item.item_type === "chapter_exercise" && !!secret;
   if (error && !alreadyBack) return false;
+  if (quizQuestions && quizQuestions.length) {
+    const { error: qErr } = await supabase.from("quiz_questions").insert(quizQuestions as any);
+    if (qErr && qErr.code !== "23505") return false;
+  }
   if (secret && (secret.solution || (Array.isArray(secret.done_log) && secret.done_log.length))) {
     const ok = await saveExerciseSecret(item.original_id, {
       solution: secret.solution || "",
