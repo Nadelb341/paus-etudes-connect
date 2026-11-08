@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
+import { fetchExerciseSecrets } from "@/lib/exerciseSecrets";
 import { loadDraft } from "@/hooks/useDraftRecovery";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,6 +45,7 @@ interface Props {
   onShareChapter: (studentId: string) => void;
 }
 
+// Jamais solution/done_log ici (vides en base de toute façon) : ils vivent dans chapter_exercise_secrets
 const EXERCISE_STUDENT_COLUMNS = "id, chapter_id, title, statement, difficulty, files, order_index, target_student_ids, solution_visible_to_students, created_at";
 
 const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onChapterChange, onDocsChanged, onShareChapter }: Props) => {
@@ -61,18 +63,19 @@ const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onCh
   });
 
   const fetchExercises = async () => {
-    if (manage) {
-      const { data } = await supabase.from("chapter_exercises").select("*").eq("chapter_id", chapter.id).order("order_index").order("created_at");
-      setExercises((data as unknown as Exercise[]) || []);
-      return;
-    }
-    // Élève : ni le corrigé ni l'historique ne sont demandés, sauf corrigé rendu visible par l'enseignante
     const { data } = await supabase.from("chapter_exercises").select(EXERCISE_STUDENT_COLUMNS).eq("chapter_id", chapter.id).order("order_index").order("created_at");
     const list = (data as unknown as Exercise[]) || [];
-    const visibleIds = list.filter(e => e.solution_visible_to_students).map(e => e.id);
-    if (visibleIds.length) {
-      const { data: sols } = await supabase.from("chapter_exercises").select("id, solution").in("id", visibleIds);
-      const map = new Map((sols || []).map(s => [s.id, s.solution]));
+    if (manage) {
+      // Admin : corrigé + historique « fait avec » rangés dans la table secrète
+      const secrets = await fetchExerciseSecrets(list.map(e => e.id));
+      list.forEach(e => { const s = secrets.get(e.id); e.solution = s?.solution || ""; e.done_log = s?.done_log || []; });
+      setExercises(list);
+      return;
+    }
+    // Élève : seuls les corrigés rendus visibles par l'enseignante, renvoyés par la base (jamais l'historique)
+    if (list.some(e => e.solution_visible_to_students)) {
+      const { data: sols } = await supabase.rpc("exercise_solutions_visibles", { p_chapter: chapter.id });
+      const map = new Map((sols || []).map(s => [s.exercise_id, s.solution]));
       list.forEach(e => { if (map.has(e.id)) e.solution = map.get(e.id) || ""; });
     }
     setExercises(list);
@@ -96,6 +99,7 @@ const ChapterTabs = ({ chapter, docs, manage, color, levelProfiles, niveau, onCh
 
   // En direct (les formulaires ouverts gardent leur propre état : seules les listes sont rechargées)
   useRealtimeRefresh(["chapter_exercises"], () => fetchExercises());
+  useRealtimeRefresh(["chapter_exercise_secrets"], () => fetchExercises(), manage);
   useRealtimeRefresh(["chapter_flashcards"], () => fetchFlashcards());
   useRealtimeRefresh(["quizzes"], () => fetchQuizCount());
 

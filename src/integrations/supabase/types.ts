@@ -193,6 +193,35 @@ export type Database = {
           },
         ]
       }
+      chapter_exercise_secrets: {
+        Row: {
+          done_log: Json
+          exercise_id: string
+          solution: string
+          updated_at: string
+        }
+        Insert: {
+          done_log?: Json
+          exercise_id: string
+          solution?: string
+          updated_at?: string
+        }
+        Update: {
+          done_log?: Json
+          exercise_id?: string
+          solution?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chapter_exercise_secrets_exercise_id_fkey"
+            columns: ["exercise_id"]
+            isOneToOne: true
+            referencedRelation: "chapter_exercises"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chapter_exercises: {
         Row: {
           chapter_id: string
@@ -1148,6 +1177,13 @@ export type Database = {
           chapter_id: string
           rempli: boolean
           theme_id: string
+        }[]
+      }
+      exercise_solutions_visibles: {
+        Args: { p_chapter: string }
+        Returns: {
+          exercise_id: string
+          solution: string
         }[]
       }
       get_admin_user_id: { Args: never; Returns: string }

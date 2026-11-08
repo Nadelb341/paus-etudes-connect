@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { moveToTrash } from "@/lib/trash";
+import { fetchExerciseSecrets, saveExerciseSecret, withSecretsForTrash } from "@/lib/exerciseSecrets";
 import { saveDraft, loadDraft, clearDraft } from "@/hooks/useDraftRecovery";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -172,11 +173,18 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
   }, [draftKey, manage]);
 
   const create = async (v: FormValues) => {
-    const { error } = await supabase.from("chapter_exercises").insert({
-      chapter_id: chapter.id, title: v.title, statement: v.statement, solution: v.solution,
+    const { data: created, error } = await supabase.from("chapter_exercises").insert({
+      chapter_id: chapter.id, title: v.title, statement: v.statement,
       difficulty: v.difficulty, files: v.files as unknown as Json, order_index: exercises.length, created_by: user?.id,
-    });
-    if (error) { toast.error("Impossible d'ajouter l'exercice"); return false; }
+    }).select("id").single();
+    if (error || !created) { toast.error("Impossible d'ajouter l'exercice"); return false; }
+    // Le corrigé va dans la table secrète (jamais lisible par les élèves via l'API)
+    if (v.solution.trim() && !(await saveExerciseSecret(created.id, { solution: v.solution }))) {
+      toast.error("Exercice ajouté, mais le corrigé n'a pas pu être enregistré : ouvre « Modifier » pour le remettre");
+      setCreateInitial(null);
+      onChanged();
+      return true;
+    }
     toast.success("Exercice ajouté !");
     setCreateInitial(null);
     onChanged();
@@ -184,8 +192,13 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
   };
 
   const update = async (ex: Exercise, v: FormValues) => {
+    // Corrigé d'abord (table secrète), puis l'exercice : la mise à jour de chapter_exercises
+    // prévient aussi les élèves en direct quand le corrigé visible a changé
+    if ((v.solution || "") !== (ex.solution || "") && !(await saveExerciseSecret(ex.id, { solution: v.solution }))) {
+      toast.error("Impossible d'enregistrer le corrigé"); return false;
+    }
     const { error } = await supabase.from("chapter_exercises").update({
-      title: v.title, statement: v.statement, solution: v.solution, difficulty: v.difficulty,
+      title: v.title, statement: v.statement, difficulty: v.difficulty,
       files: v.files as unknown as Json, updated_at: new Date().toISOString(),
     }).eq("id", ex.id);
     if (error) { toast.error("Impossible d'enregistrer"); return false; }
@@ -208,21 +221,29 @@ const ExercisesTab = ({ chapter, exercises, manage, color, levelProfiles, niveau
     patch(ex, { target_student_ids: next.length ? next : null });
   };
 
-  const addDone = (ex: Exercise) => {
+  const addDone = async (ex: Exercise) => {
     const p = levelProfiles.find(s => s.user_id === doneForm.student);
     if (!p || !doneForm.date) { toast.error("Choisis l'élève et la date"); return; }
     const entry: DoneEntry = { student_id: p.user_id, student_name: p.first_name, date: doneForm.date, note: doneForm.note.trim() };
-    patch(ex, { done_log: [...(ex.done_log || []), entry] as unknown as Json }, `Noté : fait avec ${p.first_name}`);
     setDoneForm({ student: "", date: "", note: "" });
     setOpenDone(null);
+    // Historique relu juste avant d'ajouter (pas de perte si un autre appareil a noté entre-temps)
+    const current = (await fetchExerciseSecrets([ex.id])).get(ex.id)?.done_log ?? ex.done_log ?? [];
+    if (!(await saveExerciseSecret(ex.id, { done_log: [...current, entry] }))) { toast.error("La modification a échoué"); return; }
+    toast.success(`Noté : fait avec ${p.first_name}`);
+    onChanged();
   };
 
   const confirmDelete = async () => {
     const ex = deleteTarget;
     setDeleteTarget(null);
     if (!ex || !user) return;
+    // Copie complète pour la corbeille : la ligne + le corrigé et l'historique (table secrète)
     const { data: full } = await supabase.from("chapter_exercises").select("*").eq("id", ex.id).maybeSingle();
-    await moveToTrash(user.id, "chapter_exercise", ex.id, ex.title, full || ex);
+    const [withSecret] = await withSecretsForTrash([full || ex]);
+    if (!(await moveToTrash(user.id, "chapter_exercise", ex.id, ex.title, withSecret))) {
+      toast.error("La mise en corbeille a échoué : l'exercice n'a pas été supprimé"); return;
+    }
     await supabase.from("chapter_exercises").delete().eq("id", ex.id);
     toast.success("Exercice mis dans la corbeille");
     onChanged();

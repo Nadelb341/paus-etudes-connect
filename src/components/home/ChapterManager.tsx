@@ -9,6 +9,7 @@ import { Plus, Trash2, ChevronDown, ChevronUp, X, Pencil, Check, Lock, Users } f
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { moveToTrash } from "@/lib/trash";
+import { withSecretsForTrash } from "@/lib/exerciseSecrets";
 import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
@@ -184,7 +185,9 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed, themeC
       await moveToTrash(user.id, "subject_chapter", id, chapter.title, chapter);
       const [{ data: docs }, { data: exs }, { data: cards }] = await Promise.all([
         supabase.from("chapter_documents").select("*").eq("chapter_id", id),
-        supabase.from("chapter_exercises").select("*").eq("chapter_id", id),
+        // exercices + leur corrigé / historique (table secrète) : copie complète pour la corbeille
+        supabase.from("chapter_exercises").select("*").eq("chapter_id", id)
+          .then(async r => ({ data: r.data ? await withSecretsForTrash(r.data) : null })),
         supabase.from("chapter_flashcards").select("*").eq("chapter_id", id),
       ]);
       await Promise.all([

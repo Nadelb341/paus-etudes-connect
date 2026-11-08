@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { ALL_LEVELS, Exercise } from "./chapterShared";
 import type { Json } from "@/integrations/supabase/types";
+import { fetchExerciseSecrets, saveExerciseSecret } from "@/lib/exerciseSecrets";
 
 interface Props {
   exercise: Exercise | null;
@@ -54,18 +55,21 @@ const CopyExerciseDialog = ({ exercise, onClose, defaultLevel }: Props) => {
     if (!exercise || !chapter) return;
     setSaving(true);
     const { count } = await supabase.from("chapter_exercises").select("id", { count: "exact", head: true }).eq("chapter_id", chapter);
-    const { error } = await supabase.from("chapter_exercises").insert({
+    const { data: created, error } = await supabase.from("chapter_exercises").insert({
       chapter_id: chapter,
       title: exercise.title,
       statement: exercise.statement,
-      solution: exercise.solution || "",
       difficulty: exercise.difficulty,
       files: exercise.files as unknown as Json,
       order_index: count ?? 0,
       created_by: user?.id,
-    });
+    }).select("id").single();
+    if (error || !created) { setSaving(false); toast.error("La copie a échoué"); return; }
+    // Corrigé relu dans la table secrète (source de vérité) puis recopié ; l'historique « fait avec » n'est pas copié
+    const solution = (await fetchExerciseSecrets([exercise.id])).get(exercise.id)?.solution ?? exercise.solution ?? "";
+    const solOk = !solution.trim() || await saveExerciseSecret(created.id, { solution });
     setSaving(false);
-    if (error) { toast.error("La copie a échoué"); return; }
+    if (!solOk) { toast.error("Exercice copié, mais pas son corrigé : ouvre « Modifier » dans le chapitre d'arrivée pour le remettre"); onClose(); return; }
     const chTitle = chapters.find(c => c.id === chapter)?.title || "";
     toast.success(`Exercice copié dans « ${chTitle} »`);
     onClose();

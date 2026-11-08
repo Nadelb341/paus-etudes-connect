@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { saveExerciseSecret } from "@/lib/exerciseSecrets";
 
 export type TrashItemType =
   | "quick_note" | "quiz" | "subject_comment" | "subject_theme"
@@ -49,8 +50,23 @@ export async function restoreTrashItem(item: TrashItem): Promise<boolean> {
   const table = TABLE_BY_TYPE[item.item_type as TrashItemType];
   if (!table) return false;
   const { id, ...rest } = item.item_data;
+  // Exercice : le corrigé et l'historique « fait avec » sont gardés à part (clé `secret`) et
+  // recréés dans la table secrète. Les anciens éléments (corrigé encore dans la ligne) sont
+  // déplacés automatiquement par un déclencheur en base.
+  const secret = item.item_type === "chapter_exercise" ? rest.secret : undefined;
+  if (item.item_type === "chapter_exercise") delete rest.secret;
   const { error } = await supabase.from(table as any).insert({ ...rest, id: item.original_id } as any);
-  if (error) return false;
+  // Nouvel essai après un corrigé non recréé : l'exercice est déjà revenu (doublon 23505), on finit le travail
+  const alreadyBack = !!error && error.code === "23505" && item.item_type === "chapter_exercise" && !!secret;
+  if (error && !alreadyBack) return false;
+  if (secret && (secret.solution || (Array.isArray(secret.done_log) && secret.done_log.length))) {
+    const ok = await saveExerciseSecret(item.original_id, {
+      solution: secret.solution || "",
+      done_log: Array.isArray(secret.done_log) ? secret.done_log : [],
+    });
+    // Corrigé non recréé → on garde l'élément dans la corbeille (rien n'est perdu), l'exercice est déjà revenu
+    if (!ok) return false;
+  }
   await supabase.from("trash_items" as any).delete().eq("id", item.id);
   return true;
 }
