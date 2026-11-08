@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, BookOpen, Check } from "lucide-react";
-import { DAYS_OF_WEEK, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constants";
+import { DAYS_OF_WEEK, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SUBJECTS_EXTRA } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
@@ -114,7 +114,7 @@ const CahierDeTexte = ({ badgeCount = 0 }: CahierDeTexteProps) => {
   };
 
   const getSubjectLabel = (subjectId: string) => {
-    const all = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
+    const all = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE, ...SUBJECTS_EXTRA];
     return all.find(s => s.id === subjectId)?.label || subjectId;
   };
 

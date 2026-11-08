@@ -1,0 +1,3049 @@
+[
+ {
+  "level": "Seconde",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "La poésie du Moyen Âge au XVIIIe siècle",
+    "chapters": [
+     "Les formes poétiques fixes : ballade, rondeau, sonnet",
+     "La versification : mètre, rimes, strophes",
+     "La poésie lyrique de la Renaissance : la Pléiade",
+     "La poésie baroque et la poésie classique",
+     "Les fables et la poésie au XVIIe siècle",
+     "Analyser les images et les figures de style en poésie"
+    ]
+   },
+   {
+    "title": "La littérature d'idées et la presse du XIXe au XXIe siècle",
+    "chapters": [
+     "Les genres de l'argumentation : essai, pamphlet, article, discours",
+     "La presse et l'engagement des écrivains au XIXe siècle",
+     "Les grands débats d'idées du XXe siècle",
+     "Thèse, arguments, exemples : analyser un raisonnement",
+     "Convaincre, persuader, délibérer",
+     "L'information à l'ère numérique : esprit critique et sources"
+    ]
+   },
+   {
+    "title": "Le roman et le récit du XVIIIe au XXIe siècle",
+    "chapters": [
+     "Le roman au siècle des Lumières",
+     "Le romantisme et le roman au XIXe siècle",
+     "Le réalisme et le naturalisme",
+     "La nouvelle : un récit bref",
+     "Le roman au XXe et au XXIe siècle : renouvellements",
+     "Narrateur, point de vue et rythme du récit",
+     "Le personnage de roman et sa construction"
+    ]
+   },
+   {
+    "title": "Le théâtre du XVIIe au XXIe siècle",
+    "chapters": [
+     "Le théâtre classique : règles et genres",
+     "La comédie et ses ressorts du comique",
+     "La tragédie et le tragique",
+     "Le drame romantique",
+     "Le théâtre moderne et contemporain",
+     "Texte et représentation : la mise en scène",
+     "Analyser le dialogue théâtral : double énonciation et répliques"
+    ]
+   },
+   {
+    "title": "Étude de la langue",
+    "chapters": [
+     "Les classes de mots et leurs fonctions",
+     "Le verbe : temps, modes et valeurs",
+     "Les accords dans le groupe nominal et le groupe verbal",
+     "La phrase simple et la phrase complexe",
+     "Les propositions subordonnées",
+     "Les relations logiques et les connecteurs",
+     "L'histoire de la langue et la formation des mots"
+    ]
+   },
+   {
+    "title": "Méthodes de l'écrit et de l'oral",
+    "chapters": [
+     "Lire et analyser un texte littéraire",
+     "Rédiger un commentaire de texte : première approche",
+     "Rédiger une dissertation : première approche",
+     "L'essai et l'écriture d'invention",
+     "La lecture cursive et le carnet de lecture",
+     "Lire à voix haute et présenter un exposé"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Nombres et calculs",
+    "chapters": [
+     "Les ensembles de nombres : entiers, décimaux, rationnels, réels",
+     "Multiples, diviseurs et nombres premiers",
+     "Puissances, racines carrées et notation scientifique",
+     "Intervalles et inégalités",
+     "Valeur absolue et distance entre deux nombres",
+     "Résoudre une inéquation du premier degré"
+    ]
+   },
+   {
+    "title": "Calcul algébrique",
+    "chapters": [
+     "Développer et factoriser une expression",
+     "Les identités remarquables",
+     "Calcul fractionnaire et calcul littéral",
+     "Résoudre une équation du premier degré",
+     "Équations produit et équations quotient",
+     "Comparer deux quantités par leur différence ou leur rapport"
+    ]
+   },
+   {
+    "title": "Fonctions",
+    "chapters": [
+     "La notion de fonction : image, antécédent, ensemble de définition",
+     "Représentation graphique d'une fonction et lecture de courbe",
+     "Variations, maximum et minimum d'une fonction",
+     "Fonctions affines et signe d'une expression affine",
+     "Les fonctions de référence : carré, inverse, racine carrée, cube, valeur absolue",
+     "Fonctions paires et fonctions impaires",
+     "Tableaux de signes et inéquations produit ou quotient"
+    ]
+   },
+   {
+    "title": "Géométrie",
+    "chapters": [
+     "Vecteurs : translation, égalité et somme de vecteurs",
+     "Relation de Chasles et produit d'un vecteur par un réel",
+     "Coordonnées d'un vecteur et d'un point dans un repère",
+     "Colinéarité de deux vecteurs",
+     "Distance et milieu dans un repère orthonormé",
+     "Équations de droites et coefficient directeur",
+     "Systèmes de deux équations et intersection de deux droites"
+    ]
+   },
+   {
+    "title": "Statistiques et information chiffrée",
+    "chapters": [
+     "Proportions, pourcentages et pourcentage de pourcentage",
+     "Évolutions : variation absolue, taux d'évolution, coefficient multiplicateur",
+     "Évolutions successives et évolution réciproque",
+     "Indicateurs de position : moyenne, médiane, quartiles",
+     "Indicateurs de dispersion : étendue, écart interquartile, écart type",
+     "Séries regroupées en classes et boîtes à moustaches",
+     "Tableaux croisés : fréquences marginales et conditionnelles"
+    ]
+   },
+   {
+    "title": "Probabilités",
+    "chapters": [
+     "Expérience aléatoire, univers et événements",
+     "Calculer des probabilités en situation d'équiprobabilité",
+     "Réunion, intersection et événement contraire",
+     "Probabilités conditionnelles",
+     "Arbres pondérés de probabilités",
+     "Simulation et fluctuation des fréquences"
+    ]
+   },
+   {
+    "title": "Logique, algorithmique et automatismes",
+    "chapters": [
+     "Vocabulaire ensembliste : appartenance, inclusion, ensemble de solutions",
+     "Implication, équivalence, contre-exemple et raisonnement par l'absurde",
+     "Variables, affectations et instructions conditionnelles en Python",
+     "Boucles bornées et boucles non bornées",
+     "Les fonctions en Python",
+     "Automatismes de calcul mental et de calcul numérique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "Le monde méditerranéen : empreintes de l'Antiquité et du Moyen Âge",
+    "chapters": [
+     "Athènes et la démocratie dans la Méditerranée antique",
+     "Rome : de la République à l'Empire",
+     "La diffusion du christianisme dans l'Empire romain",
+     "La Méditerranée médiévale : trois civilisations en contact",
+     "Échanges et conflits en Méditerranée : croisades, commerce, Reconquista"
+    ]
+   },
+   {
+    "title": "XVe-XVIe siècles : un nouveau rapport au monde",
+    "chapters": [
+     "Les grandes découvertes et l'ouverture atlantique",
+     "Les empires coloniaux et le choc pour les Amériques",
+     "L'humanisme et la Renaissance",
+     "Les réformes protestante et catholique",
+     "Les guerres de Religion et la recherche de la paix"
+    ]
+   },
+   {
+    "title": "L'État à l'époque moderne : France et Angleterre",
+    "chapters": [
+     "L'affirmation de l'État royal en France",
+     "Louis XIV et la monarchie absolue",
+     "Les révolutions anglaises du XVIIe siècle",
+     "Le modèle britannique et la monarchie parlementaire",
+     "L'influence du modèle britannique en Europe et en Amérique"
+    ]
+   },
+   {
+    "title": "Dynamiques et ruptures dans les sociétés des XVIIe et XVIIIe siècles",
+    "chapters": [
+     "La révolution scientifique et le développement des sciences",
+     "Les Lumières : idées, acteurs et diffusion",
+     "La société d'ordres et ses tensions",
+     "Les mutations économiques et le commerce atlantique",
+     "La traite des Noirs et l'esclavage dans les colonies"
+    ]
+   },
+   {
+    "title": "Méthodes en histoire",
+    "chapters": [
+     "Analyser un document historique",
+     "Construire une réponse argumentée",
+     "Se repérer dans le temps : frise et périodisation",
+     "Réaliser un croquis ou un schéma historique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "Sociétés et environnements : des équilibres fragiles",
+    "chapters": [
+     "Les sociétés face aux risques naturels et technologiques",
+     "L'environnement, du local au planétaire",
+     "Des ressources majeures sous pression : l'eau",
+     "Des ressources majeures sous pression : l'énergie",
+     "La France : des milieux métropolitains et ultramarins entre valorisation et protection"
+    ]
+   },
+   {
+    "title": "Territoires, populations et développement",
+    "chapters": [
+     "Des pays inégalement développés : mesurer le développement",
+     "Des dynamiques démographiques inégales",
+     "Développement et inégalités dans le monde",
+     "La France : une population qui vieillit et se répartit inégalement"
+    ]
+   },
+   {
+    "title": "Des mobilités généralisées",
+    "chapters": [
+     "Les migrations internationales",
+     "Le tourisme international",
+     "Les mobilités du quotidien",
+     "La France : mobilités, transports et enjeux d'aménagement",
+     "Les mobilités en Europe"
+    ]
+   },
+   {
+    "title": "L'Afrique australe : un espace en profonde mutation",
+    "chapters": [
+     "Des milieux et des ressources convoités",
+     "Des dynamiques démographiques et urbaines rapides",
+     "Développement, inégalités et mobilités en Afrique australe"
+    ]
+   },
+   {
+    "title": "Méthodes en géographie",
+    "chapters": [
+     "Lire et analyser une carte",
+     "Réaliser un croquis de géographie",
+     "Analyser un document et rédiger une réponse construite",
+     "Changer d'échelle pour comprendre un territoire"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "L'État de droit, garant des droits et des libertés",
+    "chapters": [
+     "Les droits et libertés fondamentaux",
+     "L'État de droit et la hiérarchie des normes",
+     "Le pluralisme démocratique",
+     "La protection des libertés par la justice"
+    ]
+   },
+   {
+    "title": "Liberté et responsabilité : l'information",
+    "chapters": [
+     "Les médias et la liberté de la presse",
+     "S'informer : vérifier une source et repérer une fausse information",
+     "Réseaux sociaux, liberté d'expression et ses limites",
+     "Les responsabilités de chacun dans l'espace numérique"
+    ]
+   },
+   {
+    "title": "Droits et responsabilité : l'environnement",
+    "chapters": [
+     "Le droit de l'environnement et la Charte de l'environnement",
+     "La sauvegarde de la biodiversité",
+     "S'engager pour l'environnement : citoyens, associations, États"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "physique-chimie",
+  "themes": [
+   {
+    "title": "Constitution de la matière",
+    "chapters": [
+     "Corps purs et mélanges",
+     "Identifier une espèce chimique : tests et chromatographie",
+     "Les solutions aqueuses et la concentration en masse",
+     "Le dosage par étalonnage",
+     "Le modèle de l'atome : noyau et électrons",
+     "Le tableau périodique et la stabilité des entités chimiques",
+     "Les entités chimiques : ions et molécules",
+     "La quantité de matière et la mole"
+    ]
+   },
+   {
+    "title": "Transformations de la matière",
+    "chapters": [
+     "Les transformations physiques et les changements d'état",
+     "Les transformations chimiques et l'équation de réaction",
+     "Le réactif limitant et les proportions stœchiométriques",
+     "La synthèse d'une espèce chimique",
+     "Les transformations nucléaires"
+    ]
+   },
+   {
+    "title": "Mouvement et interactions",
+    "chapters": [
+     "Décrire un mouvement : référentiel et trajectoire",
+     "Le vecteur vitesse",
+     "Modéliser une action mécanique par une force",
+     "L'interaction gravitationnelle et le poids",
+     "Le principe d'inertie"
+    ]
+   },
+   {
+    "title": "Ondes et signaux",
+    "chapters": [
+     "Émission, propagation et perception d'un son",
+     "Fréquence, période et niveau d'intensité sonore",
+     "La lumière : spectres d'émission et d'absorption",
+     "La réfraction et les lois de Snell-Descartes",
+     "Les lentilles minces convergentes et la formation des images",
+     "Les circuits électriques : lois des nœuds et des mailles",
+     "La loi d'Ohm et les capteurs électriques"
+    ]
+   },
+   {
+    "title": "Méthodes et démarche scientifique",
+    "chapters": [
+     "Mesures, incertitudes et chiffres significatifs",
+     "Exploiter un graphique et modéliser des données",
+     "Programmer une simulation simple en Python",
+     "Rédiger une démarche de résolution de problème"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "svt",
+  "themes": [
+   {
+    "title": "La Terre, la vie et l'organisation du vivant",
+    "chapters": [
+     "L'organisme pluricellulaire : cellules, tissus et organes",
+     "La cellule : structure et métabolisme",
+     "L'ADN, support de l'information génétique",
+     "La biodiversité et son évolution",
+     "Les mécanismes de l'évolution : mutations, sélection, dérive"
+    ]
+   },
+   {
+    "title": "Les enjeux contemporains de la planète",
+    "chapters": [
+     "L'érosion et la formation des paysages",
+     "Le transport des sédiments et la formation des roches",
+     "Les sols, une ressource fragile",
+     "Les agrosystèmes et le développement durable"
+    ]
+   },
+   {
+    "title": "Le corps humain et la santé",
+    "chapters": [
+     "La procréation et le fonctionnement des appareils reproducteurs",
+     "La régulation hormonale et la contraception",
+     "La sexualité humaine et la prévention des infections",
+     "Les micro-organismes et la santé",
+     "Le microbiote humain"
+    ]
+   },
+   {
+    "title": "Méthodes en SVT",
+    "chapters": [
+     "Observer au microscope et réaliser un dessin scientifique",
+     "Mener une démarche expérimentale",
+     "Exploiter des données et construire un graphique",
+     "Argumenter à partir de documents"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "snt",
+  "themes": [
+   {
+    "title": "Programmer et comprendre le numérique",
+    "chapters": [
+     "Les bases de la programmation en Python",
+     "Variables, conditions et boucles",
+     "Les fonctions en Python",
+     "Le codage binaire de l'information"
+    ]
+   },
+   {
+    "title": "Internet et le Web",
+    "chapters": [
+     "Internet : réseau de réseaux et protocole TCP/IP",
+     "L'adressage IP et le système DNS",
+     "Le Web : pages, liens et protocole HTTP",
+     "Les langages HTML et CSS",
+     "Les moteurs de recherche et l'indexation"
+    ]
+   },
+   {
+    "title": "Réseaux sociaux et données",
+    "chapters": [
+     "Le fonctionnement des réseaux sociaux",
+     "Les graphes de relations et le petit monde",
+     "Les données structurées et leurs formats",
+     "Traiter des données : tri, filtre, croisement",
+     "Les données personnelles et leur protection"
+    ]
+   },
+   {
+    "title": "Le numérique dans le monde physique",
+    "chapters": [
+     "La géolocalisation par satellite",
+     "La cartographie numérique et le calcul d'itinéraires",
+     "L'informatique embarquée et les systèmes autonomes",
+     "Les objets connectés",
+     "La photographie numérique : capteur, pixels et traitement d'image"
+    ]
+   },
+   {
+    "title": "Enjeux du numérique",
+    "chapters": [
+     "L'impact environnemental du numérique",
+     "Citoyenneté numérique et identité en ligne",
+     "Les métiers du numérique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "ses",
+  "themes": [
+   {
+    "title": "Les sciences économiques et sociales : démarche",
+    "chapters": [
+     "Comment raisonnent les économistes",
+     "Comment raisonnent les sociologues et les politistes",
+     "Les outils quantitatifs : proportions, pourcentages et taux de variation",
+     "Lire un tableau statistique et un graphique"
+    ]
+   },
+   {
+    "title": "La création et la mesure des richesses",
+    "chapters": [
+     "La production marchande et non marchande",
+     "Les facteurs de production",
+     "La mesure de la production : valeur ajoutée et PIB",
+     "Les limites écologiques de la croissance"
+    ]
+   },
+   {
+    "title": "Le marché et la formation des prix",
+    "chapters": [
+     "L'offre et la demande",
+     "La formation de l'équilibre sur un marché",
+     "Les effets d'une taxe ou d'une subvention"
+    ]
+   },
+   {
+    "title": "La socialisation",
+    "chapters": [
+     "Les instances de socialisation : famille, école, pairs, médias",
+     "La socialisation différenciée selon le milieu social",
+     "La socialisation différenciée selon le genre"
+    ]
+   },
+   {
+    "title": "La vie politique",
+    "chapters": [
+     "Le pouvoir politique et l'État",
+     "Les acteurs de la vie politique : partis, associations, citoyens",
+     "La participation politique"
+    ]
+   },
+   {
+    "title": "Diplôme, emploi et salaire",
+    "chapters": [
+     "Le diplôme, un atout pour l'emploi",
+     "Le lien entre diplôme et salaire",
+     "Les inégalités d'accès au diplôme et à l'emploi"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "L'art de vivre ensemble (1) : société et vie quotidienne",
+    "chapters": [
+     "Vivre entre générations",
+     "Les univers professionnels et le monde du travail",
+     "Le village, le quartier, la ville",
+     "Représentation de soi et rapport à autrui"
+    ]
+   },
+   {
+    "title": "L'art de vivre ensemble (2) : culture, planète et mémoire",
+    "chapters": [
+     "Sports et société",
+     "La création et le rapport aux arts",
+     "Sauver la planète, penser les futurs possibles",
+     "Le passé dans le présent"
+    ]
+   },
+   {
+    "title": "Le groupe verbal : temps et aspects",
+    "chapters": [
+     "Le présent simple et le présent en be + V-ing",
+     "Le prétérit simple et le prétérit en be + V-ing",
+     "Le present perfect simple et en be + V-ing",
+     "Exprimer le futur : will, be going to et le présent",
+     "Les verbes irréguliers les plus courants"
+    ]
+   },
+   {
+    "title": "Le groupe nominal et la phrase",
+    "chapters": [
+     "Les articles et les déterminants",
+     "Le dénombrable et l'indénombrable : much, many, a lot of",
+     "Le génitif et les pronoms possessifs",
+     "Les comparatifs et les superlatifs",
+     "Poser des questions : auxiliaires et mots interrogatifs",
+     "Les mots de liaison pour organiser un discours"
+    ]
+   },
+   {
+    "title": "Les modaux et l'expression de l'opinion",
+    "chapters": [
+     "Can, could et be able to : la capacité",
+     "Must, have to et should : l'obligation et le conseil",
+     "May, might et could : la probabilité",
+     "Donner son avis, exprimer l'accord et le désaccord"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau B1 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde anglophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "espagnol",
+  "themes": [
+   {
+    "title": "L'art de vivre ensemble (1) : société et vie quotidienne",
+    "chapters": [
+     "Vivre entre générations",
+     "Les univers professionnels et le monde du travail",
+     "Le village, le quartier, la ville",
+     "Représentation de soi et rapport à autrui"
+    ]
+   },
+   {
+    "title": "L'art de vivre ensemble (2) : culture, planète et mémoire",
+    "chapters": [
+     "Sports et société",
+     "La création et le rapport aux arts",
+     "Sauver la planète, penser les futurs possibles",
+     "Le passé dans le présent"
+    ]
+   },
+   {
+    "title": "Les bases du verbe espagnol",
+    "chapters": [
+     "Le présent de l'indicatif des verbes réguliers",
+     "Les verbes à diphtongue et à affaiblissement",
+     "Les verbes irréguliers du présent",
+     "Ser et estar : bien choisir",
+     "Gustar et les verbes de même construction",
+     "Hay, estar et l'expression de la localisation"
+    ]
+   },
+   {
+    "title": "Raconter au passé et parler de l'avenir",
+    "chapters": [
+     "Le passé composé et ses participes irréguliers",
+     "Le passé simple (pretérito indefinido) des verbes réguliers",
+     "Le passé simple des verbes irréguliers",
+     "L'imparfait de l'indicatif",
+     "Le futur et le futur proche (ir a + infinitif)"
+    ]
+   },
+   {
+    "title": "Le groupe nominal et la phrase",
+    "chapters": [
+     "Le genre, le nombre et l'apocope",
+     "Les pronoms personnels et l'enclise",
+     "Les démonstratifs et les possessifs",
+     "Les comparatifs et les superlatifs",
+     "L'obligation personnelle et impersonnelle",
+     "L'expression de la durée : llevar, desde hace, hace…que"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau A2-B1 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde hispanophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Seconde",
+  "subject": "allemand",
+  "themes": [
+   {
+    "title": "L'art de vivre ensemble (1) : société et vie quotidienne",
+    "chapters": [
+     "Vivre entre générations",
+     "Les univers professionnels et le monde du travail",
+     "Le village, le quartier, la ville",
+     "Représentation de soi et rapport à autrui"
+    ]
+   },
+   {
+    "title": "L'art de vivre ensemble (2) : culture, planète et mémoire",
+    "chapters": [
+     "Sports et société",
+     "La création et le rapport aux arts",
+     "Sauver la planète, penser les futurs possibles",
+     "Le passé dans le présent"
+    ]
+   },
+   {
+    "title": "La phrase allemande",
+    "chapters": [
+     "La place du verbe dans la phrase simple",
+     "La subordonnée et le verbe en dernière position",
+     "La phrase interrogative et les mots interrogatifs",
+     "La négation : nicht et kein",
+     "Les conjonctions de coordination et de subordination courantes"
+    ]
+   },
+   {
+    "title": "Le groupe verbal",
+    "chapters": [
+     "Le présent des verbes faibles, forts et à particule",
+     "Les verbes de modalité",
+     "Le parfait avec haben ou sein",
+     "Le prétérit de sein, haben et des modaux",
+     "Le futur avec werden",
+     "L'impératif"
+    ]
+   },
+   {
+    "title": "Le groupe nominal",
+    "chapters": [
+     "Le genre et le pluriel des noms",
+     "Les cas : nominatif, accusatif, datif et génitif",
+     "Les prépositions et les cas qu'elles régissent",
+     "Les pronoms personnels",
+     "Les possessifs",
+     "Le comparatif et le superlatif"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau A2-B1 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde germanophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "La poésie du XIXe au XXIe siècle",
+    "chapters": [
+     "Du romantisme au symbolisme : la poésie au XIXe siècle",
+     "Le vers libre et le poème en prose",
+     "La poésie au XXe siècle : surréalisme et engagement",
+     "Rimbaud, Cahier de Douai : « Émancipations créatrices »",
+     "Ponge, La rage de l'expression : « Dans l'atelier du poète »",
+     "Hélène Dorion, Mes forêts : « La poésie, la nature, l'intime »"
+    ]
+   },
+   {
+    "title": "La littérature d'idées du XVIe au XVIIIe siècle",
+    "chapters": [
+     "L'humanisme et les essais de la Renaissance",
+     "Moralistes et philosophes au XVIIe siècle",
+     "Le combat des Lumières",
+     "La Boétie, Discours de la servitude volontaire : « Défendre et entretenir la liberté »",
+     "Fontenelle, Entretiens sur la pluralité des mondes : « Le goût de la science »",
+     "Graffigny, Lettres d'une Péruvienne : « Un nouvel univers s'est offert à mes yeux »"
+    ]
+   },
+   {
+    "title": "Le roman et le récit du Moyen Âge au XXIe siècle",
+    "chapters": [
+     "Du roman de chevalerie au roman moderne",
+     "Le roman au XIXe siècle : peindre la société",
+     "Le roman au XXe et au XXIe siècle",
+     "Chrétien de Troyes, Le Chevalier de la charrette : « Le roman et l'invention de l'amour »",
+     "Zola, Pot-Bouille : « Dévoiler les rouages de la société »",
+     "Simone Schwarz-Bart, Pluie et vent sur Télumée Miracle : « Tisser les mémoires, habiter le monde »"
+    ]
+   },
+   {
+    "title": "Le théâtre du XVIIe au XXIe siècle",
+    "chapters": [
+     "Le théâtre classique et la comédie au XVIIe siècle",
+     "Du drame romantique au théâtre contemporain",
+     "Corneille, Le Menteur : « Mensonge et comédie »",
+     "Musset, On ne badine pas avec l'amour : « Les jeux du cœur et de la parole »",
+     "Sarraute, Pour un oui ou pour un non : « Théâtre et dispute »"
+    ]
+   },
+   {
+    "title": "Étude de la langue",
+    "chapters": [
+     "L'expression de la négation",
+     "L'interrogation : syntaxe et valeurs",
+     "Les subordonnées circonstancielles et l'expression des relations logiques",
+     "La subordonnée relative",
+     "Les compléments du nom et de l'adjectif",
+     "Répondre à la question de grammaire de l'oral"
+    ]
+   },
+   {
+    "title": "Préparer le bac de français",
+    "chapters": [
+     "Le commentaire de texte : de l'analyse au plan",
+     "Rédiger l'introduction et la conclusion d'un commentaire",
+     "La dissertation sur œuvre : comprendre le sujet et bâtir un plan",
+     "Rédiger une dissertation argumentée et illustrée",
+     "L'oral, première partie : explication linéaire et question de grammaire",
+     "L'oral, seconde partie : présenter une œuvre choisie et dialoguer avec le jury",
+     "Constituer et réviser son descriptif de lectures",
+     "Gérer son temps le jour de l'écrit"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Automatismes",
+    "chapters": [
+     "Calcul numérique : fractions, puissances, pourcentages",
+     "Calcul littéral : développer, factoriser, résoudre",
+     "Lire et interpréter un graphique ou un tableau",
+     "Proportionnalité et conversions d'unités",
+     "Ordres de grandeur et estimation"
+    ]
+   },
+   {
+    "title": "Analyse de l'information chiffrée",
+    "chapters": [
+     "Proportions et pourcentages dans des situations concrètes",
+     "Évolutions successives et indices",
+     "Statistique descriptive : indicateurs et diagrammes en boîte",
+     "Analyse de deux caractères quantitatifs : nuage de points et ajustement",
+     "Lire les données de façon critique"
+    ]
+   },
+   {
+    "title": "Phénomènes aléatoires",
+    "chapters": [
+     "Probabilités conditionnelles et tableaux croisés",
+     "Indépendance de deux événements",
+     "Répétition d'épreuves de Bernoulli identiques et indépendantes",
+     "Simulation et prise de décision"
+    ]
+   },
+   {
+    "title": "Phénomènes d'évolution et modélisation par des fonctions",
+    "chapters": [
+     "Variation linéaire : suites arithmétiques et fonctions affines",
+     "Modélisation quadratique : parabole et racines d'un polynôme factorisé",
+     "Variation exponentielle : suites géométriques",
+     "Les fonctions exponentielles de base a",
+     "Choisir un modèle d'évolution adapté"
+    ]
+   },
+   {
+    "title": "Préparer l'épreuve anticipée de mathématiques",
+    "chapters": [
+     "La partie automatismes : réflexes et rapidité",
+     "La partie résolution de problèmes : méthode",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "L'Europe face aux révolutions",
+    "chapters": [
+     "La Révolution française : la fin de l'Ancien Régime",
+     "La Révolution française : radicalisation et Terreur",
+     "Du Directoire à l'Empire napoléonien",
+     "L'Europe entre restauration et révolution (1814-1848)"
+    ]
+   },
+   {
+    "title": "La France dans l'Europe des nationalités (1848-1871)",
+    "chapters": [
+     "La Deuxième République : une difficile entrée dans l'âge démocratique",
+     "Le Second Empire",
+     "L'industrialisation et les transformations de la société",
+     "La construction de nouveaux États : l'Italie et l'Allemagne"
+    ]
+   },
+   {
+    "title": "La Troisième République avant 1914",
+    "chapters": [
+     "La mise en œuvre du projet républicain",
+     "La République face aux crises : boulangisme, affaire Dreyfus",
+     "Permanences et mutations de la société française jusqu'en 1914",
+     "Métropole et colonies : l'empire colonial français"
+    ]
+   },
+   {
+    "title": "La Première Guerre mondiale",
+    "chapters": [
+     "Un embrasement mondial et ses grandes étapes",
+     "Les sociétés en guerre : civils acteurs et victimes",
+     "Le génocide des Arméniens",
+     "Sortir de la guerre : traités de paix et nouvelle carte de l'Europe"
+    ]
+   },
+   {
+    "title": "Méthodes en histoire",
+    "chapters": [
+     "Analyser un ou deux documents",
+     "Construire une réponse à une question problématisée",
+     "Mobiliser des repères chronologiques"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "La métropolisation : un processus mondial différencié",
+    "chapters": [
+     "Les villes à l'heure de la métropolisation",
+     "Des métropoles inégales et en mutation",
+     "Paris : une métropole mondiale",
+     "La France : la métropolisation et ses effets"
+    ]
+   },
+   {
+    "title": "Une diversification des espaces et des acteurs de la production",
+    "chapters": [
+     "Les espaces de production dans le monde : une diversité croissante",
+     "Les chaînes de valeur mondialisées",
+     "Métropoles et espaces productifs en France",
+     "La France : des espaces productifs entre valorisation et fragilités"
+    ]
+   },
+   {
+    "title": "Les espaces ruraux : multifonctionnalité ou fragmentation ?",
+    "chapters": [
+     "La fragmentation des espaces ruraux dans le monde",
+     "Agriculture, alimentation et enjeux environnementaux",
+     "La France : des espaces ruraux multifonctionnels",
+     "Les politiques européennes et les initiatives locales"
+    ]
+   },
+   {
+    "title": "La Chine : des recompositions spatiales multiples",
+    "chapters": [
+     "Développement et inégalités en Chine",
+     "Métropolisation et littoralisation chinoises",
+     "Les espaces ruraux chinois en mutation"
+    ]
+   },
+   {
+    "title": "Méthodes en géographie",
+    "chapters": [
+     "Réaliser un croquis à partir d'un texte",
+     "Analyser des documents géographiques",
+     "Rédiger une réponse construite en géographie"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Les valeurs et les principes de la République à l'épreuve de la cohésion sociale",
+    "chapters": [
+     "Liberté, égalité, fraternité : des valeurs à faire vivre",
+     "La laïcité, principe de liberté et de concorde",
+     "Lutter contre les discriminations, le racisme et l'antisémitisme",
+     "La solidarité et la protection sociale"
+    ]
+   },
+   {
+    "title": "La République et la Nation",
+    "chapters": [
+     "La Nation : définitions et symboles",
+     "La citoyenneté française et européenne",
+     "L'engagement des citoyens : défense, service civique, associations",
+     "La diversité culturelle dans la Nation"
+    ]
+   },
+   {
+    "title": "Débattre et s'informer",
+    "chapters": [
+     "Construire un argumentaire et débattre",
+     "Analyser un fait d'actualité de façon critique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "ens-scientifiques",
+  "themes": [
+   {
+    "title": "Une longue histoire de la matière",
+    "chapters": [
+     "Les éléments chimiques et leur origine",
+     "La radioactivité et la datation",
+     "Les cristaux : des édifices ordonnés",
+     "Les roches et les minéraux",
+     "La cellule vivante : une structure complexe"
+    ]
+   },
+   {
+    "title": "Le Soleil, notre source d'énergie",
+    "chapters": [
+     "Le rayonnement solaire",
+     "Le bilan radiatif terrestre et l'effet de serre",
+     "La photosynthèse : conversion biologique de l'énergie solaire",
+     "Le bilan thermique du corps humain"
+    ]
+   },
+   {
+    "title": "La Terre, un astre singulier",
+    "chapters": [
+     "La forme de la Terre et sa mesure",
+     "L'histoire de l'âge de la Terre",
+     "La Terre dans l'Univers : héliocentrisme et mouvements"
+    ]
+   },
+   {
+    "title": "Son et musique, porteurs d'information",
+    "chapters": [
+     "Le son, phénomène vibratoire",
+     "La musique et les nombres : gammes et intervalles",
+     "Le son, une information à coder : numérisation",
+     "Entendre la musique : l'oreille et l'audition"
+    ]
+   },
+   {
+    "title": "Projet expérimental et numérique",
+    "chapters": [
+     "Construire une démarche expérimentale",
+     "Exploiter des mesures avec un tableur ou Python",
+     "Présenter et argumenter les résultats d'un projet"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (1) : individu et société",
+    "chapters": [
+     "Identités et échanges",
+     "Espace privé et espace public",
+     "Art et pouvoir",
+     "Citoyenneté et mondes virtuels"
+    ]
+   },
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (2) : création, sciences et mémoire",
+    "chapters": [
+     "Fictions et réalités",
+     "Innovations scientifiques et responsabilité",
+     "Diversité et inclusion",
+     "Territoire et mémoire"
+    ]
+   },
+   {
+    "title": "Le groupe verbal approfondi",
+    "chapters": [
+     "Le past perfect et l'antériorité dans le passé",
+     "La voix passive à tous les temps",
+     "Les modaux au passé : must have, should have, could have",
+     "Le conditionnel et les phrases en if",
+     "Wish et if only : le regret et le souhait",
+     "Les verbes suivis de to + base verbale ou de V-ing"
+    ]
+   },
+   {
+    "title": "La phrase complexe",
+    "chapters": [
+     "Les propositions relatives : who, which, that, whose",
+     "Le discours indirect et la concordance des temps",
+     "Les subordonnées de cause, de but, de concession",
+     "La mise en relief : it is… that, what… is",
+     "Les verbes à particule les plus utiles"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau B1-B2 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde anglophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "espagnol",
+  "themes": [
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (1) : individu et société",
+    "chapters": [
+     "Identités et échanges",
+     "Espace privé et espace public",
+     "Art et pouvoir",
+     "Citoyenneté et mondes virtuels"
+    ]
+   },
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (2) : création, sciences et mémoire",
+    "chapters": [
+     "Fictions et réalités",
+     "Innovations scientifiques et responsabilité",
+     "Diversité et inclusion",
+     "Territoire et mémoire"
+    ]
+   },
+   {
+    "title": "Les modes et la concordance des temps",
+    "chapters": [
+     "Le conditionnel présent",
+     "Le subjonctif présent : formation et emplois",
+     "L'impératif affirmatif et négatif",
+     "Le subjonctif imparfait",
+     "La concordance des temps",
+     "L'hypothèse avec si"
+    ]
+   },
+   {
+    "title": "La phrase complexe",
+    "chapters": [
+     "Les propositions relatives et l'emploi de lo que",
+     "Le discours indirect",
+     "Les subordonnées de temps, de cause et de concession",
+     "Les tournures de la condition et du souhait",
+     "Les traductions de « devenir »",
+     "Les périphrases verbales : seguir, volver a, acabar de"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau B1 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde hispanophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "allemand",
+  "themes": [
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (1) : individu et société",
+    "chapters": [
+     "Identités et échanges",
+     "Espace privé et espace public",
+     "Art et pouvoir",
+     "Citoyenneté et mondes virtuels"
+    ]
+   },
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (2) : création, sciences et mémoire",
+    "chapters": [
+     "Fictions et réalités",
+     "Innovations scientifiques et responsabilité",
+     "Diversité et inclusion",
+     "Territoire et mémoire"
+    ]
+   },
+   {
+    "title": "Le groupe verbal approfondi",
+    "chapters": [
+     "Le prétérit des verbes forts et faibles",
+     "Le plus-que-parfait",
+     "Le passif avec werden",
+     "Le subjonctif II : souhait, conseil et hypothèse",
+     "Le subjonctif I et le discours indirect",
+     "Les verbes à rection prépositionnelle"
+    ]
+   },
+   {
+    "title": "La phrase complexe et le groupe nominal approfondi",
+    "chapters": [
+     "La déclinaison de l'adjectif épithète",
+     "Les propositions relatives",
+     "Les subordonnées de temps, de cause, de but et de conséquence",
+     "Les infinitives avec zu, um… zu et ohne… zu",
+     "Le participe employé comme adjectif",
+     "Les prépositions à double régime"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau B1 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde germanophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-math",
+  "themes": [
+   {
+    "title": "Automatismes, logique et algorithmique",
+    "chapters": [
+     "Les automatismes de calcul et de lecture graphique",
+     "Vocabulaire ensembliste et logique : quantificateurs et raisonnements",
+     "Les listes en Python",
+     "Algorithmes sur les suites et les fonctions"
+    ]
+   },
+   {
+    "title": "Suites numériques",
+    "chapters": [
+     "Modes de génération d'une suite",
+     "Sens de variation d'une suite",
+     "Suites arithmétiques",
+     "Suites géométriques",
+     "Sommes de termes et premières notions de limite"
+    ]
+   },
+   {
+    "title": "Second degré",
+    "chapters": [
+     "La forme canonique d'un polynôme du second degré",
+     "Parabole : sommet et axe de symétrie",
+     "Discriminant et résolution des équations du second degré",
+     "Factorisation et signe d'un trinôme",
+     "Inéquations du second degré"
+    ]
+   },
+   {
+    "title": "Dérivation et étude de fonctions",
+    "chapters": [
+     "Taux de variation et nombre dérivé",
+     "Tangente à une courbe et approximation affine",
+     "Fonctions dérivées des fonctions usuelles et opérations",
+     "Dérivée de x ↦ g(ax + b)",
+     "Dérivation et variations d'une fonction",
+     "Extremums et problèmes d'optimisation",
+     "La fonction racine carrée"
+    ]
+   },
+   {
+    "title": "Fonction exponentielle",
+    "chapters": [
+     "Définition et propriétés algébriques de l'exponentielle",
+     "Lien entre exponentielle et suites géométriques",
+     "Étude de la fonction exponentielle",
+     "Dérivée de t ↦ e^(at) et modèles d'évolution"
+    ]
+   },
+   {
+    "title": "Trigonométrie",
+    "chapters": [
+     "Le cercle trigonométrique et le radian",
+     "Cosinus et sinus d'un réel, valeurs remarquables",
+     "Les fonctions cosinus et sinus : parité, périodicité, courbes"
+    ]
+   },
+   {
+    "title": "Géométrie",
+    "chapters": [
+     "Le produit scalaire : définitions",
+     "Propriétés et calculs du produit scalaire",
+     "Applications : Al-Kashi, projeté orthogonal, orthogonalité",
+     "Vecteur normal et équation cartésienne d'une droite",
+     "Équation d'un cercle"
+    ]
+   },
+   {
+    "title": "Probabilités et statistiques",
+    "chapters": [
+     "Probabilités conditionnelles et arbres pondérés",
+     "La formule des probabilités totales",
+     "Indépendance de deux événements",
+     "Répétition d'épreuves de Bernoulli indépendantes",
+     "Variables aléatoires réelles et loi de probabilité",
+     "Espérance, variance et écart type",
+     "Simulation et expérimentation avec un tableur ou Python"
+    ]
+   },
+   {
+    "title": "Préparer l'épreuve anticipée de mathématiques",
+    "chapters": [
+     "La partie automatismes : réflexes et rapidité",
+     "Rédiger un raisonnement mathématique",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-physique",
+  "themes": [
+   {
+    "title": "Composition et évolution d'un système chimique",
+    "chapters": [
+     "Masse molaire, volume molaire et concentration en quantité de matière",
+     "La loi de Beer-Lambert et la spectrophotométrie",
+     "Le tableau d'avancement et l'état final",
+     "Les réactions d'oxydoréduction",
+     "Le titrage colorimétrique"
+    ]
+   },
+   {
+    "title": "De la structure des entités aux propriétés de la matière",
+    "chapters": [
+     "Le schéma de Lewis des molécules et des ions",
+     "La géométrie des entités chimiques",
+     "Électronégativité et polarité des molécules",
+     "La cohésion des solides : interactions et liaisons hydrogène",
+     "Dissolution, solubilité et extraction par un solvant"
+    ]
+   },
+   {
+    "title": "Chimie organique et combustions",
+    "chapters": [
+     "Squelettes carbonés et groupes caractéristiques",
+     "Nomenclature des espèces organiques",
+     "Les étapes d'une synthèse organique",
+     "Les combustions et l'énergie libérée"
+    ]
+   },
+   {
+    "title": "Mouvement et interactions",
+    "chapters": [
+     "Les interactions fondamentales et la loi de Coulomb",
+     "Champ électrostatique et champ de gravitation",
+     "Le fluide au repos : pression et loi de Mariotte",
+     "La loi fondamentale de la statique des fluides",
+     "Mouvement d'un système et variation du vecteur vitesse"
+    ]
+   },
+   {
+    "title": "L'énergie : conversions et transferts",
+    "chapters": [
+     "Le circuit électrique : intensité, tension et puissance",
+     "L'effet Joule et le rendement d'un convertisseur",
+     "Énergie cinétique et théorème de l'énergie cinétique",
+     "Énergie potentielle et énergie mécanique",
+     "Forces conservatives et non conservatives"
+    ]
+   },
+   {
+    "title": "Ondes et signaux",
+    "chapters": [
+     "Les ondes mécaniques progressives",
+     "Les ondes périodiques : période, longueur d'onde et célérité",
+     "La lentille convergente : relation de conjugaison et grandissement",
+     "Couleurs : synthèse additive et soustractive",
+     "Le modèle ondulatoire et particulaire de la lumière : le photon",
+     "Spectres et niveaux d'énergie de l'atome"
+    ]
+   },
+   {
+    "title": "Méthodes et pratique expérimentale",
+    "chapters": [
+     "Mesure et incertitudes en Première",
+     "Exploiter des données avec Python",
+     "Résoudre un problème de physique-chimie"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-svt",
+  "themes": [
+   {
+    "title": "Transmission, variation et expression du patrimoine génétique",
+    "chapters": [
+     "Les divisions cellulaires : la mitose",
+     "La réplication de l'ADN",
+     "Les mutations et la réparation de l'ADN",
+     "L'expression du patrimoine génétique : transcription et traduction",
+     "Les enzymes, des biomolécules aux propriétés catalytiques",
+     "Les phénotypes à différentes échelles"
+    ]
+   },
+   {
+    "title": "La dynamique interne de la Terre",
+    "chapters": [
+     "La structure du globe terrestre",
+     "La lithosphère et la tectonique des plaques",
+     "Les dorsales et la divergence",
+     "Les zones de subduction et la convergence",
+     "La construction historique de la tectonique des plaques"
+    ]
+   },
+   {
+    "title": "Écosystèmes et services environnementaux",
+    "chapters": [
+     "Les écosystèmes : des interactions dynamiques",
+     "L'humanité et les écosystèmes : les services écosystémiques",
+     "Gérer durablement un écosystème"
+    ]
+   },
+   {
+    "title": "Variation génétique et santé",
+    "chapters": [
+     "Patrimoine génétique et maladie : l'exemple de la mucoviscidose",
+     "Altérations du génome et cancérisation",
+     "Variation génétique bactérienne et résistance aux antibiotiques"
+    ]
+   },
+   {
+    "title": "Le fonctionnement du système immunitaire humain",
+    "chapters": [
+     "L'immunité innée et la réaction inflammatoire",
+     "L'immunité adaptative : lymphocytes B et anticorps",
+     "L'immunité adaptative : lymphocytes T",
+     "La mémoire immunitaire et la vaccination",
+     "Les dysfonctionnements du système immunitaire"
+    ]
+   },
+   {
+    "title": "Méthodes en SVT",
+    "chapters": [
+     "Exploiter des documents scientifiques",
+     "Utiliser des logiciels de modélisation moléculaire",
+     "Rédiger une synthèse argumentée"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-hggsp",
+  "themes": [
+   {
+    "title": "Comprendre un régime politique : la démocratie",
+    "chapters": [
+     "Penser la démocratie : démocratie directe et démocratie représentative",
+     "La démocratie athénienne et ses héritages",
+     "Avancées et reculs des démocraties",
+     "L'Union européenne et la démocratie"
+    ]
+   },
+   {
+    "title": "Analyser les dynamiques des puissances internationales",
+    "chapters": [
+     "Essor et déclin des puissances : un regard historique",
+     "Les formes indirectes de la puissance : soft power et influence",
+     "La puissance par l'économie, la culture et le numérique",
+     "La Russie : l'affirmation d'une puissance"
+    ]
+   },
+   {
+    "title": "Étudier les divisions politiques du monde : les frontières",
+    "chapters": [
+     "Tracer des frontières : une approche géopolitique",
+     "Les frontières en débat",
+     "Les frontières internes et externes de l'Union européenne"
+    ]
+   },
+   {
+    "title": "S'informer : un regard critique sur les sources",
+    "chapters": [
+     "Les grandes révolutions techniques de l'information",
+     "Liberté ou contrôle de l'information : un débat politique",
+     "L'information à l'heure d'Internet"
+    ]
+   },
+   {
+    "title": "Analyser les relations entre États et religions",
+    "chapters": [
+     "Pouvoir politique et autorité religieuse",
+     "États et religions : une inégale sécularisation",
+     "États et religions en Inde"
+    ]
+   },
+   {
+    "title": "Méthodes de la spécialité",
+    "chapters": [
+     "La dissertation en HGGSP",
+     "L'étude critique de documents",
+     "Réaliser une production graphique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-hlp",
+  "themes": [
+   {
+    "title": "Les pouvoirs de la parole",
+    "chapters": [
+     "L'art de la parole : rhétorique et éloquence",
+     "L'autorité de la parole : qui a le droit de parler ?",
+     "Les séductions de la parole : persuasion et manipulation",
+     "La parole de l'Antiquité à l'âge classique : auteurs et textes"
+    ]
+   },
+   {
+    "title": "Les représentations du monde",
+    "chapters": [
+     "Découverte du monde et pluralité des cultures",
+     "Décrire, figurer, imaginer",
+     "L'homme et l'animal",
+     "De la Renaissance aux Lumières : auteurs et textes"
+    ]
+   },
+   {
+    "title": "Méthodes de la spécialité",
+    "chapters": [
+     "L'interprétation littéraire d'un texte",
+     "L'essai philosophique",
+     "Construire une culture de références"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-nsi",
+  "themes": [
+   {
+    "title": "Histoire de l'informatique",
+    "chapters": [
+     "Les grandes étapes de l'informatique",
+     "Les pionniers et les grandes inventions"
+    ]
+   },
+   {
+    "title": "Représentation des données : types de base",
+    "chapters": [
+     "Écriture des entiers naturels en base 2, 10 et 16",
+     "Représentation des entiers relatifs",
+     "Représentation approximative des nombres réels : les flottants",
+     "Les booléens et les opérations logiques",
+     "Le codage des caractères : ASCII et Unicode"
+    ]
+   },
+   {
+    "title": "Représentation des données : types construits",
+    "chapters": [
+     "Les p-uplets",
+     "Les tableaux et les listes en compréhension",
+     "Les dictionnaires",
+     "Le traitement de données en tables : fichiers CSV, tri et fusion"
+    ]
+   },
+   {
+    "title": "Interactions entre l'homme et la machine sur le Web",
+    "chapters": [
+     "Pages web : HTML, CSS et JavaScript",
+     "Interactions client-serveur et protocole HTTP",
+     "Les formulaires : méthodes GET et POST"
+    ]
+   },
+   {
+    "title": "Architectures matérielles et systèmes d'exploitation",
+    "chapters": [
+     "Le modèle de von Neumann",
+     "Les circuits logiques et les portes",
+     "Les réseaux : transmission de données et protocoles",
+     "Les systèmes d'exploitation et les commandes Linux",
+     "Les périphériques d'entrée et de sortie"
+    ]
+   },
+   {
+    "title": "Langages et programmation",
+    "chapters": [
+     "Constructions élémentaires d'un langage",
+     "Spécification et tests d'un programme",
+     "Mise au point et documentation d'un programme",
+     "Diversité et histoire des langages"
+    ]
+   },
+   {
+    "title": "Algorithmique",
+    "chapters": [
+     "Parcours séquentiel d'un tableau",
+     "Tri par insertion et tri par sélection",
+     "Recherche dichotomique dans un tableau trié",
+     "Les algorithmes gloutons",
+     "L'algorithme des k plus proches voisins",
+     "Coût d'un algorithme et preuve de correction"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-si",
+  "themes": [
+   {
+    "title": "Innovation et démarche de projet",
+    "chapters": [
+     "Créer des produits innovants : la démarche de conception",
+     "Le cahier des charges et l'analyse du besoin",
+     "Le design et l'écoconception",
+     "La démarche de projet en équipe"
+    ]
+   },
+   {
+    "title": "Analyser et décrire un système",
+    "chapters": [
+     "Le langage SysML : diagrammes d'exigences et de blocs",
+     "Les chaînes de puissance et d'information",
+     "Analyser les performances d'un système"
+    ]
+   },
+   {
+    "title": "Mécanique",
+    "chapters": [
+     "Modéliser les liaisons mécaniques",
+     "La statique : principe fondamental",
+     "La cinématique : trajectoire, vitesse et accélération",
+     "La résistance des matériaux : premières notions"
+    ]
+   },
+   {
+    "title": "Énergie",
+    "chapters": [
+     "Les sources et les formes d'énergie",
+     "La chaîne de puissance : alimenter, convertir, transmettre",
+     "Puissance, rendement et bilan énergétique",
+     "Les moteurs électriques et leur commande"
+    ]
+   },
+   {
+    "title": "Information et commande",
+    "chapters": [
+     "Les capteurs et l'acquisition de données",
+     "Le codage et le traitement numérique de l'information",
+     "Programmer un microcontrôleur",
+     "Les réseaux de communication entre objets",
+     "Les systèmes asservis : premières notions"
+    ]
+   },
+   {
+    "title": "Expérimenter, simuler et communiquer",
+    "chapters": [
+     "Mesurer et interpréter des écarts",
+     "Simuler le comportement d'un système",
+     "Prototyper une solution",
+     "Communiquer sur un projet technique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-ses",
+  "themes": [
+   {
+    "title": "Science économique",
+    "chapters": [
+     "Le fonctionnement d'un marché concurrentiel",
+     "Les marchés imparfaitement concurrentiels : monopole et oligopole",
+     "Les défaillances du marché : externalités et biens communs",
+     "Le financement des agents économiques",
+     "La monnaie et sa création"
+    ]
+   },
+   {
+    "title": "Sociologie et science politique",
+    "chapters": [
+     "La socialisation et les différences de comportement",
+     "La construction et l'évolution des liens sociaux",
+     "Les processus sociaux de la déviance",
+     "La formation et l'expression de l'opinion publique",
+     "Le vote : une affaire individuelle ou collective"
+    ]
+   },
+   {
+    "title": "Regards croisés",
+    "chapters": [
+     "Assurance, protection sociale et gestion des risques",
+     "L'organisation et la gouvernance des entreprises"
+    ]
+   },
+   {
+    "title": "Savoir-faire et méthodes",
+    "chapters": [
+     "Calculs de proportions, de taux et d'indices",
+     "Moyenne, médiane et lecture de données statistiques",
+     "Lire un graphique et une courbe d'offre ou de demande",
+     "Répondre à une question mobilisant des connaissances"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Première",
+  "subject": "spe-lit-langues",
+  "themes": [
+   {
+    "title": "Imaginaires",
+    "chapters": [
+     "L'imagination créatrice et visionnaire",
+     "Les imaginaires effrayants",
+     "Utopies et dystopies",
+     "Étudier une œuvre intégrale de l'imaginaire"
+    ]
+   },
+   {
+    "title": "Rencontres",
+    "chapters": [
+     "L'amour et l'amitié",
+     "L'individu et le groupe",
+     "La confrontation à la différence",
+     "Étudier une œuvre intégrale sur la rencontre"
+    ]
+   },
+   {
+    "title": "Littérature et culture du monde anglophone",
+    "chapters": [
+     "Repères d'histoire littéraire anglophone",
+     "Lire la poésie en anglais",
+     "Lire le théâtre en anglais",
+     "Analyser une image, un film ou une série"
+    ]
+   },
+   {
+    "title": "Méthodes de la spécialité",
+    "chapters": [
+     "Le commentaire de texte en anglais",
+     "La traduction",
+     "L'expression écrite argumentée",
+     "L'oral : présenter et débattre"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "philosophie",
+  "themes": [
+   {
+    "title": "Découvrir la philosophie",
+    "chapters": [
+     "Qu'est-ce que philosopher ?",
+     "Les grands courants et les grands auteurs",
+     "Les repères conceptuels : distinguer pour penser"
+    ]
+   },
+   {
+    "title": "Le sujet et la connaissance de soi",
+    "chapters": [
+     "La conscience",
+     "L'inconscient",
+     "Le temps",
+     "Le langage"
+    ]
+   },
+   {
+    "title": "La raison et le réel",
+    "chapters": [
+     "La raison",
+     "La vérité",
+     "La science",
+     "La nature"
+    ]
+   },
+   {
+    "title": "La culture et ses œuvres",
+    "chapters": [
+     "L'art",
+     "La technique",
+     "Le travail",
+     "La religion"
+    ]
+   },
+   {
+    "title": "La morale et la politique",
+    "chapters": [
+     "Le devoir",
+     "Le bonheur",
+     "La liberté",
+     "La justice",
+     "L'État"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Analyser un sujet de dissertation et dégager un problème",
+     "Construire le plan et rédiger la dissertation",
+     "L'explication de texte : comprendre la thèse et l'argumentation",
+     "Rédiger l'explication de texte",
+     "Mobiliser les auteurs et les exemples",
+     "Gérer les quatre heures de l'épreuve"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "Fragilités des démocraties, totalitarismes et Seconde Guerre mondiale (1929-1945)",
+    "chapters": [
+     "La crise de 1929 et ses effets économiques et sociaux",
+     "Les régimes totalitaires : URSS stalinienne, Italie fasciste, Allemagne nazie",
+     "Les démocraties face aux crises : le Front populaire",
+     "La Seconde Guerre mondiale : une guerre d'anéantissement",
+     "La Shoah et les génocides",
+     "La France défaite et occupée : Vichy, collaboration et Résistance"
+    ]
+   },
+   {
+    "title": "La multiplication des acteurs internationaux dans un monde bipolaire (1945-début des années 1970)",
+    "chapters": [
+     "La fin de la guerre et les débuts d'un nouvel ordre mondial",
+     "La guerre froide : un monde bipolaire",
+     "Décolonisation et émergence du tiers-monde",
+     "La guerre d'Algérie",
+     "La France : de la IVe à la Ve République et sa nouvelle place dans le monde"
+    ]
+   },
+   {
+    "title": "Les remises en cause économiques, politiques et sociales des années 1970 à 1991",
+    "chapters": [
+     "Chocs pétroliers et nouveaux équilibres économiques mondiaux",
+     "Le tournant néolibéral et la fin de la guerre froide",
+     "L'effondrement du bloc soviétique",
+     "La France de 1974 à 1988 : un tournant social, politique et culturel"
+    ]
+   },
+   {
+    "title": "Le monde, l'Europe et la France depuis les années 1990",
+    "chapters": [
+     "Nouveaux rapports de puissance et nouvelles conflictualités",
+     "Le terrorisme et les enjeux de sécurité",
+     "La construction européenne : élargissements, approfondissement et remises en question",
+     "La République française : évolutions des institutions et de la société",
+     "Les nouveaux enjeux mondiaux : environnement et coopération"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "La question problématisée en histoire",
+     "L'analyse de document en histoire",
+     "Les repères chronologiques indispensables",
+     "Réviser efficacement pour le contrôle continu"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "Mers et océans : au cœur de la mondialisation",
+    "chapters": [
+     "Mers et océans : vecteurs essentiels de la mondialisation",
+     "Ports, détroits et grandes routes maritimes",
+     "Mers et océans : entre appropriation, protection et liberté de circulation",
+     "La France : une puissance maritime ?"
+    ]
+   },
+   {
+    "title": "Dynamiques territoriales, coopérations et tensions dans la mondialisation",
+    "chapters": [
+     "Des territoires inégalement intégrés dans la mondialisation",
+     "Coopérations, tensions et régulations aux échelles mondiale, régionale et locale",
+     "La France : un territoire attractif dans la mondialisation ?",
+     "Le rayonnement international de la France"
+    ]
+   },
+   {
+    "title": "L'Union européenne dans la mondialisation : des dynamiques complexes",
+    "chapters": [
+     "L'Union européenne : un espace plus ou moins ouvert sur le monde",
+     "Les régions européennes : intégration et inégalités",
+     "La France et ses régions dans l'Union européenne et dans la mondialisation"
+    ]
+   },
+   {
+    "title": "La France et ses régions dans le monde",
+    "chapters": [
+     "Les outre-mer : atouts et défis",
+     "Les régions françaises face à la mondialisation",
+     "Les politiques d'aménagement du territoire"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Réaliser un croquis de synthèse",
+     "Construire un schéma à partir d'un texte",
+     "La question problématisée en géographie",
+     "L'analyse de document en géographie"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Les principes et les espaces du débat démocratique",
+    "chapters": [
+     "Le débat, au cœur de la démocratie",
+     "Les espaces du débat : médias, réseaux sociaux, associations",
+     "Liberté d'expression et respect d'autrui dans le débat",
+     "L'information et la désinformation dans le débat public"
+    ]
+   },
+   {
+    "title": "La délibération dans les institutions",
+    "chapters": [
+     "Le Parlement, lieu de la délibération et de la loi",
+     "Le Conseil constitutionnel et le contrôle des lois",
+     "Les collectivités territoriales et la démocratie locale",
+     "Les institutions européennes et la décision"
+    ]
+   },
+   {
+    "title": "Participer à la prise de décision",
+    "chapters": [
+     "Le vote et la représentation",
+     "Démocratie participative : consultations et conventions citoyennes",
+     "L'engagement citoyen et ses formes"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Analyser un document et argumenter en EMC",
+     "Préparer un débat ou un projet évalué"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "ens-scientifiques",
+  "themes": [
+   {
+    "title": "Science, climat et société",
+    "chapters": [
+     "L'atmosphère terrestre et la vie",
+     "La complexité du système climatique",
+     "Le climat du futur : modèles et scénarios",
+     "Énergie, choix de développement et futur climatique"
+    ]
+   },
+   {
+    "title": "Le futur des énergies",
+    "chapters": [
+     "Deux siècles d'énergie électrique",
+     "Les atouts de l'électricité : production sans combustion",
+     "Optimisation du transport de l'électricité",
+     "Choix énergétiques et impacts sur les sociétés"
+    ]
+   },
+   {
+    "title": "Une histoire du vivant",
+    "chapters": [
+     "La biodiversité et son évolution",
+     "L'évolution comme grille de lecture du monde",
+     "L'évolution humaine",
+     "Les modèles démographiques",
+     "L'intelligence artificielle"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Exploiter des documents scientifiques variés",
+     "Rédiger une argumentation scientifique",
+     "Utiliser des outils mathématiques dans un problème scientifique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (1) : individu et société",
+    "chapters": [
+     "Identités et échanges",
+     "Espace privé et espace public",
+     "Art et pouvoir",
+     "Citoyenneté et mondes virtuels"
+    ]
+   },
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (2) : création, sciences et mémoire",
+    "chapters": [
+     "Fictions et réalités",
+     "Innovations scientifiques et responsabilité",
+     "Diversité et inclusion",
+     "Territoire et mémoire"
+    ]
+   },
+   {
+    "title": "Le groupe verbal approfondi",
+    "chapters": [
+     "Le past perfect et l'antériorité dans le passé",
+     "La voix passive à tous les temps",
+     "Les modaux au passé : must have, should have, could have",
+     "Le conditionnel et les phrases en if",
+     "Wish et if only : le regret et le souhait",
+     "Les verbes suivis de to + base verbale ou de V-ing"
+    ]
+   },
+   {
+    "title": "Révisions grammaticales du cycle terminal",
+    "chapters": [
+     "Les temps du récit et leurs valeurs",
+     "Les modes de l'hypothèse et du souhait",
+     "Les articulateurs du discours argumenté",
+     "Les erreurs les plus fréquentes à éviter"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau B2 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde anglophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'évaluation de la compréhension de l'oral",
+     "L'évaluation de la compréhension de l'écrit",
+     "L'expression écrite : sujets et méthode",
+     "L'expression orale : présenter et défendre un axe",
+     "Gérer son temps et se relire le jour de l'épreuve",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "espagnol",
+  "themes": [
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (1) : individu et société",
+    "chapters": [
+     "Identités et échanges",
+     "Espace privé et espace public",
+     "Art et pouvoir",
+     "Citoyenneté et mondes virtuels"
+    ]
+   },
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (2) : création, sciences et mémoire",
+    "chapters": [
+     "Fictions et réalités",
+     "Innovations scientifiques et responsabilité",
+     "Diversité et inclusion",
+     "Territoire et mémoire"
+    ]
+   },
+   {
+    "title": "Les modes et la concordance des temps",
+    "chapters": [
+     "Le conditionnel présent",
+     "Le subjonctif présent : formation et emplois",
+     "L'impératif affirmatif et négatif",
+     "Le subjonctif imparfait",
+     "La concordance des temps",
+     "L'hypothèse avec si"
+    ]
+   },
+   {
+    "title": "Révisions grammaticales du cycle terminal",
+    "chapters": [
+     "Les temps du récit et leurs valeurs",
+     "Les modes de l'hypothèse et du souhait",
+     "Les articulateurs du discours argumenté",
+     "Les erreurs les plus fréquentes à éviter"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau B1-B2 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde hispanophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'évaluation de la compréhension de l'oral",
+     "L'évaluation de la compréhension de l'écrit",
+     "L'expression écrite : sujets et méthode",
+     "L'expression orale : présenter et défendre un axe",
+     "Gérer son temps et se relire le jour de l'épreuve",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "allemand",
+  "themes": [
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (1) : individu et société",
+    "chapters": [
+     "Identités et échanges",
+     "Espace privé et espace public",
+     "Art et pouvoir",
+     "Citoyenneté et mondes virtuels"
+    ]
+   },
+   {
+    "title": "Gestes fondateurs et mondes en mouvement (2) : création, sciences et mémoire",
+    "chapters": [
+     "Fictions et réalités",
+     "Innovations scientifiques et responsabilité",
+     "Diversité et inclusion",
+     "Territoire et mémoire"
+    ]
+   },
+   {
+    "title": "Le groupe verbal approfondi",
+    "chapters": [
+     "Le prétérit des verbes forts et faibles",
+     "Le plus-que-parfait",
+     "Le passif avec werden",
+     "Le subjonctif II : souhait, conseil et hypothèse",
+     "Le subjonctif I et le discours indirect",
+     "Les verbes à rection prépositionnelle"
+    ]
+   },
+   {
+    "title": "Révisions grammaticales du cycle terminal",
+    "chapters": [
+     "Les temps du récit et leurs valeurs",
+     "Les modes de l'hypothèse et du souhait",
+     "Les articulateurs du discours argumenté",
+     "Les erreurs les plus fréquentes à éviter"
+    ]
+   },
+   {
+    "title": "Les compétences de communication",
+    "chapters": [
+     "Comprendre un document audio ou vidéo",
+     "Comprendre un texte écrit",
+     "S'exprimer à l'oral en continu",
+     "Dialoguer et débattre à l'oral",
+     "Rédiger un texte construit",
+     "La médiation : rendre compte d'un document dans l'autre langue",
+     "Viser le niveau B1-B2 du cadre européen"
+    ]
+   },
+   {
+    "title": "Repères culturels du monde germanophone",
+    "chapters": [
+     "Les grandes étapes de l'histoire des pays de la langue",
+     "La géographie et la diversité des pays de la langue",
+     "Les institutions et la vie politique",
+     "Les grandes figures de la littérature et des arts",
+     "Les fêtes, traditions et faits de société actuels"
+    ]
+   },
+   {
+    "title": "Lexique et méthodes de travail",
+    "chapters": [
+     "Le vocabulaire de la description d'image et de document",
+     "Le vocabulaire de l'argumentation",
+     "Apprendre et réviser son vocabulaire efficacement",
+     "La prononciation, l'accentuation et l'intonation"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'évaluation de la compréhension de l'oral",
+     "L'évaluation de la compréhension de l'écrit",
+     "L'expression écrite : sujets et méthode",
+     "L'expression orale : présenter et défendre un axe",
+     "Gérer son temps et se relire le jour de l'épreuve",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-math",
+  "themes": [
+   {
+    "title": "Combinatoire et dénombrement",
+    "chapters": [
+     "Ensembles, produit cartésien et principe multiplicatif",
+     "Listes, arrangements et permutations",
+     "Combinaisons et coefficients binomiaux",
+     "Triangle de Pascal et formule du binôme"
+    ]
+   },
+   {
+    "title": "Géométrie dans l'espace",
+    "chapters": [
+     "Vecteurs, droites et plans de l'espace",
+     "Bases et repères de l'espace",
+     "Représentations paramétriques de droites",
+     "Produit scalaire dans l'espace et orthogonalité",
+     "Équations cartésiennes de plans",
+     "Projeté orthogonal et distances"
+    ]
+   },
+   {
+    "title": "Suites",
+    "chapters": [
+     "Le raisonnement par récurrence",
+     "Limites de suites",
+     "Opérations sur les limites et théorèmes de comparaison",
+     "Suites monotones et convergence"
+    ]
+   },
+   {
+    "title": "Limites, continuité et dérivation",
+    "chapters": [
+     "Limites de fonctions et asymptotes",
+     "Continuité et théorème des valeurs intermédiaires",
+     "Dérivée d'une fonction composée",
+     "Dérivée seconde et convexité",
+     "Points d'inflexion"
+    ]
+   },
+   {
+    "title": "Fonctions logarithme et trigonométriques",
+    "chapters": [
+     "La fonction logarithme népérien : définition et propriétés",
+     "Étude de la fonction logarithme",
+     "Croissances comparées",
+     "Les fonctions sinus et cosinus : dérivées et étude"
+    ]
+   },
+   {
+    "title": "Primitives, équations différentielles et intégration",
+    "chapters": [
+     "Primitives d'une fonction",
+     "Équations différentielles y' = ay et y' = ay + b",
+     "L'intégrale d'une fonction et l'aire sous la courbe",
+     "Propriétés de l'intégrale et valeur moyenne",
+     "L'intégration par parties"
+    ]
+   },
+   {
+    "title": "Probabilités",
+    "chapters": [
+     "Succession d'épreuves indépendantes et schéma de Bernoulli",
+     "La loi binomiale",
+     "Sommes de variables aléatoires : espérance et variance",
+     "Inégalité de Bienaymé-Tchebychev et inégalité de concentration",
+     "La loi des grands nombres"
+    ]
+   },
+   {
+    "title": "Algorithmique et programmation",
+    "chapters": [
+     "Les listes en Python : création et manipulation",
+     "Algorithmes de seuil et de dichotomie",
+     "Simuler des expériences aléatoires en Python"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Comprendre la structure de l'épreuve de spécialité",
+     "Rédiger une démonstration complète",
+     "Les exercices types : suites, fonctions, géométrie, probabilités",
+     "Utiliser la calculatrice le jour de l'épreuve",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-physique",
+  "themes": [
+   {
+    "title": "Déterminer la composition d'un système",
+    "chapters": [
+     "Les réactions acide-base et le pH",
+     "Les spectroscopies infrarouge et UV-visible",
+     "Le titrage avec suivi pH-métrique ou conductimétrique",
+     "La loi de Kohlrausch et la conductimétrie"
+    ]
+   },
+   {
+    "title": "Modéliser l'évolution temporelle d'un système",
+    "chapters": [
+     "La cinétique chimique : vitesse et facteurs cinétiques",
+     "La catalyse",
+     "Le mécanisme réactionnel",
+     "La décroissance radioactive"
+    ]
+   },
+   {
+    "title": "Prévoir l'état final d'un système",
+    "chapters": [
+     "Le quotient de réaction et la constante d'équilibre",
+     "Le sens d'évolution spontanée d'un système",
+     "Les piles et l'électrolyse",
+     "La force des acides et des bases : constante d'acidité",
+     "Les diagrammes de distribution et les solutions tampons"
+    ]
+   },
+   {
+    "title": "Élaborer des stratégies en synthèse organique",
+    "chapters": [
+     "Structure et réactivité des molécules organiques",
+     "Optimiser une synthèse : vitesse et rendement",
+     "Les polymères"
+    ]
+   },
+   {
+    "title": "Mouvement et interactions",
+    "chapters": [
+     "Vecteurs position, vitesse et accélération",
+     "La deuxième loi de Newton",
+     "Mouvement dans un champ de pesanteur uniforme",
+     "Mouvement dans un champ électrique uniforme",
+     "Les lois de Kepler et le mouvement des satellites",
+     "La poussée d'Archimède",
+     "L'écoulement d'un fluide : débit et relation de Bernoulli"
+    ]
+   },
+   {
+    "title": "L'énergie : conversions et transferts",
+    "chapters": [
+     "Le modèle du gaz parfait",
+     "Énergie interne et premier principe de la thermodynamique",
+     "Les transferts thermiques : conduction, convection, rayonnement",
+     "Bilan thermique du système Terre-atmosphère",
+     "La loi phénoménologique de Newton et l'évolution de la température"
+    ]
+   },
+   {
+    "title": "Ondes et signaux",
+    "chapters": [
+     "L'intensité sonore et le niveau d'intensité sonore",
+     "La diffraction",
+     "Les interférences",
+     "L'effet Doppler",
+     "La lunette astronomique",
+     "L'effet photoélectrique et le photon",
+     "Le condensateur et le circuit RC"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'épreuve écrite : lire un sujet et rédiger",
+     "L'épreuve expérimentale (ECE)",
+     "Incertitudes et validation d'un résultat",
+     "Résoudre un exercice de type « problème »",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-svt",
+  "themes": [
+   {
+    "title": "Génétique et évolution",
+    "chapters": [
+     "Le brassage génétique lors de la méiose et de la fécondation",
+     "Les anomalies de la méiose",
+     "La complexification des génomes : transferts horizontaux et endosymbioses",
+     "L'évolution des génomes au sein des populations",
+     "D'autres mécanismes de diversification du vivant",
+     "Les relations de parenté et la phylogénie"
+    ]
+   },
+   {
+    "title": "À la recherche du passé géologique de notre planète",
+    "chapters": [
+     "Le temps et les roches : datation relative",
+     "La datation absolue par radiochronologie",
+     "Les traces du passé mouvementé de la Terre : chaînes de montagnes",
+     "Les ophiolites et les marqueurs d'une ancienne subduction"
+    ]
+   },
+   {
+    "title": "De la plante sauvage à la plante domestiquée",
+    "chapters": [
+     "L'organisation fonctionnelle des plantes à fleurs",
+     "La plante, productrice de matière organique",
+     "La reproduction des plantes à fleurs",
+     "La domestication des plantes"
+    ]
+   },
+   {
+    "title": "Les climats de la Terre",
+    "chapters": [
+     "Le réchauffement climatique actuel",
+     "Les climats du passé récent : le Quaternaire",
+     "Les climats du passé lointain",
+     "Comprendre le passé pour agir aujourd'hui et demain"
+    ]
+   },
+   {
+    "title": "Corps humain et santé",
+    "chapters": [
+     "Le réflexe myotatique",
+     "Le cerveau et le mouvement volontaire",
+     "La contraction musculaire",
+     "L'origine de l'ATP nécessaire à la contraction",
+     "La régulation de la glycémie",
+     "Le stress : une réponse adaptative de l'organisme"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'exercice de restitution des connaissances",
+     "L'exercice de raisonnement à partir de documents",
+     "L'épreuve expérimentale (ECE)",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-hggsp",
+  "themes": [
+   {
+    "title": "De nouveaux espaces de conquête",
+    "chapters": [
+     "Conquêtes, affirmations de puissance et rivalités",
+     "Enjeux diplomatiques et coopérations",
+     "La Chine : à la conquête de l'espace, des mers et des océans"
+    ]
+   },
+   {
+    "title": "Faire la guerre, faire la paix",
+    "chapters": [
+     "La dimension politique de la guerre : des conflits interétatiques aux conflits transnationaux",
+     "Le défi de la construction de la paix",
+     "Le Moyen-Orient : conflits régionaux et tentatives de paix"
+    ]
+   },
+   {
+    "title": "Histoire et mémoires",
+    "chapters": [
+     "Histoire et mémoires des conflits",
+     "Histoire, mémoire et justice",
+     "L'histoire et les mémoires du génocide des Juifs et des Tsiganes"
+    ]
+   },
+   {
+    "title": "Identifier, protéger et valoriser le patrimoine",
+    "chapters": [
+     "Usages sociaux et politiques du patrimoine",
+     "Le patrimoine, entre tensions et concurrences",
+     "La France et le patrimoine : des actions majeures de valorisation et de protection"
+    ]
+   },
+   {
+    "title": "L'environnement, entre exploitation et protection",
+    "chapters": [
+     "Exploiter, préserver et protéger",
+     "Le changement climatique : approches historique et géopolitique",
+     "Les États-Unis et la question environnementale"
+    ]
+   },
+   {
+    "title": "L'enjeu de la connaissance",
+    "chapters": [
+     "Produire et diffuser des connaissances",
+     "La connaissance, enjeu politique et géopolitique",
+     "Le cyberespace : conflictualité et coopération"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "La dissertation en HGGSP",
+     "L'étude critique de document(s)",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-hlp",
+  "themes": [
+   {
+    "title": "La recherche de soi",
+    "chapters": [
+     "Éducation, transmission et émancipation",
+     "Les expressions de la sensibilité",
+     "Les métamorphoses du moi",
+     "Du romantisme au XXe siècle : auteurs et textes"
+    ]
+   },
+   {
+    "title": "L'humanité en question",
+    "chapters": [
+     "Création, continuités et ruptures",
+     "Histoire et violence",
+     "L'humain et ses limites",
+     "Le XXe et le XXIe siècle : auteurs et textes"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'interprétation littéraire : méthode",
+     "L'essai philosophique : méthode",
+     "L'épreuve écrite et l'oral de l'épreuve",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-nsi",
+  "themes": [
+   {
+    "title": "Structures de données",
+    "chapters": [
+     "Interface et implémentation d'une structure",
+     "La programmation orientée objet",
+     "Listes, piles et files",
+     "Les dictionnaires et le hachage",
+     "Les arbres et les arbres binaires de recherche",
+     "Les graphes"
+    ]
+   },
+   {
+    "title": "Bases de données",
+    "chapters": [
+     "Le modèle relationnel",
+     "Les systèmes de gestion de bases de données",
+     "Le langage SQL : interroger une base",
+     "Le langage SQL : modifier une base"
+    ]
+   },
+   {
+    "title": "Architectures matérielles, systèmes d'exploitation et réseaux",
+    "chapters": [
+     "Les composants intégrés d'un système sur puce",
+     "Gestion des processus et ordonnancement",
+     "Les protocoles de routage RIP et OSPF",
+     "La sécurisation des communications : chiffrement symétrique et asymétrique"
+    ]
+   },
+   {
+    "title": "Langages et programmation",
+    "chapters": [
+     "Calculabilité et décidabilité",
+     "La récursivité",
+     "La modularité et les bibliothèques",
+     "Les paradigmes de programmation",
+     "Mise au point des programmes et gestion des bugs"
+    ]
+   },
+   {
+    "title": "Algorithmique",
+    "chapters": [
+     "Algorithmes sur les arbres binaires",
+     "Algorithmes sur les graphes : parcours et recherche de chemin",
+     "Diviser pour régner : le tri fusion",
+     "La programmation dynamique",
+     "La recherche textuelle : algorithme de Boyer-Moore"
+    ]
+   },
+   {
+    "title": "Histoire de l'informatique",
+    "chapters": [
+     "Les grandes figures et les ruptures de l'informatique moderne"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'épreuve écrite : méthode",
+     "L'épreuve pratique sur machine",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-si",
+  "themes": [
+   {
+    "title": "Innovation et projet",
+    "chapters": [
+     "Le projet de conception en équipe",
+     "L'écoconception et l'analyse du cycle de vie",
+     "Présenter un projet devant un jury"
+    ]
+   },
+   {
+    "title": "Mécanique",
+    "chapters": [
+     "Le principe fondamental de la dynamique",
+     "La cinématique des solides en mouvement",
+     "Le comportement des matériaux et des structures",
+     "Les transmissions de mouvement"
+    ]
+   },
+   {
+    "title": "Énergie",
+    "chapters": [
+     "L'énergie dans la chaîne de puissance",
+     "La conversion électromécanique",
+     "La gestion et le stockage de l'énergie",
+     "Les rendements et les pertes"
+    ]
+   },
+   {
+    "title": "Information et commande",
+    "chapters": [
+     "Les systèmes asservis : stabilité, précision, rapidité",
+     "Le traitement numérique du signal",
+     "La programmation de la commande d'un système",
+     "Les réseaux de communication et l'Internet des objets"
+    ]
+   },
+   {
+    "title": "Modéliser et simuler",
+    "chapters": [
+     "Modéliser un système multiphysique",
+     "Simuler et comparer avec le réel",
+     "Analyser les écarts entre performances attendues, mesurées et simulées"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "L'épreuve écrite de sciences de l'ingénieur",
+     "La partie sciences physiques de l'épreuve",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-ses",
+  "themes": [
+   {
+    "title": "Science économique",
+    "chapters": [
+     "Les sources et les défis de la croissance économique",
+     "Le commerce international et l'internationalisation de la production",
+     "Lutter contre le chômage",
+     "Les crises financières et la régulation du système financier",
+     "Les politiques économiques dans le cadre européen"
+    ]
+   },
+   {
+    "title": "Sociologie et science politique",
+    "chapters": [
+     "La structure de la société française actuelle",
+     "L'action de l'École sur les destins individuels",
+     "La mobilité sociale : caractéristiques et facteurs",
+     "Les mutations du travail et de l'emploi",
+     "L'engagement politique dans les sociétés démocratiques"
+    ]
+   },
+   {
+    "title": "Regards croisés",
+    "chapters": [
+     "Inégalités et justice sociale",
+     "L'action publique pour l'environnement"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "La dissertation en SES",
+     "L'épreuve composée : mobilisation des connaissances",
+     "L'épreuve composée : étude d'un document",
+     "L'épreuve composée : raisonnement appuyé sur un dossier",
+     "Les calculs et outils statistiques à maîtriser"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "spe-lit-langues",
+  "themes": [
+   {
+    "title": "Arts et débats d'idées",
+    "chapters": [
+     "Art et contestation",
+     "L'art qui fait débat",
+     "L'art du débat"
+    ]
+   },
+   {
+    "title": "Expression et construction de soi",
+    "chapters": [
+     "L'expression des émotions",
+     "La mise en scène de soi",
+     "Initiation et apprentissage"
+    ]
+   },
+   {
+    "title": "Voyages, territoires, frontières",
+    "chapters": [
+     "Exploration et aventure",
+     "Frontières et conflits",
+     "Migration et exil"
+    ]
+   },
+   {
+    "title": "Œuvres intégrales et culture anglophone",
+    "chapters": [
+     "Étudier une œuvre intégrale en Terminale",
+     "Le dossier personnel pour l'oral",
+     "Repères culturels du monde anglophone contemporain"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "La synthèse de documents en anglais",
+     "La traduction ou la transposition",
+     "L'oral : présenter son dossier et dialoguer",
+     "Sujets d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "maths-complementaires",
+  "themes": [
+   {
+    "title": "Suites et modèles d'évolution",
+    "chapters": [
+     "Suites arithmétiques et géométriques : rappels et applications",
+     "Le raisonnement par récurrence",
+     "Limites de suites",
+     "Suites arithmético-géométriques et modèles d'évolution"
+    ]
+   },
+   {
+    "title": "Fonctions et modélisation",
+    "chapters": [
+     "Dérivation : rappels et fonctions composées",
+     "Convexité et points d'inflexion",
+     "Limites de fonctions",
+     "La fonction exponentielle et ses applications",
+     "La fonction logarithme népérien et ses applications",
+     "Primitives et équations différentielles simples",
+     "Calcul intégral et aires"
+    ]
+   },
+   {
+    "title": "Statistiques à deux variables",
+    "chapters": [
+     "Nuage de points et ajustement affine",
+     "La méthode des moindres carrés",
+     "Ajustements se ramenant à un ajustement affine",
+     "Corrélation et causalité"
+    ]
+   },
+   {
+    "title": "Probabilités",
+    "chapters": [
+     "Variables aléatoires discrètes : rappels",
+     "Répétition d'expériences indépendantes et loi binomiale",
+     "La loi géométrique et les temps d'attente",
+     "Lois à densité : loi uniforme et loi exponentielle",
+     "Échantillonnage et prise de décision"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Réussir les évaluations de contrôle continu",
+     "Rédiger la résolution d'un problème de modélisation",
+     "Exercices d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "maths-expertes",
+  "themes": [
+   {
+    "title": "Nombres complexes",
+    "chapters": [
+     "Forme algébrique et opérations",
+     "Conjugué et équations du second degré dans les complexes",
+     "Module, argument et représentation géométrique",
+     "Formes trigonométrique et exponentielle",
+     "Formules de Moivre et d'Euler",
+     "Racines n-ièmes de l'unité",
+     "Nombres complexes et géométrie"
+    ]
+   },
+   {
+    "title": "Arithmétique",
+    "chapters": [
+     "Divisibilité et division euclidienne",
+     "Les congruences",
+     "PGCD et algorithme d'Euclide",
+     "Théorèmes de Bézout et de Gauss",
+     "Nombres premiers et décomposition en facteurs premiers",
+     "Le petit théorème de Fermat",
+     "Applications à la cryptographie"
+    ]
+   },
+   {
+    "title": "Graphes et matrices",
+    "chapters": [
+     "Calcul matriciel : opérations et inverse",
+     "Matrices et systèmes linéaires",
+     "Les graphes : vocabulaire et matrice d'adjacence",
+     "Chaînes et chemins dans un graphe",
+     "Les chaînes de Markov",
+     "Suites de matrices et état stable"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Réussir les évaluations de contrôle continu",
+     "Rédiger une démonstration en arithmétique",
+     "Exercices d'entraînement corrigés"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "Terminale",
+  "subject": "grand-oral",
+  "themes": [
+   {
+    "title": "Comprendre l'épreuve",
+    "chapters": [
+     "Le déroulement du Grand oral",
+     "Les critères d'évaluation du jury"
+    ]
+   },
+   {
+    "title": "Construire ses questions",
+    "chapters": [
+     "Choisir deux questions liées à ses spécialités",
+     "Formuler une problématique claire",
+     "Faire des recherches et sélectionner ses sources",
+     "Construire un plan d'exposé en cinq minutes"
+    ]
+   },
+   {
+    "title": "Prendre la parole",
+    "chapters": [
+     "Maîtriser sa voix, son débit et son regard",
+     "Gérer son corps et son stress",
+     "Utiliser le temps de préparation et le support",
+     "Parler sans lire ses notes"
+    ]
+   },
+   {
+    "title": "Échanger avec le jury",
+    "chapters": [
+     "Répondre aux questions et approfondir",
+     "Présenter son projet d'orientation",
+     "Relier sa question à son parcours"
+    ]
+   },
+   {
+    "title": "Préparer le bac",
+    "chapters": [
+     "Les erreurs fréquentes à éviter",
+     "S'entraîner avec des oraux blancs",
+     "La veille de l'épreuve : se préparer sereinement"
+    ]
+   }
+  ]
+ }
+]

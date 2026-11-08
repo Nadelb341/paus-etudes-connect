@@ -1,0 +1,2719 @@
+[
+ {
+  "level": "6ème",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Lire et comprendre des textes",
+    "chapters": [
+     "Lire à voix haute avec fluidité et expressivité",
+     "Comprendre un texte : repérer les informations essentielles",
+     "Faire des inférences et interpréter un texte",
+     "Identifier le narrateur, les personnages et le cadre d'un récit",
+     "Comprendre l'organisation d'un récit : schéma narratif",
+     "Lire une œuvre intégrale et en garder trace",
+     "Lire des documents variés : textes, images, schémas"
+    ]
+   },
+   {
+    "title": "Le monstre, aux limites de l'humain",
+    "chapters": [
+     "Les monstres dans les récits de l'Antiquité",
+     "Ulysse face aux monstres de l'Odyssée",
+     "Les monstres dans les contes et les légendes",
+     "Décrire un monstre : le portrait et ses effets",
+     "Le monstre, miroir de nos peurs"
+    ]
+   },
+   {
+    "title": "Récits d'aventures",
+    "chapters": [
+     "Les caractéristiques du roman d'aventures",
+     "Le héros d'aventures et ses épreuves",
+     "Découvrir un roman d'aventures en œuvre intégrale",
+     "Créer du suspense dans un récit",
+     "L'aventure à l'image : bande dessinée et cinéma"
+    ]
+   },
+   {
+    "title": "Récits de création et création poétique",
+    "chapters": [
+     "Les récits de création du monde dans différentes cultures",
+     "La Genèse : un texte fondateur",
+     "Les métamorphoses dans les récits mythologiques",
+     "Découvrir la poésie : vers, strophes et rimes",
+     "Les images poétiques : comparaison et métaphore",
+     "Jouer avec les mots et les sonorités"
+    ]
+   },
+   {
+    "title": "Résister au plus fort : ruses, mensonges et masques",
+    "chapters": [
+     "Les fables : morale et personnages",
+     "Le Roman de Renart et le personnage du rusé",
+     "La ruse dans les contes",
+     "Les ruses et les masques au théâtre : découvrir la comédie",
+     "Lire et jouer une scène de théâtre"
+    ]
+   },
+   {
+    "title": "Grammaire : la phrase et ses constituants",
+    "chapters": [
+     "Les types et les formes de phrases",
+     "La phrase simple et la phrase complexe",
+     "Identifier le verbe et son sujet",
+     "Les classes de mots : nom, déterminant, adjectif, pronom",
+     "Les mots invariables : adverbes, prépositions, conjonctions",
+     "Le groupe nominal et ses expansions",
+     "Les compléments du verbe et les compléments de phrase",
+     "L'attribut du sujet"
+    ]
+   },
+   {
+    "title": "Le verbe et la conjugaison",
+    "chapters": [
+     "Le radical et la terminaison du verbe",
+     "Le présent de l'indicatif",
+     "L'imparfait et le passé simple",
+     "Le futur simple et le futur proche",
+     "Les temps composés : passé composé et plus-que-parfait",
+     "L'impératif présent",
+     "Le choix des temps dans un récit au passé"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "Les accords dans le groupe nominal",
+     "L'accord du verbe avec son sujet",
+     "L'accord du participe passé avec être",
+     "Les homophones grammaticaux courants",
+     "Le pluriel des noms et des adjectifs",
+     "Les règles d'orthographe lexicale : lettres muettes, doubles consonnes"
+    ]
+   },
+   {
+    "title": "Vocabulaire",
+    "chapters": [
+     "Utiliser le dictionnaire",
+     "La formation des mots : préfixes, suffixes et familles de mots",
+     "Les mots d'origine grecque et latine",
+     "Synonymes, antonymes et champ lexical",
+     "Sens propre et sens figuré",
+     "Les registres de langue"
+    ]
+   },
+   {
+    "title": "Écrire",
+    "chapters": [
+     "Écrire une phrase correcte et la ponctuer",
+     "Rédiger un paragraphe organisé",
+     "Écrire la suite d'un récit",
+     "Rédiger une description",
+     "Écrire un texte poétique",
+     "Améliorer et corriger son texte : la réécriture"
+    ]
+   },
+   {
+    "title": "S'exprimer à l'oral",
+    "chapters": [
+     "Écouter et comprendre un message oral",
+     "Raconter une histoire à l'oral",
+     "Réciter un texte appris par cœur",
+     "Participer à un échange et argumenter simplement",
+     "Présenter un exposé"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Nombres entiers et nombres décimaux",
+    "chapters": [
+     "Écrire, lire et décomposer les nombres entiers",
+     "Les nombres décimaux : écriture décimale et fractions décimales",
+     "Repérer des nombres sur une demi-droite graduée",
+     "Comparer, ranger et encadrer des nombres décimaux",
+     "Arrondir et donner une valeur approchée"
+    ]
+   },
+   {
+    "title": "Fractions",
+    "chapters": [
+     "La fraction comme partage",
+     "La fraction comme quotient",
+     "Repérer une fraction sur une demi-droite graduée",
+     "Comparer une fraction à 1 et comparer des fractions",
+     "Fractions égales",
+     "Additionner et soustraire des fractions de même dénominateur",
+     "Prendre une fraction d'une quantité"
+    ]
+   },
+   {
+    "title": "Calculer avec les nombres",
+    "chapters": [
+     "Addition et soustraction de nombres décimaux",
+     "Multiplication de nombres décimaux",
+     "Multiplier et diviser par 10, 100, 1 000 et par 0,1 ; 0,01",
+     "La division euclidienne",
+     "La division décimale",
+     "Multiples, diviseurs et critères de divisibilité",
+     "Le calcul mental et l'ordre de grandeur",
+     "Les priorités opératoires et les expressions avec parenthèses"
+    ]
+   },
+   {
+    "title": "Résoudre des problèmes",
+    "chapters": [
+     "Résoudre un problème à une ou plusieurs étapes",
+     "Problèmes de comparaison et de partage",
+     "Initiation à la pensée algébrique : trouver un nombre inconnu",
+     "Les programmes de calcul"
+    ]
+   },
+   {
+    "title": "Proportionnalité",
+    "chapters": [
+     "Reconnaître une situation de proportionnalité",
+     "Utiliser un tableau de proportionnalité",
+     "Le passage par l'unité et le coefficient de proportionnalité",
+     "Appliquer un pourcentage",
+     "Les échelles sur un plan ou une carte"
+    ]
+   },
+   {
+    "title": "Organisation et gestion de données",
+    "chapters": [
+     "Lire et construire un tableau",
+     "Lire et construire un diagramme en barres",
+     "Lire un graphique cartésien",
+     "Découvrir le hasard : situations aléatoires"
+    ]
+   },
+   {
+    "title": "Grandeurs et mesures",
+    "chapters": [
+     "Longueurs et périmètres",
+     "Le périmètre et la longueur du cercle",
+     "Aires : comparer et mesurer",
+     "Aires du rectangle, du triangle et du disque",
+     "Volumes et contenances",
+     "Mesurer et construire des angles",
+     "Durées et horaires",
+     "Les conversions d'unités"
+    ]
+   },
+   {
+    "title": "Espace et géométrie",
+    "chapters": [
+     "Le vocabulaire de la géométrie : points, droites, segments",
+     "Droites perpendiculaires et droites parallèles",
+     "Le cercle",
+     "Les triangles et leurs propriétés",
+     "Les quadrilatères particuliers",
+     "La médiatrice d'un segment",
+     "La symétrie axiale",
+     "Solides : reconnaître, décrire, patrons et représentations"
+    ]
+   },
+   {
+    "title": "Algorithmique et programmation",
+    "chapters": [
+     "Se repérer et se déplacer sur un quadrillage",
+     "Écrire un programme de déplacement",
+     "Découvrir Scratch : instructions et boucles",
+     "Construire une figure avec un programme"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "La longue histoire de l'humanité et des migrations",
+    "chapters": [
+     "Les débuts de l'humanité",
+     "Les premiers humains et leur peuplement de la Terre",
+     "Les sociétés de chasseurs-cueilleurs et l'art préhistorique",
+     "La révolution néolithique : agriculture et sédentarisation",
+     "Premiers États, premières écritures"
+    ]
+   },
+   {
+    "title": "Récits fondateurs, croyances et citoyenneté dans la Méditerranée antique",
+    "chapters": [
+     "Le monde des cités grecques",
+     "Les dieux et les héros grecs : mythes et religion",
+     "Athènes, la naissance de la démocratie",
+     "Rome, de la légende à l'histoire",
+     "La naissance du monothéisme juif dans un monde polythéiste"
+    ]
+   },
+   {
+    "title": "L'Empire romain dans le monde antique",
+    "chapters": [
+     "Conquêtes, paix romaine et romanisation",
+     "La vie dans une ville de l'Empire romain",
+     "Les débuts du christianisme",
+     "Des chrétiens dans l'Empire : persécutions puis religion officielle",
+     "Les relations de l'Empire romain avec la Chine des Han"
+    ]
+   },
+   {
+    "title": "Méthodes de l'historien",
+    "chapters": [
+     "Se repérer dans le temps : frise chronologique, siècles et millénaires",
+     "Analyser un document historique",
+     "Lire et compléter une carte historique",
+     "Raconter un événement historique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "Habiter une métropole",
+    "chapters": [
+     "Qu'est-ce qu'une métropole ?",
+     "Habiter une métropole d'un pays développé",
+     "Habiter une métropole d'un pays en développement",
+     "Les métropoles et leurs habitants : mobilités et quartiers",
+     "La ville de demain : une ville durable"
+    ]
+   },
+   {
+    "title": "Habiter un espace de faible densité",
+    "chapters": [
+     "Habiter un espace à fortes contraintes naturelles",
+     "Habiter un espace de grande biodiversité",
+     "Habiter un espace agricole",
+     "Préserver et valoriser les espaces de faible densité"
+    ]
+   },
+   {
+    "title": "Habiter les littoraux",
+    "chapters": [
+     "Les littoraux, des espaces attractifs",
+     "Un littoral industrialo-portuaire",
+     "Un littoral touristique",
+     "Aménager et protéger les littoraux"
+    ]
+   },
+   {
+    "title": "Le monde habité",
+    "chapters": [
+     "La répartition de la population mondiale",
+     "Les grands foyers de peuplement",
+     "Les espaces peu peuplés du monde",
+     "La variété des formes d'occupation du monde"
+    ]
+   },
+   {
+    "title": "Méthodes du géographe",
+    "chapters": [
+     "Se repérer sur un planisphère et un globe",
+     "Lire une carte : titre, légende, échelle, orientation",
+     "Analyser un paysage",
+     "Réaliser un croquis simple"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Respecter autrui",
+    "chapters": [
+     "Le respect de soi et des autres",
+     "Les règles de la vie collective au collège",
+     "Lutter contre le harcèlement et le cyberharcèlement",
+     "Accepter les différences : refuser les discriminations",
+     "Les émotions et leur expression"
+    ]
+   },
+   {
+    "title": "Acquérir et partager les valeurs de la République",
+    "chapters": [
+     "Liberté, égalité, fraternité : la devise républicaine",
+     "Les symboles de la République française",
+     "La laïcité à l'école",
+     "L'égalité entre les filles et les garçons",
+     "Les droits de l'enfant"
+    ]
+   },
+   {
+    "title": "Construire une culture civique",
+    "chapters": [
+     "Le règlement intérieur : droits et devoirs de l'élève",
+     "Le délégué de classe et les instances du collège",
+     "S'engager dans un projet collectif",
+     "S'informer et développer son esprit critique face aux médias",
+     "Être un citoyen responsable du numérique",
+     "Protéger l'environnement : un engagement citoyen"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "physique-chimie",
+  "themes": [
+   {
+    "title": "La matière et ses états",
+    "chapters": [
+     "Les trois états de la matière : solide, liquide, gaz",
+     "Les changements d'état de l'eau",
+     "La masse et le volume",
+     "Mesurer une masse et un volume",
+     "L'air, une matière qui a une masse"
+    ]
+   },
+   {
+    "title": "Les mélanges",
+    "chapters": [
+     "Mélanges homogènes et hétérogènes",
+     "La dissolution et la solubilité",
+     "Séparer les constituants d'un mélange : décantation, filtration, évaporation",
+     "L'eau, un solvant : eaux minérales et eau potable"
+    ]
+   },
+   {
+    "title": "Le mouvement",
+    "chapters": [
+     "Décrire un mouvement : trajectoire et référentiel",
+     "Mouvements rectilignes et circulaires",
+     "La vitesse d'un objet",
+     "Mouvements à vitesse constante ou variable"
+    ]
+   },
+   {
+    "title": "L'énergie",
+    "chapters": [
+     "Les différentes formes d'énergie",
+     "Les sources d'énergie renouvelables et non renouvelables",
+     "Les conversions d'énergie",
+     "Économiser l'énergie au quotidien"
+    ]
+   },
+   {
+    "title": "Signaux et informations",
+    "chapters": [
+     "Les signaux lumineux et sonores",
+     "Le circuit électrique simple",
+     "Conducteurs et isolants",
+     "Les dangers de l'électricité"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "svt",
+  "themes": [
+   {
+    "title": "Le vivant et sa diversité",
+    "chapters": [
+     "Distinguer le vivant du non-vivant",
+     "La cellule, unité du vivant",
+     "Classer les êtres vivants : groupes emboîtés",
+     "La biodiversité et son évolution au cours du temps",
+     "Les fossiles, traces des espèces disparues"
+    ]
+   },
+   {
+    "title": "Les fonctions de nutrition",
+    "chapters": [
+     "Les besoins nutritifs des végétaux chlorophylliens",
+     "Les besoins alimentaires des animaux",
+     "L'origine de la matière des êtres vivants",
+     "Les micro-organismes et la transformation des aliments",
+     "Les régimes alimentaires et les chaînes alimentaires"
+    ]
+   },
+   {
+    "title": "Le développement et la reproduction des êtres vivants",
+    "chapters": [
+     "Les stades de développement des animaux",
+     "La reproduction sexuée et asexuée chez les végétaux",
+     "La reproduction sexuée des animaux",
+     "La puberté et les modifications du corps humain"
+    ]
+   },
+   {
+    "title": "Le corps humain et la santé",
+    "chapters": [
+     "Les mouvements du corps : os, muscles et articulations",
+     "La digestion des aliments",
+     "Une alimentation équilibrée",
+     "L'hygiène de vie : sommeil, activité physique et écrans"
+    ]
+   },
+   {
+    "title": "La planète Terre et les êtres vivants dans leur environnement",
+    "chapters": [
+     "La Terre dans le système solaire",
+     "Les mouvements de la Terre : jours, nuits et saisons",
+     "Les phénomènes géologiques : séismes et volcans",
+     "Le peuplement d'un milieu et ses variations",
+     "L'impact des activités humaines sur l'environnement"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "technologie",
+  "themes": [
+   {
+    "title": "Les objets techniques et leur évolution",
+    "chapters": [
+     "Le besoin et la fonction d'un objet technique",
+     "L'évolution des objets techniques dans le temps",
+     "Les solutions techniques d'un objet",
+     "Décrire le fonctionnement d'un objet technique"
+    ]
+   },
+   {
+    "title": "Les matériaux",
+    "chapters": [
+     "Les familles de matériaux",
+     "Les propriétés des matériaux",
+     "Choisir un matériau adapté",
+     "Le recyclage et l'impact environnemental des matériaux"
+    ]
+   },
+   {
+    "title": "Concevoir et fabriquer un objet",
+    "chapters": [
+     "Le cahier des charges",
+     "Représenter un objet : croquis et schéma",
+     "Les étapes de fabrication",
+     "Découvrir la modélisation en 3D"
+    ]
+   },
+   {
+    "title": "Informatique et programmation",
+    "chapters": [
+     "Les composants d'un ordinateur",
+     "Les réseaux informatiques et Internet",
+     "Stocker et organiser ses fichiers",
+     "Programmer un objet avec des blocs"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Se présenter et parler de soi",
+    "chapters": [
+     "Saluer et se présenter",
+     "L'alphabet, les nombres et l'épellation",
+     "Le verbe be au présent",
+     "Parler de sa famille : have got et le génitif",
+     "Décrire une personne : les adjectifs"
+    ]
+   },
+   {
+    "title": "Ma vie quotidienne",
+    "chapters": [
+     "L'heure, les jours et les mois",
+     "Le présent simple et la routine quotidienne",
+     "Les adverbes de fréquence",
+     "Les goûts : like, love, hate + -ing",
+     "Le collège et les matières"
+    ]
+   },
+   {
+    "title": "Mon environnement",
+    "chapters": [
+     "La maison et la chambre : there is / there are",
+     "Les prépositions de lieu",
+     "La ville et les directions",
+     "Le présent en be + -ing"
+    ]
+   },
+   {
+    "title": "Grammaire de base",
+    "chapters": [
+     "Les pronoms personnels et les adjectifs possessifs",
+     "Le pluriel des noms",
+     "Les articles a, an, the",
+     "Le modal can : capacité et permission",
+     "Les questions avec les mots interrogatifs",
+     "L'impératif"
+    ]
+   },
+   {
+    "title": "Découvrir le monde anglophone",
+    "chapters": [
+     "Les pays anglophones et leurs drapeaux",
+     "Les fêtes : Halloween, Thanksgiving, Christmas",
+     "Londres et ses monuments",
+     "La vie d'un collégien britannique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "La représentation plastique et ses dispositifs",
+    "chapters": [
+     "Ressemblance et écart : représenter le réel",
+     "Le dessin d'observation",
+     "Les outils et les gestes du dessin",
+     "Représenter l'espace et la profondeur"
+    ]
+   },
+   {
+    "title": "Les fabrications et la relation entre l'objet et l'espace",
+    "chapters": [
+     "Transformer un objet du quotidien",
+     "Le volume : modeler, assembler, construire",
+     "L'objet et son statut : œuvre ou objet ?",
+     "Mettre en scène un objet dans l'espace"
+    ]
+   },
+   {
+    "title": "La matérialité de la production plastique",
+    "chapters": [
+     "La couleur : primaires, secondaires et nuances",
+     "Les effets de la matière et de la texture",
+     "Le support et le format",
+     "Le geste et la trace"
+    ]
+   },
+   {
+    "title": "La narration et l'image",
+    "chapters": [
+     "Raconter avec des images",
+     "Image fixe et image en séquence",
+     "Le cadrage et le point de vue",
+     "Découvrir des œuvres et en parler"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "6ème",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Chanter et interpréter",
+    "chapters": [
+     "Chanter juste et en rythme",
+     "Respiration et posture du chanteur",
+     "Interpréter un chant en groupe",
+     "Chanter à plusieurs voix : le canon"
+    ]
+   },
+   {
+    "title": "Écouter, comparer, construire une culture musicale",
+    "chapters": [
+     "Les familles d'instruments",
+     "Les paramètres du son : hauteur, durée, intensité, timbre",
+     "Les formes musicales simples",
+     "Musiques d'hier et d'aujourd'hui",
+     "Les musiques du monde"
+    ]
+   },
+   {
+    "title": "Explorer, imaginer et créer",
+    "chapters": [
+     "Le rythme et la pulsation",
+     "Créer un paysage sonore",
+     "Inventer une courte pièce rythmique"
+    ]
+   },
+   {
+    "title": "Échanger et partager",
+    "chapters": [
+     "Décrire une musique avec un vocabulaire précis",
+     "Exprimer et justifier ses goûts musicaux",
+     "Respecter le travail des autres en concert"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Le voyage et l'aventure : pourquoi aller vers l'inconnu ?",
+    "chapters": [
+     "Les récits de voyage et d'exploration",
+     "Le roman d'aventures : héros et péripéties",
+     "Ulysse, Sindbad et les grands voyageurs de la littérature",
+     "Décrire un lieu inconnu",
+     "Raconter un voyage : le carnet de bord"
+    ]
+   },
+   {
+    "title": "Avec autrui : familles, amis, réseaux",
+    "chapters": [
+     "Les relations familiales au théâtre",
+     "La comédie de Molière : personnages et procédés comiques",
+     "L'amitié dans les récits",
+     "Les réseaux sociaux : communiquer avec les autres",
+     "Le dialogue au théâtre : répliques et didascalies"
+    ]
+   },
+   {
+    "title": "Imaginer des univers nouveaux",
+    "chapters": [
+     "Les récits merveilleux et fantastiques",
+     "La science-fiction : imaginer d'autres mondes",
+     "Créer un univers imaginaire",
+     "Le pouvoir de l'imagination en poésie"
+    ]
+   },
+   {
+    "title": "Héros, héroïnes et héroïsmes",
+    "chapters": [
+     "Le héros épique et la chanson de geste",
+     "Le chevalier dans les romans de la Table ronde",
+     "Les valeurs du héros",
+     "Les héros d'aujourd'hui : du héros au super-héros"
+    ]
+   },
+   {
+    "title": "L'être humain est-il maître de la nature ?",
+    "chapters": [
+     "La nature dans les textes littéraires",
+     "La nature menacée : dire et dénoncer",
+     "L'homme face aux éléments"
+    ]
+   },
+   {
+    "title": "Grammaire et syntaxe",
+    "chapters": [
+     "La phrase : types, formes et ponctuation",
+     "Phrase simple et phrase complexe : juxtaposition, coordination, subordination",
+     "Les classes grammaticales",
+     "Les fonctions dans le groupe verbal : COD, COI, attribut du sujet",
+     "Les compléments circonstanciels",
+     "Les expansions du nom : adjectif, complément du nom, proposition relative",
+     "Les pronoms personnels et leurs fonctions"
+    ]
+   },
+   {
+    "title": "Conjugaison",
+    "chapters": [
+     "Le présent, l'imparfait et le passé simple de l'indicatif",
+     "Le futur et le conditionnel présent",
+     "Les temps composés de l'indicatif",
+     "L'impératif présent",
+     "Le subjonctif présent",
+     "Les valeurs des temps dans le récit"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "Les accords sujet-verbe dans les cas difficiles",
+     "L'accord du participe passé avec être et avoir",
+     "L'accord de l'adjectif et du participe employé comme adjectif",
+     "Les homophones grammaticaux",
+     "Terminaisons verbales en -é, -er, -ez, -ait"
+    ]
+   },
+   {
+    "title": "Lexique",
+    "chapters": [
+     "La formation des mots : dérivation et composition",
+     "L'étymologie : racines latines et grecques",
+     "Le sens des mots : polysémie, sens propre et figuré",
+     "Synonymes, antonymes et paronymes",
+     "Le vocabulaire des émotions et des sentiments"
+    ]
+   },
+   {
+    "title": "Écrire et s'exprimer à l'oral",
+    "chapters": [
+     "Rédiger un récit cohérent",
+     "Écrire un dialogue et le ponctuer",
+     "Rédiger une description ou un portrait",
+     "Exprimer son avis et le justifier",
+     "Lire à voix haute et réciter avec expressivité",
+     "Jouer une scène de théâtre"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Nombres et calculs",
+    "chapters": [
+     "Enchaînements d'opérations et priorités de calcul",
+     "Les nombres relatifs : définition et repérage sur une droite graduée",
+     "Comparer les nombres relatifs",
+     "Additionner et soustraire des nombres relatifs",
+     "Se repérer dans le plan : coordonnées",
+     "Multiples, diviseurs et nombres premiers"
+    ]
+   },
+   {
+    "title": "Fractions",
+    "chapters": [
+     "Fractions égales et simplification",
+     "Comparer des fractions",
+     "Additionner et soustraire des fractions",
+     "Multiplier une fraction par un nombre"
+    ]
+   },
+   {
+    "title": "Calcul littéral",
+    "chapters": [
+     "Utiliser des lettres dans une expression",
+     "Produire et tester une égalité",
+     "Simplifier une expression littérale",
+     "La distributivité simple",
+     "Tester si un nombre est solution d'une équation"
+    ]
+   },
+   {
+    "title": "Proportionnalité",
+    "chapters": [
+     "Reconnaître et utiliser la proportionnalité",
+     "Calculer une quatrième proportionnelle",
+     "Les pourcentages",
+     "Les ratios et le partage proportionnel",
+     "Les échelles"
+    ]
+   },
+   {
+    "title": "Statistiques et probabilités",
+    "chapters": [
+     "Recueillir et organiser des données : effectifs et fréquences",
+     "Représenter des données : diagrammes en barres et circulaires",
+     "Calculer une moyenne",
+     "Notion de probabilité",
+     "Calculer une probabilité dans des cas simples"
+    ]
+   },
+   {
+    "title": "Grandeurs et mesures",
+    "chapters": [
+     "Périmètres et aires des figures usuelles",
+     "Aire du parallélogramme et du disque",
+     "Volume du prisme droit et du cylindre",
+     "Unités de volume et conversions",
+     "Les grandeurs produits et quotients : vitesse et durée"
+    ]
+   },
+   {
+    "title": "Géométrie plane",
+    "chapters": [
+     "Les angles : vocabulaire, angles alternes-internes et correspondants",
+     "La somme des angles d'un triangle",
+     "L'inégalité triangulaire et la construction de triangles",
+     "Les hauteurs et les médiatrices d'un triangle",
+     "Le parallélogramme et ses propriétés",
+     "La symétrie centrale"
+    ]
+   },
+   {
+    "title": "Géométrie dans l'espace",
+    "chapters": [
+     "Prismes droits et cylindres de révolution",
+     "Patrons de prismes et de cylindres",
+     "Représenter un solide en perspective cavalière"
+    ]
+   },
+   {
+    "title": "Algorithmique et programmation",
+    "chapters": [
+     "Les variables dans un programme",
+     "Les boucles et les instructions conditionnelles",
+     "Programmer des figures géométriques",
+     "Les événements et la programmation de plusieurs lutins"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "Chrétientés et islam (VIe-XIIIe siècle), des mondes en contact",
+    "chapters": [
+     "Byzance et l'Europe carolingienne",
+     "La naissance de l'islam et l'expansion de l'empire musulman",
+     "Bagdad, une capitale du monde musulman",
+     "Les échanges et les conflits entre chrétientés et islam : les croisades"
+    ]
+   },
+   {
+    "title": "Société, Église et pouvoir politique dans l'Occident féodal (XIe-XVe siècle)",
+    "chapters": [
+     "L'ordre seigneurial : seigneurs et paysans",
+     "L'essor des villes au Moyen Âge",
+     "La place de l'Église dans la société médiévale",
+     "L'affirmation de l'État monarchique dans le royaume des Capétiens et des Valois",
+     "Les crises de la fin du Moyen Âge : guerre de Cent Ans et peste noire"
+    ]
+   },
+   {
+    "title": "Transformations de l'Europe et ouverture sur le monde (XVIe-XVIIe siècle)",
+    "chapters": [
+     "Le monde au temps de Charles Quint et de Soliman le Magnifique",
+     "Les grandes découvertes et les premiers empires coloniaux",
+     "Humanisme et Renaissance",
+     "Les réformes religieuses : protestants et catholiques",
+     "Du Prince de la Renaissance au roi absolu : François Ier, Henri IV, Louis XIV"
+    ]
+   },
+   {
+    "title": "Méthodes en histoire",
+    "chapters": [
+     "Situer un événement dans le temps et dans l'espace",
+     "Analyser une œuvre d'art comme source historique",
+     "Rédiger un paragraphe argumenté en histoire"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "La question démographique et l'inégal développement",
+    "chapters": [
+     "La croissance démographique et ses effets",
+     "La répartition de la population mondiale",
+     "Mesurer le développement : l'IDH",
+     "Répartition de la richesse et de la pauvreté dans le monde"
+    ]
+   },
+   {
+    "title": "Des ressources limitées, à gérer et à renouveler",
+    "chapters": [
+     "L'énergie, des besoins croissants",
+     "L'eau, une ressource vitale et inégalement répartie",
+     "L'alimentation : nourrir l'humanité",
+     "Vers une gestion durable des ressources"
+    ]
+   },
+   {
+    "title": "Prévenir les risques, s'adapter au changement global",
+    "chapters": [
+     "Le changement climatique et ses effets",
+     "Les risques naturels et technologiques",
+     "Les sociétés face aux risques : prévention et adaptation",
+     "Agir pour un développement durable"
+    ]
+   },
+   {
+    "title": "Méthodes en géographie",
+    "chapters": [
+     "Lire et analyser une carte thématique",
+     "Construire un croquis et sa légende",
+     "Exploiter des statistiques et des graphiques"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Respecter autrui et vivre ensemble",
+    "chapters": [
+     "La dignité de la personne humaine",
+     "Lutter contre les préjugés, le racisme et l'antisémitisme",
+     "L'égalité entre les femmes et les hommes",
+     "Le harcèlement : comprendre, prévenir, agir",
+     "La solidarité et la fraternité"
+    ]
+   },
+   {
+    "title": "Les droits et les devoirs",
+    "chapters": [
+     "Les droits de l'enfant et leur protection",
+     "La justice à l'école et dans la société",
+     "La sécurité des personnes et des biens",
+     "Les règles et le droit : à quoi servent les lois ?"
+    ]
+   },
+   {
+    "title": "Construire une culture civique",
+    "chapters": [
+     "La laïcité : principe et pratique",
+     "Les médias et l'information : vérifier ses sources",
+     "Les réseaux sociaux et l'identité numérique",
+     "S'engager : associations et bénévolat",
+     "Protéger la biodiversité et l'environnement"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "physique-chimie",
+  "themes": [
+   {
+    "title": "Organisation et transformations de la matière",
+    "chapters": [
+     "Les états de la matière et les changements d'état",
+     "La température de changement d'état d'un corps pur",
+     "La masse et le volume lors d'un changement d'état",
+     "Les mélanges et les corps purs",
+     "La solubilité et la miscibilité",
+     "La masse volumique",
+     "L'eau dans notre environnement : eau potable et traitement"
+    ]
+   },
+   {
+    "title": "Mouvement et interactions",
+    "chapters": [
+     "Décrire un mouvement : trajectoire et vitesse",
+     "Mouvements uniformes, accélérés et ralentis",
+     "Le référentiel et la relativité du mouvement"
+    ]
+   },
+   {
+    "title": "L'énergie et ses conversions",
+    "chapters": [
+     "Les sources et les formes d'énergie",
+     "Les chaînes énergétiques",
+     "Le circuit électrique : générateur et récepteurs",
+     "Les circuits en série et en dérivation",
+     "La sécurité électrique"
+    ]
+   },
+   {
+    "title": "Des signaux pour observer et communiquer",
+    "chapters": [
+     "Les sources de lumière et la propagation rectiligne",
+     "Ombres et phases de la Lune",
+     "Le son : émission et propagation",
+     "Les signaux pour communiquer"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "svt",
+  "themes": [
+   {
+    "title": "La planète Terre, l'environnement et l'action humaine",
+    "chapters": [
+     "Météo et climat : distinguer les deux",
+     "Les phénomènes géologiques : séismes et volcans",
+     "L'érosion et la formation des paysages",
+     "Les roches et le sous-sol",
+     "Les ressources naturelles et leur exploitation"
+    ]
+   },
+   {
+    "title": "Le vivant et son évolution",
+    "chapters": [
+     "La respiration des êtres vivants dans différents milieux",
+     "Les besoins des végétaux et leur nutrition",
+     "La reproduction et la dispersion des végétaux",
+     "Les relations entre les êtres vivants dans un écosystème",
+     "Le peuplement des milieux et l'action humaine"
+    ]
+   },
+   {
+    "title": "Le corps humain et la santé",
+    "chapters": [
+     "La respiration chez l'être humain",
+     "La digestion et l'absorption des nutriments",
+     "La circulation sanguine et le cœur",
+     "L'effort physique : besoins et adaptations de l'organisme",
+     "Les comportements responsables : alimentation, sommeil, activité physique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "technologie",
+  "themes": [
+   {
+    "title": "Design, innovation et créativité",
+    "chapters": [
+     "Identifier un besoin et formuler un problème",
+     "Le cahier des charges fonctionnel",
+     "Rechercher et imaginer des solutions",
+     "Représenter une solution : croquis et modélisation 3D"
+    ]
+   },
+   {
+    "title": "Les objets et les systèmes techniques",
+    "chapters": [
+     "Analyser le fonctionnement d'un objet technique",
+     "Les familles de matériaux et leurs propriétés",
+     "Les sources d'énergie et leur transformation dans un objet",
+     "L'évolution des objets dans leur contexte"
+    ]
+   },
+   {
+    "title": "Modélisation et simulation",
+    "chapters": [
+     "Lire et interpréter un schéma",
+     "Mesurer et relever des grandeurs",
+     "Simuler le fonctionnement d'un système"
+    ]
+   },
+   {
+    "title": "Informatique et programmation",
+    "chapters": [
+     "Capteurs, actionneurs et interfaces",
+     "Écrire un algorithme simple",
+     "Programmer un système avec des blocs",
+     "Les réseaux et la circulation de l'information"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Parler du passé",
+    "chapters": [
+     "Le prétérit du verbe be",
+     "Le prétérit des verbes réguliers",
+     "Les verbes irréguliers au prétérit",
+     "Raconter un événement passé"
+    ]
+   },
+   {
+    "title": "Décrire et comparer",
+    "chapters": [
+     "Décrire l'apparence et le caractère",
+     "Le comparatif des adjectifs",
+     "Le superlatif des adjectifs",
+     "Les vêtements et la mode"
+    ]
+   },
+   {
+    "title": "Vie quotidienne et loisirs",
+    "chapters": [
+     "Présent simple et présent en be + -ing",
+     "Les sports et les loisirs",
+     "La nourriture : dénombrables et indénombrables",
+     "Some, any, much, many, a lot of"
+    ]
+   },
+   {
+    "title": "Exprimer des projets et des obligations",
+    "chapters": [
+     "Le futur avec be going to",
+     "Le futur avec will",
+     "Les modaux must, have to et should",
+     "Inviter, proposer, accepter et refuser"
+    ]
+   },
+   {
+    "title": "Découvrir le monde anglophone",
+    "chapters": [
+     "Les États-Unis : géographie et grandes villes",
+     "Héros et légendes : Robin Hood, le roi Arthur",
+     "L'école aux États-Unis et au Royaume-Uni",
+     "Les fêtes et traditions anglophones"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "espagnol",
+  "themes": [
+   {
+    "title": "Se présenter et entrer en contact",
+    "chapters": [
+     "Saluer, se présenter et prendre congé",
+     "L'alphabet, les nombres et la prononciation",
+     "Les verbes ser et tener au présent",
+     "Les pronoms sujets et le tutoiement/vouvoiement",
+     "Les pays hispanophones"
+    ]
+   },
+   {
+    "title": "Ma famille et mes amis",
+    "chapters": [
+     "Présenter sa famille",
+     "Les adjectifs possessifs",
+     "Décrire physiquement une personne",
+     "Décrire le caractère : ser et estar"
+    ]
+   },
+   {
+    "title": "Mes goûts et ma vie quotidienne",
+    "chapters": [
+     "Exprimer ses goûts : me gusta, me encanta",
+     "Le présent des verbes réguliers",
+     "Les jours, les mois et l'heure",
+     "La routine et les verbes pronominaux",
+     "Le collège et les matières"
+    ]
+   },
+   {
+    "title": "Mon environnement",
+    "chapters": [
+     "La maison et la chambre : hay et estar",
+     "Se repérer dans la ville",
+     "Les prépositions de lieu",
+     "Les fêtes et traditions du monde hispanique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "allemand",
+  "themes": [
+   {
+    "title": "Se présenter et entrer en contact",
+    "chapters": [
+     "Saluer, se présenter et prendre congé",
+     "L'alphabet, les nombres et la prononciation",
+     "Les verbes sein et heißen au présent",
+     "Les pronoms personnels sujets",
+     "Les pays germanophones"
+    ]
+   },
+   {
+    "title": "Ma famille, mes amis et mes animaux",
+    "chapters": [
+     "Présenter sa famille",
+     "Le genre des noms : der, die, das",
+     "Les articles indéfinis et la négation kein",
+     "Les possessifs mein et dein",
+     "Décrire une personne ou un animal"
+    ]
+   },
+   {
+    "title": "Mes goûts et mes loisirs",
+    "chapters": [
+     "Exprimer ses goûts : gern, lieber, am liebsten",
+     "La conjugaison des verbes réguliers au présent",
+     "La place du verbe dans la phrase",
+     "Le verbe haben et l'accusatif",
+     "Les loisirs et les sports"
+    ]
+   },
+   {
+    "title": "La vie quotidienne",
+    "chapters": [
+     "Les jours, les mois et l'heure",
+     "Le collège et l'emploi du temps",
+     "Les repas et les aliments",
+     "Les fêtes et traditions des pays germanophones"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "La représentation plastique et les dispositifs de présentation",
+    "chapters": [
+     "La ressemblance : représenter le réel ou s'en écarter",
+     "Le dessin d'observation et la proportion",
+     "La perspective et la profondeur",
+     "Présenter et exposer une production"
+    ]
+   },
+   {
+    "title": "La matérialité de l'œuvre",
+    "chapters": [
+     "Les qualités physiques des matériaux",
+     "La couleur et ses effets",
+     "Le collage et l'assemblage",
+     "Matière, texture et geste"
+    ]
+   },
+   {
+    "title": "L'objet et l'œuvre",
+    "chapters": [
+     "Le statut de l'objet en art",
+     "L'objet transformé ou détourné",
+     "La sculpture : volume et espace",
+     "L'installation"
+    ]
+   },
+   {
+    "title": "Images, narration et numérique",
+    "chapters": [
+     "Raconter avec l'image : la bande dessinée",
+     "Le cadrage et le point de vue",
+     "Créer avec des outils numériques",
+     "Analyser une œuvre d'art"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "5ème",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Réaliser des projets musicaux d'interprétation",
+    "chapters": [
+     "Chanter avec justesse et expressivité",
+     "Interpréter un chant à plusieurs voix",
+     "Accompagner un chant avec des percussions"
+    ]
+   },
+   {
+    "title": "Écouter, comparer, construire une culture musicale",
+    "chapters": [
+     "Les instruments de l'orchestre",
+     "Le timbre et les modes de jeu",
+     "La musique au Moyen Âge et à la Renaissance",
+     "Musique et danse",
+     "Les musiques traditionnelles du monde"
+    ]
+   },
+   {
+    "title": "Explorer, imaginer, créer",
+    "chapters": [
+     "Le rythme, le tempo et la mesure",
+     "Les nuances et les variations d'intensité",
+     "Composer une courte pièce",
+     "Musique et image : la musique de film"
+    ]
+   },
+   {
+    "title": "Échanger, partager, argumenter",
+    "chapters": [
+     "Décrire une œuvre avec le vocabulaire musical",
+     "Argumenter un jugement sur une musique",
+     "Le respect des droits d'auteur"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Dire l'amour",
+    "chapters": [
+     "L'amour dans la poésie lyrique",
+     "Les formes poétiques : le sonnet, la ballade, le poème en prose",
+     "Le lyrisme : exprimer ses sentiments",
+     "L'amour impossible au théâtre et dans le roman",
+     "Écrire un poème lyrique"
+    ]
+   },
+   {
+    "title": "Individu et société : confrontations de valeurs ?",
+    "chapters": [
+     "La tragédie et la comédie classiques",
+     "Le conflit entre devoir et sentiment",
+     "Le héros face à la société dans le roman",
+     "Le dilemme : choisir entre deux valeurs",
+     "Argumenter pour défendre une valeur"
+    ]
+   },
+   {
+    "title": "La fiction pour interroger le réel",
+    "chapters": [
+     "La nouvelle réaliste",
+     "Le roman réaliste et naturaliste au XIXe siècle",
+     "La nouvelle fantastique : le doute et l'hésitation",
+     "Le portrait et la description réalistes",
+     "Écrire une nouvelle"
+    ]
+   },
+   {
+    "title": "Informer, s'informer, déformer ?",
+    "chapters": [
+     "La presse et les différents médias",
+     "Distinguer fait et opinion",
+     "Analyser une une de journal",
+     "Les fausses informations et la manipulation",
+     "Rédiger un article de presse"
+    ]
+   },
+   {
+    "title": "La ville, lieu de tous les possibles ?",
+    "chapters": [
+     "La ville dans la poésie",
+     "La ville dans le roman du XIXe siècle",
+     "Ville rêvée, ville cauchemar : utopies et dystopies",
+     "Décrire un espace urbain"
+    ]
+   },
+   {
+    "title": "Grammaire et syntaxe",
+    "chapters": [
+     "La phrase complexe : propositions indépendantes, principales et subordonnées",
+     "La proposition subordonnée relative",
+     "La proposition subordonnée complétive",
+     "Les propositions subordonnées circonstancielles",
+     "La voix active et la voix passive",
+     "Le discours direct, indirect et indirect libre",
+     "Les fonctions par rapport au nom et au verbe"
+    ]
+   },
+   {
+    "title": "Conjugaison",
+    "chapters": [
+     "L'indicatif : temps simples et temps composés",
+     "Le conditionnel : formes et emplois",
+     "Le subjonctif présent et passé",
+     "Les valeurs des temps dans un texte",
+     "La concordance des temps"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "L'accord du participe passé employé avec avoir",
+     "L'accord du participe passé des verbes pronominaux",
+     "Les homophones grammaticaux plus complexes",
+     "L'accord des adjectifs de couleur et des adjectifs composés",
+     "Le pluriel des noms composés"
+    ]
+   },
+   {
+    "title": "Lexique",
+    "chapters": [
+     "L'étymologie et l'histoire des mots",
+     "Les niveaux de langue",
+     "Le vocabulaire des sentiments et du jugement",
+     "Dénotation et connotation",
+     "Les figures de style : comparaison, métaphore, personnification, hyperbole"
+    ]
+   },
+   {
+    "title": "Écrire et s'exprimer à l'oral",
+    "chapters": [
+     "Rédiger un texte argumentatif",
+     "Construire un paragraphe argumentatif",
+     "Écrire un récit en respectant la cohérence des temps",
+     "Participer à un débat",
+     "Lire un texte expressivement et le mettre en voix"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Nombres relatifs",
+    "chapters": [
+     "Additionner et soustraire des nombres relatifs",
+     "Multiplier des nombres relatifs",
+     "Diviser des nombres relatifs",
+     "Calculer une expression avec des nombres relatifs"
+    ]
+   },
+   {
+    "title": "Fractions et nombres rationnels",
+    "chapters": [
+     "Additionner et soustraire des fractions de dénominateurs différents",
+     "Multiplier des fractions",
+     "Diviser des fractions : l'inverse d'un nombre",
+     "Les fractions et les nombres relatifs"
+    ]
+   },
+   {
+    "title": "Puissances",
+    "chapters": [
+     "Puissances d'un nombre à exposant positif",
+     "Puissances de 10 et exposants négatifs",
+     "Les règles de calcul sur les puissances",
+     "L'écriture scientifique d'un nombre",
+     "Les préfixes nano, micro, milli, kilo, méga, giga"
+    ]
+   },
+   {
+    "title": "Calcul littéral et équations",
+    "chapters": [
+     "Réduire une expression littérale",
+     "Développer avec la simple distributivité",
+     "Factoriser une expression simple",
+     "La double distributivité",
+     "Résoudre une équation du premier degré",
+     "Mettre un problème en équation"
+    ]
+   },
+   {
+    "title": "Proportionnalité et fonctions",
+    "chapters": [
+     "La proportionnalité et le produit en croix",
+     "Représenter graphiquement une situation de proportionnalité",
+     "Augmenter ou diminuer d'un pourcentage",
+     "Les grandeurs composées : vitesse, débit",
+     "Introduction à la notion de fonction"
+    ]
+   },
+   {
+    "title": "Statistiques et probabilités",
+    "chapters": [
+     "Calculer une moyenne pondérée",
+     "La médiane d'une série",
+     "L'étendue d'une série",
+     "Les probabilités : événements et calcul",
+     "Fréquence et probabilité : simulations"
+    ]
+   },
+   {
+    "title": "Le théorème de Pythagore",
+    "chapters": [
+     "La racine carrée d'un nombre positif",
+     "Le théorème de Pythagore : calculer une longueur",
+     "La réciproque du théorème de Pythagore",
+     "Résoudre un problème avec le théorème de Pythagore"
+    ]
+   },
+   {
+    "title": "Géométrie plane",
+    "chapters": [
+     "Le théorème de Thalès dans un triangle",
+     "Le cosinus d'un angle dans un triangle rectangle",
+     "Les translations",
+     "Les triangles égaux",
+     "Les droites remarquables : médianes et bissectrices"
+    ]
+   },
+   {
+    "title": "Géométrie dans l'espace et grandeurs",
+    "chapters": [
+     "Les pyramides et les cônes de révolution",
+     "Le volume de la pyramide et du cône",
+     "Se repérer dans un pavé droit",
+     "Agrandissements et réductions de longueurs"
+    ]
+   },
+   {
+    "title": "Algorithmique et programmation",
+    "chapters": [
+     "Les variables et les opérations",
+     "Les instructions conditionnelles",
+     "Les boucles répéter et répéter jusqu'à",
+     "Décomposer un programme en sous-programmes"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "Le XVIIIe siècle : expansions, Lumières et révolutions",
+    "chapters": [
+     "Bourgeoisies marchandes, négoces internationaux et traites négrières",
+     "L'esclavage dans les colonies au XVIIIe siècle",
+     "L'Europe des Lumières : circulation des idées et despotisme éclairé",
+     "La Révolution française : de 1789 à la République",
+     "La Révolution française et l'Empire : nouvel ordre politique et société"
+    ]
+   },
+   {
+    "title": "L'Europe et le monde au XIXe siècle",
+    "chapters": [
+     "L'Europe de la révolution industrielle",
+     "Le monde ouvrier et les mutations sociales",
+     "Conquêtes et sociétés coloniales",
+     "L'abolition de l'esclavage en 1848"
+    ]
+   },
+   {
+    "title": "Société, culture et politique dans la France du XIXe siècle",
+    "chapters": [
+     "Une difficile conquête : voter de 1815 à 1870",
+     "La IIIe République : la République s'installe",
+     "Conditions féminines dans une société en mutation",
+     "La laïcité : de l'école à la loi de 1905"
+    ]
+   },
+   {
+    "title": "Méthodes en histoire",
+    "chapters": [
+     "Analyser un texte historique",
+     "Analyser une caricature ou une affiche",
+     "Rédiger un développement construit"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "L'urbanisation du monde",
+    "chapters": [
+     "Espaces et paysages de l'urbanisation : géographie des centres et des périphéries",
+     "Des villes inégalement connectées aux réseaux de la mondialisation",
+     "Les métropoles mondiales",
+     "La ville durable : un défi"
+    ]
+   },
+   {
+    "title": "Les mobilités humaines transnationales",
+    "chapters": [
+     "Un monde de migrants",
+     "Les grandes routes migratoires",
+     "Le tourisme et ses espaces",
+     "Les effets des migrations sur les territoires"
+    ]
+   },
+   {
+    "title": "Des espaces transformés par la mondialisation",
+    "chapters": [
+     "Mers et océans : un monde maritimisé",
+     "L'adaptation du territoire des États-Unis aux nouvelles conditions de la mondialisation",
+     "Les dynamiques d'un grand ensemble géographique africain",
+     "Les flux de marchandises et d'informations"
+    ]
+   },
+   {
+    "title": "Méthodes en géographie",
+    "chapters": [
+     "Analyser une carte à différentes échelles",
+     "Réaliser un schéma ou un croquis",
+     "Comparer des documents géographiques"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Les libertés et les droits",
+    "chapters": [
+     "Les libertés fondamentales",
+     "La liberté d'expression et ses limites",
+     "Les droits de l'Homme et du citoyen",
+     "Le droit et la justice en France",
+     "La justice des mineurs"
+    ]
+   },
+   {
+    "title": "La sécurité et la défense des personnes",
+    "chapters": [
+     "La sécurité au quotidien : prévention et secours",
+     "Les droits et les devoirs face au numérique",
+     "Le respect de la vie privée et des données personnelles"
+    ]
+   },
+   {
+    "title": "Être citoyen dans une démocratie",
+    "chapters": [
+     "La laïcité : une liberté garantie",
+     "L'égalité devant la loi et la lutte contre les discriminations",
+     "S'engager dans la vie collective",
+     "L'information et l'esprit critique",
+     "L'engagement pour l'environnement et le développement durable"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "physique-chimie",
+  "themes": [
+   {
+    "title": "Organisation et transformations de la matière",
+    "chapters": [
+     "Les molécules et les atomes",
+     "Le modèle moléculaire et les changements d'état",
+     "Les transformations chimiques : réactifs et produits",
+     "La conservation de la masse lors d'une transformation chimique",
+     "Les combustions",
+     "Les équations de réaction",
+     "Les solutions acides, neutres et basiques : le pH"
+    ]
+   },
+   {
+    "title": "Mouvement et interactions",
+    "chapters": [
+     "Les interactions entre objets",
+     "Modéliser une action par une force",
+     "Le poids et la masse",
+     "La gravitation universelle"
+    ]
+   },
+   {
+    "title": "L'énergie et ses conversions",
+    "chapters": [
+     "L'intensité du courant électrique",
+     "La tension électrique",
+     "Les lois des circuits en série et en dérivation",
+     "La résistance électrique et la loi d'Ohm"
+    ]
+   },
+   {
+    "title": "Des signaux pour observer et communiquer",
+    "chapters": [
+     "La lumière : propagation et vitesse",
+     "La couleur des objets et la synthèse des couleurs",
+     "Le son : fréquence, vitesse et perception",
+     "Les signaux sonores et lumineux pour communiquer"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "svt",
+  "themes": [
+   {
+    "title": "La planète Terre, l'environnement et l'action humaine",
+    "chapters": [
+     "La tectonique des plaques",
+     "Séismes et volcans, manifestations de l'activité interne",
+     "Les risques géologiques et leur prévention",
+     "Les phénomènes météorologiques et climatiques",
+     "L'impact des activités humaines sur les écosystèmes"
+    ]
+   },
+   {
+    "title": "Le vivant et son évolution",
+    "chapters": [
+     "La reproduction sexuée et asexuée",
+     "La reproduction des plantes à fleurs",
+     "La biodiversité et sa répartition",
+     "Les relations entre les êtres vivants et leur milieu"
+    ]
+   },
+   {
+    "title": "Le corps humain et la santé",
+    "chapters": [
+     "La puberté et la transformation du corps",
+     "Les appareils reproducteurs et la fécondation",
+     "La grossesse et la naissance",
+     "La contraception et la prévention des infections sexuellement transmissibles",
+     "Le système nerveux et la communication nerveuse",
+     "Les perturbations du système nerveux : drogues, écrans et sommeil"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "technologie",
+  "themes": [
+   {
+    "title": "Design, innovation et créativité",
+    "chapters": [
+     "Les étapes d'un projet technique",
+     "Le design : forme, fonction et esthétique",
+     "Rechercher des solutions innovantes",
+     "Modéliser une solution en 3D"
+    ]
+   },
+   {
+    "title": "Les objets et les systèmes techniques",
+    "chapters": [
+     "La chaîne d'information et la chaîne d'énergie",
+     "Les liaisons et les mouvements dans un mécanisme",
+     "Les matériaux et leur impact environnemental",
+     "Le cycle de vie d'un produit"
+    ]
+   },
+   {
+    "title": "Modélisation et simulation",
+    "chapters": [
+     "Mesurer les performances d'un objet",
+     "Simuler un fonctionnement avec un logiciel",
+     "Comparer le modèle et le réel"
+    ]
+   },
+   {
+    "title": "Informatique et programmation",
+    "chapters": [
+     "Le fonctionnement d'un réseau informatique",
+     "Les capteurs et les actionneurs",
+     "Programmer un système avec des conditions et des boucles",
+     "La sécurité informatique et les données"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Raconter des expériences",
+    "chapters": [
+     "Le prétérit simple : révision",
+     "Le prétérit en be + -ing",
+     "Le present perfect : expérience et bilan",
+     "Present perfect ou prétérit ?",
+     "Les marqueurs de temps : ago, since, for"
+    ]
+   },
+   {
+    "title": "Exprimer son opinion et argumenter",
+    "chapters": [
+     "Donner son avis et le justifier",
+     "Les connecteurs logiques",
+     "Exprimer l'accord et le désaccord",
+     "Les modaux de conseil et d'obligation"
+    ]
+   },
+   {
+    "title": "Imaginer et faire des hypothèses",
+    "chapters": [
+     "Le futur avec will et be going to",
+     "Les modaux de probabilité : may, might, could",
+     "La condition avec if au présent",
+     "Faire des prévisions sur l'avenir"
+    ]
+   },
+   {
+    "title": "Comparer et décrire",
+    "chapters": [
+     "Le comparatif et le superlatif : révision et cas particuliers",
+     "Les pronoms relatifs who, which, that",
+     "Les adverbes de manière"
+    ]
+   },
+   {
+    "title": "Découvrir le monde anglophone",
+    "chapters": [
+     "Les grandes figures de l'histoire anglophone",
+     "Le Royaume-Uni et ses nations",
+     "Les médias et les réseaux sociaux dans le monde anglophone",
+     "L'environnement : enjeux dans les pays anglophones"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "espagnol",
+  "themes": [
+   {
+    "title": "Raconter au passé",
+    "chapters": [
+     "Le passé composé (pretérito perfecto)",
+     "Les participes passés irréguliers",
+     "Raconter ses vacances et ses souvenirs",
+     "L'imparfait (pretérito imperfecto)"
+    ]
+   },
+   {
+    "title": "Exprimer l'obligation et les projets",
+    "chapters": [
+     "Exprimer l'obligation : tener que, hay que",
+     "Le futur proche : ir a + infinitif",
+     "Le gérondif et la forme progressive : estar + gérondif",
+     "Proposer et donner un conseil"
+    ]
+   },
+   {
+    "title": "Décrire et comparer",
+    "chapters": [
+     "Les comparatifs et les superlatifs",
+     "Les verbes à diphtongue et à affaiblissement",
+     "Décrire un lieu et un paysage",
+     "Ser et estar : approfondissement"
+    ]
+   },
+   {
+    "title": "Découvrir le monde hispanique",
+    "chapters": [
+     "L'Espagne et ses régions",
+     "L'Amérique latine : pays et cultures",
+     "Les grandes fêtes du monde hispanique",
+     "Artistes et monuments hispaniques"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "allemand",
+  "themes": [
+   {
+    "title": "Raconter au passé",
+    "chapters": [
+     "Le parfait avec haben et sein",
+     "Les participes passés réguliers et irréguliers",
+     "Le prétérit de sein et haben",
+     "Raconter ses vacances"
+    ]
+   },
+   {
+    "title": "Les cas et la phrase",
+    "chapters": [
+     "Le nominatif, l'accusatif et le datif",
+     "Les prépositions suivies de l'accusatif ou du datif",
+     "Les prépositions spatiales et les verbes de position",
+     "La subordonnée avec weil et dass"
+    ]
+   },
+   {
+    "title": "Exprimer la volonté, la capacité et l'obligation",
+    "chapters": [
+     "Les verbes de modalité : können, müssen, wollen, dürfen, sollen, mögen",
+     "Le futur avec werden",
+     "Les verbes à particule séparable"
+    ]
+   },
+   {
+    "title": "Découvrir le monde germanophone",
+    "chapters": [
+     "Berlin et les grandes villes allemandes",
+     "L'Autriche et la Suisse",
+     "La vie des adolescents en Allemagne",
+     "Fêtes et traditions germanophones"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "La représentation et ses écarts",
+    "chapters": [
+     "Représenter le corps : proportions et mouvement",
+     "L'autoportrait et le portrait",
+     "Le réalisme et ses détournements",
+     "L'abstraction"
+    ]
+   },
+   {
+    "title": "La matérialité et la couleur",
+    "chapters": [
+     "La couleur : contrastes et harmonies",
+     "La lumière et l'ombre",
+     "Les techniques mixtes",
+     "La matière comme langage"
+    ]
+   },
+   {
+    "title": "L'œuvre, l'espace et le spectateur",
+    "chapters": [
+     "L'espace de présentation de l'œuvre",
+     "L'installation et l'implication du spectateur",
+     "L'œuvre dans l'espace public",
+     "Le land art et l'art dans la nature"
+    ]
+   },
+   {
+    "title": "Images et numérique",
+    "chapters": [
+     "La photographie : cadrage, lumière et intention",
+     "L'image numérique et sa transformation",
+     "Images et vérité : la manipulation de l'image",
+     "L'histoire des arts : analyser une œuvre"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "4ème",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Réaliser des projets musicaux d'interprétation",
+    "chapters": [
+     "Interpréter un chant en polyphonie",
+     "Travailler l'expressivité et le phrasé",
+     "Préparer une présentation en public"
+    ]
+   },
+   {
+    "title": "Écouter, comparer, construire une culture musicale",
+    "chapters": [
+     "La musique baroque",
+     "La musique classique et l'orchestre symphonique",
+     "Le romantisme en musique",
+     "Le jazz et ses origines",
+     "Musique et engagement"
+    ]
+   },
+   {
+    "title": "Explorer, imaginer, créer",
+    "chapters": [
+     "Le langage musical : mélodie, harmonie, accords",
+     "Créer avec des outils numériques",
+     "Composer un accompagnement",
+     "Les variations et les reprises"
+    ]
+   },
+   {
+    "title": "Échanger, partager, argumenter",
+    "chapters": [
+     "Commenter une œuvre musicale",
+     "Comparer deux interprétations",
+     "La musique et la société"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Se raconter, se représenter",
+    "chapters": [
+     "L'autobiographie et le pacte autobiographique",
+     "Les mémoires, le journal intime et l'autoportrait",
+     "Écrire sur soi : souvenirs et retour sur le passé",
+     "La représentation de soi dans les arts",
+     "Rédiger un récit autobiographique"
+    ]
+   },
+   {
+    "title": "Dénoncer les travers de la société",
+    "chapters": [
+     "La satire et la caricature",
+     "L'apologue : fable et conte philosophique",
+     "La poésie engagée",
+     "Le théâtre et la critique sociale",
+     "Les procédés de l'ironie"
+    ]
+   },
+   {
+    "title": "Visions poétiques du monde",
+    "chapters": [
+     "La poésie, regard sur le monde",
+     "Les formes poétiques du vers libre au poème en prose",
+     "Les images poétiques et les figures de style",
+     "Écrire un poème"
+    ]
+   },
+   {
+    "title": "Agir dans la cité : individu et pouvoir",
+    "chapters": [
+     "La littérature de guerre et de témoignage",
+     "Résister à l'oppression : écrire pour témoigner",
+     "L'engagement de l'écrivain",
+     "Le roman et le théâtre face à l'Histoire du XXe siècle"
+    ]
+   },
+   {
+    "title": "Progrès et rêves scientifiques",
+    "chapters": [
+     "Le progrès scientifique dans la littérature",
+     "Le roman d'anticipation et la dystopie",
+     "Les dangers du progrès : débattre et argumenter"
+    ]
+   },
+   {
+    "title": "Grammaire et syntaxe",
+    "chapters": [
+     "Les propositions subordonnées : relatives, complétives et circonstancielles",
+     "L'expression de la cause, de la conséquence et du but",
+     "L'expression de l'opposition et de la concession",
+     "L'expression de la condition et de l'hypothèse",
+     "Les modalisateurs et l'expression du jugement",
+     "Les discours rapportés"
+    ]
+   },
+   {
+    "title": "Conjugaison",
+    "chapters": [
+     "Les valeurs des temps de l'indicatif",
+     "Le conditionnel et l'hypothèse",
+     "Le subjonctif : formes et emplois",
+     "Les modes impersonnels : infinitif, participe et gérondif",
+     "La concordance des temps"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "L'accord du participe passé : tous les cas",
+     "Les homophones grammaticaux et lexicaux",
+     "Les accords complexes du verbe avec son sujet",
+     "Réussir la dictée : stratégies de relecture"
+    ]
+   },
+   {
+    "title": "Lexique",
+    "chapters": [
+     "Les familles de mots et l'étymologie",
+     "Les champs lexicaux et sémantiques",
+     "Le vocabulaire de l'argumentation",
+     "Les figures de style : antithèse, oxymore, gradation, anaphore"
+    ]
+   },
+   {
+    "title": "Écrire et s'exprimer à l'oral",
+    "chapters": [
+     "Rédiger un texte d'imagination",
+     "Rédiger un texte de réflexion argumenté",
+     "Construire un plan et rédiger une introduction et une conclusion",
+     "Exposer et défendre un point de vue à l'oral"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve de français",
+    "chapters": [
+     "Comprendre l'organisation de l'épreuve de français",
+     "Répondre aux questions de compréhension et de grammaire",
+     "Réussir la réécriture",
+     "Réussir la dictée",
+     "Réussir le sujet de rédaction : imagination ou réflexion"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Nombres et arithmétique",
+    "chapters": [
+     "Les nombres premiers et la décomposition en facteurs premiers",
+     "Le PGCD et les fractions irréductibles",
+     "Les puissances : révision et écriture scientifique",
+     "Les racines carrées",
+     "Les ensembles de nombres"
+    ]
+   },
+   {
+    "title": "Calcul littéral",
+    "chapters": [
+     "Développer et réduire une expression",
+     "Les identités remarquables",
+     "Factoriser une expression",
+     "Prouver un résultat général avec le calcul littéral"
+    ]
+   },
+   {
+    "title": "Équations et inéquations",
+    "chapters": [
+     "Résoudre une équation du premier degré",
+     "L'équation produit nul",
+     "Les équations de la forme x² = a",
+     "Résoudre une inéquation du premier degré",
+     "Modéliser un problème par une équation"
+    ]
+   },
+   {
+    "title": "Fonctions",
+    "chapters": [
+     "La notion de fonction : image et antécédent",
+     "Tableau de valeurs et représentation graphique",
+     "Les fonctions linéaires",
+     "Les fonctions affines",
+     "Lire et interpréter un graphique"
+    ]
+   },
+   {
+    "title": "Proportionnalité et grandeurs",
+    "chapters": [
+     "La proportionnalité et les fonctions linéaires",
+     "Les pourcentages d'évolution et les coefficients multiplicateurs",
+     "Les grandeurs composées et les conversions",
+     "Agrandissement, réduction et effet sur les aires et les volumes"
+    ]
+   },
+   {
+    "title": "Statistiques et probabilités",
+    "chapters": [
+     "Moyenne, médiane et étendue",
+     "Comparer des séries statistiques",
+     "Les probabilités : expériences à une épreuve",
+     "Les expériences à deux épreuves : arbres et tableaux",
+     "Fréquence et probabilité"
+    ]
+   },
+   {
+    "title": "Géométrie plane",
+    "chapters": [
+     "Le théorème de Thalès et sa réciproque",
+     "La trigonométrie : cosinus, sinus et tangente",
+     "Les triangles semblables",
+     "Les homothéties",
+     "Les rotations et les transformations du plan"
+    ]
+   },
+   {
+    "title": "Géométrie dans l'espace",
+    "chapters": [
+     "La sphère et la boule : aire et volume",
+     "Les sections de solides par un plan",
+     "Se repérer dans l'espace : latitude et longitude",
+     "Les volumes des solides usuels"
+    ]
+   },
+   {
+    "title": "Algorithmique et programmation",
+    "chapters": [
+     "Les variables et les instructions conditionnelles",
+     "Les boucles et la décomposition en blocs",
+     "Lire et compléter un programme",
+     "Programmer un calcul ou une simulation"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve de mathématiques",
+    "chapters": [
+     "Comprendre l'organisation de l'épreuve de mathématiques",
+     "Réussir les questions de calcul automatisé et de cours",
+     "Rédiger une démonstration",
+     "Résoudre un problème à prise d'initiative",
+     "S'entraîner sur des sujets types"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "L'Europe, un théâtre majeur des guerres totales (1914-1945)",
+    "chapters": [
+     "La Première Guerre mondiale : une guerre totale",
+     "La violence de masse et le génocide des Arméniens",
+     "La révolution russe et l'URSS de Staline",
+     "L'Allemagne nazie et le régime totalitaire",
+     "La Seconde Guerre mondiale : une guerre d'anéantissement",
+     "Le génocide des Juifs et des Tsiganes",
+     "La France défaite et occupée : régime de Vichy, collaboration et Résistance"
+    ]
+   },
+   {
+    "title": "Le monde depuis 1945",
+    "chapters": [
+     "Indépendances et construction de nouveaux États",
+     "Un monde bipolaire au temps de la guerre froide",
+     "Affirmation et mise en œuvre du projet européen",
+     "Enjeux et conflits dans le monde après 1989"
+    ]
+   },
+   {
+    "title": "Françaises et Français dans une République repensée",
+    "chapters": [
+     "1944-1947 : refonder la République, redéfinir la démocratie",
+     "La Ve République, de la République gaullienne à l'alternance et à la cohabitation",
+     "Femmes et hommes dans la société des années 1950 aux années 1980",
+     "Les évolutions de la société française depuis 1945"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve d'histoire",
+    "chapters": [
+     "Comprendre l'organisation de l'épreuve d'histoire-géographie-EMC",
+     "Analyser et comprendre des documents",
+     "Rédiger un développement construit en histoire",
+     "Maîtriser les repères chronologiques du brevet"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "Dynamiques territoriales de la France contemporaine",
+    "chapters": [
+     "Les aires urbaines, une nouvelle géographie de la France mondialisée",
+     "Les espaces productifs et leurs évolutions",
+     "Les espaces de faible densité et leurs atouts"
+    ]
+   },
+   {
+    "title": "Pourquoi et comment aménager le territoire ?",
+    "chapters": [
+     "Aménager pour répondre aux inégalités croissantes entre territoires",
+     "Les acteurs de l'aménagement du territoire",
+     "Les territoires ultramarins français : une problématique spécifique"
+    ]
+   },
+   {
+    "title": "La France et l'Union européenne",
+    "chapters": [
+     "L'Union européenne, un nouveau territoire de référence et d'appartenance",
+     "La France et l'Europe dans le monde",
+     "Les politiques régionales de l'Union européenne"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve de géographie",
+    "chapters": [
+     "Analyser une carte ou un document géographique",
+     "Rédiger un développement construit en géographie",
+     "Compléter un croquis ou un schéma",
+     "Maîtriser les repères géographiques du brevet"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "La République et la citoyenneté",
+    "chapters": [
+     "Les valeurs, principes et symboles de la République",
+     "La Constitution de la Ve République et les institutions",
+     "La citoyenneté française et la citoyenneté européenne",
+     "Le vote et l'élection : un droit et un devoir",
+     "La laïcité, principe de la République"
+    ]
+   },
+   {
+    "title": "Les droits et les devoirs du citoyen",
+    "chapters": [
+     "Les droits et les devoirs du citoyen",
+     "L'engagement politique, syndical et associatif",
+     "Les médias, l'opinion publique et l'esprit critique",
+     "La lutte contre toutes les formes de discrimination"
+    ]
+   },
+   {
+    "title": "La défense et la paix",
+    "chapters": [
+     "La Défense nationale et ses missions",
+     "L'engagement de la France dans le monde : ONU et coopérations",
+     "Le parcours de citoyenneté : recensement et Journée défense et citoyenneté"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve d'EMC",
+    "chapters": [
+     "Comprendre la situation pratique d'EMC",
+     "Mobiliser ses connaissances pour répondre à une situation",
+     "Argumenter et justifier sa réponse en EMC"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "physique-chimie",
+  "themes": [
+   {
+    "title": "Organisation et transformations de la matière",
+    "chapters": [
+     "La structure de l'atome : noyau et électrons",
+     "Les éléments chimiques et le tableau périodique",
+     "Les ions et la conduction électrique des solutions",
+     "Les tests d'identification des ions",
+     "Les réactions entre acides et métaux",
+     "L'Univers et la formation des éléments chimiques"
+    ]
+   },
+   {
+    "title": "Mouvement et interactions",
+    "chapters": [
+     "Vitesse et mouvement : révision et calcul",
+     "Les forces et leur représentation vectorielle",
+     "Le poids et la gravitation sur Terre et sur d'autres astres",
+     "Équilibre d'un objet soumis à deux forces"
+    ]
+   },
+   {
+    "title": "L'énergie et ses conversions",
+    "chapters": [
+     "L'énergie cinétique et l'énergie potentielle",
+     "La conservation de l'énergie",
+     "La puissance et l'énergie électrique",
+     "La production de l'électricité : centrales et alternateur",
+     "Lire une facture d'électricité et économiser l'énergie"
+    ]
+   },
+   {
+    "title": "Des signaux pour observer et communiquer",
+    "chapters": [
+     "Les ondes sonores et les ultrasons",
+     "La lumière et les ondes électromagnétiques",
+     "Les signaux pour transmettre une information"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve de sciences",
+    "chapters": [
+     "Comprendre l'organisation de l'épreuve de sciences",
+     "Exploiter des documents scientifiques",
+     "Rédiger une réponse scientifique argumentée",
+     "Réussir un sujet type pas à pas"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "svt",
+  "themes": [
+   {
+    "title": "La planète Terre, l'environnement et l'action humaine",
+    "chapters": [
+     "Le changement climatique : causes et conséquences",
+     "Les énergies fossiles et renouvelables",
+     "La gestion des ressources naturelles",
+     "Les risques naturels et l'aménagement du territoire",
+     "Écosystèmes et action humaine : agir pour la biodiversité"
+    ]
+   },
+   {
+    "title": "Le vivant et son évolution",
+    "chapters": [
+     "La cellule, l'ADN et les chromosomes",
+     "La diversité génétique des individus : les allèles",
+     "La transmission de l'information génétique : mitose et méiose",
+     "L'évolution des espèces et la sélection naturelle",
+     "La parenté des êtres vivants et la classification"
+    ]
+   },
+   {
+    "title": "Le corps humain et la santé",
+    "chapters": [
+     "Le monde microbien et la contamination",
+     "Les défenses immunitaires de l'organisme",
+     "La vaccination et la mémoire immunitaire",
+     "Les antibiotiques et l'antibiorésistance",
+     "L'alimentation, le microbiote et la santé"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve de sciences",
+    "chapters": [
+     "Comprendre l'organisation de l'épreuve de sciences",
+     "Exploiter des documents scientifiques",
+     "Rédiger une réponse scientifique argumentée",
+     "Réussir un sujet type pas à pas"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "technologie",
+  "themes": [
+   {
+    "title": "Design, innovation et créativité",
+    "chapters": [
+     "Conduire un projet technique en équipe",
+     "L'éco-conception et le développement durable",
+     "Prototyper une solution",
+     "Présenter et argumenter un projet"
+    ]
+   },
+   {
+    "title": "Les objets et les systèmes techniques",
+    "chapters": [
+     "Les systèmes automatisés",
+     "La chaîne d'information et la chaîne d'énergie : approfondissement",
+     "Les objets connectés",
+     "L'évolution des objets et les innovations"
+    ]
+   },
+   {
+    "title": "Modélisation et simulation",
+    "chapters": [
+     "Modéliser le comportement d'un système",
+     "Interpréter des résultats de simulation",
+     "Valider une solution par des essais"
+    ]
+   },
+   {
+    "title": "Informatique et programmation",
+    "chapters": [
+     "Les réseaux, Internet et le protocole de communication",
+     "Programmer un système automatisé",
+     "Les variables et les événements dans un programme",
+     "La cybersécurité et la protection des données"
+    ]
+   },
+   {
+    "title": "Préparer le brevet : épreuve de sciences",
+    "chapters": [
+     "Comprendre l'organisation de l'épreuve de sciences",
+     "Exploiter des documents scientifiques",
+     "Rédiger une réponse scientifique argumentée",
+     "Réussir un sujet type pas à pas"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Raconter et rapporter",
+    "chapters": [
+     "Le present perfect et le prétérit : approfondissement",
+     "Le past perfect",
+     "Le discours indirect",
+     "Raconter un récit de vie"
+    ]
+   },
+   {
+    "title": "Exprimer l'hypothèse et le regret",
+    "chapters": [
+     "La condition avec if : les trois types",
+     "Exprimer le souhait et le regret : I wish",
+     "Les modaux au passé"
+    ]
+   },
+   {
+    "title": "Argumenter et convaincre",
+    "chapters": [
+     "Construire une argumentation en anglais",
+     "Les connecteurs logiques avancés",
+     "La voix passive",
+     "Exprimer la cause, la conséquence et le but"
+    ]
+   },
+   {
+    "title": "Grammaire approfondie",
+    "chapters": [
+     "Les propositions relatives",
+     "Le gérondif et l'infinitif après un verbe",
+     "Les quantifieurs",
+     "Les questions tags et les réponses courtes"
+    ]
+   },
+   {
+    "title": "Découvrir le monde anglophone",
+    "chapters": [
+     "Les droits civiques aux États-Unis",
+     "Le Commonwealth et la diversité anglophone",
+     "Les grands défis contemporains : environnement et technologie",
+     "Les arts et la culture anglophones"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "espagnol",
+  "themes": [
+   {
+    "title": "Raconter au passé",
+    "chapters": [
+     "Le passé simple (pretérito indefinido) : verbes réguliers",
+     "Le passé simple des verbes irréguliers",
+     "Passé simple ou imparfait ?",
+     "Raconter une histoire ou un événement historique"
+    ]
+   },
+   {
+    "title": "Exprimer l'ordre, le souhait et l'hypothèse",
+    "chapters": [
+     "L'impératif affirmatif",
+     "Le subjonctif présent : formes et premiers emplois",
+     "Le futur simple",
+     "Le conditionnel présent"
+    ]
+   },
+   {
+    "title": "Donner son avis et argumenter",
+    "chapters": [
+     "Exprimer son opinion : creo que, pienso que",
+     "Les connecteurs logiques",
+     "Débattre d'un sujet de société"
+    ]
+   },
+   {
+    "title": "Découvrir le monde hispanique",
+    "chapters": [
+     "La guerre d'Espagne et le franquisme",
+     "Les cultures précolombiennes",
+     "Les grands artistes hispaniques : Picasso, Frida Kahlo, Dalí",
+     "Les enjeux du monde hispanique d'aujourd'hui"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "allemand",
+  "themes": [
+   {
+    "title": "Raconter et décrire",
+    "chapters": [
+     "Le prétérit des verbes de modalité et des verbes forts",
+     "La déclinaison de l'adjectif épithète",
+     "Les subordonnées avec wenn, als et ob",
+     "La subordonnée relative"
+    ]
+   },
+   {
+    "title": "Exprimer le souhait et l'hypothèse",
+    "chapters": [
+     "Le subjonctif II : würde et hätte, wäre",
+     "Exprimer un souhait ou une condition",
+     "Le comparatif et le superlatif"
+    ]
+   },
+   {
+    "title": "Argumenter et donner son avis",
+    "chapters": [
+     "Exprimer son opinion : ich finde, ich glaube, dass",
+     "Les connecteurs : deshalb, trotzdem, obwohl",
+     "Les verbes à préposition"
+    ]
+   },
+   {
+    "title": "Découvrir le monde germanophone",
+    "chapters": [
+     "Le mur de Berlin et la réunification",
+     "L'Allemagne aujourd'hui : écologie et société",
+     "Les relations franco-allemandes",
+     "Artistes et grandes figures germanophones"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "La représentation et ses enjeux",
+    "chapters": [
+     "Représentation et vérité : la ressemblance en question",
+     "La narration visuelle et le temps",
+     "La création à partir d'œuvres existantes : citation et détournement"
+    ]
+   },
+   {
+    "title": "La matérialité de l'œuvre et l'objet",
+    "chapters": [
+     "La transformation de la matière",
+     "Les matériaux de récupération et l'art",
+     "L'objet comme matériau en art"
+    ]
+   },
+   {
+    "title": "L'œuvre, l'espace, l'auteur, le spectateur",
+    "chapters": [
+     "L'œuvre in situ et l'installation",
+     "La relation de l'œuvre au spectateur",
+     "La performance et le corps de l'artiste",
+     "Le numérique au service de la création"
+    ]
+   },
+   {
+    "title": "Histoire des arts",
+    "chapters": [
+     "L'art au XXe siècle : les grands mouvements",
+     "Art et engagement : témoigner par l'image",
+     "Analyser une œuvre : méthode",
+     "Présenter une œuvre à l'oral"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Réaliser des projets musicaux d'interprétation",
+    "chapters": [
+     "Interpréter un répertoire varié",
+     "Chanter en polyphonie avec précision",
+     "Préparer un concert ou une restitution"
+    ]
+   },
+   {
+    "title": "Écouter, comparer, construire une culture musicale",
+    "chapters": [
+     "La musique au XXe siècle",
+     "Musique et engagement : chansons de résistance et de protestation",
+     "Rock, pop, rap et musiques actuelles",
+     "Musique de film et musique à l'image",
+     "Musique et technologie : enregistrement et musique électronique"
+    ]
+   },
+   {
+    "title": "Explorer, imaginer, créer",
+    "chapters": [
+     "Composer et arranger une pièce",
+     "Créer avec la musique assistée par ordinateur",
+     "Improviser à partir d'une structure"
+    ]
+   },
+   {
+    "title": "Échanger, partager, argumenter",
+    "chapters": [
+     "Construire un commentaire d'écoute",
+     "Présenter une œuvre en histoire des arts",
+     "Les droits d'auteur et le partage de la musique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "3ème",
+  "subject": "grand-oral",
+  "themes": [
+   {
+    "title": "Comprendre l'épreuve orale du brevet",
+    "chapters": [
+     "Le déroulement de l'épreuve orale",
+     "Les critères d'évaluation",
+     "Présenter seul ou en groupe"
+    ]
+   },
+   {
+    "title": "Choisir et construire son projet",
+    "chapters": [
+     "Choisir un sujet : parcours éducatifs, EPI ou histoire des arts",
+     "Formuler une problématique",
+     "Rechercher et sélectionner des informations",
+     "Organiser sa présentation : introduction, plan et conclusion"
+    ]
+   },
+   {
+    "title": "Préparer son support",
+    "chapters": [
+     "Réaliser un diaporama clair et efficace",
+     "Choisir les images et les documents",
+     "Préparer ses notes sans lire"
+    ]
+   },
+   {
+    "title": "Présenter et convaincre à l'oral",
+    "chapters": [
+     "Gérer son stress et sa posture",
+     "Parler clairement : voix, débit et regard",
+     "Gérer son temps de parole",
+     "Répondre aux questions du jury",
+     "S'entraîner avec une grille d'auto-évaluation"
+    ]
+   }
+  ]
+ }
+]

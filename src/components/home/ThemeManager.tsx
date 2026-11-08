@@ -61,26 +61,34 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
   }, [subjectId]);
 
   // En direct : grands thèmes (un renommage en cours garde son champ de saisie)
-  useRealtimeRefresh(["subject_themes"], () => fetchThemes(), !!baseSubjectId && hasThemesTable);
+  useRealtimeRefresh(["subject_themes", "subject_chapters"], () => fetchThemes(), !!subjectId && hasThemesTable);
 
   const fetchThemes = async () => {
     const { data, error } = await supabase
       .from("subject_themes")
       .select("*")
-      .eq("subject_id", baseSubjectId)
+      .eq("subject_id", subjectId) // thèmes propres à CHAQUE niveau (ex. « mathematique|3ème ») depuis le 2026-11-08
       .order("order_index");
 
     if (error) {
       setHasThemesTable(false);
       return;
     }
-    setThemes((data as Theme[]) || []);
+    let list = (data as Theme[]) || [];
+    // Élève / parent : seulement les thèmes qui contiennent au moins un chapitre qui lui est attribué
+    // (la bibliothèque de l'admin reste invisible pour eux)
+    if (!isAdmin) {
+      const { data: chaps } = await supabase.from("subject_chapters").select("theme_id").eq("subject_id", subjectId);
+      const withChapters = new Set((chaps || []).map(c => c.theme_id).filter(Boolean));
+      list = list.filter(t => withChapters.has(t.id));
+    }
+    setThemes(list);
   };
 
   const createTheme = async () => {
     if (!newThemeTitle.trim()) return;
     const { error } = await supabase.from("subject_themes").insert({
-      subject_id: baseSubjectId,
+      subject_id: subjectId,
       title: newThemeTitle.trim(),
       order_index: themes.length,
     });
@@ -125,7 +133,7 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
       return;
     }
     const inserts = defaults.map((title, i) => ({
-      subject_id: baseSubjectId,
+      subject_id: subjectId,
       title,
       order_index: i,
     }));

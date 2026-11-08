@@ -14,20 +14,42 @@ export const LYCEE_MAIN_LEVELS = ["Seconde", "Première", "Terminale"] as const;
 export const levelSubjectId = (subjectId: string, level: string): string =>
   `${subjectId}|${level}`;
 
-// Retourne les matières disponibles pour un niveau donné
+// Matières ajoutées le 2026-11-08 (bibliothèque, programmes officiels) : visibles par l'admin SEULEMENT
+// (jamais dans la grille des élèves/parents, cf. SubjectsGrid).
+export const SUBJECTS_EXTRA = [
+  { id: "emc", label: "Enseignement moral et civique", icon: "⚖️", color: "hsl(15, 75%, 50%)" },
+  { id: "allemand", label: "Allemand", icon: "🇩🇪", color: "hsl(48, 85%, 45%)" },
+  { id: "questionner-le-monde", label: "Questionner le monde", icon: "🔎", color: "hsl(175, 55%, 40%)" },
+  { id: "sciences-techno", label: "Sciences et technologie", icon: "🧪", color: "hsl(155, 55%, 40%)" },
+  { id: "philosophie", label: "Philosophie", icon: "💭", color: "hsl(270, 45%, 50%)" },
+  { id: "maths-complementaires", label: "Maths complémentaires", icon: "➗", color: "hsl(225, 70%, 55%)" },
+  { id: "maths-expertes", label: "Maths expertes", icon: "🧮", color: "hsl(235, 65%, 50%)" },
+];
+export const ADMIN_ONLY_SUBJECT_IDS: string[] = SUBJECTS_EXTRA.map(s => s.id);
+
+const PRIMAIRE_C2 = ["francais", "mathematique", "questionner-le-monde", "anglais", "emc", "dessin", "musique", "option1", "option2"];
+const PRIMAIRE_C3 = ["francais", "mathematique", "histoire", "geographie", "sciences-techno", "anglais", "emc", "dessin", "musique", "option1", "option2"];
+const COLLEGE = ["francais", "mathematique", "histoire", "geographie", "emc", "physique-chimie", "svt", "technologie", "anglais", "espagnol", "allemand", "dessin", "musique", "option1", "option2"];
+const LYCEE_TC = ["francais", "mathematique", "histoire", "geographie", "emc", "physique-chimie", "svt", "technologie", "anglais", "espagnol", "allemand", "dessin", "musique", "option1", "option2"];
+const SPES = ["spe-math", "spe-physique", "spe-svt", "spe-hggsp", "spe-hlp", "spe-nsi", "spe-si", "spe-ses", "spe-lit-langues"];
+
+// Matières de chaque niveau (programmes officiels ; une matière qui avait déjà du contenu n'a jamais été retirée)
+const LEVEL_SUBJECT_IDS: Record<string, string[]> = {
+  CP: PRIMAIRE_C2, CE1: PRIMAIRE_C2, CE2: PRIMAIRE_C2,
+  CM1: PRIMAIRE_C3, CM2: PRIMAIRE_C3,
+  "6ème": COLLEGE, "5ème": COLLEGE, "4ème": COLLEGE,
+  "3ème": [...COLLEGE, "grand-oral"],
+  Seconde: [...LYCEE_TC, "snt", "ses", "ens-scientifiques"],
+  Première: [...LYCEE_TC, "ens-scientifiques", ...SPES],
+  Terminale: [...LYCEE_TC, "philosophie", "ens-scientifiques", ...SPES, "maths-complementaires", "maths-expertes", "grand-oral"],
+};
+
+// Retourne les matières disponibles pour un niveau donné (vue admin)
 export const getSubjectsForLevel = (level: string) => {
-  // 13 matières communes : Français → Option 2 (sans Grand Oral)
-  const base = SUBJECTS_GENERAL.slice(0, 13);
-
-  if (level === "3ème") return [...base, SUBJECTS_GENERAL[13]]; // + Grand Oral
-
-  if (level === "Seconde")
-    return [...base, SUBJECTS_LYCEE[0], SUBJECTS_LYCEE[1], SUBJECTS_LYCEE[2]]; // + SNT, SES, Ens. sci.
-
-  if (level === "Première" || level === "Terminale")
-    return [...base, ...SUBJECTS_LYCEE.slice(2)]; // + Ens. sci. + toutes Spé (sans SNT/SES)
-
-  return base;
+  const all = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE, ...SUBJECTS_EXTRA];
+  const ids = LEVEL_SUBJECT_IDS[level];
+  if (!ids) return SUBJECTS_GENERAL.slice(0, 13); // maternelle : inchangé
+  return ids.map(id => all.find(s => s.id === id)).filter((s): s is typeof all[number] => !!s);
 };
 
 export const SUBJECTS_GENERAL = [

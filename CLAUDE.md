@@ -31,6 +31,14 @@ Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 202
 6. ✅ **Clé Resend (2026-11-08)** : retirée du code, de la migration d'avril et de la base (fonctions mortes `process_email_queue` + `trigger_process_email_queue` supprimées). NOUVELLE clé Resend « pausetude » (accès d'envoi seulement) posée par Nadia dans le secret `RESEND_API_KEY` (empreinte b1a43a04…), send-notifications v3 déployée (lit le secret). ✅ Ancienne clé `re_231PpcSh…` (« agenda-famille », seule utilisation sur 15 jours = un GET /domains manuel, aucun envoi) SUPPRIMÉE dans Resend le 2026-11-08 par Nadia. Restent : pausetude, nouvelle-base-vercel (Agenda), Mon agenda.
 7. ✅ Pièces jointes Messages (2026-11-08) : règle « Users can upload own message files » (chacun SEULEMENT dans `messages/<son id>/`). + BUG corrigé : les règles admin du stockage recréées le 2026-11-07 lisaient `auth.users` (interdit au rôle authenticated) → tout envoi de fichier échouait, admin comprise ; réécrites avec `auth.email()`. Testé en ROLLBACK : 5/5 (admin chapitre OK, admin message OK, autre son dossier OK, dossier d'un autre refusé, chapitre refusé). Migration `20261108010000_pj_messages_et_cle_resend.sql`.
 
+## 📚 Bibliothèque CP → Terminale (2026-11-08)
+- Demande de Nadia : remplir toutes les cartes de niveaux (contenus « comme SchoolMouv »). Copie de SchoolMouv REFUSÉE (droits d'auteur + CGU, même pour usage privé ; jamais se connecter avec ses identifiants). À la place : programmes officiels.
+- Choix de Nadia : chapitres DANS les cartes existantes, visibles par elle seule ; nouvelles matières visibles par elle seule ; primaire = liste officielle par niveau.
+- `src/lib/constants.ts` : `SUBJECTS_EXTRA` (emc, allemand, questionner-le-monde, sciences-techno, philosophie, maths-complementaires, maths-expertes) = `ADMIN_ONLY_SUBJECT_IDS` (jamais dans la grille élève) ; `LEVEL_SUBJECT_IDS` par niveau (Grand Oral aussi en Terminale). Grille élève (`SubjectsGrid`) = matières de SON niveau.
+- Thèmes propres à chaque niveau (`subject_themes.subject_id` = « matiere|niveau ») ; migration `20261108030000_themes_par_niveau.sql` (8 thèmes de maths recopiés pour 5ème/3ème, 55 chapitres rattachés). Élève : un thème n'apparaît que s'il contient un chapitre qui lui est attribué.
+- Données : `supabase/bibliotheque/{primaire,college,lycee}.json` (765 thèmes, ~3 600 chapitres), chargées par `charger_bibliotheque.py` (idempotent : ne recrée pas un thème/chapitre de même titre). Chapitres sans élève attribué = invisibles aux élèves (RLS).
+- ⚠️ Rédigé surtout de mémoire des programmes (BO inaccessible en 403) ; maths lycée = nouveaux programmes BO 2 avril 2026 (Seconde/Première). Vérification Eduscol proposée à Nadia.
+
 ## 📦 Pas de débordement de texte hors de son conteneur
 Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
 - `overflow-hidden` sur tout conteneur de liste/carte

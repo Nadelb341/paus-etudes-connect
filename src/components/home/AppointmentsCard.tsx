@@ -4,7 +4,7 @@ import { moveToTrash } from "@/lib/trash";
 import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constants";
+import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SUBJECTS_EXTRA } from "@/lib/constants";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -50,7 +50,7 @@ interface Profile {
   status: string;
 }
 
-const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
+const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE, ...SUBJECTS_EXTRA];
 const DURATIONS = ["30min", "1h", "1h30", "2h", "2h30", "3h", "3h30", "4h"];
 
 interface AppointmentsCardProps {

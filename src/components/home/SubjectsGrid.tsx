@@ -3,7 +3,7 @@ import SubjectCard from "./SubjectCard";
 import SubjectContentDialog from "./SubjectContentDialog";
 import AdminLevelView from "./AdminLevelView";
 import LevelSubjectsDialog from "./LevelSubjectsDialog";
-import { SUBJECTS_GENERAL, SUBJECTS_LYCEE, ADMIN_EMAIL, levelSubjectId } from "@/lib/constants";
+import { SUBJECTS_GENERAL, SUBJECTS_LYCEE, ADMIN_EMAIL, ADMIN_ONLY_SUBJECT_IDS, getSubjectsForLevel, levelSubjectId } from "@/lib/constants";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -137,12 +137,20 @@ const SubjectsGrid = () => {
   }
 
   // ─── VUE ÉLÈVE / PARENT ─────────────────────────────────────────────────────
+  // Matières du niveau de l'élève (programmes officiels), sans les matières réservées à l'admin.
+  // Tant que le niveau n'est pas chargé : toutes les matières générales, comme avant.
+  const levelIds = userLevel
+    ? new Set(getSubjectsForLevel(userLevel).map(s => s.id).filter(id => !ADMIN_ONLY_SUBJECT_IDS.includes(id)))
+    : null;
+  const studentGeneral = levelIds ? SUBJECTS_GENERAL.filter(s => levelIds.has(s.id)) : SUBJECTS_GENERAL;
+  const studentLycee = levelIds ? SUBJECTS_LYCEE.filter(s => levelIds.has(s.id)) : SUBJECTS_LYCEE;
+
   return (
     <div className="space-y-6">
       <div>
         <h3 className="font-heading font-semibold text-foreground mb-3">Matières générales</h3>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3">
-          {SUBJECTS_GENERAL.map((subject, i) => (
+          {studentGeneral.map((subject, i) => (
             <SubjectCard
               key={subject.id} {...subject} index={i}
               isVisible={visibility[subject.id] !== false}
@@ -154,7 +162,7 @@ const SubjectsGrid = () => {
         </div>
       </div>
 
-      {showLycee && (
+      {showLycee && studentLycee.length > 0 && (
         <>
           <div className="flex items-center gap-3">
             <div className="flex-1 h-px bg-border" />
@@ -162,9 +170,9 @@ const SubjectsGrid = () => {
             <div className="flex-1 h-px bg-border" />
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3">
-            {SUBJECTS_LYCEE.map((subject, i) => (
+            {studentLycee.map((subject, i) => (
               <SubjectCard
-                key={subject.id} {...subject} index={i + SUBJECTS_GENERAL.length}
+                key={subject.id} {...subject} index={i + studentGeneral.length}
                 isVisible={visibility[subject.id] !== false}
                 onClick={() => handleStudentSubjectClick(subject)}
                 onManageContent={() => handleStudentSubjectClick(subject)}

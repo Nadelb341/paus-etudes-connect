@@ -5,7 +5,7 @@ import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
-import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
+import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SUBJECTS_EXTRA, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { moveToTrash } from "@/lib/trash";
 import { toast } from "sonner";
@@ -41,7 +41,7 @@ interface HomeworkItem {
 }
 interface Completion { homework_id: string; user_id: string; completed: boolean; }
 
-const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE];
+const ALL_SUBJECTS = [...SUBJECTS_GENERAL, ...SUBJECTS_LYCEE, ...SUBJECTS_EXTRA];
 
 // Formate un montant en euros : entier → "13€", décimal → "19.50€"
 const formatEur = (n: number): string => {

@@ -1,0 +1,2425 @@
+[
+ {
+  "level": "CP",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Langage oral",
+    "chapters": [
+     "Écouter et comprendre une histoire lue par l'adulte",
+     "Raconter une histoire entendue dans l'ordre",
+     "Prendre la parole devant la classe en articulant",
+     "Participer à un échange en respectant les tours de parole",
+     "Dire de mémoire une comptine ou un poème",
+     "Décrire une image avec des phrases complètes"
+    ]
+   },
+   {
+    "title": "Conscience phonologique",
+    "chapters": [
+     "Découper un mot en syllabes orales",
+     "Repérer un son dans un mot entendu",
+     "Localiser un son au début, au milieu ou à la fin d'un mot",
+     "Trouver des mots qui riment",
+     "Fusionner des sons pour former une syllabe",
+     "Supprimer ou ajouter une syllabe dans un mot"
+    ]
+   },
+   {
+    "title": "Code alphabétique : les lettres et les sons",
+    "chapters": [
+     "Connaître le nom des lettres de l'alphabet",
+     "Reconnaître les lettres en capitales, en script et en cursive",
+     "Les voyelles a, e, i, o, u, y et leurs sons",
+     "Les consonnes qui chantent : l, m, r, s, f, v, j, ch, n",
+     "Les consonnes qui claquent : p, b, t, d, c, g",
+     "Les sons ou, on, an/en, in, oi",
+     "Les sons è, é, eu et leurs différentes écritures",
+     "Les graphies complexes : au, eau, ai, ei, et, er, ez",
+     "Les lettres qui changent de son : c/ç, g/ge/gu, s/ss",
+     "Les sons gn, ill, ail, eil, euil, ouille",
+     "Les lettres muettes en fin de mot"
+    ]
+   },
+   {
+    "title": "Lecture : déchiffrage et fluence",
+    "chapters": [
+     "Lire des syllabes simples (consonne + voyelle)",
+     "Lire des syllabes inversées et complexes",
+     "Lire des mots réguliers en combinant les syllabes",
+     "Reconnaître rapidement les mots outils fréquents",
+     "Lire une phrase à voix haute en respectant la ponctuation",
+     "Lire un court texte avec fluidité",
+     "S'entraîner à lire plus vite et sans erreur"
+    ]
+   },
+   {
+    "title": "Compréhension de lecture",
+    "chapters": [
+     "Comprendre une phrase lue seul",
+     "Retrouver les personnages, le lieu et le moment d'une histoire",
+     "Répondre à des questions sur un texte lu",
+     "Remettre dans l'ordre les étapes d'une histoire",
+     "Faire le lien entre un texte et une illustration",
+     "Comprendre une consigne écrite simple",
+     "Imaginer la suite d'une histoire"
+    ]
+   },
+   {
+    "title": "Écriture : geste et copie",
+    "chapters": [
+     "Bien tenir son crayon et se placer pour écrire",
+     "Tracer les lettres rondes et les lettres à boucles en cursive",
+     "Écrire les lettres attachées et enchaîner les liaisons",
+     "Écrire les majuscules en cursive",
+     "Copier un mot puis une phrase sans erreur",
+     "Présenter son travail proprement sur la ligne"
+    ]
+   },
+   {
+    "title": "Écriture : encoder et produire",
+    "chapters": [
+     "Écrire une syllabe ou un mot dicté",
+     "Écrire des mots en s'aidant des sons entendus",
+     "Écrire une phrase dictée",
+     "Écrire une phrase pour légender une image",
+     "Rédiger deux ou trois phrases sur un thème",
+     "Relire sa phrase pour vérifier qu'il ne manque rien"
+    ]
+   },
+   {
+    "title": "Vocabulaire",
+    "chapters": [
+     "Ranger des mots par catégories",
+     "Découvrir les mots d'un même thème",
+     "Trouver le contraire d'un mot",
+     "Découvrir les mots de la même famille",
+     "Utiliser des mots précis pour dire ce que l'on ressent"
+    ]
+   },
+   {
+    "title": "Grammaire et orthographe",
+    "chapters": [
+     "Reconnaître une phrase : majuscule et point",
+     "Les signes de ponctuation : point, point d'interrogation, point d'exclamation",
+     "Distinguer le nom et le verbe",
+     "Le déterminant devant le nom : un, une, le, la, les",
+     "Le masculin et le féminin des noms",
+     "Le singulier et le pluriel : le s du pluriel",
+     "Identifier qui fait l'action dans une phrase",
+     "Écrire sans erreur les mots outils les plus fréquents"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CP",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Les nombres jusqu'à 100",
+    "chapters": [
+     "Dénombrer une collection jusqu'à 10",
+     "Lire et écrire les nombres jusqu'à 20",
+     "Compter de 1 en 1 et de 10 en 10 jusqu'à 100",
+     "Les dizaines et les unités",
+     "Lire et écrire les nombres jusqu'à 100 en chiffres",
+     "Écrire les nombres en lettres jusqu'à 100",
+     "Les nombres de 60 à 100 : soixante-dix, quatre-vingts, quatre-vingt-dix",
+     "Placer des nombres sur une droite graduée",
+     "Comparer et ranger des nombres jusqu'à 100",
+     "Encadrer un nombre et trouver le nombre qui suit ou qui précède"
+    ]
+   },
+   {
+    "title": "Décomposer les nombres",
+    "chapters": [
+     "Les décompositions des nombres jusqu'à 10",
+     "Les compléments à 10",
+     "Le double et la moitié des petits nombres",
+     "Décomposer un nombre en dizaines et unités",
+     "Utiliser la monnaie pour représenter un nombre"
+    ]
+   },
+   {
+    "title": "Calcul : addition et soustraction",
+    "chapters": [
+     "Comprendre le sens de l'addition : ajouter, réunir",
+     "Comprendre le sens de la soustraction : enlever, chercher l'écart",
+     "Mémoriser les tables d'addition",
+     "Calculer mentalement des sommes et des différences simples",
+     "Ajouter ou retirer une dizaine",
+     "Calculer en ligne avec des nombres jusqu'à 100",
+     "Poser une addition sans retenue en colonnes"
+    ]
+   },
+   {
+    "title": "Résoudre des problèmes",
+    "chapters": [
+     "Comprendre l'énoncé d'un problème",
+     "Résoudre un problème d'ajout ou de retrait",
+     "Résoudre un problème de réunion de deux collections",
+     "Résoudre un problème de comparaison",
+     "Résoudre un problème de partage ou de groupements par manipulation",
+     "Représenter un problème par un schéma"
+    ]
+   },
+   {
+    "title": "Grandeurs et mesures",
+    "chapters": [
+     "Comparer des longueurs",
+     "Mesurer une longueur avec une règle en centimètres",
+     "Comparer des masses avec une balance",
+     "Se repérer dans la journée et dans la semaine",
+     "Lire l'heure juste sur une horloge",
+     "Utiliser les pièces et les billets en euros"
+    ]
+   },
+   {
+    "title": "Espace et géométrie",
+    "chapters": [
+     "Se repérer dans l'espace : devant, derrière, à gauche, à droite",
+     "Se repérer et coder un déplacement sur un quadrillage",
+     "Reconnaître le carré, le rectangle, le triangle et le cercle",
+     "Reproduire une figure sur un quadrillage",
+     "Tracer un trait droit avec une règle",
+     "Reconnaître le cube et quelques solides",
+     "Repérer un axe de symétrie dans une image"
+    ]
+   },
+   {
+    "title": "Organiser des données",
+    "chapters": [
+     "Lire un tableau simple",
+     "Compléter un tableau à double entrée",
+     "Lire un graphique en bâtons très simple"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CP",
+  "subject": "questionner-le-monde",
+  "themes": [
+   {
+    "title": "Le vivant",
+    "chapters": [
+     "Distinguer le vivant du non-vivant",
+     "Les besoins des plantes pour pousser",
+     "Observer la germination d'une graine",
+     "Les besoins des animaux : se nourrir, se protéger",
+     "La naissance, la croissance et la mort d'un être vivant",
+     "Les animaux de la classe et de l'école"
+    ]
+   },
+   {
+    "title": "Le corps et la santé",
+    "chapters": [
+     "Les parties du corps humain",
+     "Les cinq sens",
+     "L'hygiène : se laver les mains et les dents",
+     "Bien manger : les repas de la journée",
+     "L'importance du sommeil",
+     "Bouger pour être en bonne santé"
+    ]
+   },
+   {
+    "title": "La matière et les objets",
+    "chapters": [
+     "Les états de l'eau : solide et liquide",
+     "Observer la fonte de la glace",
+     "Trier les objets selon la matière",
+     "Fabriquer un objet simple en suivant une fiche",
+     "Utiliser les objets et les appareils électriques avec prudence",
+     "Découvrir le clavier et la souris de l'ordinateur"
+    ]
+   },
+   {
+    "title": "Se situer dans l'espace",
+    "chapters": [
+     "Se repérer dans la classe et dans l'école",
+     "Lire un plan simple de la classe",
+     "Découvrir le quartier ou le village",
+     "Les paysages proches : ville et campagne",
+     "Découvrir une maquette et une photographie aérienne"
+    ]
+   },
+   {
+    "title": "Se situer dans le temps",
+    "chapters": [
+     "Les moments de la journée",
+     "Les jours de la semaine",
+     "Les mois de l'année et le calendrier",
+     "Les saisons",
+     "Avant, maintenant, après : se repérer dans le temps",
+     "Retracer les étapes de sa vie"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CP",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Se présenter et saluer",
+    "chapters": [
+     "Dire bonjour et au revoir en anglais",
+     "Dire son prénom",
+     "Dire son âge",
+     "Demander comment ça va et répondre",
+     "Les formules de politesse : please, thank you"
+    ]
+   },
+   {
+    "title": "Les premiers mots",
+    "chapters": [
+     "Les couleurs",
+     "Les nombres de 1 à 10",
+     "Les animaux familiers",
+     "Les fruits",
+     "Les parties du visage",
+     "Les objets de la classe"
+    ]
+   },
+   {
+    "title": "Comprendre et réagir",
+    "chapters": [
+     "Comprendre les consignes de la classe",
+     "Montrer une image en réponse à une question",
+     "Dire ce que l'on aime et ce que l'on n'aime pas"
+    ]
+   },
+   {
+    "title": "Chants, comptines et culture",
+    "chapters": [
+     "Chanter une comptine en anglais",
+     "Mimer une chanson avec des gestes",
+     "Découvrir les fêtes anglophones : Halloween, Christmas",
+     "Écouter un album en anglais"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CP",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Respecter autrui",
+    "chapters": [
+     "Respecter ses camarades et les adultes de l'école",
+     "Les règles de politesse",
+     "Exprimer ses émotions avec des mots",
+     "Écouter l'autre et accepter les différences",
+     "Refuser la moquerie et le harcèlement"
+    ]
+   },
+   {
+    "title": "Les règles de la vie collective",
+    "chapters": [
+     "Pourquoi il y a des règles en classe",
+     "Le règlement de la classe et de l'école",
+     "Les droits et les devoirs de l'élève",
+     "Prendre soin du matériel et des lieux communs"
+    ]
+   },
+   {
+    "title": "Coopérer et s'engager",
+    "chapters": [
+     "Travailler à deux ou en groupe",
+     "Prendre une responsabilité dans la classe",
+     "Aider un camarade"
+    ]
+   },
+   {
+    "title": "Les symboles de la République",
+    "chapters": [
+     "Le drapeau bleu, blanc, rouge",
+     "La devise : Liberté, Égalité, Fraternité",
+     "Découvrir La Marseillaise"
+    ]
+   },
+   {
+    "title": "Sécurité et prévention",
+    "chapters": [
+     "Les dangers de la maison",
+     "Traverser la rue en sécurité",
+     "Les numéros d'urgence et alerter un adulte"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CP",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "Le dessin",
+    "chapters": [
+     "Dessiner pour raconter une histoire",
+     "Dessiner d'après observation",
+     "Utiliser crayons, feutres et craies grasses",
+     "Remplir une surface avec des motifs"
+    ]
+   },
+   {
+    "title": "La couleur",
+    "chapters": [
+     "Les couleurs primaires",
+     "Mélanger les couleurs pour en obtenir de nouvelles",
+     "Peindre avec un pinceau, une éponge ou les doigts",
+     "Les couleurs chaudes et les couleurs froides"
+    ]
+   },
+   {
+    "title": "Formes, volumes et matières",
+    "chapters": [
+     "Découper, déchirer et coller : le collage",
+     "Modeler avec de la pâte ou de l'argile",
+     "Assembler des objets pour créer un volume",
+     "Utiliser des matériaux de récupération"
+    ]
+   },
+   {
+    "title": "Regarder les œuvres",
+    "chapters": [
+     "Observer et décrire une œuvre d'art",
+     "Découvrir un artiste et sa manière de créer",
+     "Dire ce que l'on ressent devant une œuvre",
+     "Présenter sa production à la classe"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CP",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Chanter",
+    "chapters": [
+     "Chanter une comptine en chœur",
+     "Chanter juste en écoutant les autres",
+     "Mémoriser les paroles d'un chant",
+     "Respirer et bien se tenir pour chanter"
+    ]
+   },
+   {
+    "title": "Écouter",
+    "chapters": [
+     "Reconnaître des bruits et des sons du quotidien",
+     "Distinguer un son aigu et un son grave",
+     "Distinguer un son fort et un son doux",
+     "Distinguer un son long et un son court",
+     "Reconnaître quelques instruments à l'écoute"
+    ]
+   },
+   {
+    "title": "Rythme et instruments",
+    "chapters": [
+     "Frapper une pulsation régulière",
+     "Reproduire un rythme simple",
+     "Jouer avec des percussions corporelles",
+     "Utiliser de petits instruments de musique"
+    ]
+   },
+   {
+    "title": "Créer et partager",
+    "chapters": [
+     "Inventer une petite musique avec sa voix",
+     "Bouger et danser sur une musique",
+     "Exprimer ce que l'on ressent en écoutant une musique"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE1",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Langage oral",
+    "chapters": [
+     "Écouter un texte lu et en dégager l'essentiel",
+     "Raconter une histoire en utilisant des mots de liaison",
+     "Présenter un exposé court à la classe",
+     "Donner son avis et le justifier",
+     "Réciter un poème de façon expressive",
+     "Lire à voix haute devant un public"
+    ]
+   },
+   {
+    "title": "Lecture : décoder et lire avec fluidité",
+    "chapters": [
+     "Consolider les correspondances entre lettres et sons",
+     "Lire les mots contenant des graphies complexes",
+     "Lire des mots longs et inconnus",
+     "Lire un texte de façon fluide et expressive",
+     "Mesurer et améliorer sa vitesse de lecture"
+    ]
+   },
+   {
+    "title": "Compréhension de lecture",
+    "chapters": [
+     "Identifier les personnages, les lieux et les époques",
+     "Comprendre les substituts : il, elle, le personnage…",
+     "Repérer les étapes d'un récit",
+     "Faire des inférences : comprendre ce qui n'est pas écrit",
+     "Lire et comprendre un texte documentaire",
+     "Lire et suivre une recette ou une règle de jeu",
+     "Lire et comprendre un poème",
+     "Découvrir les contes traditionnels"
+    ]
+   },
+   {
+    "title": "Écriture et rédaction",
+    "chapters": [
+     "Écrire en cursive avec aisance et régularité",
+     "Copier un texte court sans erreur",
+     "Écrire une phrase correcte et la relire",
+     "Rédiger un court texte de quelques lignes",
+     "Écrire la suite d'une histoire",
+     "Améliorer son texte avec l'aide de l'adulte"
+    ]
+   },
+   {
+    "title": "Vocabulaire",
+    "chapters": [
+     "L'ordre alphabétique",
+     "Chercher un mot dans le dictionnaire",
+     "Les familles de mots",
+     "Les synonymes",
+     "Les contraires",
+     "Le sens d'un mot selon le contexte",
+     "Les préfixes et les suffixes simples"
+    ]
+   },
+   {
+    "title": "Grammaire : la phrase",
+    "chapters": [
+     "La phrase et la ponctuation",
+     "La phrase déclarative, interrogative et exclamative",
+     "La phrase affirmative et la phrase négative",
+     "Identifier le verbe dans une phrase",
+     "Identifier le sujet du verbe",
+     "Le nom commun et le nom propre",
+     "Le déterminant, le nom et l'adjectif",
+     "Le groupe nominal"
+    ]
+   },
+   {
+    "title": "Conjugaison",
+    "chapters": [
+     "Passé, présent, futur : se repérer dans le temps",
+     "L'infinitif du verbe",
+     "Les pronoms personnels sujets",
+     "Le présent des verbes en -er",
+     "Le présent des verbes être, avoir, aller, faire, dire, venir",
+     "Le futur des verbes en -er, être et avoir",
+     "L'imparfait des verbes en -er, être et avoir",
+     "Le passé composé des verbes en -er avec avoir"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "Le pluriel des noms en -s",
+     "Le pluriel des noms en -x",
+     "Le féminin des noms et des adjectifs",
+     "Les accords dans le groupe nominal",
+     "L'accord du verbe avec le sujet",
+     "Les homophones a / à",
+     "Les homophones et / est",
+     "Les homophones son / sont et on / ont",
+     "La lettre m devant m, b et p",
+     "Écrire sans erreur les mots fréquents"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE1",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Les nombres jusqu'à 1 000",
+    "chapters": [
+     "Les centaines, les dizaines et les unités",
+     "Lire et écrire les nombres jusqu'à 1 000 en chiffres",
+     "Écrire les nombres en lettres jusqu'à 1 000",
+     "Décomposer un nombre de trois chiffres",
+     "Comparer et ranger des nombres jusqu'à 1 000",
+     "Encadrer un nombre entre deux dizaines ou deux centaines",
+     "Placer des nombres sur une droite graduée",
+     "Le double et la moitié"
+    ]
+   },
+   {
+    "title": "Calcul mental",
+    "chapters": [
+     "Mémoriser les tables d'addition",
+     "Les compléments à la dizaine et à 100",
+     "Ajouter et soustraire 10 ou 100",
+     "Ajouter et soustraire des dizaines entières",
+     "Mémoriser les tables de multiplication par 2, 5 et 10",
+     "Calculer en ligne en décomposant les nombres"
+    ]
+   },
+   {
+    "title": "Calcul posé",
+    "chapters": [
+     "Poser une addition sans retenue",
+     "Additionner des nombres à deux chiffres avec retenue",
+     "Additionner des nombres à trois chiffres avec retenue",
+     "Poser une soustraction sans retenue",
+     "Poser une soustraction avec retenue",
+     "Vérifier un calcul avec un ordre de grandeur"
+    ]
+   },
+   {
+    "title": "Multiplication et division",
+    "chapters": [
+     "Comprendre la multiplication comme une addition répétée",
+     "Utiliser le signe × et écrire une multiplication",
+     "Construire les tables de multiplication par 3 et 4",
+     "Multiplier un nombre par 10",
+     "Partager équitablement une quantité",
+     "Faire des groupements et trouver le nombre de groupes"
+    ]
+   },
+   {
+    "title": "Résoudre des problèmes",
+    "chapters": [
+     "Résoudre un problème additif ou soustractif",
+     "Résoudre un problème de comparaison : combien de plus, combien de moins",
+     "Résoudre un problème multiplicatif",
+     "Résoudre un problème de partage",
+     "Résoudre un problème en plusieurs étapes",
+     "Utiliser un schéma en barres pour résoudre un problème"
+    ]
+   },
+   {
+    "title": "Grandeurs et mesures",
+    "chapters": [
+     "Mesurer en centimètres et en mètres",
+     "Convertir des mètres en centimètres",
+     "Comparer et mesurer des masses en grammes et kilogrammes",
+     "Comparer et mesurer des contenances en litres",
+     "Lire l'heure : heures et demi-heures",
+     "Les jours, les semaines, les mois et l'année",
+     "Calculer avec la monnaie : euros et centimes"
+    ]
+   },
+   {
+    "title": "Espace et géométrie",
+    "chapters": [
+     "Se repérer et se déplacer sur un plan ou un quadrillage",
+     "Reconnaître et nommer le carré, le rectangle et le triangle",
+     "Identifier un angle droit avec une équerre",
+     "Tracer un carré et un rectangle sur quadrillage",
+     "Tracer un cercle avec un compas",
+     "Reconnaître le cube, le pavé, la pyramide et la boule",
+     "Compléter une figure par symétrie"
+    ]
+   },
+   {
+    "title": "Organiser des données",
+    "chapters": [
+     "Lire et compléter un tableau",
+     "Lire un graphique en barres",
+     "Construire un tableau à partir d'informations"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE1",
+  "subject": "questionner-le-monde",
+  "themes": [
+   {
+    "title": "Le vivant",
+    "chapters": [
+     "Les caractéristiques du vivant : naître, grandir, se reproduire, mourir",
+     "Le cycle de vie d'une plante",
+     "Le cycle de vie d'un animal",
+     "Le régime alimentaire des animaux",
+     "Les animaux et leur milieu de vie",
+     "Les chaînes alimentaires simples"
+    ]
+   },
+   {
+    "title": "Le corps humain et la santé",
+    "chapters": [
+     "La croissance de l'enfant",
+     "Les dents et leur rôle",
+     "L'alimentation équilibrée : les familles d'aliments",
+     "Le sommeil et les rythmes de vie",
+     "Les bienfaits de l'activité physique",
+     "Les dangers des écrans pour la santé"
+    ]
+   },
+   {
+    "title": "La matière",
+    "chapters": [
+     "Les trois états de l'eau",
+     "Les changements d'état : fusion et solidification",
+     "L'air existe : le mettre en évidence",
+     "Mélanger et dissoudre dans l'eau",
+     "Trier les déchets selon leur matière"
+    ]
+   },
+   {
+    "title": "Les objets et l'électricité",
+    "chapters": [
+     "Comment fonctionnent les objets du quotidien",
+     "Réaliser un circuit électrique simple avec une pile et une ampoule",
+     "Les dangers de l'électricité",
+     "Découvrir l'ordinateur et ses usages"
+    ]
+   },
+   {
+    "title": "Se situer dans l'espace",
+    "chapters": [
+     "Se repérer sur un plan",
+     "Lire une légende et utiliser des symboles",
+     "Les différents espaces : la ville, la campagne, la montagne, la mer",
+     "Situer sa commune sur une carte de France",
+     "Le globe terrestre et le planisphère : continents et océans"
+    ]
+   },
+   {
+    "title": "Se situer dans le temps",
+    "chapters": [
+     "Le calendrier et l'année",
+     "La frise chronologique",
+     "L'arbre généalogique et les générations",
+     "Comparer la vie d'hier et la vie d'aujourd'hui",
+     "Les traces du passé : objets, photos, monuments"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE1",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Se présenter et parler de soi",
+    "chapters": [
+     "Se présenter : nom, âge, lieu d'habitation",
+     "Présenter sa famille",
+     "Décrire ses sentiments : happy, sad, tired",
+     "Dire ce que l'on aime : I like, I don't like"
+    ]
+   },
+   {
+    "title": "Le vocabulaire du quotidien",
+    "chapters": [
+     "Les nombres de 1 à 20",
+     "Les jours de la semaine",
+     "Les vêtements",
+     "Les parties du corps",
+     "La nourriture et les boissons",
+     "Les animaux de la ferme et du zoo"
+    ]
+   },
+   {
+    "title": "Communiquer en classe",
+    "chapters": [
+     "Comprendre et utiliser les consignes de la classe",
+     "Poser une question simple et y répondre",
+     "Demander quelque chose poliment",
+     "Décrire une image avec des mots simples"
+    ]
+   },
+   {
+    "title": "Culture et chansons",
+    "chapters": [
+     "Chanter des chansons traditionnelles anglaises",
+     "Découvrir le Royaume-Uni et son drapeau",
+     "Les fêtes : Thanksgiving, Easter, Bonfire Night",
+     "Écouter et comprendre une histoire courte"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE1",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Respecter autrui",
+    "chapters": [
+     "Identifier et exprimer ses émotions",
+     "Respecter la diversité des personnes",
+     "L'égalité entre les filles et les garçons",
+     "Lutter contre les moqueries et le harcèlement",
+     "Régler un conflit par la parole"
+    ]
+   },
+   {
+    "title": "Les règles et le droit",
+    "chapters": [
+     "Les règles de la classe et de l'école",
+     "La sanction et la réparation",
+     "Les droits de l'enfant",
+     "Différencier ce qui est permis et ce qui est interdit"
+    ]
+   },
+   {
+    "title": "S'engager dans la vie collective",
+    "chapters": [
+     "Coopérer dans un travail de groupe",
+     "Les délégués et le conseil d'élèves",
+     "Débattre en respectant la parole des autres",
+     "Protéger l'environnement à l'école"
+    ]
+   },
+   {
+    "title": "La République française",
+    "chapters": [
+     "Les symboles de la République : drapeau, devise, hymne, Marianne",
+     "Le 14 Juillet, fête nationale",
+     "La mairie et le maire"
+    ]
+   },
+   {
+    "title": "Sécurité et prévention",
+    "chapters": [
+     "Être piéton et passager en sécurité",
+     "Les gestes de premiers secours : alerter",
+     "Se protéger sur Internet"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE1",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "Le dessin et le graphisme",
+    "chapters": [
+     "Dessiner un personnage en mouvement",
+     "Varier les traits : épais, fins, pointillés",
+     "Dessiner d'après observation d'un objet",
+     "Inventer un univers imaginaire"
+    ]
+   },
+   {
+    "title": "La couleur et la peinture",
+    "chapters": [
+     "Les couleurs primaires et secondaires",
+     "Éclaircir et foncer une couleur",
+     "Peindre en aplat ou par touches",
+     "Exprimer une émotion avec les couleurs"
+    ]
+   },
+   {
+    "title": "Formes et volumes",
+    "chapters": [
+     "Réaliser un collage avec différents papiers",
+     "Fabriquer une sculpture en volume",
+     "Transformer un objet du quotidien",
+     "Créer une empreinte et un tampon"
+    ]
+   },
+   {
+    "title": "Images et œuvres",
+    "chapters": [
+     "Observer une photographie et la décrire",
+     "Découvrir des œuvres de différentes époques",
+     "Comparer deux œuvres d'art",
+     "Parler de sa production et de celle des autres"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE1",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Chanter",
+    "chapters": [
+     "Chanter avec une bonne posture et une bonne respiration",
+     "Chanter en respectant le tempo",
+     "Chanter en canon simple",
+     "Interpréter un chant avec des nuances"
+    ]
+   },
+   {
+    "title": "Écouter et comparer",
+    "chapters": [
+     "Reconnaître les familles d'instruments",
+     "Repérer le tempo : lent ou rapide",
+     "Repérer les nuances : piano et forte",
+     "Repérer un refrain et un couplet",
+     "Découvrir des musiques d'autres pays"
+    ]
+   },
+   {
+    "title": "Rythme et pratique instrumentale",
+    "chapters": [
+     "Garder une pulsation en groupe",
+     "Lire et jouer un rythme codé simple",
+     "Accompagner un chant avec des percussions"
+    ]
+   },
+   {
+    "title": "Créer et échanger",
+    "chapters": [
+     "Inventer un paysage sonore",
+     "Enregistrer et réécouter sa production",
+     "Exprimer ses goûts musicaux avec des mots précis"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE2",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Langage oral",
+    "chapters": [
+     "Écouter et reformuler un message",
+     "Raconter une histoire de façon structurée",
+     "Présenter un exposé avec un support",
+     "Argumenter dans un débat",
+     "Mettre en voix un texte ou un poème",
+     "Jouer une scène de théâtre"
+    ]
+   },
+   {
+    "title": "Lecture et fluence",
+    "chapters": [
+     "Lire avec fluidité des mots complexes",
+     "Lire un texte à voix haute avec expression",
+     "Respecter les groupes de souffle et la ponctuation",
+     "Améliorer sa vitesse de lecture"
+    ]
+   },
+   {
+    "title": "Compréhension de lecture",
+    "chapters": [
+     "Comprendre un récit et ses étapes",
+     "Identifier le narrateur et les personnages",
+     "Comprendre les pensées et les sentiments des personnages",
+     "Faire des inférences dans un texte",
+     "Lire et comprendre un texte documentaire",
+     "Lire une bande dessinée",
+     "Lire et comprendre une fable",
+     "Lire un roman court en entier"
+    ]
+   },
+   {
+    "title": "Écriture et rédaction",
+    "chapters": [
+     "Écrire une phrase complexe correcte",
+     "Rédiger un récit court avec un début, un milieu et une fin",
+     "Écrire un portrait",
+     "Écrire une lettre ou un message",
+     "Écrire un poème",
+     "Relire et améliorer son texte avec une grille"
+    ]
+   },
+   {
+    "title": "Vocabulaire",
+    "chapters": [
+     "Utiliser le dictionnaire",
+     "Les familles de mots et le radical",
+     "Les préfixes et les suffixes",
+     "Les synonymes et les antonymes",
+     "Les mots génériques et les mots spécifiques",
+     "Le sens propre et le sens figuré",
+     "Les homonymes"
+    ]
+   },
+   {
+    "title": "Grammaire",
+    "chapters": [
+     "Les types de phrases",
+     "La forme négative",
+     "Le verbe et son sujet",
+     "Le sujet inversé et le sujet éloigné",
+     "Les compléments du verbe",
+     "Les compléments de phrase",
+     "Le groupe nominal : déterminant, nom, adjectif",
+     "Les classes de mots : nom, verbe, adjectif, déterminant, pronom",
+     "Les pronoms personnels"
+    ]
+   },
+   {
+    "title": "Conjugaison",
+    "chapters": [
+     "Les trois groupes de verbes",
+     "Le présent des verbes du 1er et du 2e groupe",
+     "Le présent des verbes du 3e groupe fréquents",
+     "Le futur simple",
+     "L'imparfait",
+     "Le passé composé avec avoir",
+     "Le passé composé avec être",
+     "Choisir le bon temps dans un récit"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "Le pluriel des noms et des adjectifs",
+     "Le féminin des noms et des adjectifs",
+     "Les accords dans le groupe nominal",
+     "L'accord du verbe avec le sujet",
+     "L'accord du participe passé avec être",
+     "Les homophones a / à, et / est, son / sont, on / ont",
+     "Les homophones ou / où, ce / se, ces / ses",
+     "Les mots invariables fréquents",
+     "Les lettres muettes et les consonnes doubles"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE2",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Les nombres jusqu'à 10 000",
+    "chapters": [
+     "Les milliers, centaines, dizaines et unités",
+     "Lire et écrire les nombres jusqu'à 10 000",
+     "Décomposer un nombre de quatre chiffres",
+     "Comparer et ranger des nombres jusqu'à 10 000",
+     "Encadrer et arrondir un nombre",
+     "Placer des nombres sur une droite graduée"
+    ]
+   },
+   {
+    "title": "Les fractions",
+    "chapters": [
+     "Découvrir les fractions : partager une unité",
+     "Lire et écrire une fraction simple",
+     "Représenter une fraction par un dessin",
+     "Comparer une fraction à l'unité",
+     "Placer une fraction sur une droite graduée"
+    ]
+   },
+   {
+    "title": "Calcul mental",
+    "chapters": [
+     "Mémoriser toutes les tables de multiplication",
+     "Multiplier par 10, 100 et 1 000",
+     "Calculer des doubles et des moitiés",
+     "Ajouter et soustraire des nombres ronds",
+     "Utiliser les propriétés du calcul pour calculer vite"
+    ]
+   },
+   {
+    "title": "Calcul posé",
+    "chapters": [
+     "Poser et calculer une addition de grands nombres",
+     "Poser et calculer une soustraction avec retenue",
+     "Poser une multiplication par un nombre à un chiffre",
+     "Poser une multiplication par un nombre à deux chiffres",
+     "Comprendre la division : partage et groupement",
+     "Trouver le quotient et le reste d'une division simple"
+    ]
+   },
+   {
+    "title": "Résoudre des problèmes",
+    "chapters": [
+     "Résoudre un problème additif ou soustractif",
+     "Résoudre un problème multiplicatif",
+     "Résoudre un problème de division",
+     "Résoudre un problème en plusieurs étapes",
+     "Trier les informations utiles d'un énoncé",
+     "Représenter un problème avec un schéma en barres"
+    ]
+   },
+   {
+    "title": "Grandeurs et mesures",
+    "chapters": [
+     "Mesurer et convertir les longueurs : km, m, cm, mm",
+     "Mesurer et convertir les masses : kg, g",
+     "Mesurer et convertir les contenances : L, dL, cL",
+     "Lire l'heure et calculer une durée",
+     "Les unités de temps : heure, minute, seconde",
+     "Calculer le périmètre d'un polygone",
+     "Calculer avec la monnaie"
+    ]
+   },
+   {
+    "title": "Espace et géométrie",
+    "chapters": [
+     "Se repérer sur un quadrillage avec des coordonnées",
+     "Programmer un déplacement",
+     "Reconnaître et tracer des droites perpendiculaires",
+     "Le carré, le rectangle et le losange",
+     "Les triangles : triangle rectangle, isocèle et équilatéral",
+     "Tracer un cercle : centre et rayon",
+     "Reproduire une figure complexe",
+     "Compléter une figure par symétrie axiale",
+     "Les solides : faces, arêtes et sommets"
+    ]
+   },
+   {
+    "title": "Organiser des données",
+    "chapters": [
+     "Lire et construire un tableau",
+     "Lire et construire un graphique en barres",
+     "Extraire des informations d'un document"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE2",
+  "subject": "questionner-le-monde",
+  "themes": [
+   {
+    "title": "Le vivant",
+    "chapters": [
+     "Classer les êtres vivants",
+     "La reproduction des animaux",
+     "La reproduction des plantes : fleur, fruit, graine",
+     "Les relations alimentaires entre êtres vivants",
+     "Les animaux et les saisons : migration, hibernation",
+     "Préserver la biodiversité"
+    ]
+   },
+   {
+    "title": "Le corps humain et la santé",
+    "chapters": [
+     "Le squelette et les articulations",
+     "Les muscles et le mouvement",
+     "La digestion",
+     "La respiration",
+     "L'équilibre alimentaire",
+     "Les règles d'hygiène et la prévention des maladies"
+    ]
+   },
+   {
+    "title": "La matière",
+    "chapters": [
+     "Les états de la matière : solide, liquide, gaz",
+     "Les changements d'état de l'eau",
+     "Le cycle de l'eau",
+     "Les mélanges et les solutions",
+     "Les matériaux et leurs propriétés"
+    ]
+   },
+   {
+    "title": "Les objets techniques",
+    "chapters": [
+     "Les circuits électriques : conducteurs et isolants",
+     "Fabriquer un objet qui roule",
+     "Les objets techniques et leur fonction",
+     "Programmer un robot ou un personnage à l'écran",
+     "Utiliser un traitement de texte"
+    ]
+   },
+   {
+    "title": "Se situer dans l'espace",
+    "chapters": [
+     "Lire une carte et utiliser l'échelle",
+     "Les points cardinaux",
+     "La France : régions, fleuves et montagnes",
+     "Les continents et les océans",
+     "Comparer des modes de vie dans le monde"
+    ]
+   },
+   {
+    "title": "Se situer dans le temps",
+    "chapters": [
+     "La frise chronologique : siècles et millénaires",
+     "Les grandes périodes de l'histoire",
+     "L'évolution des modes de vie : école, transports, habitat",
+     "L'évolution des objets et des techniques",
+     "Les traces du passé dans sa commune"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE2",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Parler de soi et des autres",
+    "chapters": [
+     "Se présenter de façon complète",
+     "Décrire une personne : physique et caractère",
+     "Parler de sa famille et de ses amis",
+     "Dire ce que l'on sait faire : I can"
+    ]
+   },
+   {
+    "title": "Le vocabulaire du quotidien",
+    "chapters": [
+     "Les nombres jusqu'à 100",
+     "Les mois et les saisons",
+     "La météo",
+     "La maison et ses pièces",
+     "Les sports et les loisirs",
+     "Dire l'heure en anglais"
+    ]
+   },
+   {
+    "title": "Communiquer",
+    "chapters": [
+     "Poser des questions avec what, where, who",
+     "Exprimer ses goûts et ses préférences",
+     "Demander et indiquer son chemin simplement",
+     "Lire et écrire des phrases courtes"
+    ]
+   },
+   {
+    "title": "Culture des pays anglophones",
+    "chapters": [
+     "Découvrir Londres",
+     "Découvrir les États-Unis",
+     "Les fêtes et traditions anglophones",
+     "Chansons et comptines traditionnelles"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE2",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Respecter autrui",
+    "chapters": [
+     "Exprimer et comprendre les émotions",
+     "Le respect des différences",
+     "Lutter contre les discriminations",
+     "L'égalité entre les filles et les garçons",
+     "Prévenir le harcèlement"
+    ]
+   },
+   {
+    "title": "Les règles, le droit et la justice",
+    "chapters": [
+     "Les règles de vie et leur utilité",
+     "Les droits et les devoirs de l'enfant",
+     "La Convention internationale des droits de l'enfant",
+     "La loi et la justice"
+    ]
+   },
+   {
+    "title": "S'engager",
+    "chapters": [
+     "Le conseil d'élèves et les délégués",
+     "Débattre et argumenter",
+     "La solidarité et l'entraide",
+     "Agir pour l'environnement"
+    ]
+   },
+   {
+    "title": "La République et la démocratie",
+    "chapters": [
+     "Les symboles de la République",
+     "La commune et le conseil municipal",
+     "Voter : un droit et un devoir du citoyen",
+     "La laïcité à l'école"
+    ]
+   },
+   {
+    "title": "Sécurité et usage du numérique",
+    "chapters": [
+     "Les règles de sécurité à vélo",
+     "Les gestes de premiers secours",
+     "Utiliser Internet de façon responsable",
+     "Vérifier une information"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE2",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "Le dessin",
+    "chapters": [
+     "Dessiner en perspective simple : proche et lointain",
+     "Représenter un personnage et son expression",
+     "Faire une bande dessinée",
+     "Dessiner un paysage"
+    ]
+   },
+   {
+    "title": "La couleur et la peinture",
+    "chapters": [
+     "Le cercle chromatique",
+     "Les nuances et les camaïeux",
+     "Peindre une ambiance",
+     "Utiliser différentes techniques : aquarelle, gouache, pastel"
+    ]
+   },
+   {
+    "title": "Volumes et installations",
+    "chapters": [
+     "Créer une sculpture par assemblage",
+     "Modeler un personnage",
+     "Réaliser une installation dans l'espace",
+     "Jouer avec la lumière et l'ombre"
+    ]
+   },
+   {
+    "title": "Images, numérique et œuvres",
+    "chapters": [
+     "Photographier et cadrer une image",
+     "Transformer une image avec un logiciel simple",
+     "Découvrir les grands mouvements artistiques",
+     "Visiter un musée ou une exposition",
+     "Analyser une œuvre : formes, couleurs, matières"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CE2",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Chanter et interpréter",
+    "chapters": [
+     "Chanter à deux voix",
+     "Chanter en canon",
+     "Interpréter un chant avec des nuances et un tempo",
+     "Chanter dans une autre langue"
+    ]
+   },
+   {
+    "title": "Écouter et analyser",
+    "chapters": [
+     "Reconnaître les instruments de l'orchestre",
+     "Identifier la structure d'une musique",
+     "Repérer les caractéristiques du son : hauteur, durée, intensité, timbre",
+     "Découvrir des œuvres de différentes époques",
+     "Découvrir des musiques du monde"
+    ]
+   },
+   {
+    "title": "Rythme et pratique instrumentale",
+    "chapters": [
+     "Jouer un rythme en groupe",
+     "Lire un codage rythmique",
+     "Accompagner une chanson avec des instruments"
+    ]
+   },
+   {
+    "title": "Créer et partager",
+    "chapters": [
+     "Inventer une courte mélodie",
+     "Créer un accompagnement rythmique",
+     "Préparer un petit spectacle musical",
+     "Débattre de ses goûts musicaux"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Langage oral",
+    "chapters": [
+     "Écouter un document et en prendre des notes simples",
+     "Présenter un exposé structuré",
+     "Participer à un débat en argumentant",
+     "Lire un texte à voix haute de façon expressive",
+     "Réciter un poème en l'interprétant",
+     "Jouer un texte de théâtre"
+    ]
+   },
+   {
+    "title": "Lecture et compréhension",
+    "chapters": [
+     "Lire avec fluidité un texte long",
+     "Comprendre l'implicite d'un texte",
+     "Identifier le narrateur et le point de vue",
+     "Comprendre un texte documentaire et ses illustrations",
+     "Lire un tableau, un schéma ou une carte dans un document",
+     "Résumer un texte lu",
+     "Justifier sa réponse en citant le texte"
+    ]
+   },
+   {
+    "title": "Culture littéraire",
+    "chapters": [
+     "Le conte et ses personnages types",
+     "La fable",
+     "Le récit d'aventure",
+     "La poésie : vers, strophes et rimes",
+     "Le théâtre : dialogues et didascalies",
+     "Le roman jeunesse : lecture suivie"
+    ]
+   },
+   {
+    "title": "Écriture et rédaction",
+    "chapters": [
+     "Écrire lisiblement et rapidement en cursive",
+     "Copier un texte et le mettre en page",
+     "Rédiger un récit avec des paragraphes",
+     "Écrire un dialogue avec la bonne ponctuation",
+     "Décrire un lieu ou un personnage",
+     "Rédiger un texte explicatif court",
+     "Réviser son texte avec une grille de relecture"
+    ]
+   },
+   {
+    "title": "Vocabulaire",
+    "chapters": [
+     "Utiliser le dictionnaire et comprendre un article",
+     "La formation des mots : radical, préfixe, suffixe",
+     "Les familles de mots",
+     "Synonymes, antonymes et homonymes",
+     "Le sens propre et le sens figuré",
+     "Les niveaux de langue",
+     "Les mots génériques et les champs lexicaux"
+    ]
+   },
+   {
+    "title": "Grammaire",
+    "chapters": [
+     "La phrase simple et la phrase complexe",
+     "Les types et les formes de phrases",
+     "Le verbe et son sujet",
+     "Le complément d'objet direct et indirect",
+     "Les compléments circonstanciels",
+     "L'attribut du sujet",
+     "Le groupe nominal et ses expansions",
+     "L'adjectif épithète et le complément du nom",
+     "Les classes de mots : déterminant, pronom, adverbe, préposition, conjonction"
+    ]
+   },
+   {
+    "title": "Conjugaison",
+    "chapters": [
+     "Le présent de l'indicatif des trois groupes",
+     "L'imparfait de l'indicatif",
+     "Le futur simple",
+     "Le passé composé",
+     "Le passé simple aux troisièmes personnes",
+     "Le plus-que-parfait",
+     "L'impératif présent",
+     "Utiliser les temps du récit"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "Les accords dans le groupe nominal",
+     "L'accord du verbe avec le sujet",
+     "L'accord de l'adjectif attribut",
+     "L'accord du participe passé avec être",
+     "Les terminaisons é, er, ez, ait",
+     "Les homophones grammaticaux : a / à, et / est, son / sont, on / ont",
+     "Les homophones ce / se, ces / ses, ou / où, la / là",
+     "Le pluriel des noms en -al, -ail, -eu, -ou",
+     "Les mots invariables"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Les grands nombres",
+    "chapters": [
+     "Lire et écrire les nombres jusqu'au million",
+     "Les classes des unités, des milliers et des millions",
+     "Décomposer un grand nombre",
+     "Comparer et ranger des grands nombres",
+     "Encadrer et arrondir un grand nombre",
+     "Placer des nombres sur une droite graduée"
+    ]
+   },
+   {
+    "title": "Les fractions",
+    "chapters": [
+     "Comprendre et écrire une fraction",
+     "Les fractions simples : demi, tiers, quart",
+     "Repérer une fraction sur une droite graduée",
+     "Comparer une fraction à l'unité",
+     "Décomposer une fraction : partie entière et fraction inférieure à 1",
+     "Les fractions décimales : dixièmes et centièmes",
+     "Ajouter des fractions de même dénominateur"
+    ]
+   },
+   {
+    "title": "Les nombres décimaux",
+    "chapters": [
+     "Passer de la fraction décimale au nombre décimal",
+     "Lire et écrire un nombre décimal",
+     "La valeur des chiffres : dixièmes et centièmes",
+     "Placer un nombre décimal sur une droite graduée",
+     "Comparer et ranger des nombres décimaux",
+     "Encadrer un nombre décimal entre deux entiers"
+    ]
+   },
+   {
+    "title": "Calcul mental et en ligne",
+    "chapters": [
+     "Connaître les tables de multiplication par cœur",
+     "Multiplier un nombre entier par 10, 100 ou 1 000",
+     "Calculer avec des multiples de 25 et de 50",
+     "Trouver les multiples et les diviseurs d'un nombre",
+     "Estimer un ordre de grandeur",
+     "Utiliser une calculatrice à bon escient"
+    ]
+   },
+   {
+    "title": "Calcul posé",
+    "chapters": [
+     "Additionner et soustraire des nombres entiers",
+     "Additionner et soustraire des nombres décimaux",
+     "Multiplier un nombre entier par un nombre à deux ou trois chiffres",
+     "Multiplier un nombre décimal par un nombre entier",
+     "Poser une division euclidienne par un nombre à un chiffre",
+     "Poser une division euclidienne par un nombre à deux chiffres"
+    ]
+   },
+   {
+    "title": "Résoudre des problèmes",
+    "chapters": [
+     "Résoudre un problème additif ou soustractif",
+     "Résoudre un problème de multiplication ou de division",
+     "Résoudre un problème en plusieurs étapes",
+     "Résoudre un problème de proportionnalité simple",
+     "Utiliser un schéma en barres pour modéliser un problème",
+     "Vérifier la vraisemblance d'un résultat"
+    ]
+   },
+   {
+    "title": "Grandeurs et mesures",
+    "chapters": [
+     "Mesurer et convertir des longueurs",
+     "Mesurer et convertir des masses",
+     "Mesurer et convertir des contenances",
+     "Lire l'heure et calculer des durées",
+     "Calculer le périmètre d'un polygone",
+     "Comparer des aires par superposition ou pavage",
+     "Mesurer une aire en comptant des carreaux",
+     "Comparer et reproduire des angles"
+    ]
+   },
+   {
+    "title": "Espace et géométrie",
+    "chapters": [
+     "Se repérer et se déplacer avec un plan ou un logiciel",
+     "Tracer des droites perpendiculaires et parallèles",
+     "Les quadrilatères : carré, rectangle, losange",
+     "Les triangles particuliers",
+     "Le cercle : centre, rayon et diamètre",
+     "Reproduire et construire une figure à partir d'un programme",
+     "La symétrie axiale",
+     "Les solides : cube, pavé droit, prisme, pyramide, cylindre, cône et boule",
+     "Le patron d'un cube et d'un pavé droit"
+    ]
+   },
+   {
+    "title": "Organiser et gérer des données",
+    "chapters": [
+     "Lire et compléter un tableau de données",
+     "Lire et construire un diagramme en barres",
+     "Lire un graphique cartésien",
+     "Reconnaître une situation de proportionnalité"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "Et avant la France ?",
+    "chapters": [
+     "La Préhistoire : les premiers humains",
+     "Le Paléolithique : chasseurs-cueilleurs et art pariétal",
+     "Le Néolithique : les premiers agriculteurs",
+     "Les Celtes et les Gaulois",
+     "La conquête romaine et Vercingétorix",
+     "La Gaule romaine : villes, routes et romanisation",
+     "Le christianisme dans la Gaule romaine",
+     "Les grandes invasions et Clovis",
+     "Charlemagne et l'Empire carolingien"
+    ]
+   },
+   {
+    "title": "Le temps des rois",
+    "chapters": [
+     "La société féodale : seigneurs, paysans et château fort",
+     "L'Église au Moyen Âge",
+     "Louis IX, roi chrétien",
+     "La guerre de Cent Ans et Jeanne d'Arc",
+     "François Ier et la Renaissance",
+     "Les grandes découvertes",
+     "Les guerres de Religion et Henri IV",
+     "Louis XIV, roi absolu, et Versailles"
+    ]
+   },
+   {
+    "title": "Le temps de la Révolution et de l'Empire",
+    "chapters": [
+     "La France à la fin de l'Ancien Régime",
+     "Les Lumières",
+     "1789 : les débuts de la Révolution",
+     "La Déclaration des droits de l'homme et du citoyen",
+     "La fin de la monarchie et la Première République",
+     "Napoléon Bonaparte et l'Empire",
+     "Les héritages de la Révolution et de l'Empire"
+    ]
+   },
+   {
+    "title": "Les outils de l'historien",
+    "chapters": [
+     "La frise chronologique : siècles et millénaires",
+     "Lire et interpréter un document historique",
+     "Distinguer l'histoire et la fiction"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "Découvrir le lieu où j'habite",
+    "chapters": [
+     "Situer sa commune sur différentes cartes",
+     "Lire une carte : titre, légende, échelle, orientation",
+     "Décrire les paysages de sa commune",
+     "Les aménagements et les acteurs de la commune",
+     "Comparer son lieu de vie avec d'autres lieux"
+    ]
+   },
+   {
+    "title": "Se loger, travailler, se cultiver, avoir des loisirs en France",
+    "chapters": [
+     "Les différents types de logement en France",
+     "Les grandes villes de France",
+     "Les espaces ruraux en France",
+     "Les espaces de travail : agriculture, industrie, services",
+     "Les lieux de culture et de loisirs",
+     "Les espaces touristiques en France"
+    ]
+   },
+   {
+    "title": "Consommer en France",
+    "chapters": [
+     "Satisfaire ses besoins en eau",
+     "Satisfaire ses besoins en énergie",
+     "Satisfaire ses besoins alimentaires",
+     "D'où viennent les produits que nous consommons",
+     "Les déchets et le recyclage"
+    ]
+   },
+   {
+    "title": "La France et le monde",
+    "chapters": [
+     "Le territoire français : métropole et outre-mer",
+     "Le relief et les fleuves de France",
+     "Les climats de France",
+     "La France en Europe et dans le monde",
+     "Se repérer sur le globe et le planisphère"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "sciences-techno",
+  "themes": [
+   {
+    "title": "Matière, mouvement, énergie, information",
+    "chapters": [
+     "Les états de la matière : solide, liquide, gaz",
+     "Les changements d'état",
+     "Les mélanges : homogènes et hétérogènes",
+     "Séparer les constituants d'un mélange",
+     "Décrire un mouvement : trajectoire et vitesse",
+     "Les sources et les formes d'énergie",
+     "Les signaux et l'information : lumière, son, électricité"
+    ]
+   },
+   {
+    "title": "Le vivant, sa diversité et ses fonctions",
+    "chapters": [
+     "Classer les êtres vivants",
+     "Le développement des êtres vivants",
+     "Les besoins des plantes vertes",
+     "L'alimentation humaine et l'équilibre alimentaire",
+     "La conservation des aliments",
+     "La digestion",
+     "Les mouvements du corps : os, muscles et articulations"
+    ]
+   },
+   {
+    "title": "Matériaux et objets techniques",
+    "chapters": [
+     "Les familles de matériaux",
+     "Les propriétés des matériaux",
+     "L'évolution d'un objet technique dans le temps",
+     "Concevoir et fabriquer un objet technique",
+     "Le circuit électrique et ses dangers",
+     "Programmer un déplacement avec un logiciel"
+    ]
+   },
+   {
+    "title": "La planète Terre, les êtres vivants dans leur environnement",
+    "chapters": [
+     "La Terre dans le système solaire",
+     "Les mouvements de la Terre : jour, nuit et saisons",
+     "Le relief et les paysages",
+     "Les phénomènes géologiques : volcans et séismes",
+     "Les êtres vivants dans leur milieu",
+     "Les relations entre les êtres vivants",
+     "L'impact de l'homme sur l'environnement"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Parler de soi et de son entourage",
+    "chapters": [
+     "Se présenter et présenter quelqu'un",
+     "Décrire son physique et son caractère",
+     "Parler de sa famille",
+     "Parler de ses goûts et de ses loisirs",
+     "Dire ce que l'on sait faire et ne pas faire"
+    ]
+   },
+   {
+    "title": "La vie quotidienne",
+    "chapters": [
+     "La journée et les activités quotidiennes",
+     "Dire l'heure",
+     "L'école et les matières",
+     "La nourriture et les repas",
+     "Les vêtements et les achats",
+     "La maison et les pièces"
+    ]
+   },
+   {
+    "title": "Grammaire et communication",
+    "chapters": [
+     "Le verbe to be au présent",
+     "Le verbe to have got",
+     "Le présent simple",
+     "Poser des questions avec les mots interrogatifs",
+     "Les prépositions de lieu",
+     "Les adjectifs possessifs"
+    ]
+   },
+   {
+    "title": "Culture des pays anglophones",
+    "chapters": [
+     "Le Royaume-Uni : pays et capitales",
+     "Les traditions britanniques",
+     "Les fêtes du calendrier anglophone",
+     "Lire une histoire ou un album en anglais"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Respecter autrui",
+    "chapters": [
+     "Identifier et gérer ses émotions",
+     "Le respect de soi et des autres",
+     "Lutter contre le racisme et les discriminations",
+     "L'égalité entre les femmes et les hommes",
+     "Prévenir le harcèlement et le cyberharcèlement"
+    ]
+   },
+   {
+    "title": "Les valeurs de la République",
+    "chapters": [
+     "Liberté, égalité, fraternité",
+     "La laïcité",
+     "Les symboles de la République",
+     "La Déclaration des droits de l'homme et du citoyen"
+    ]
+   },
+   {
+    "title": "La règle et le droit",
+    "chapters": [
+     "Les règles de vie collective",
+     "Les droits de l'enfant",
+     "La loi et la justice",
+     "La sanction et la réparation"
+    ]
+   },
+   {
+    "title": "Construire une culture civique",
+    "chapters": [
+     "Débattre en respectant les règles",
+     "La démocratie et le vote",
+     "La commune : maire et conseil municipal",
+     "S'engager pour l'environnement et la solidarité",
+     "Utiliser Internet et les écrans de façon responsable",
+     "Distinguer une information d'une rumeur"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "La représentation du monde",
+    "chapters": [
+     "Dessiner d'après observation",
+     "Représenter l'espace : premier plan et arrière-plan",
+     "Le portrait et l'autoportrait",
+     "Le paysage"
+    ]
+   },
+   {
+    "title": "Couleur, matière et techniques",
+    "chapters": [
+     "Les couleurs complémentaires",
+     "Les effets de matière : texture et relief",
+     "Peindre avec différents outils",
+     "La gravure et l'impression"
+    ]
+   },
+   {
+    "title": "Volume et espace",
+    "chapters": [
+     "La sculpture par modelage et par assemblage",
+     "L'installation et le land art",
+     "La mise en scène d'un objet"
+    ]
+   },
+   {
+    "title": "Images et numérique",
+    "chapters": [
+     "Le cadrage et le point de vue en photographie",
+     "Le collage et le photomontage",
+     "Créer une image avec un outil numérique",
+     "Raconter avec des images : la bande dessinée"
+    ]
+   },
+   {
+    "title": "Histoire des arts",
+    "chapters": [
+     "L'art de la Préhistoire et de l'Antiquité",
+     "L'art du Moyen Âge",
+     "La Renaissance",
+     "Décrire et analyser une œuvre",
+     "Visiter un musée ou un monument"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM1",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Chanter et interpréter",
+    "chapters": [
+     "Chanter juste en groupe",
+     "Chanter à plusieurs voix",
+     "Interpréter un chant avec expression",
+     "Tenir sa partie dans un canon"
+    ]
+   },
+   {
+    "title": "Écouter, comparer, commenter",
+    "chapters": [
+     "Reconnaître les familles d'instruments",
+     "Identifier la forme d'une œuvre : couplet, refrain, thème",
+     "Décrire une musique avec un vocabulaire précis",
+     "Situer une œuvre dans le temps",
+     "Comparer des musiques de styles différents"
+    ]
+   },
+   {
+    "title": "Explorer et imaginer",
+    "chapters": [
+     "Inventer et jouer des rythmes",
+     "Créer une courte pièce musicale",
+     "Utiliser un codage pour noter une création",
+     "Accompagner un chant avec des instruments"
+    ]
+   },
+   {
+    "title": "Échanger et partager",
+    "chapters": [
+     "Préparer un concert de classe",
+     "Exprimer ses émotions face à une musique",
+     "Respecter le travail des autres musiciens"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "francais",
+  "themes": [
+   {
+    "title": "Langage oral",
+    "chapters": [
+     "Écouter un document et en restituer l'essentiel",
+     "Faire un exposé avec un support numérique",
+     "Argumenter et nuancer son point de vue dans un débat",
+     "Lire un texte à voix haute devant un public",
+     "Interpréter un poème ou une scène de théâtre",
+     "Reformuler la parole d'un autre"
+    ]
+   },
+   {
+    "title": "Lecture et compréhension",
+    "chapters": [
+     "Lire et comprendre un texte long",
+     "Comprendre l'implicite et faire des déductions",
+     "Identifier le genre d'un texte",
+     "Comprendre l'organisation d'un texte documentaire",
+     "Croiser plusieurs documents pour s'informer",
+     "Interpréter un texte et débattre de son sens",
+     "Résumer un chapitre ou un texte"
+    ]
+   },
+   {
+    "title": "Culture littéraire",
+    "chapters": [
+     "Le récit d'aventure et le héros",
+     "Le récit de science-fiction",
+     "Les récits mythologiques",
+     "La poésie : images et figures de style",
+     "Le théâtre",
+     "L'autobiographie et le récit de vie",
+     "Le roman policier"
+    ]
+   },
+   {
+    "title": "Écriture et rédaction",
+    "chapters": [
+     "Organiser son texte en paragraphes",
+     "Écrire un récit avec des rebondissements",
+     "Insérer un dialogue ou une description dans un récit",
+     "Rédiger un texte argumentatif court",
+     "Écrire un poème avec des contraintes",
+     "Prendre des notes et rédiger un compte rendu",
+     "Réécrire et améliorer son texte"
+    ]
+   },
+   {
+    "title": "Vocabulaire",
+    "chapters": [
+     "La formation des mots : dérivation et composition",
+     "Les mots d'origine latine et grecque",
+     "Les familles de mots",
+     "La polysémie et le sens propre ou figuré",
+     "Synonymes, antonymes, homonymes et paronymes",
+     "Les niveaux de langue",
+     "Les champs lexicaux et le vocabulaire des émotions"
+    ]
+   },
+   {
+    "title": "Grammaire",
+    "chapters": [
+     "La phrase simple et la phrase complexe : propositions",
+     "Les propositions juxtaposées et coordonnées",
+     "La proposition relative",
+     "Les fonctions : sujet, COD, COI, attribut du sujet",
+     "Les compléments circonstanciels",
+     "Les expansions du nom : adjectif, complément du nom, relative",
+     "Les classes de mots",
+     "Les pronoms personnels compléments",
+     "La voix active et la voix passive"
+    ]
+   },
+   {
+    "title": "Conjugaison",
+    "chapters": [
+     "Les temps simples et les temps composés",
+     "Le présent de l'indicatif",
+     "L'imparfait et le passé simple",
+     "Le futur simple et le futur antérieur",
+     "Le passé composé et le plus-que-parfait",
+     "Le conditionnel présent",
+     "L'impératif présent",
+     "Le présent du subjonctif",
+     "L'emploi des temps dans un récit"
+    ]
+   },
+   {
+    "title": "Orthographe",
+    "chapters": [
+     "Les accords dans le groupe nominal",
+     "L'accord du verbe avec un sujet éloigné ou inversé",
+     "L'accord du participe passé avec être et avoir",
+     "Les terminaisons verbales en é, er, ez, ais, ait",
+     "Les homophones grammaticaux",
+     "Les homophones leur / leurs, quel / quelle / qu'elle",
+     "Les homophones peu / peut, sans / s'en / c'en",
+     "Le pluriel des noms composés",
+     "Les accents et les mots invariables"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "mathematique",
+  "themes": [
+   {
+    "title": "Les grands nombres",
+    "chapters": [
+     "Lire et écrire les nombres jusqu'au milliard",
+     "Décomposer un grand nombre",
+     "Comparer et ranger des grands nombres",
+     "Encadrer et arrondir un grand nombre"
+    ]
+   },
+   {
+    "title": "Les fractions",
+    "chapters": [
+     "Les fractions et la droite graduée",
+     "Les fractions égales",
+     "Comparer des fractions",
+     "Encadrer une fraction entre deux entiers",
+     "Additionner des fractions de même dénominateur",
+     "Calculer la fraction d'une quantité"
+    ]
+   },
+   {
+    "title": "Les nombres décimaux",
+    "chapters": [
+     "Lire et écrire les nombres décimaux jusqu'aux millièmes",
+     "Passer de l'écriture fractionnaire à l'écriture décimale",
+     "Comparer et ranger des nombres décimaux",
+     "Encadrer, intercaler et arrondir un nombre décimal",
+     "Placer un nombre décimal sur une droite graduée"
+    ]
+   },
+   {
+    "title": "Calcul mental et en ligne",
+    "chapters": [
+     "Multiplier et diviser par 10, 100 et 1 000",
+     "Multiplier par 0,1 ou 0,5",
+     "Les critères de divisibilité par 2, 3, 5, 9 et 10",
+     "Multiples et diviseurs",
+     "Calculer un ordre de grandeur",
+     "Utiliser les parenthèses dans un calcul"
+    ]
+   },
+   {
+    "title": "Calcul posé",
+    "chapters": [
+     "Additionner et soustraire des nombres décimaux",
+     "Multiplier deux nombres entiers",
+     "Multiplier un nombre décimal par un nombre entier",
+     "La division euclidienne",
+     "Diviser un nombre décimal par un nombre entier",
+     "Calculer un quotient décimal"
+    ]
+   },
+   {
+    "title": "Résoudre des problèmes",
+    "chapters": [
+     "Résoudre un problème avec les quatre opérations",
+     "Résoudre un problème en plusieurs étapes",
+     "Résoudre un problème de proportionnalité",
+     "Calculer un pourcentage simple",
+     "Utiliser l'échelle d'un plan",
+     "Organiser sa démarche et rédiger une solution"
+    ]
+   },
+   {
+    "title": "Grandeurs et mesures",
+    "chapters": [
+     "Convertir les unités de longueur, de masse et de contenance",
+     "Calculer des durées et convertir les unités de temps",
+     "Calculer le périmètre du carré et du rectangle",
+     "La longueur du cercle",
+     "Calculer l'aire du carré et du rectangle",
+     "Les unités d'aire : cm², m², km²",
+     "Calculer l'aire d'un triangle rectangle",
+     "Mesurer un angle et le classer : aigu, droit, obtus",
+     "Le volume d'un pavé droit en comptant des cubes"
+    ]
+   },
+   {
+    "title": "Espace et géométrie",
+    "chapters": [
+     "Se repérer sur un plan et programmer un déplacement",
+     "Droites perpendiculaires et parallèles",
+     "Les quadrilatères et leurs propriétés",
+     "Construire un triangle",
+     "Le cercle et le disque",
+     "Construire une figure à partir d'un programme de construction",
+     "La symétrie axiale : construire le symétrique d'une figure",
+     "Les solides et leurs patrons"
+    ]
+   },
+   {
+    "title": "Organiser et gérer des données",
+    "chapters": [
+     "Lire et construire un tableau",
+     "Lire et construire un diagramme en barres ou circulaire",
+     "Lire et construire un graphique cartésien",
+     "Reconnaître et utiliser une situation de proportionnalité"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "histoire",
+  "themes": [
+   {
+    "title": "Le temps de la République",
+    "chapters": [
+     "1848 : le suffrage universel masculin et l'abolition de l'esclavage",
+     "La IIIe République s'installe",
+     "L'école gratuite, laïque et obligatoire de Jules Ferry",
+     "La loi de 1905 : la séparation des Églises et de l'État",
+     "Les symboles de la République",
+     "Le droit de vote des femmes en 1944",
+     "La Ve République et la Constitution de 1958"
+    ]
+   },
+   {
+    "title": "L'âge industriel en France",
+    "chapters": [
+     "Les débuts de l'industrialisation : énergies et machines",
+     "La vie des ouvriers et le travail des enfants",
+     "La ville industrielle",
+     "Le monde rural au XIXe siècle",
+     "Les nouveaux transports : le chemin de fer",
+     "La colonisation au XIXe siècle"
+    ]
+   },
+   {
+    "title": "La France, des guerres mondiales à l'Union européenne",
+    "chapters": [
+     "La Première Guerre mondiale",
+     "La vie des soldats dans les tranchées",
+     "La Seconde Guerre mondiale",
+     "L'Occupation, la collaboration et la Résistance",
+     "La Shoah et le génocide des Tziganes",
+     "La décolonisation",
+     "La construction européenne",
+     "Les Trente Glorieuses et la société de consommation"
+    ]
+   },
+   {
+    "title": "Les outils de l'historien",
+    "chapters": [
+     "Se repérer sur une frise chronologique",
+     "Analyser un document : texte, image, affiche",
+     "Distinguer la mémoire et l'histoire"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "geographie",
+  "themes": [
+   {
+    "title": "Se déplacer",
+    "chapters": [
+     "Se déplacer au quotidien en France",
+     "Les réseaux de transport en France",
+     "Se déplacer en Europe et dans le monde",
+     "Les aéroports et le trafic aérien",
+     "Les mobilités durables"
+    ]
+   },
+   {
+    "title": "Communiquer d'un bout à l'autre du monde grâce à Internet",
+    "chapters": [
+     "Le fonctionnement d'Internet",
+     "Un monde de réseaux : câbles, satellites et centres de données",
+     "Les inégalités d'accès à Internet",
+     "Les usages d'Internet au quotidien"
+    ]
+   },
+   {
+    "title": "Mieux habiter",
+    "chapters": [
+     "La nature en ville",
+     "Recycler et réduire ses déchets",
+     "Habiter un écoquartier",
+     "Les énergies renouvelables",
+     "Protéger les espaces naturels"
+    ]
+   },
+   {
+    "title": "Se repérer en France, en Europe et dans le monde",
+    "chapters": [
+     "Les grands repères de la France",
+     "L'Union européenne et ses pays",
+     "Les continents, les océans et les grands ensembles de relief",
+     "Les grandes zones climatiques du monde",
+     "La répartition de la population mondiale"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "sciences-techno",
+  "themes": [
+   {
+    "title": "Matière, mouvement, énergie, information",
+    "chapters": [
+     "La masse et le volume d'un objet",
+     "Les propriétés de l'air",
+     "Les solutions et la dissolution",
+     "Les mouvements et la vitesse",
+     "Les besoins en énergie et les sources d'énergie",
+     "Énergies renouvelables et non renouvelables",
+     "La lumière et les ombres",
+     "Le son et sa propagation"
+    ]
+   },
+   {
+    "title": "Le vivant, sa diversité et ses fonctions",
+    "chapters": [
+     "La classification du vivant",
+     "La cellule, unité du vivant",
+     "La respiration",
+     "La circulation sanguine et le cœur",
+     "La reproduction des plantes à fleurs",
+     "La reproduction humaine et la puberté",
+     "Les micro-organismes et l'hygiène"
+    ]
+   },
+   {
+    "title": "Matériaux et objets techniques",
+    "chapters": [
+     "Le fonctionnement d'un objet technique",
+     "Les besoins et les fonctions d'un objet",
+     "La transmission du mouvement",
+     "Concevoir et réaliser un prototype",
+     "Les circuits électriques en série et en dérivation",
+     "Programmer un algorithme simple",
+     "Les réseaux informatiques et la communication"
+    ]
+   },
+   {
+    "title": "La planète Terre, les êtres vivants dans leur environnement",
+    "chapters": [
+     "Le système solaire",
+     "La Lune et ses phases",
+     "Le cycle de l'eau",
+     "La météo et le climat",
+     "Les risques naturels",
+     "Les écosystèmes",
+     "Préserver les ressources et la biodiversité"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "anglais",
+  "themes": [
+   {
+    "title": "Parler de soi et des autres",
+    "chapters": [
+     "Se présenter de façon détaillée",
+     "Décrire une personne",
+     "Parler de ses goûts, de ses passions et de ses projets",
+     "Exprimer ses sentiments et son opinion"
+    ]
+   },
+   {
+    "title": "La vie quotidienne et l'environnement",
+    "chapters": [
+     "La routine quotidienne",
+     "La ville et les directions",
+     "Les animaux et la nature",
+     "La météo et les saisons",
+     "Les achats et l'argent",
+     "Les métiers"
+    ]
+   },
+   {
+    "title": "Grammaire et communication",
+    "chapters": [
+     "Le présent simple et le présent continu",
+     "Le prétérit des verbes être et avoir",
+     "Exprimer le futur avec will et going to",
+     "Le pluriel des noms et les quantités",
+     "Comparer avec les comparatifs",
+     "Poser des questions et y répondre"
+    ]
+   },
+   {
+    "title": "Culture des pays anglophones",
+    "chapters": [
+     "Le monde anglophone",
+     "Les États-Unis et leurs symboles",
+     "Les grandes figures de la culture anglophone",
+     "Lire un texte court et le comprendre",
+     "Écrire un court message en anglais"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "emc",
+  "themes": [
+   {
+    "title": "Respecter autrui",
+    "chapters": [
+     "Comprendre et gérer ses émotions",
+     "Le respect de la diversité",
+     "Lutter contre les préjugés et les discriminations",
+     "L'égalité entre les femmes et les hommes",
+     "Prévenir le harcèlement et le cyberharcèlement"
+    ]
+   },
+   {
+    "title": "Les valeurs et institutions de la République",
+    "chapters": [
+     "Les valeurs et les symboles de la République",
+     "La laïcité, une liberté garantie",
+     "La Constitution et les institutions de la Ve République",
+     "Le président, le gouvernement et le Parlement",
+     "Le vote et la citoyenneté"
+    ]
+   },
+   {
+    "title": "La règle et le droit",
+    "chapters": [
+     "Les droits et les devoirs du citoyen",
+     "Les droits de l'enfant",
+     "La justice en France",
+     "La Défense nationale"
+    ]
+   },
+   {
+    "title": "Construire une culture civique",
+    "chapters": [
+     "Débattre et argumenter",
+     "L'engagement associatif et la solidarité",
+     "L'Union européenne et la citoyenneté européenne",
+     "Agir pour le développement durable",
+     "S'informer et vérifier une information",
+     "Protéger sa vie privée sur Internet"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "dessin",
+  "themes": [
+   {
+    "title": "La représentation du monde",
+    "chapters": [
+     "Le dessin d'observation",
+     "La perspective et la profondeur",
+     "Représenter le mouvement",
+     "Transformer la réalité : déformation et exagération"
+    ]
+   },
+   {
+    "title": "Couleur, matière et techniques",
+    "chapters": [
+     "La couleur et la lumière",
+     "Mélanger les techniques : technique mixte",
+     "L'abstraction",
+     "L'affiche et la typographie"
+    ]
+   },
+   {
+    "title": "Volume et espace",
+    "chapters": [
+     "La sculpture et l'assemblage",
+     "L'architecture et la maquette",
+     "L'installation dans un lieu"
+    ]
+   },
+   {
+    "title": "Images, numérique et récit",
+    "chapters": [
+     "La photographie et le photomontage",
+     "Créer une image numérique",
+     "Le cinéma d'animation",
+     "La bande dessinée et le roman graphique"
+    ]
+   },
+   {
+    "title": "Histoire des arts",
+    "chapters": [
+     "L'art aux XVIIe et XVIIIe siècles",
+     "L'impressionnisme",
+     "L'art du XXe siècle",
+     "L'art contemporain",
+     "Analyser et comparer des œuvres"
+    ]
+   }
+  ]
+ },
+ {
+  "level": "CM2",
+  "subject": "musique",
+  "themes": [
+   {
+    "title": "Chanter et interpréter",
+    "chapters": [
+     "Chanter à plusieurs voix",
+     "Interpréter un chant en respectant le style",
+     "Chanter en soliste et en chœur",
+     "Mémoriser un répertoire varié"
+    ]
+   },
+   {
+    "title": "Écouter, comparer, commenter",
+    "chapters": [
+     "Identifier les éléments du langage musical",
+     "Reconnaître des formations : orchestre, chœur, groupe",
+     "Situer une œuvre dans l'histoire de la musique",
+     "Comparer des interprétations d'une même œuvre",
+     "Découvrir les musiques du monde"
+    ]
+   },
+   {
+    "title": "Explorer et imaginer",
+    "chapters": [
+     "Créer une pièce musicale en groupe",
+     "Utiliser un logiciel pour créer de la musique",
+     "Improviser sur un rythme donné",
+     "Mettre en musique un texte"
+    ]
+   },
+   {
+    "title": "Échanger et partager",
+    "chapters": [
+     "Préparer et présenter un spectacle",
+     "Argumenter ses choix musicaux",
+     "Respecter le droit d'auteur en musique"
+    ]
+   }
+  ]
+ }
+]
