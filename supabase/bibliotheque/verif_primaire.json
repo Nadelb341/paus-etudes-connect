@@ -1,0 +1,1872 @@
+{
+  "add": [
+    {
+      "level": "CP",
+      "subject": "francais",
+      "theme": "Lecture : déchiffrage et fluence",
+      "chapters": [
+        "Lire au moins 30 mots par minute sans préparation (50 après préparation) en fin d'année",
+        "Amorcer une lecture expressive"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "francais",
+      "theme": "Compréhension de lecture",
+      "chapters": [
+        "Chercher le sens d'un mot inconnu dans un texte",
+        "Repérer les reprises d'un personnage : il, elle, le garçon…",
+        "Justifier sa réponse en revenant au texte"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "francais",
+      "theme": "Vocabulaire",
+      "chapters": [
+        "Trouver des synonymes",
+        "Commencer à utiliser l'ordre alphabétique et un dictionnaire adapté",
+        "Distinguer deux niveaux de langue"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "francais",
+      "theme": "Grammaire et orthographe",
+      "chapters": [
+        "Les trois types de phrases : déclarative, interrogative, impérative",
+        "Reconnaître une phrase négative et une phrase exclamative",
+        "Reconnaître l'adjectif et le pronom personnel",
+        "Le lien entre le sujet et le verbe",
+        "Conjuguer être et avoir au présent",
+        "Identifier et nommer les accents"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Lecture : décoder et lire avec fluidité",
+      "chapters": [
+        "Lire 70 mots par minute en fin d'année"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Vocabulaire",
+      "chapters": [
+        "Les mots génériques et les mots spécifiques",
+        "Le sens propre et le sens figuré",
+        "Les niveaux de langue : familier, courant, soutenu"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Grammaire : la phrase",
+      "chapters": [
+        "Le groupe sujet, le verbe et les compléments",
+        "Le pronom personnel sujet"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapters": [
+        "Le radical et la terminaison d'un verbe"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Lecture et fluence",
+      "chapters": [
+        "Lire 90 mots par minute en fin d'année"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "chapters": [
+        "L'adverbe : un mot invariable",
+        "Le discours rapporté et les guillemets"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Lecture et compréhension",
+      "chapters": [
+        "Lire 110 mots par minute en moyenne",
+        "Donner la nature et la source d'un document",
+        "Repérer les informations dans un document composite"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Culture littéraire",
+      "chapters": [
+        "Découvrir des héroïnes et des héros",
+        "Se confronter au merveilleux et à l'étrange",
+        "Imaginer et vivre d'autres vies",
+        "Comprendre et interroger la morale",
+        "Savourer le goût des mots et créer en poésie",
+        "Se découvrir et s'affirmer dans le rapport aux autres"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Écriture et rédaction",
+      "chapters": [
+        "Utiliser le brouillon pour préparer son texte",
+        "Écrire pour reformuler l'essentiel d'une leçon"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "chapters": [
+        "La nature et la fonction d'un mot",
+        "Les manipulations : déplacer, supprimer, remplacer, ajouter, encadrer",
+        "Les pronoms personnels sujets et compléments",
+        "Les différentes façons de poser une question"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapters": [
+        "Le radical, la marque de temps et la marque de personne",
+        "Les verbes en -cer, -ger, -yer, -eler et -eter",
+        "Le passé composé à la forme négative"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Lecture et compréhension",
+      "chapters": [
+        "Lire 120 mots par minute en moyenne",
+        "Rapprocher deux documents de genres différents"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Culture littéraire",
+      "chapters": [
+        "Découvrir des héroïnes et des héros",
+        "Se confronter au merveilleux et à l'étrange",
+        "Comprendre et interroger la morale",
+        "Se découvrir et s'affirmer dans le rapport aux autres"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "chapters": [
+        "Le sujet inversé",
+        "Différencier l'attribut du sujet et le complément d'objet",
+        "Différencier l'épithète et l'attribut du sujet",
+        "Les prépositions et les conjonctions de subordination",
+        "Nature et fonction des groupes de mots"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapters": [
+        "Le passé simple des verbes du 1er, du 2e groupe et des verbes irréguliers fréquents",
+        "Les temps composés : auxiliaire et participe passé"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Les nombres jusqu'à 100",
+      "chapters": [
+        "Les nombres ordinaux jusqu'à « vingtième »",
+        "Repérer un rang ou une position dans une file",
+        "Poursuivre une suite de symboles, de formes ou de nombres"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Calcul : addition et soustraction",
+      "chapters": [
+        "Comprendre le sens de la multiplication",
+        "Ajouter ou retirer 20, 30, 40… à un nombre",
+        "Ajouter 9 à un nombre",
+        "Calculer en 3 minutes : la fluence en calcul"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "chapters": [
+        "Résoudre un problème en deux étapes"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "chapters": [
+        "Savoir qu'un mètre est égal à cent centimètres",
+        "Associer une heure à un moment de la journée",
+        "Simuler des achats et rendre la monnaie"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "chapters": [
+        "Repérer et vérifier des alignements avec la règle",
+        "Décrire le cube et le pavé : les faces",
+        "Coder un déplacement avec des instructions"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Organiser des données",
+      "chapters": [
+        "Mener une petite enquête et présenter les résultats en diagramme en barres"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "chapters": [
+        "Partager un tout en parts égales : la moitié, le tiers, le quart",
+        "Lire et écrire les fractions 1/2, 1/3, 1/4, 1/5, 1/6, 1/8 et 1/10",
+        "Le numérateur et le dénominateur",
+        "Les fractions inférieures ou égales à 1",
+        "Comparer des fractions de même dénominateur",
+        "Comparer des fractions de numérateur 1",
+        "Additionner et soustraire des fractions de même dénominateur"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Les nombres jusqu'à 1 000",
+      "chapters": [
+        "Les nombres ordinaux jusqu'à « centième »",
+        "Les nombres pairs et les nombres impairs"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Multiplication et division",
+      "chapters": [
+        "La multiplication est commutative",
+        "Mémoriser les tables de multiplication de 6 à 9",
+        "Multiplier un nombre de 11 à 19 en le décomposant"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "chapters": [
+        "Résoudre un problème mixte : une étape additive et une étape multiplicative"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "chapters": [
+        "Le kilomètre et les relations entre m, cm et km",
+        "Estimer une longueur ou une masse",
+        "Distinguer les heures du matin et de l'après-midi",
+        "Mesurer une durée en heures et minutes",
+        "L'écriture à virgule d'un prix en euros"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "chapters": [
+        "Établir des égalités de fractions",
+        "Comparer des fractions inférieures à 1",
+        "Additionner et soustraire des fractions",
+        "Mesurer une longueur avec des fractions d'unité"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Calcul mental",
+      "chapters": [
+        "Le vocabulaire : terme, somme, facteur, produit, multiple",
+        "Multiplier un nombre par 4 ou par 8",
+        "Ajouter ou soustraire 9, 19, 29 ou 39"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "chapters": [
+        "Résoudre un problème de comparaison : fois plus, fois moins",
+        "Résoudre un problème de produit cartésien"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "chapters": [
+        "Les masses : la tonne",
+        "Le décimètre et le millimètre",
+        "Poser des additions et des soustractions de prix en euros",
+        "Résoudre un problème de durée"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "chapters": [
+        "Construire un cube à partir d'un patron",
+        "Coder un angle droit et des longueurs égales"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les grands nombres",
+      "chapters": [
+        "Reconnaître les multiples de 2, de 5 et de 10"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "chapters": [
+        "Écrire une fraction supérieure à 1 comme un entier plus une fraction",
+        "Encadrer une fraction entre deux entiers consécutifs",
+        "Comparer des fractions",
+        "Calculer une fraction d'une quantité"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les nombres décimaux",
+      "chapters": [
+        "Donner la partie entière et l'arrondi à l'entier"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Calcul mental et en ligne",
+      "chapters": [
+        "Multiplier un nombre décimal par 10 et le diviser par 10",
+        "Utiliser la distributivité dans des cas simples",
+        "Calculer avec des parenthèses"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "chapters": [
+        "Résoudre un problème de comparaison multiplicative",
+        "Résoudre un problème de dénombrement",
+        "Résoudre un problème d'optimisation"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "chapters": [
+        "Les unités de contenance du millilitre à l'hectolitre",
+        "Les unités de masse du milligramme à la tonne",
+        "Le centimètre carré",
+        "Résoudre un problème de durée"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "chapters": [
+        "Le prisme droit",
+        "Construire le symétrique d'une figure sur quadrillage",
+        "Résoudre des problèmes d'assemblages de cubes"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Organiser et gérer des données",
+      "chapters": [
+        "Résoudre un problème avec les données d'un tableau ou d'un diagramme"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Initiation à l'algèbre",
+      "chapters": [
+        "Trouver le nombre manquant dans une égalité à trous",
+        "Représenter un nombre inconnu par un symbole ou une lettre",
+        "Résoudre des problèmes algébriques",
+        "Exécuter un programme de calcul",
+        "Poursuivre une suite de nombres ou de motifs"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les probabilités",
+      "chapters": [
+        "Reconnaître une expérience aléatoire",
+        "Trouver toutes les issues possibles",
+        "Impossible, possible, certain, probable, peu probable",
+        "Comparer les chances qu'un événement se produise",
+        "Reconnaître une situation d'équiprobabilité"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Les grands nombres",
+      "chapters": [
+        "Trouver tous les diviseurs d'un nombre",
+        "Les diviseurs et les multiples communs"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "chapters": [
+        "Écrire une fraction supérieure à 1 comme un entier plus une fraction",
+        "Multiplier une fraction par un nombre entier"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Calcul mental et en ligne",
+      "chapters": [
+        "Calculer le double et la moitié d'un nombre décimal",
+        "Ajouter ou soustraire 98 ou 99"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "chapters": [
+        "Résoudre un problème de comparaison multiplicative",
+        "Résoudre un problème de dénombrement",
+        "Résoudre un problème d'optimisation"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "chapters": [
+        "Convertir des unités d'aire",
+        "Additionner des angles et construire la moitié d'un angle par pliage",
+        "Les durées avec les secondes"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "chapters": [
+        "Le trapèze, le pentagone et l'hexagone",
+        "Résoudre des problèmes d'assemblages de cubes"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Initiation à l'algèbre",
+      "chapters": [
+        "Trouver le nombre manquant dans une égalité à trous",
+        "Résoudre des problèmes algébriques",
+        "Exécuter ou écrire un programme de calcul",
+        "Trouver le nombre d'éléments d'une suite de motifs"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Les probabilités",
+      "chapters": [
+        "Trouver toutes les issues d'une expérience aléatoire",
+        "Exprimer une probabilité sous la forme « a chances sur b »",
+        "Comparer des probabilités simples",
+        "Une expérience en deux étapes : tableau ou arbre"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "Le vivant",
+      "chapters": [
+        "Trier ce qui est vivant, non vivant ou fabriqué par un être vivant",
+        "Observer et nommer les êtres vivants autour de l'école",
+        "Le milieu de vie des animaux et des plantes observés",
+        "Les gestes simples pour protéger l'environnement"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "Le corps et la santé",
+      "chapters": [
+        "Les familles d'aliments et leur origine",
+        "Le squelette : les principales articulations et quelques os",
+        "Mon rythme de la journée : sommeil, activité, repos",
+        "Limiter le temps passé devant les écrans"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "La matière et les objets",
+      "chapters": [
+        "Comparer des masses avec une balance",
+        "Lire une température sur un thermomètre",
+        "Reconnaître l'eau solide et liquide dans la nature",
+        "Qu'est-ce qu'un objet technique ?",
+        "Des matériaux bruts aux objets fabriqués",
+        "Les objets qui répondent à nos besoins"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "Se situer dans l'espace",
+      "chapters": [
+        "Décrire un trajet entre la maison et l'école",
+        "Reconnaître un lieu vu sous différents angles",
+        "Le globe et le planisphère : continents et océans",
+        "Les points cardinaux : nord, sud, est, ouest",
+        "Situer la France sur un planisphère"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "Se situer dans le temps",
+      "chapters": [
+        "Le jour et la nuit : manipuler un globe terrestre",
+        "Les outils pour mesurer le temps : sablier, horloge, montre",
+        "Hier, aujourd'hui, demain : situer un événement sur un calendrier",
+        "Les générations et l'arbre généalogique"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matière, mouvement, énergie, information",
+      "chapters": [
+        "Mesurer une masse avec une balance et utiliser la tare",
+        "Dissoudre un solide dans l'eau : la saturation",
+        "Les ombres propres et les ombres portées",
+        "Les phases de la Lune"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Le vivant, sa diversité et ses fonctions",
+      "chapters": [
+        "Qu'est-ce qu'une espèce ?",
+        "Identifier une espèce avec une clé de détermination",
+        "De la fécondation à la naissance : ovipares et vivipares",
+        "Le cerveau et ses grandes fonctions",
+        "Mieux se concentrer et mieux mémoriser",
+        "Les changements du corps à la puberté"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matériaux et objets techniques",
+      "chapters": [
+        "Les fonctions des éléments d'un objet technique",
+        "Dessiner le croquis d'un objet technique",
+        "Traduire un programme simple en langage naturel"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "La planète Terre, les êtres vivants dans leur environnement",
+      "chapters": [
+        "Qu'est-ce qu'un écosystème ?",
+        "Les réseaux alimentaires",
+        "Mesurer la météo : thermomètre, pluviomètre, anémomètre",
+        "Les variations de la météo au fil des saisons"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps des rois",
+      "chapters": [
+        "La seigneurie : le seigneur, les paysannes et les paysans",
+        "Vivre en ville au Moyen Âge : marchés, foires et artisans",
+        "L'art roman et l'art gothique",
+        "François Ier, Léonard de Vinci et la Renaissance",
+        "La société d'ordres : clergé, noblesse, tiers état",
+        "Les femmes à la cour de Versailles",
+        "Les inventions qui permettent la navigation au grand large",
+        "Les premiers empires coloniaux en Amérique",
+        "La traite des esclaves et la vie dans les plantations",
+        "1685 : le Code noir"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps de la Révolution et de l'Empire",
+      "chapters": [
+        "Les cahiers de doléances et les États généraux",
+        "Le 14 juillet 1789 : la prise de la Bastille",
+        "La nuit du 4 août : l'abolition des privilèges",
+        "Les femmes en 1789 : la marche sur Versailles"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se nourrir dans le monde",
+      "chapters": [
+        "Les pratiques alimentaires dans un pays riche et dans un pays en développement",
+        "Produits agricoles et produits transformés",
+        "La chaîne de production d'un aliment",
+        "Malnutrition et sous-nutrition dans le monde"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Les inégalités dans le monde",
+      "chapters": [
+        "L'inégal accès à l'eau, à la santé ou à l'éducation",
+        "Les grandes aires régionales du monde sur un planisphère"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se déplacer dans le monde",
+      "chapters": [
+        "Comment les élèves de la classe se déplacent",
+        "Les modes de transport et leurs infrastructures : aéroport, port, gare, route",
+        "Mesurer un déplacement en kilomètres et en temps"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Communiquer dans le monde avec Internet",
+      "chapters": [
+        "Les usages d'Internet",
+        "Un réseau de câbles sous-marins et de satellites",
+        "L'inégal accès à Internet dans le monde et en France"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "anglais",
+      "theme": "Comprendre et réagir",
+      "chapters": [
+        "Suivre une histoire courte racontée en anglais",
+        "Demander de répéter ou de parler plus lentement"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "anglais",
+      "theme": "Chants, comptines et culture",
+      "chapters": [
+        "Reconnaître et reproduire les sons et l'intonation de l'anglais"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "anglais",
+      "theme": "Grammaire et communication",
+      "chapters": [
+        "Raconter une courte histoire à l'oral",
+        "Comprendre un message oral court sur un sujet familier",
+        "Écrire quelques phrases pour se décrire ou donner son avis",
+        "L'accent et l'intonation en anglais"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "emc",
+      "theme": "Respecter autrui",
+      "chapters": [
+        "Les émotions de base : joie, tristesse, peur, colère, dégoût, surprise",
+        "Comprendre les émotions des autres : l'empathie"
+      ]
+    },
+    {
+      "level": "CP",
+      "subject": "emc",
+      "theme": "Les règles de la vie collective",
+      "chapters": [
+        "Les adultes de l'école et leur rôle",
+        "Mon corps m'appartient : hygiène et intimité",
+        "Les droits de l'enfant",
+        "Respecter l'environnement et les animaux"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "emc",
+      "theme": "Respecter autrui",
+      "chapters": [
+        "Stéréotypes et préjugés : un premier regard sur les images et la publicité",
+        "Auteur, cible, témoin : les rôles dans le harcèlement"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "emc",
+      "theme": "La République française",
+      "chapters": [
+        "Chanter le premier couplet et le refrain de La Marseillaise",
+        "La laïcité : la liberté de croire ou de ne pas croire",
+        "Le français, langue de la République"
+      ]
+    },
+    {
+      "level": "CE1",
+      "subject": "emc",
+      "theme": "Sécurité et prévention",
+      "chapters": [
+        "Repérer les dangers et donner l'alerte"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "emc",
+      "theme": "S'engager",
+      "chapters": [
+        "Le bien commun et l'intérêt général",
+        "Les services publics et les associations au service de tous"
+      ]
+    },
+    {
+      "level": "CE2",
+      "subject": "emc",
+      "theme": "La République et la démocratie",
+      "chapters": [
+        "Le président de la République, chef de l'État élu",
+        "Le rôle du maire : état civil, école, environnement"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "emc",
+      "theme": "Construire une culture civique",
+      "chapters": [
+        "Le civisme : agir pour le bien public",
+        "Les incivilités et leurs conséquences",
+        "La sobriété numérique"
+      ]
+    },
+    {
+      "level": "CM1",
+      "subject": "emc",
+      "theme": "Respecter autrui",
+      "chapters": [
+        "L'égalité en droit et la dignité de la personne humaine",
+        "La fraternité et l'empathie"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "emc",
+      "theme": "Les valeurs et institutions de la République",
+      "chapters": [
+        "Citoyenneté et nationalité : comment devient-on français ?",
+        "Le 14 Juillet, héritier de la fête de la Fédération",
+        "La France, membre de l'Union européenne"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "emc",
+      "theme": "La règle et le droit",
+      "chapters": [
+        "Les devoirs du citoyen : respecter les lois, contribuer aux dépenses publiques",
+        "La Déclaration universelle des droits de l'homme (1948)",
+        "La Charte des droits fondamentaux de l'Union européenne",
+        "La Charte de l'environnement"
+      ]
+    },
+    {
+      "level": "CM2",
+      "subject": "emc",
+      "theme": "Respecter autrui",
+      "chapters": [
+        "Racisme, antisémitisme, sexisme, homophobie : des délits punis par la loi"
+      ]
+    }
+  ],
+  "rename": [
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Grammaire : la phrase",
+      "old": "La phrase déclarative, interrogative et exclamative",
+      "new": "Les types de phrases : déclarative, interrogative et impérative"
+    },
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Grammaire : la phrase",
+      "old": "La phrase affirmative et la phrase négative",
+      "new": "Les formes de phrases : négative et exclamative"
+    },
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "old": "Le présent des verbes être, avoir, aller, faire, dire, venir",
+      "new": "Le présent des verbes être et avoir"
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "La forme négative",
+      "new": "Les formes négative et exclamative"
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "Le sujet inversé et le sujet éloigné",
+      "new": "Remplacer le groupe sujet par un pronom personnel"
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "Les compléments du verbe",
+      "new": "Repérer les compléments dans la phrase, sans les distinguer"
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "Les classes de mots : nom, verbe, adjectif, déterminant, pronom",
+      "new": "Les classes de mots : déterminant, nom, adjectif, verbe, pronom personnel sujet, adverbe"
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "old": "Le présent des verbes du 1er et du 2e groupe",
+      "new": "Le présent des verbes du 1er groupe"
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "old": "Le présent des verbes du 3e groupe fréquents",
+      "new": "Le présent de faire, aller, dire, venir, pouvoir, voir, vouloir, prendre"
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "La phrase simple et la phrase complexe",
+      "new": "La phrase simple : verbe conjugué, groupe sujet et compléments"
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "Les compléments circonstanciels",
+      "new": "Repérer les compléments circonstanciels, sans les distinguer"
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "L'adjectif épithète et le complément du nom",
+      "new": "Le nom noyau et l'adjectif épithète"
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "Les classes de mots : déterminant, pronom, adverbe, préposition, conjonction",
+      "new": "Les classes de mots : déterminants, adverbes, conjonctions de coordination"
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "La phrase simple et la phrase complexe : propositions",
+      "new": "Distinguer phrase simple et phrase complexe en repérant les verbes conjugués"
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "Les compléments circonstanciels",
+      "new": "Les compléments circonstanciels de temps, de lieu et de cause"
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "old": "Les expansions du nom : adjectif, complément du nom, relative",
+      "new": "Les expansions du nom : adjectif épithète et complément du nom"
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "old": "Le futur simple et le futur antérieur",
+      "new": "Le futur simple"
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "old": "Reconnaître le carré, le rectangle, le triangle et le cercle",
+      "new": "Reconnaître le carré, le rectangle, le triangle et le disque"
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "old": "Lire l'heure : heures et demi-heures",
+      "new": "Lire l'heure : heures, demi-heures et quarts d'heure"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Calcul posé",
+      "old": "Trouver le quotient et le reste d'une division simple",
+      "new": "La division, opération inverse de la multiplication : le signe ÷"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "old": "Les unités de temps : heure, minute, seconde",
+      "new": "Les unités de durée : heure et minute"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "old": "Reconnaître et tracer des droites perpendiculaires",
+      "new": "Reconnaître et tracer un angle droit avec l'équerre"
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les grands nombres",
+      "old": "Lire et écrire les nombres jusqu'au million",
+      "new": "Lire et écrire les nombres jusqu'à 999 999"
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "old": "Le patron d'un cube et d'un pavé droit",
+      "new": "Le patron d'un cube"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Les grands nombres",
+      "old": "Lire et écrire les nombres jusqu'au milliard",
+      "new": "Lire et écrire les nombres jusqu'à 999 999 999"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Calcul mental et en ligne",
+      "old": "Multiplier par 0,1 ou 0,5",
+      "new": "Multiplier un nombre décimal par 5 ou par 50"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Calcul mental et en ligne",
+      "old": "Les critères de divisibilité par 2, 3, 5, 9 et 10",
+      "new": "Les critères de divisibilité par 2, 5 et 10"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Calcul posé",
+      "old": "Diviser un nombre décimal par un nombre entier",
+      "new": "Diviser un nombre décimal par un nombre entier à un chiffre"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "old": "Les unités d'aire : cm², m², km²",
+      "new": "Les unités d'aire : cm², dm² et m²"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "old": "Mesurer un angle et le classer : aigu, droit, obtus",
+      "new": "Comparer et classer les angles : aigu, droit, obtus ; l'angle droit mesure 90°"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "old": "Le volume d'un pavé droit en comptant des cubes",
+      "new": "Dénombrer les cubes d'un assemblage"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Organiser et gérer des données",
+      "old": "Lire et construire un diagramme en barres ou circulaire",
+      "new": "Construire un diagramme en barres et lire un diagramme circulaire"
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matière, mouvement, énergie, information",
+      "old": "Décrire un mouvement : trajectoire et vitesse",
+      "new": "Mesurer une distance et une durée lors d'un déplacement"
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matière, mouvement, énergie, information",
+      "old": "Les signaux et l'information : lumière, son, électricité",
+      "new": "La lumière : matériaux transparents, translucides et opaques"
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "La planète Terre, les êtres vivants dans leur environnement",
+      "old": "Le relief et les paysages",
+      "new": "Les conséquences d'une action humaine sur un réseau alimentaire"
+    }
+  ],
+  "remove": [
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "chapter": "Les compléments de phrase",
+      "raison": "Programme de français du cycle 2 (BO n°41 du 31-10-2024) : l'étude des compléments circonstanciels est réservée au cycle 3."
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "chapter": "L'attribut du sujet",
+      "raison": "Programme de français cycle 3 (BO n°16 du 17-04-2025) : l'attribut du sujet est étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapter": "Le passé simple aux troisièmes personnes",
+      "raison": "Programme de français cycle 3 (BO n°16 du 17-04-2025) : le passé simple est à mémoriser au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapter": "Le plus-que-parfait",
+      "raison": "Programme de français cycle 3 (BO n°16 du 17-04-2025) : le plus-que-parfait est étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapter": "L'impératif présent",
+      "raison": "Programme de français cycle 3 (BO n°16 du 17-04-2025) : l'impératif présent est à mémoriser en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Orthographe",
+      "chapter": "L'accord de l'adjectif attribut",
+      "raison": "Programme de français cycle 3 (BO n°16 du 17-04-2025) : l'accord sujet/attribut est étudié au CM2."
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "chapter": "La proposition relative",
+      "raison": "Absente du programme de français du cycle 3 (BO n°16 du 17-04-2025) : relève du collège."
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "chapter": "La voix active et la voix passive",
+      "raison": "Absente du programme de français du cycle 3 (BO n°16 du 17-04-2025) : relève du collège."
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapter": "Le conditionnel présent",
+      "raison": "Programme de français cycle 3 (BO n°16 du 17-04-2025) : le conditionnel présent est à mémoriser en 6e."
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapter": "L'impératif présent",
+      "raison": "Programme de français cycle 3 (BO n°16 du 17-04-2025) : l'impératif présent est à mémoriser en 6e."
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Conjugaison",
+      "chapter": "Le présent du subjonctif",
+      "raison": "Absent du programme de français du cycle 3 (BO n°16 du 17-04-2025) : relève du collège."
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "chapter": "Repérer un axe de symétrie dans une image",
+      "raison": "Programme de mathématiques cycle 2 (BO n°41 du 31-10-2024) : la symétrie axiale n'apparaît qu'au CE2."
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "chapter": "Comparer et mesurer des contenances en litres",
+      "raison": "Programme de mathématiques cycle 2 (BO n°41 du 31-10-2024) : les contenances sont introduites au CE2."
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "chapter": "Compléter une figure par symétrie",
+      "raison": "Programme de mathématiques cycle 2 (BO n°41 du 31-10-2024) : la symétrie axiale n'apparaît qu'au CE2."
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Espace et géométrie",
+      "chapter": "Se repérer sur un quadrillage avec des coordonnées",
+      "raison": "Absent du programme de mathématiques du CE2 (BO n°41 du 31-10-2024)."
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Calcul posé",
+      "chapter": "Poser une division euclidienne par un nombre à deux chiffres",
+      "raison": "Programme de mathématiques cycle 3 (BO n°16 du 17-04-2025) : au cours moyen, la division posée se fait avec un diviseur à un chiffre."
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "chapter": "Calculer un pourcentage simple",
+      "raison": "Programme de mathématiques cycle 3 (BO n°16 du 17-04-2025) : les pourcentages sont introduits en 6e."
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "chapter": "Utiliser l'échelle d'un plan",
+      "raison": "Programme de mathématiques cycle 3 (BO n°16 du 17-04-2025) : les problèmes d'échelles sont introduits en 6e."
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "chapter": "La longueur du cercle",
+      "raison": "Programme de mathématiques cycle 3 (BO n°16 du 17-04-2025) : le périmètre du disque est étudié en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matière, mouvement, énergie, information",
+      "chapter": "Les états de la matière : solide, liquide, gaz",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matière, mouvement, énergie, information",
+      "chapter": "Les changements d'état",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matière, mouvement, énergie, information",
+      "chapter": "Les sources et les formes d'énergie",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : absent du CM1."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Le vivant, sa diversité et ses fonctions",
+      "chapter": "L'alimentation humaine et l'équilibre alimentaire",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Le vivant, sa diversité et ses fonctions",
+      "chapter": "La digestion",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudiée au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Le vivant, sa diversité et ses fonctions",
+      "chapter": "La conservation des aliments",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : absente du CM1."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Le vivant, sa diversité et ses fonctions",
+      "chapter": "Les mouvements du corps : os, muscles et articulations",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : absent du cycle 3 (vu au cycle 2)."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Matériaux et objets techniques",
+      "chapter": "Le circuit électrique et ses dangers",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "La planète Terre, les êtres vivants dans leur environnement",
+      "chapter": "La Terre dans le système solaire",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "La planète Terre, les êtres vivants dans leur environnement",
+      "chapter": "Les mouvements de la Terre : jour, nuit et saisons",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "La planète Terre, les êtres vivants dans leur environnement",
+      "chapter": "Les phénomènes géologiques : volcans et séismes",
+      "raison": "Programme de sciences et technologie 2026 (BO n°24 du 11-06-2026), en vigueur au CM1 depuis la rentrée 2026 : étudié au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "La Préhistoire : les premiers humains",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : la Préhistoire est étudiée au CE2 et en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "Le Paléolithique : chasseurs-cueilleurs et art pariétal",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : la Préhistoire est étudiée au CE2 et en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "Le Néolithique : les premiers agriculteurs",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : la Préhistoire est étudiée au CE2 et en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "Les Celtes et les Gaulois",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : les Celtes et la Gaule romaine sont étudiés au CE2 et en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "La conquête romaine et Vercingétorix",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : les Celtes et la Gaule romaine sont étudiés au CE2 et en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "La Gaule romaine : villes, routes et romanisation",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : les Celtes et la Gaule romaine sont étudiés au CE2 et en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "Le christianisme dans la Gaule romaine",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : les Celtes et la Gaule romaine sont étudiés au CE2 et en 6e."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "Les grandes invasions et Clovis",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 commence au XIe siècle ; la construction du royaume de France est étudiée au CE2."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Et avant la France ?",
+      "chapter": "Charlemagne et l'Empire carolingien",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 commence au XIe siècle ; la construction du royaume de France est étudiée au CE2."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps des rois",
+      "chapter": "Louis IX, roi chrétien",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : la construction du royaume de France (Xe-XVe siècles) est étudiée au CE2."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps des rois",
+      "chapter": "La guerre de Cent Ans et Jeanne d'Arc",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : la construction du royaume de France (Xe-XVe siècles) est étudiée au CE2."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps de la Révolution et de l'Empire",
+      "chapter": "La fin de la monarchie et la Première République",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 s'arrête à l'année 1789 ; la période 1792-1815 est étudiée au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps de la Révolution et de l'Empire",
+      "chapter": "Napoléon Bonaparte et l'Empire",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 s'arrête à l'année 1789 ; la période 1792-1815 est étudiée au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps de la Révolution et de l'Empire",
+      "chapter": "Les héritages de la Révolution et de l'Empire",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 s'arrête à l'année 1789 ; la période 1792-1815 est étudiée au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Découvrir le lieu où j'habite",
+      "chapter": "Décrire les paysages de sa commune",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; l'étude de l'espace proche relève du cycle 2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Découvrir le lieu où j'habite",
+      "chapter": "Les aménagements et les acteurs de la commune",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; l'étude de l'espace proche relève du cycle 2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se loger, travailler, se cultiver, avoir des loisirs en France",
+      "chapter": "Les différents types de logement en France",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; se loger et travailler en France sont étudiés au CE2, l'organisation du territoire français au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se loger, travailler, se cultiver, avoir des loisirs en France",
+      "chapter": "Les grandes villes de France",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; se loger et travailler en France sont étudiés au CE2, l'organisation du territoire français au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se loger, travailler, se cultiver, avoir des loisirs en France",
+      "chapter": "Les espaces ruraux en France",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; se loger et travailler en France sont étudiés au CE2, l'organisation du territoire français au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se loger, travailler, se cultiver, avoir des loisirs en France",
+      "chapter": "Les espaces de travail : agriculture, industrie, services",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; se loger et travailler en France sont étudiés au CE2, l'organisation du territoire français au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se loger, travailler, se cultiver, avoir des loisirs en France",
+      "chapter": "Les lieux de culture et de loisirs",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; se loger et travailler en France sont étudiés au CE2, l'organisation du territoire français au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se loger, travailler, se cultiver, avoir des loisirs en France",
+      "chapter": "Les espaces touristiques en France",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; se loger et travailler en France sont étudiés au CE2, l'organisation du territoire français au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Consommer en France",
+      "chapter": "Satisfaire ses besoins en énergie",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; notion absente du nouveau programme du CM1."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Consommer en France",
+      "chapter": "Les déchets et le recyclage",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; notion absente du nouveau programme du CM1."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "La France et le monde",
+      "chapter": "Le territoire français : métropole et outre-mer",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; la France et l'Union européenne sont étudiées au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "La France et le monde",
+      "chapter": "Le relief et les fleuves de France",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; la France et l'Union européenne sont étudiées au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "La France et le monde",
+      "chapter": "Les climats de France",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; la France et l'Union européenne sont étudiées au CM2."
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "La France et le monde",
+      "chapter": "La France en Europe et dans le monde",
+      "raison": "Programme d'histoire-géographie 2026 (BO n°22 du 28-05-2026), en vigueur au CM1 depuis la rentrée 2026 : le CM1 porte sur la diversité des modes de vie dans le monde ; la France et l'Union européenne sont étudiées au CM2."
+    },
+    {
+      "level": "CM2",
+      "subject": "emc",
+      "theme": "La règle et le droit",
+      "chapter": "La Défense nationale",
+      "raison": "Absente du programme d'EMC du CM2 (BO n°24 du 13-06-2024, thème « Vivre en République ») : relève du collège."
+    }
+  ],
+  "links": [
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Les nombres jusqu'à 100",
+      "label": "Programme officiel de mathématiques du cycle 2 (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%204%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20du%20cycle%202-403821.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Les nombres jusqu'à 1 000",
+      "label": "Programme officiel de mathématiques du cycle 2 (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%204%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20du%20cycle%202-403821.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Les nombres jusqu'à 10 000",
+      "label": "Programme officiel de mathématiques du cycle 2 (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%204%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20du%20cycle%202-403821.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Les nombres jusqu'à 100",
+      "label": "Livret d'accompagnement de mathématiques CP (Eduscol)",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementmathcppdf-111984.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Multiplication et division",
+      "label": "Livret d'accompagnement de mathématiques CE1 (Eduscol)",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementmathce1pdf-116325.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Grandeurs et mesures",
+      "label": "Livret d'accompagnement de mathématiques CE2 (Eduscol)",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementmathce2pdf-122974.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "label": "Guide : enseigner les nombres, le calcul et la résolution de problèmes au CP",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/guide-pour-enseigner-les-nombres-le-calcul-et-la-resolution-de-problemes-au-cp-68664.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "mathematique",
+      "theme": "Calcul : addition et soustraction",
+      "label": "Eduscol : enseigner le calcul mental du CP au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/calcul-mentalv2pdf-111834.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Calcul mental",
+      "label": "Eduscol : enseigner le calcul mental du CP au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/calcul-mentalv2pdf-111834.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Calcul mental",
+      "label": "Eduscol : enseigner le calcul mental du CP au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/calcul-mentalv2pdf-111834.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Calcul mental et en ligne",
+      "label": "Eduscol : enseigner le calcul mental du CP au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/calcul-mentalv2pdf-111834.pdf"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Calcul mental et en ligne",
+      "label": "Eduscol : enseigner le calcul mental du CP au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/calcul-mentalv2pdf-111834.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "label": "Eduscol : enseigner les fractions du CE1 au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/les-fractionsv2pdf-111831.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "label": "Eduscol : enseigner les fractions du CE1 au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/les-fractionsv2pdf-111831.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "label": "Eduscol : enseigner les fractions du CE1 au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/les-fractionsv2pdf-111831.pdf"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Les fractions",
+      "label": "Eduscol : enseigner les fractions du CE1 au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/les-fractionsv2pdf-111831.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "label": "Eduscol : enseigner la résolution de problèmes de la maternelle au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/la-resolution-de-problemesv2pdf-111837.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "label": "Eduscol : enseigner la résolution de problèmes de la maternelle au CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/la-resolution-de-problemesv2pdf-111837.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "label": "Guide : la résolution de problèmes mathématiques au cours moyen",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/guide-resolution-de-problemes-cours-moyen-90990.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les grands nombres",
+      "label": "Programme officiel de mathématiques du cycle 3 (2025)",
+      "url": "https://www.education.gouv.fr/sites/default/files/programme-de-math-matiques-pour-le-cycle-3-439827.pdf"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Résoudre des problèmes",
+      "label": "Guide : la résolution de problèmes mathématiques au cours moyen",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/guide-resolution-de-problemes-cours-moyen-90990.pdf"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Les grands nombres",
+      "label": "Programme officiel de mathématiques du cycle 3 (2025)",
+      "url": "https://www.education.gouv.fr/sites/default/files/programme-de-math-matiques-pour-le-cycle-3-439827.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "mathematique",
+      "theme": "Les nombres décimaux",
+      "label": "Exemples pour la mise en œuvre du programme de mathématiques en CM1",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvrecm1mathspdf-111543.pdf"
+    },
+    {
+      "level": "CM2",
+      "subject": "mathematique",
+      "theme": "Les nombres décimaux",
+      "label": "Exemples pour la mise en œuvre du programme de mathématiques en CM2",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvrecm2-mathpdf-111537.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "francais",
+      "theme": "Lecture : déchiffrage et fluence",
+      "label": "Programme officiel de français du cycle 2 (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel135_annexe3.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "francais",
+      "theme": "Lecture : décoder et lire avec fluidité",
+      "label": "Programme officiel de français du cycle 2 (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel135_annexe3.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "francais",
+      "theme": "Lecture et fluence",
+      "label": "Programme officiel de français du cycle 2 (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel135_annexe3.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "francais",
+      "theme": "Code alphabétique : les lettres et les sons",
+      "label": "Livret d'accompagnement de français CP (Eduscol)",
+      "url": "https://eduscol.education.fr/document/66051/download"
+    },
+    {
+      "level": "CM1",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "label": "Programme officiel de français du cycle 3 (2025)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel620_annexe1.pdf"
+    },
+    {
+      "level": "CM2",
+      "subject": "francais",
+      "theme": "Grammaire",
+      "label": "Programme officiel de français du cycle 3 (2025)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel620_annexe1.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "emc",
+      "theme": "Respecter autrui",
+      "label": "Programme officiel d'enseignement moral et civique (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "emc",
+      "theme": "Respecter autrui",
+      "label": "Programme officiel d'enseignement moral et civique (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "emc",
+      "theme": "Respecter autrui",
+      "label": "Programme officiel d'enseignement moral et civique (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "emc",
+      "theme": "Les valeurs de la République",
+      "label": "Programme officiel d'enseignement moral et civique (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+    },
+    {
+      "level": "CM2",
+      "subject": "emc",
+      "theme": "Les valeurs et institutions de la République",
+      "label": "Programme officiel d'enseignement moral et civique (2024)",
+      "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "emc",
+      "theme": "Les règles de la vie collective",
+      "label": "Livret d'accompagnement d'EMC CP (Eduscol)",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementemccp-111693.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "emc",
+      "theme": "Construire une culture civique",
+      "label": "Livret d'accompagnement d'EMC CM1 (Eduscol)",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementemccm1-112047.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "Le vivant",
+      "label": "Programme officiel de sciences et technologie du cycle 2 (2026)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-programme-de-sciences-et-technologie-du-cycle-2-517289.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "Se situer dans le temps",
+      "label": "Programme officiel d'histoire-géographie du cycle 2 (2026)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-3-programme-d-histoire-geographie-cycle-2-516776.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "questionner-le-monde",
+      "theme": "Le corps et la santé",
+      "label": "Livret d'accompagnement d'éducation à la vie affective et relationnelle CP (Eduscol)",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/2026livretaccompagnementevarcp-126299.pdf"
+    },
+    {
+      "level": "CE1",
+      "subject": "questionner-le-monde",
+      "theme": "Le vivant",
+      "label": "Programme du cycle 2 en vigueur en 2026-2027 pour « Questionner le monde » (version 2020)",
+      "url": "https://cache.media.education.gouv.fr/file/31/88/5/ensel714_annexe1_1312885.pdf"
+    },
+    {
+      "level": "CE2",
+      "subject": "questionner-le-monde",
+      "theme": "Le vivant",
+      "label": "Programme du cycle 2 en vigueur en 2026-2027 pour « Questionner le monde » (version 2020)",
+      "url": "https://cache.media.education.gouv.fr/file/31/88/5/ensel714_annexe1_1312885.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "sciences-techno",
+      "theme": "Le vivant, sa diversité et ses fonctions",
+      "label": "Programme officiel de sciences et technologie du cycle 3 (2026)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-2-programme-de-sciences-et-technologie-du-cycle-3-517292.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "histoire",
+      "theme": "Le temps des rois",
+      "label": "Programme officiel d'histoire-géographie du cycle 3 (2026)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-4-programme-d-histoire-geographie-cycle-3-516779.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "geographie",
+      "theme": "Se nourrir dans le monde",
+      "label": "Programme officiel d'histoire-géographie du cycle 3 (2026)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-4-programme-d-histoire-geographie-cycle-3-516779.pdf"
+    },
+    {
+      "level": "CP",
+      "subject": "anglais",
+      "theme": "Comprendre et réagir",
+      "label": "Programme officiel de langues vivantes du cycle 2 (2026)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%201%20%E2%80%93%20Programme%20de%20langues%20vivantes%20%C3%A9trang%C3%A8res%20et%20r%C3%A9gionales%20pour%20le%20cycle%202%20-481187.pdf"
+    },
+    {
+      "level": "CM1",
+      "subject": "anglais",
+      "theme": "Grammaire et communication",
+      "label": "Programme officiel de langues vivantes du cours moyen (2026)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20langues%20vivantes%20%C3%A9trang%C3%A8res%20et%20r%C3%A9gionales%20pour%20les%20classes%20de%20cours%20moyen%20%28cycle%203%29-481190.pdf"
+    }
+  ],
+  "sources": [
+    "https://cache.media.education.gouv.fr/file/31/88/5/ensel714_annexe1_1312885.pdf",
+    "https://eduscol.education.fr/document/66051/download",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementemccm1-112047.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementemccp-111693.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementmathce1pdf-116325.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementmathce2pdf-122974.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/2025livretaccompagnementmathcppdf-111984.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/2026livretaccompagnementevarcp-126299.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/calcul-mentalv2pdf-111834.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvrecm1mathspdf-111543.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvrecm2-mathpdf-111537.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/guide-pour-enseigner-les-nombres-le-calcul-et-la-resolution-de-problemes-au-cp-68664.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/guide-resolution-de-problemes-cours-moyen-90990.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/la-resolution-de-problemesv2pdf-111837.pdf",
+    "https://eduscol.education.gouv.fr/sites/default/files/document/les-fractionsv2pdf-111831.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/Annexe%201%20%E2%80%93%20Programme%20de%20langues%20vivantes%20%C3%A9trang%C3%A8res%20et%20r%C3%A9gionales%20pour%20le%20cycle%202%20-481187.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20langues%20vivantes%20%C3%A9trang%C3%A8res%20et%20r%C3%A9gionales%20pour%20les%20classes%20de%20cours%20moyen%20%28cycle%203%29-481190.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/Annexe%204%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20du%20cycle%202-403821.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/annexe-1-programme-de-sciences-et-technologie-du-cycle-2-517289.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/annexe-2-programme-de-sciences-et-technologie-du-cycle-3-517292.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/annexe-3-programme-d-histoire-geographie-cycle-2-516776.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/annexe-4-programme-d-histoire-geographie-cycle-3-516779.pdf",
+    "https://www.education.gouv.fr/sites/default/files/ensel135_annexe3.pdf",
+    "https://www.education.gouv.fr/sites/default/files/ensel620_annexe1.pdf",
+    "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf",
+    "https://www.education.gouv.fr/sites/default/files/programme-de-math-matiques-pour-le-cycle-3-439827.pdf",
+    "https://eduscol.education.fr/document/65383/download",
+    "https://eduscol.education.fr/document/67770/download",
+    "https://eduscol.education.fr/document/69017/download",
+    "https://education.gouv.fr/sites/default/files/Bulletin_officiel_MENJS_2024_06_13_BO24-1718196134.pdf",
+    "https://www.education.gouv.fr/sites/default/files/document/bulletin-officiel-ndeg-24-du-11-juin-2026-519026.pdf",
+    "https://direction-1d-38.web.ac-grenoble.fr/sites/default/files/Media/document/Lettre%20d%27information%20DSDEN38%202026.06.08.pdf",
+    "https://pedagogie.ac-toulouse.fr/prim82/accompagnement-des-nouveaux-programmes",
+    "https://sites.ac-nancy-metz.fr/dsden54-maths/les-ressources-institutionnelles/cycle-2/",
+    "https://sites.ac-nancy-metz.fr/dsden54-maths/les-ressources-institutionnelles/cycle-3/"
+  ]
+}

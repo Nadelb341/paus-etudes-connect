@@ -1,0 +1,1556 @@
+{
+ "add": [
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Chanter et enchanter le monde : mots et merveilles",
+   "chapters": [
+    "Découvrir la poésie : vers, strophes et rimes",
+    "Les images poétiques : comparaison et métaphore",
+    "Jouer avec les mots et les sonorités",
+    "Le merveilleux en poésie",
+    "Dire un poème : rythme, voix et mise en scène"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Lire et comprendre des textes",
+   "chapters": [
+    "Lire avec fluidité : viser 130 mots par minute",
+    "Repérer l'implicite, les liens logiques et les reprises nominales"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Grammaire : la phrase et ses constituants",
+   "chapters": [
+    "Distinguer l'attribut du sujet et le COD",
+    "Les pronoms personnels et leur antécédent",
+    "Épithète ou complément du nom ?",
+    "La proposition : juxtaposition, coordination et subordination",
+    "Conjonction de coordination ou conjonction de subordination ?"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Le verbe et la conjugaison",
+   "chapters": [
+    "Le conditionnel présent",
+    "Les verbes du 1er groupe dont le radical change (appeler, jeter, manger…)",
+    "Temps du discours et temps du récit : premières valeurs"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Orthographe",
+   "chapters": [
+    "L'accord du participe passé avec avoir quand le COD est un pronom placé avant"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Écrire",
+   "chapters": [
+    "Copier un texte sans erreur et soigner son écriture",
+    "Résumer et synthétiser un texte ou une leçon",
+    "Utiliser le brouillon pour préparer son texte"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Voyager en poésie : « Du monde entier au cœur du monde »",
+   "chapters": [
+    "Le voyage réel et le voyage intérieur en poésie",
+    "Poètes d'ici et d'ailleurs, y compris francophones",
+    "Sonorités, rythmes et images : la force des mots",
+    "Écrire un poème de voyage avec une contrainte",
+    "Lire un poème à voix haute avec expressivité"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Imaginer, sentir, raisonner : des histoires pour plaire et instruire",
+   "chapters": [
+    "Contes et fables : plaire et instruire",
+    "Les personnages, miroirs des qualités et des défauts humains",
+    "Récits de traditions et de cultures diverses",
+    "Débattre d'une morale",
+    "Écrire ou réécrire un apologue"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Expérimenter et jouer au théâtre : la société sens dessus dessous",
+   "chapters": [
+    "Maîtres et valets : quand les rôles s'inversent",
+    "Les ressorts du comique : mots, gestes, situations, caractères"
+   ],
+   "note": "thème renommé ci-dessus : à ajouter dans ce thème après renommage"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Devenir héroïne ou héros : destins romanesques",
+   "chapters": [
+    "Du héros d'épopée au héros de roman moderne",
+    "Héroïnes et héros : stéréotypes et représentations"
+   ],
+   "note": "thème renommé ci-dessus : à ajouter dans ce thème après renommage"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Grammaire et syntaxe",
+   "chapters": [
+    "Déterminants ou pronoms ? Pronoms démonstratifs et indéfinis",
+    "Les paroles rapportées : discours direct et discours indirect",
+    "Grammaire de l'écrit et grammaire de l'oral : les registres de langue"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Orthographe",
+   "chapters": [
+    "L'accord de l'attribut du sujet et les verbes attributifs"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Lexique",
+   "chapters": [
+    "Le néologisme : inventer des mots",
+    "Le sens des préfixes et des suffixes les plus fréquents"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Nombres entiers et nombres décimaux",
+   "chapters": [
+    "Les grands nombres jusqu'au milliard",
+    "Un même nombre, plusieurs écritures : fraction décimale, nombre mixte, pourcentage"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Fractions",
+   "chapters": [
+    "Les nombres mixtes",
+    "Multiplier une fraction par un nombre entier",
+    "Inventer des problèmes avec des fractions"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Résoudre des problèmes",
+   "chapters": [
+    "Le schéma en barres pour modéliser un problème",
+    "Les motifs évolutifs : repérer une régularité"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Proportionnalité",
+   "chapters": [
+    "Calculer une proportion et l'exprimer en pourcentage"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Organisation et gestion de données",
+   "chapters": [
+    "Planifier une enquête et filtrer les données d'un tableau",
+    "Représenter des mesures par des points dans un repère",
+    "Calculer une probabilité quand les issues sont équiprobables",
+    "Comparer les résultats d'une expérience répétée à une probabilité"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Espace et géométrie",
+   "chapters": [
+    "Distance entre deux points et milieu d'un segment",
+    "Angles opposés par le sommet, adjacents et supplémentaires",
+    "La bissectrice d'un angle",
+    "La somme des angles d'un triangle",
+    "Médiatrices d'un triangle et cercle circonscrit"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Algorithmique et programmation",
+   "chapters": [
+    "Instructions, séquences et répétitions, avec ou sans ordinateur"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Nombres et calculs",
+   "chapters": [
+    "Diviser par un nombre décimal",
+    "Opposé et valeur absolue d'un nombre relatif",
+    "La distributivité simple sur des exemples numériques"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Puissances",
+   "chapters": [
+    "Le carré et le cube d'un nombre : notation",
+    "Les carrés des entiers de 0 à 12",
+    "Calculer une expression contenant des puissances simples"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Calcul littéral",
+   "chapters": [
+    "Produire une formule : double, triple, carré, périmètre, aire",
+    "Démontrer avec le calcul littéral ou réfuter avec un contre-exemple",
+    "Résoudre des équations du type ax = c et x + b = c"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Fonctions",
+   "chapters": [
+    "Exprimer une grandeur en fonction d'une autre",
+    "Produire et lire un tableau de valeurs",
+    "Lire et interpréter un graphique cartésien",
+    "Reconnaître graphiquement une situation de proportionnalité"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Proportionnalité",
+   "chapters": [
+    "Utiliser un coefficient de proportionnalité : prix unitaire, vitesse moyenne, échelle"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Statistiques et probabilités",
+   "chapters": [
+    "Répéter une expérience aléatoire : effectifs et fréquences"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Grandeurs et mesures",
+   "chapters": [
+    "L'aire du triangle",
+    "Le volume du cube et du pavé droit"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Géométrie plane",
+   "chapters": [
+    "Les parallélogrammes particuliers : rectangle, losange, carré",
+    "Démontrer que la somme des angles d'un triangle vaut 180°"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Géométrie dans l'espace",
+   "chapters": [
+    "Relier perspective cavalière et patron d'un solide"
+   ]
+  },
+  {
+   "level": "3ème",
+   "subject": "histoire",
+   "theme": "L'Europe, un théâtre majeur des guerres totales (1914-1945)",
+   "chapters": [
+    "Démocraties fragilisées : la France des années 1930 et le Front populaire"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "emc",
+   "theme": "Construire une culture civique",
+   "chapters": [
+    "Représenter les autres : élire et être élu, de la classe au Parlement européen",
+    "L'intérêt général et les générations futures"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "emc",
+   "theme": "Acquérir et partager les valeurs de la République",
+   "chapters": [
+    "La liberté de conscience : croire, ne pas croire, changer de croyance"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "emc",
+   "theme": "Respecter autrui",
+   "chapters": [
+    "Le droit à la vie privée et le droit à l'image",
+    "Traces numériques, données personnelles et majorité numérique à 15 ans"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "emc",
+   "theme": "Respecter autrui et vivre ensemble",
+   "chapters": [
+    "L'égalité femmes-hommes : des lois conquises, de 1944 à la parité",
+    "Les discours de haine en ligne et la loi"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "emc",
+   "theme": "La solidarité et ses échelles",
+   "chapters": [
+    "La Sécurité sociale : se protéger contre la maladie et les accidents",
+    "Le rôle des communes, des départements et des régions",
+    "Agir face aux risques environnementaux : prévention et secours"
+   ]
+  },
+  {
+   "level": "4ème",
+   "subject": "emc",
+   "theme": "Les libertés et les droits",
+   "chapters": [
+    "L'État de droit et la hiérarchie des normes",
+    "L'indépendance de la justice et l'organisation judiciaire"
+   ]
+  },
+  {
+   "level": "4ème",
+   "subject": "emc",
+   "theme": "La sécurité et la défense des personnes",
+   "chapters": [
+    "La Défense nationale : protéger le pays et ses habitants",
+    "Vigipirate et la sécurité civile : protéger la population",
+    "Guerre de l'information et cyberdéfense"
+   ]
+  },
+  {
+   "level": "3ème",
+   "subject": "emc",
+   "theme": "La République et la citoyenneté",
+   "chapters": [
+    "Les institutions de l'Union européenne"
+   ]
+  },
+  {
+   "level": "3ème",
+   "subject": "emc",
+   "theme": "Les droits et les devoirs du citoyen",
+   "chapters": [
+    "Information et désinformation : sondages, complotisme et intelligence artificielle",
+    "Les lanceurs d'alerte",
+    "Élections et référendum : les temps du débat démocratique"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "physique-chimie",
+   "theme": "La matière et ses états",
+   "chapters": [
+    "Le palier de température pendant un changement d'état",
+    "Mesurer un volume de gaz par déplacement d'eau",
+    "Masse et volume : une relation de proportionnalité",
+    "Trier les matériaux selon leurs propriétés : conduction et aimantation"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "physique-chimie",
+   "theme": "Les mélanges",
+   "chapters": [
+    "Liquides non miscibles et saturation d'une solution",
+    "La composition de l'air et les gaz à effet de serre",
+    "Une première transformation chimique : couleur qui change, gaz qui se forme",
+    "La sécurité : pictogrammes de danger et produits ménagers"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "physique-chimie",
+   "theme": "Le mouvement",
+   "chapters": [
+    "Calculer une vitesse à partir d'une distance et d'une durée",
+    "La Terre tourne : l'année (révolution) et le jour (rotation)"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "physique-chimie",
+   "theme": "L'énergie",
+   "chapters": [
+    "Représenter une chaîne énergétique",
+    "Ressources énergétiques et conséquences sur l'environnement"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "physique-chimie",
+   "theme": "Signaux et informations",
+   "chapters": [
+    "Un circuit avec moteur, cellule photovoltaïque ou capteur",
+    "Le schéma normalisé d'un circuit électrique",
+    "Le jour, la nuit et les saisons : modéliser la lumière du Soleil"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "svt",
+   "theme": "Le vivant et sa diversité",
+   "chapters": [
+    "Observer des cellules au microscope",
+    "Utiliser une clé de détermination",
+    "Lire un arbre de parenté",
+    "Les grandes crises biologiques"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "svt",
+   "theme": "Les fonctions de nutrition",
+   "chapters": [
+    "Conserver les aliments : froid, salaison, stérilisation",
+    "La fermentation : fabriquer du pain ou un yaourt"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "svt",
+   "theme": "Le développement et la reproduction des êtres vivants",
+   "chapters": [
+    "La pollinisation : de la fleur au fruit",
+    "Pollinisateurs, pesticides et cultures",
+    "Les organes reproducteurs humains et la fécondation"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "svt",
+   "theme": "La planète Terre et les êtres vivants dans leur environnement",
+   "chapters": [
+    "Les conditions de la vie sur Terre",
+    "Le réchauffement climatique : causes, effets et solutions",
+    "Un écosystème au fil des saisons",
+    "Les décomposeurs et le cycle de la matière dans le sol",
+    "Fabriquer un objet pour la biodiversité : nichoir, hôtel à insectes"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "technologie",
+   "theme": "Informatique et programmation",
+   "chapters": [
+    "Stocker et retrouver ses fichiers : formats, dossiers et octets",
+    "Les bases de la cybersécurité et la propriété intellectuelle",
+    "Décrire un objet par des données : descripteurs et types"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "technologie",
+   "theme": "Les objets et les systèmes techniques",
+   "chapters": [
+    "Réparer un objet en suivant un protocole",
+    "Découvrir les machines d'un atelier de fabrication (fablab)"
+   ]
+  },
+  {
+   "level": "4ème",
+   "subject": "technologie",
+   "theme": "Informatique et programmation",
+   "chapters": [
+    "Usage raisonné du numérique : identité numérique, cookies et géolocalisation",
+    "Connecter un objet à un réseau local : l'adresse IP",
+    "Analyser une table de données issue d'un objet"
+   ]
+  },
+  {
+   "level": "4ème",
+   "subject": "technologie",
+   "theme": "Les objets et les systèmes techniques",
+   "chapters": [
+    "Trouver l'origine d'une panne et remplacer une pièce"
+   ]
+  },
+  {
+   "level": "3ème",
+   "subject": "technologie",
+   "theme": "Les objets et les systèmes techniques",
+   "chapters": [
+    "L'intelligence artificielle : apprentissage, usages et biais",
+    "Découverte scientifique et innovation de rupture",
+    "Diagnostiquer et réparer un système défectueux"
+   ]
+  },
+  {
+   "level": "3ème",
+   "subject": "technologie",
+   "theme": "Informatique et programmation",
+   "chapters": [
+    "Représenter l'information en données : bits, texte et image"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "anglais",
+   "theme": "Découvrir le monde anglophone",
+   "chapters": [
+    "Personnes et personnages célèbres du monde anglophone",
+    "Pays et paysages de l'aire anglophone",
+    "Contes et légendes du monde anglophone",
+    "Arts et expression des sentiments"
+   ]
+  },
+  {
+   "level": "6ème",
+   "subject": "anglais",
+   "theme": "Grammaire de base",
+   "chapters": [
+    "Les démonstratifs this, that, these, those",
+    "Les pronoms compléments et les pronoms possessifs",
+    "Reconnaître le prétérit des verbes les plus courants",
+    "Dire la date avec les nombres ordinaux"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "anglais",
+   "theme": "Découvrir le monde anglophone",
+   "chapters": [
+    "Portrait et autoportrait dans les arts anglophones",
+    "Le réel et l'imaginaire dans les récits anglophones",
+    "Des langues, des lieux, des histoires : l'anglais dans le monde"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "anglais",
+   "theme": "Vie quotidienne et loisirs",
+   "chapters": [
+    "Les pronoms réfléchis : myself, yourself…"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "anglais",
+   "theme": "Exprimer des projets et des obligations",
+   "chapters": [
+    "Les modaux could et should",
+    "Donner son opinion : I think, in my opinion"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "espagnol",
+   "theme": "Le Mexique et les repères culturels de 5e",
+   "chapters": [
+    "Le Mexique : nature et grands sites archéologiques",
+    "Les saveurs du Mexique",
+    "Le Jour des morts (Día de los Muertos)",
+    "Portrait et autoportrait dans l'art hispanique",
+    "Le réel et l'imaginaire dans les récits hispaniques"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "espagnol",
+   "theme": "Mes goûts et ma vie quotidienne",
+   "chapters": [
+    "Le futur proche : ir a + infinitif",
+    "Estar + gérondif : l'action en cours",
+    "Les comparatifs : más… que, menos… que",
+    "Le présent du subjonctif : premières formes"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "allemand",
+   "theme": "16 nuances d'Allemagne et repères culturels de 5e",
+   "chapters": [
+    "Les 16 Länder : la diversité des régions allemandes",
+    "Portrait et autoportrait",
+    "Le réel et l'imaginaire : contes et légendes germaniques"
+   ]
+  },
+  {
+   "level": "5ème",
+   "subject": "allemand",
+   "theme": "Mes goûts et mes loisirs",
+   "chapters": [
+    "Les verbes de modalité au présent : können, müssen, wollen, dürfen, sollen, mögen",
+    "Le prétérit de sein et haben",
+    "Raconter au parfait : premiers verbes",
+    "Exprimer un souhait : ich möchte, ich hätte gern"
+   ]
+  }
+ ],
+ "rename": [
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Le monstre, aux limites de l'humain",
+   "old": "Le monstre, aux limites de l'humain",
+   "new": "Rencontrer des monstres : expérience de l'autre, expérience de soi"
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Récits d'aventures",
+   "old": "Récits d'aventures",
+   "new": "Partir à l'aventure !"
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Récits de création et création poétique",
+   "old": "Récits de création et création poétique",
+   "new": "Créer, recréer le monde : récits des origines"
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Résister au plus fort : ruses, mensonges et masques",
+   "old": "Résister au plus fort : ruses, mensonges et masques",
+   "new": "Se masquer, jouer, déjouer : ruses en action"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Héros, héroïnes et héroïsmes",
+   "old": "Héros, héroïnes et héroïsmes",
+   "new": "Devenir héroïne ou héros : destins romanesques"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Avec autrui : familles, amis, réseaux",
+   "old": "Avec autrui : familles, amis, réseaux",
+   "new": "Expérimenter et jouer au théâtre : la société sens dessus dessous"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Conjugaison",
+   "old": "Le subjonctif présent",
+   "new": "Le passé antérieur et le futur antérieur (par imitation)"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Grammaire et syntaxe",
+   "old": "Phrase simple et phrase complexe : juxtaposition, coordination, subordination",
+   "new": "Phrase simple, phrase complexe et phrase non verbale : juxtaposition et coordination"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Grammaire et syntaxe",
+   "old": "Les expansions du nom : adjectif, complément du nom, proposition relative",
+   "new": "Le groupe nominal minimal et le groupe nominal étendu"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Fractions",
+   "old": "Additionner et soustraire des fractions de même dénominateur",
+   "new": "Additionner et soustraire des fractions"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Calculer avec les nombres",
+   "old": "Multiples, diviseurs et critères de divisibilité",
+   "new": "Multiples et diviseurs au service du calcul sur les fractions"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Proportionnalité",
+   "old": "Le passage par l'unité et le coefficient de proportionnalité",
+   "new": "Le retour à l'unité et les propriétés de linéarité"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Organisation et gestion de données",
+   "old": "Lire et construire un diagramme en barres",
+   "new": "Lire et interpréter un diagramme en barres ou une courbe"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Organisation et gestion de données",
+   "old": "Découvrir le hasard : situations aléatoires",
+   "new": "Les probabilités : un nombre compris entre 0 et 1"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Grandeurs et mesures",
+   "old": "Aires du rectangle, du triangle et du disque",
+   "new": "Aires du carré et du rectangle ; conversions d'aires"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Grandeurs et mesures",
+   "old": "Volumes et contenances",
+   "new": "Volumes : le centimètre cube et les assemblages de cubes"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Espace et géométrie",
+   "old": "Solides : reconnaître, décrire, patrons et représentations",
+   "new": "Voir dans l'espace : assemblages de cubes et leurs représentations"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Nombres et calculs",
+   "old": "Multiples, diviseurs et nombres premiers",
+   "new": "Multiples, diviseurs et critères de divisibilité par 3 et par 9"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Proportionnalité",
+   "old": "Les ratios et le partage proportionnel",
+   "new": "Les proportions : exprimer une partie d'un tout"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Géométrie plane",
+   "old": "Les hauteurs et les médiatrices d'un triangle",
+   "new": "Les hauteurs et les médianes d'un triangle"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Algorithmique et programmation",
+   "old": "Les variables dans un programme",
+   "new": "Programmer une formule de calcul avec des blocs"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Algorithmique et programmation",
+   "old": "Les boucles et les instructions conditionnelles",
+   "new": "La boucle « répéter n fois »"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Algorithmique et programmation",
+   "old": "Les événements et la programmation de plusieurs lutins",
+   "new": "Les entrées et les sorties d'un programme"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Nombres et arithmétique",
+   "old": "Le PGCD et les fractions irréductibles",
+   "new": "Rendre une fraction irréductible grâce aux facteurs premiers"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Nombres et arithmétique",
+   "old": "Les ensembles de nombres",
+   "new": "Nombres rationnels et premiers nombres irrationnels (√2, π)"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Calcul littéral",
+   "old": "Les identités remarquables",
+   "new": "L'identité a² − b² = (a − b)(a + b)"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Préparer le brevet : épreuve de mathématiques",
+   "old": "Réussir les questions de calcul automatisé et de cours",
+   "new": "Réussir la partie automatismes (20 minutes, sans calculatrice)"
+  },
+  {
+   "level": "5ème",
+   "subject": "anglais",
+   "theme": "Découvrir le monde anglophone",
+   "old": "Les États-Unis : géographie et grandes villes",
+   "new": "Le Royaume-Uni : nations, histoire et société"
+  }
+ ],
+ "remove": [
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Récits de création et création poétique",
+   "chapter": "Découvrir la poésie : vers, strophes et rimes",
+   "raison": "Déplacé : la poésie forme désormais une entrée à part en 6e (« Chanter et enchanter le monde : mots et merveilles »), où ce chapitre est recréé."
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Récits de création et création poétique",
+   "chapter": "Les images poétiques : comparaison et métaphore",
+   "raison": "Déplacé : la poésie forme désormais une entrée à part en 6e (« Chanter et enchanter le monde : mots et merveilles »), où ce chapitre est recréé."
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Récits de création et création poétique",
+   "chapter": "Jouer avec les mots et les sonorités",
+   "raison": "Déplacé : la poésie forme désormais une entrée à part en 6e (« Chanter et enchanter le monde : mots et merveilles »), où ce chapitre est recréé."
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Équations et inéquations",
+   "chapter": "Résoudre une inéquation du premier degré",
+   "raison": "Hors programme du collège : les inéquations ne figurent pas au programme de cycle 4 (vues en seconde)."
+  }
+ ],
+ "links": [
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Lire et comprendre des textes",
+   "label": "Programme officiel de français du cycle 3 (BO du 17 avril 2025)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel620_annexe1.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Lire et comprendre des textes",
+   "label": "Calendrier officiel d'entrée en vigueur des nouveaux programmes (Eduscol, juillet 2026)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/calendriernouveauxprogrammes-129025.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Lire et comprendre des textes",
+   "label": "Évaluations nationales de 6e : présentation (Eduscol, 2025)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/2025presentation-eva6pdf-113220.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Nombres entiers et nombres décimaux",
+   "label": "Programme officiel de mathématiques du cycle 3 (BO du 17 avril 2025)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel620_annexe2-v2.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Nombres entiers et nombres décimaux",
+   "label": "Évaluation nationale de 6e en mathématiques : exercices et compétences (Eduscol, 2025)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/25eva6mathematiquesdocpropdf-113202.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Grammaire et syntaxe",
+   "label": "Programme officiel de français du cycle 4 (BO du 5 mars 2026)",
+   "url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%201%20%E2%80%93%20Programme%20de%20fran%C3%A7ais%20pour%20le%20cycle%204-480713.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "francais",
+   "theme": "Grammaire et syntaxe",
+   "label": "Repères annuels de progression en français, cycle 4 (Eduscol, programme encore en vigueur en 4e et 3e)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/25-francais-c4-reperes-eduscol1114755pdf-74691.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "francais",
+   "theme": "Grammaire et syntaxe",
+   "label": "Repères annuels de progression en français, cycle 4 (Eduscol, programme encore en vigueur en 4e et 3e)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/25-francais-c4-reperes-eduscol1114755pdf-74691.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Nombres et calculs",
+   "label": "Programme officiel de mathématiques du cycle 4 (BO du 5 mars 2026)",
+   "url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "emc",
+   "theme": "Acquérir et partager les valeurs de la République",
+   "label": "Programme officiel d'EMC (BO du 13 juin 2024)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "emc",
+   "theme": "Respecter autrui et vivre ensemble",
+   "label": "Programme officiel d'EMC (BO du 13 juin 2024)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "emc",
+   "theme": "Les libertés et les droits",
+   "label": "Programme officiel d'EMC (BO du 13 juin 2024)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "emc",
+   "theme": "La République et la citoyenneté",
+   "label": "Programme officiel d'EMC (BO du 13 juin 2024)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "technologie",
+   "theme": "Les objets et les systèmes techniques",
+   "label": "Programme officiel de technologie du cycle 4 (BO du 29 février 2024)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel802_annexe.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "technologie",
+   "theme": "Les objets et les systèmes techniques",
+   "label": "Programme officiel de technologie du cycle 4 (BO du 29 février 2024)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel802_annexe.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "technologie",
+   "theme": "Les objets et les systèmes techniques",
+   "label": "Programme officiel de technologie du cycle 4 (BO du 29 février 2024)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel802_annexe.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "physique-chimie",
+   "theme": "La matière et ses états",
+   "label": "Programme de sciences et technologie du cycle 3, version rentrée 2023 (Eduscol, copie académique)",
+   "url": "https://pedagogie.ac-orleans-tours.fr/documents/pdf/programme_physique-chimie_c3_rs_2023.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "svt",
+   "theme": "Le vivant et sa diversité",
+   "label": "Programme de sciences et technologie du cycle 3, version rentrée 2023 (Eduscol, copie académique)",
+   "url": "https://pedagogie.ac-orleans-tours.fr/documents/pdf/programme_physique-chimie_c3_rs_2023.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "technologie",
+   "theme": "Les objets techniques et leur évolution",
+   "label": "Programme de sciences et technologie du cycle 3, version rentrée 2023 (Eduscol, copie académique)",
+   "url": "https://pedagogie.ac-orleans-tours.fr/documents/pdf/programme_physique-chimie_c3_rs_2023.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "anglais",
+   "theme": "Découvrir le monde anglophone",
+   "label": "Programme officiel d'anglais pour le collège (BO du 29 mai 2025)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel621_annexe3.pdf"
+  },
+  {
+   "level": "6ème",
+   "subject": "anglais",
+   "theme": "Découvrir le monde anglophone",
+   "label": "Exemples officiels de mise en œuvre en anglais au collège (Eduscol, 2025)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvreanglaiscollegepdf-111873.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "anglais",
+   "theme": "Découvrir le monde anglophone",
+   "label": "Programme officiel d'anglais pour le collège (BO du 29 mai 2025)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel621_annexe3.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "anglais",
+   "theme": "Découvrir le monde anglophone",
+   "label": "Exemples officiels de mise en œuvre en anglais au collège (Eduscol, 2025)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvreanglaiscollegepdf-111873.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "espagnol",
+   "theme": "Se présenter et entrer en contact",
+   "label": "Programme officiel d'espagnol pour le collège (BO du 29 mai 2025)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel621_annexe9.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "espagnol",
+   "theme": "Se présenter et entrer en contact",
+   "label": "Exemples officiels de mise en œuvre en espagnol au collège (Eduscol, 2025)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvreespagnolcollegepdf-111891.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "allemand",
+   "theme": "Se présenter et entrer en contact",
+   "label": "Programme officiel d'allemand pour le collège (BO du 29 mai 2025)",
+   "url": "https://www.education.gouv.fr/sites/default/files/ensel621_annexe1.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "allemand",
+   "theme": "Se présenter et entrer en contact",
+   "label": "Exemples officiels de mise en œuvre en allemand au collège (Eduscol, 2025)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvreallemandcollegepdf-111867.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "histoire",
+   "theme": "Chrétientés et islam (VIe-XIIIe siècle), des mondes en contact",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "geographie",
+   "theme": "La question démographique et l'inégal développement",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "histoire",
+   "theme": "Le XVIIIe siècle : expansions, Lumières et révolutions",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "geographie",
+   "theme": "L'urbanisation du monde",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "histoire",
+   "theme": "L'Europe, un théâtre majeur des guerres totales (1914-1945)",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "geographie",
+   "theme": "Dynamiques territoriales de la France contemporaine",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "physique-chimie",
+   "theme": "Organisation et transformations de la matière",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "physique-chimie",
+   "theme": "Organisation et transformations de la matière",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "physique-chimie",
+   "theme": "Organisation et transformations de la matière",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "5ème",
+   "subject": "svt",
+   "theme": "La planète Terre, l'environnement et l'action humaine",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "svt",
+   "theme": "La planète Terre, l'environnement et l'action humaine",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "svt",
+   "theme": "La planète Terre, l'environnement et l'action humaine",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "mathematique",
+   "theme": "Nombres relatifs",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Nombres et arithmétique",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "4ème",
+   "subject": "francais",
+   "theme": "Dire l'amour",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "francais",
+   "theme": "Se raconter, se représenter",
+   "label": "Programmes du cycle 4 encore en vigueur (BO du 30 juillet 2020)",
+   "url": "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Préparer le brevet : épreuve de mathématiques",
+   "label": "Annales du brevet de mathématiques (sujets officiels, APMEP, gratuit)",
+   "url": "https://www.apmep.fr/Annales-du-Brevet-des-colleges"
+  },
+  {
+   "level": "3ème",
+   "subject": "francais",
+   "theme": "Préparer le brevet : épreuve de français",
+   "label": "Lumni : réviser le brevet (méthodes, quiz, fiches)",
+   "url": "https://www.lumni.fr/college/troisieme/brevet"
+  },
+  {
+   "level": "3ème",
+   "subject": "histoire",
+   "theme": "Préparer le brevet : épreuve d'histoire",
+   "label": "Lumni : réviser le brevet (méthodes, quiz, fiches)",
+   "url": "https://www.lumni.fr/college/troisieme/brevet"
+  },
+  {
+   "level": "3ème",
+   "subject": "geographie",
+   "theme": "Préparer le brevet : épreuve de géographie",
+   "label": "Lumni : réviser le brevet (méthodes, quiz, fiches)",
+   "url": "https://www.lumni.fr/college/troisieme/brevet"
+  },
+  {
+   "level": "3ème",
+   "subject": "physique-chimie",
+   "theme": "Préparer le brevet : épreuve de sciences",
+   "label": "Lumni : réviser le brevet (méthodes, quiz, fiches)",
+   "url": "https://www.lumni.fr/college/troisieme/brevet"
+  },
+  {
+   "level": "3ème",
+   "subject": "svt",
+   "theme": "Préparer le brevet : épreuve de sciences",
+   "label": "Lumni : réviser le brevet (méthodes, quiz, fiches)",
+   "url": "https://www.lumni.fr/college/troisieme/brevet"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Préparer le brevet : épreuve de mathématiques",
+   "label": "Lumni : réviser le brevet (méthodes, quiz, fiches)",
+   "url": "https://www.lumni.fr/college/troisieme/brevet"
+  },
+  {
+   "level": "6ème",
+   "subject": "francais",
+   "theme": "Lire et comprendre des textes",
+   "label": "Lumni : vidéos et quiz gratuits (francais, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/francais"
+  },
+  {
+   "level": "6ème",
+   "subject": "mathematique",
+   "theme": "Nombres entiers et nombres décimaux",
+   "label": "Lumni : vidéos et quiz gratuits (mathematique, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/mathematiques"
+  },
+  {
+   "level": "6ème",
+   "subject": "histoire",
+   "theme": "La longue histoire de l'humanité et des migrations",
+   "label": "Lumni : vidéos et quiz gratuits (histoire, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/histoire"
+  },
+  {
+   "level": "6ème",
+   "subject": "geographie",
+   "theme": "Habiter une métropole",
+   "label": "Lumni : vidéos et quiz gratuits (geographie, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/geographie"
+  },
+  {
+   "level": "6ème",
+   "subject": "emc",
+   "theme": "Respecter autrui",
+   "label": "Lumni : vidéos et quiz gratuits (emc, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/enseignement-moral-et-civique"
+  },
+  {
+   "level": "6ème",
+   "subject": "physique-chimie",
+   "theme": "La matière et ses états",
+   "label": "Lumni : vidéos et quiz gratuits (physique-chimie, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/sciences-et-technologie"
+  },
+  {
+   "level": "6ème",
+   "subject": "svt",
+   "theme": "Le vivant et sa diversité",
+   "label": "Lumni : vidéos et quiz gratuits (svt, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/sciences-et-technologie"
+  },
+  {
+   "level": "6ème",
+   "subject": "technologie",
+   "theme": "Les objets techniques et leur évolution",
+   "label": "Lumni : vidéos et quiz gratuits (technologie, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/sciences-et-technologie"
+  },
+  {
+   "level": "6ème",
+   "subject": "anglais",
+   "theme": "Se présenter et parler de soi",
+   "label": "Lumni : vidéos et quiz gratuits (anglais, 6ème)",
+   "url": "https://www.lumni.fr/college/sixieme/anglais"
+  },
+  {
+   "level": "5ème",
+   "subject": "francais",
+   "theme": "Le voyage et l'aventure : pourquoi aller vers l'inconnu ?",
+   "label": "Lumni : vidéos et quiz gratuits (francais, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/francais"
+  },
+  {
+   "level": "5ème",
+   "subject": "mathematique",
+   "theme": "Nombres et calculs",
+   "label": "Lumni : vidéos et quiz gratuits (mathematique, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/mathematiques"
+  },
+  {
+   "level": "5ème",
+   "subject": "histoire",
+   "theme": "Chrétientés et islam (VIe-XIIIe siècle), des mondes en contact",
+   "label": "Lumni : vidéos et quiz gratuits (histoire, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/histoire"
+  },
+  {
+   "level": "5ème",
+   "subject": "geographie",
+   "theme": "La question démographique et l'inégal développement",
+   "label": "Lumni : vidéos et quiz gratuits (geographie, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/geographie"
+  },
+  {
+   "level": "5ème",
+   "subject": "emc",
+   "theme": "Respecter autrui et vivre ensemble",
+   "label": "Lumni : vidéos et quiz gratuits (emc, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/enseignement-moral-et-civique"
+  },
+  {
+   "level": "5ème",
+   "subject": "physique-chimie",
+   "theme": "Organisation et transformations de la matière",
+   "label": "Lumni : vidéos et quiz gratuits (physique-chimie, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/physique-chimie"
+  },
+  {
+   "level": "5ème",
+   "subject": "svt",
+   "theme": "La planète Terre, l'environnement et l'action humaine",
+   "label": "Lumni : vidéos et quiz gratuits (svt, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/sciences-de-la-vie-et-de-la-terre"
+  },
+  {
+   "level": "5ème",
+   "subject": "technologie",
+   "theme": "Design, innovation et créativité",
+   "label": "Lumni : vidéos et quiz gratuits (technologie, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/technologie"
+  },
+  {
+   "level": "5ème",
+   "subject": "anglais",
+   "theme": "Parler du passé",
+   "label": "Lumni : vidéos et quiz gratuits (anglais, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/anglais"
+  },
+  {
+   "level": "5ème",
+   "subject": "espagnol",
+   "theme": "Se présenter et entrer en contact",
+   "label": "Lumni : vidéos et quiz gratuits (espagnol, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/espagnol"
+  },
+  {
+   "level": "5ème",
+   "subject": "allemand",
+   "theme": "Se présenter et entrer en contact",
+   "label": "Lumni : vidéos et quiz gratuits (allemand, 5ème)",
+   "url": "https://www.lumni.fr/college/cinquieme/allemand"
+  },
+  {
+   "level": "4ème",
+   "subject": "francais",
+   "theme": "Dire l'amour",
+   "label": "Lumni : vidéos et quiz gratuits (francais, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/francais"
+  },
+  {
+   "level": "4ème",
+   "subject": "mathematique",
+   "theme": "Nombres relatifs",
+   "label": "Lumni : vidéos et quiz gratuits (mathematique, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/mathematiques"
+  },
+  {
+   "level": "4ème",
+   "subject": "histoire",
+   "theme": "Le XVIIIe siècle : expansions, Lumières et révolutions",
+   "label": "Lumni : vidéos et quiz gratuits (histoire, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/histoire"
+  },
+  {
+   "level": "4ème",
+   "subject": "geographie",
+   "theme": "L'urbanisation du monde",
+   "label": "Lumni : vidéos et quiz gratuits (geographie, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/geographie"
+  },
+  {
+   "level": "4ème",
+   "subject": "emc",
+   "theme": "Les libertés et les droits",
+   "label": "Lumni : vidéos et quiz gratuits (emc, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/enseignement-moral-et-civique"
+  },
+  {
+   "level": "4ème",
+   "subject": "physique-chimie",
+   "theme": "Organisation et transformations de la matière",
+   "label": "Lumni : vidéos et quiz gratuits (physique-chimie, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/physique-chimie"
+  },
+  {
+   "level": "4ème",
+   "subject": "svt",
+   "theme": "La planète Terre, l'environnement et l'action humaine",
+   "label": "Lumni : vidéos et quiz gratuits (svt, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/sciences-de-la-vie-et-de-la-terre"
+  },
+  {
+   "level": "4ème",
+   "subject": "technologie",
+   "theme": "Design, innovation et créativité",
+   "label": "Lumni : vidéos et quiz gratuits (technologie, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/technologie"
+  },
+  {
+   "level": "4ème",
+   "subject": "anglais",
+   "theme": "Raconter des expériences",
+   "label": "Lumni : vidéos et quiz gratuits (anglais, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/anglais"
+  },
+  {
+   "level": "4ème",
+   "subject": "espagnol",
+   "theme": "Raconter au passé",
+   "label": "Lumni : vidéos et quiz gratuits (espagnol, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/espagnol"
+  },
+  {
+   "level": "4ème",
+   "subject": "allemand",
+   "theme": "Raconter au passé",
+   "label": "Lumni : vidéos et quiz gratuits (allemand, 4ème)",
+   "url": "https://www.lumni.fr/college/quatrieme/allemand"
+  },
+  {
+   "level": "3ème",
+   "subject": "francais",
+   "theme": "Se raconter, se représenter",
+   "label": "Lumni : vidéos et quiz gratuits (francais, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/francais"
+  },
+  {
+   "level": "3ème",
+   "subject": "mathematique",
+   "theme": "Nombres et arithmétique",
+   "label": "Lumni : vidéos et quiz gratuits (mathematique, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/mathematiques"
+  },
+  {
+   "level": "3ème",
+   "subject": "histoire",
+   "theme": "L'Europe, un théâtre majeur des guerres totales (1914-1945)",
+   "label": "Lumni : vidéos et quiz gratuits (histoire, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/histoire"
+  },
+  {
+   "level": "3ème",
+   "subject": "geographie",
+   "theme": "Dynamiques territoriales de la France contemporaine",
+   "label": "Lumni : vidéos et quiz gratuits (geographie, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/geographie"
+  },
+  {
+   "level": "3ème",
+   "subject": "emc",
+   "theme": "La République et la citoyenneté",
+   "label": "Lumni : vidéos et quiz gratuits (emc, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/enseignement-moral-et-civique"
+  },
+  {
+   "level": "3ème",
+   "subject": "physique-chimie",
+   "theme": "Organisation et transformations de la matière",
+   "label": "Lumni : vidéos et quiz gratuits (physique-chimie, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/physique-chimie"
+  },
+  {
+   "level": "3ème",
+   "subject": "svt",
+   "theme": "La planète Terre, l'environnement et l'action humaine",
+   "label": "Lumni : vidéos et quiz gratuits (svt, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/sciences-de-la-vie-et-de-la-terre"
+  },
+  {
+   "level": "3ème",
+   "subject": "technologie",
+   "theme": "Design, innovation et créativité",
+   "label": "Lumni : vidéos et quiz gratuits (technologie, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/technologie"
+  },
+  {
+   "level": "3ème",
+   "subject": "anglais",
+   "theme": "Raconter et rapporter",
+   "label": "Lumni : vidéos et quiz gratuits (anglais, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/anglais"
+  },
+  {
+   "level": "3ème",
+   "subject": "espagnol",
+   "theme": "Raconter au passé",
+   "label": "Lumni : vidéos et quiz gratuits (espagnol, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/espagnol"
+  },
+  {
+   "level": "3ème",
+   "subject": "allemand",
+   "theme": "Raconter et décrire",
+   "label": "Lumni : vidéos et quiz gratuits (allemand, 3ème)",
+   "url": "https://www.lumni.fr/college/troisieme/allemand"
+  }
+ ],
+ "sources": [
+  "https://cache.media.education.gouv.fr/file/31/89/1/ensel714_annexe3_1312891.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/2025presentation-eva6pdf-113220.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/25-francais-c4-reperes-eduscol1114755pdf-74691.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/25eva6mathematiquesdocpropdf-113202.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/calendriernouveauxprogrammes-129025.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvreallemandcollegepdf-111867.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvreanglaiscollegepdf-111873.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/exemplesmiseenoeuvreespagnolcollegepdf-111891.pdf",
+  "https://mathematiques.ac-besancon.fr/wp-content/uploads/sites/45/2025/08/Changements_dans_le_programme_6e_2025.pdf",
+  "https://pedagogie.ac-orleans-tours.fr/documents/pdf/programme_physique-chimie_c3_rs_2023.pdf",
+  "https://pedagogie.ac-toulouse.fr/lettres/node/696",
+  "https://sites.ac-nancy-metz.fr/mathematiques/modalites-dattribution-du-dnb-a-compter-de-2026-epreuve-de-mathematiques/",
+  "https://www.apmep.fr/Annales-du-Brevet-des-colleges",
+  "https://www.education.gouv.fr/sites/default/files/document/Annexe%201%20%E2%80%93%20Programme%20de%20fran%C3%A7ais%20pour%20le%20cycle%204-480713.pdf",
+  "https://www.education.gouv.fr/sites/default/files/document/Annexe%202%20%E2%80%93%20Programme%20de%20math%C3%A9matiques%20pour%20le%20cycle%204-480716.pdf",
+  "https://www.education.gouv.fr/sites/default/files/ensel620_annexe1.pdf",
+  "https://www.education.gouv.fr/sites/default/files/ensel620_annexe2-v2.pdf",
+  "https://www.education.gouv.fr/sites/default/files/ensel621_annexe1.pdf",
+  "https://www.education.gouv.fr/sites/default/files/ensel621_annexe3.pdf",
+  "https://www.education.gouv.fr/sites/default/files/ensel621_annexe9.pdf",
+  "https://www.education.gouv.fr/sites/default/files/ensel802_annexe.pdf",
+  "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf",
+  "https://www.lumni.fr/college/cinquieme/allemand",
+  "https://www.lumni.fr/college/cinquieme/anglais",
+  "https://www.lumni.fr/college/cinquieme/enseignement-moral-et-civique",
+  "https://www.lumni.fr/college/cinquieme/espagnol",
+  "https://www.lumni.fr/college/cinquieme/francais",
+  "https://www.lumni.fr/college/cinquieme/geographie",
+  "https://www.lumni.fr/college/cinquieme/histoire",
+  "https://www.lumni.fr/college/cinquieme/mathematiques",
+  "https://www.lumni.fr/college/cinquieme/physique-chimie",
+  "https://www.lumni.fr/college/cinquieme/sciences-de-la-vie-et-de-la-terre",
+  "https://www.lumni.fr/college/cinquieme/technologie",
+  "https://www.lumni.fr/college/quatrieme/allemand",
+  "https://www.lumni.fr/college/quatrieme/anglais",
+  "https://www.lumni.fr/college/quatrieme/enseignement-moral-et-civique",
+  "https://www.lumni.fr/college/quatrieme/espagnol",
+  "https://www.lumni.fr/college/quatrieme/francais",
+  "https://www.lumni.fr/college/quatrieme/geographie",
+  "https://www.lumni.fr/college/quatrieme/histoire",
+  "https://www.lumni.fr/college/quatrieme/mathematiques",
+  "https://www.lumni.fr/college/quatrieme/physique-chimie",
+  "https://www.lumni.fr/college/quatrieme/sciences-de-la-vie-et-de-la-terre",
+  "https://www.lumni.fr/college/quatrieme/technologie",
+  "https://www.lumni.fr/college/sixieme/anglais",
+  "https://www.lumni.fr/college/sixieme/enseignement-moral-et-civique",
+  "https://www.lumni.fr/college/sixieme/francais",
+  "https://www.lumni.fr/college/sixieme/geographie",
+  "https://www.lumni.fr/college/sixieme/histoire",
+  "https://www.lumni.fr/college/sixieme/mathematiques",
+  "https://www.lumni.fr/college/sixieme/sciences-et-technologie",
+  "https://www.lumni.fr/college/troisieme/allemand",
+  "https://www.lumni.fr/college/troisieme/anglais",
+  "https://www.lumni.fr/college/troisieme/brevet",
+  "https://www.lumni.fr/college/troisieme/enseignement-moral-et-civique",
+  "https://www.lumni.fr/college/troisieme/espagnol",
+  "https://www.lumni.fr/college/troisieme/francais",
+  "https://www.lumni.fr/college/troisieme/geographie",
+  "https://www.lumni.fr/college/troisieme/histoire",
+  "https://www.lumni.fr/college/troisieme/mathematiques",
+  "https://www.lumni.fr/college/troisieme/physique-chimie",
+  "https://www.lumni.fr/college/troisieme/sciences-de-la-vie-et-de-la-terre",
+  "https://www.lumni.fr/college/troisieme/technologie",
+  "https://www.pedagogie.ac-nice.fr/espagnol/wp-content/uploads/sites/43/2025/09/diapo-nouveaux-programmes-college-version-PDF.pdf"
+ ]
+}

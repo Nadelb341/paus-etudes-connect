@@ -1,0 +1,890 @@
+{
+ "add": [
+  {
+   "level": "Seconde",
+   "subject": "histoire",
+   "theme": "Dynamiques et ruptures dans les sociétés des XVIIe et XVIIIe siècles",
+   "chapters": [
+    "Le rôle des femmes dans la vie scientifique, culturelle et politique",
+    "Les nouvelles techniques aux origines de la révolution industrielle"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Sociétés et environnements : des équilibres fragiles",
+   "chapters": [
+    "Étude de cas : un environnement fragile (Arctique, Amazonie ou Alpes)"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "L'Afrique australe : un espace en profonde mutation",
+   "chapters": [
+    "Des territoires traversés et remodelés par des mobilités complexes"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "physique-chimie",
+   "theme": "Constitution de la matière",
+   "chapters": [
+    "La composition de l'air et la composition massique d'un mélange"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "physique-chimie",
+   "theme": "Transformations de la matière",
+   "chapters": [
+    "L'énergie des changements d'état et les transferts thermiques"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "physique-chimie",
+   "theme": "Ondes et signaux",
+   "chapters": [
+    "La lumière blanche, la dispersion et la longueur d'onde"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "La Terre, la vie et l'organisation du vivant",
+   "chapters": [
+    "Les échelles de la biodiversité et la notion d'espèce",
+    "Les crises biologiques et l'évolution de la biodiversité",
+    "La communication au sein d'une espèce et la sélection sexuelle"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Les enjeux contemporains de la planète",
+   "chapters": [
+    "L'érosion et l'activité humaine"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Le corps humain et la santé",
+   "chapters": [
+    "Cerveau, plaisir et sexualité",
+    "Les agents pathogènes et les maladies vectorielles"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Internet et le Web",
+   "chapters": [
+    "Les réseaux pair-à-pair",
+    "Le Web : droit d'auteur, licences et notions juridiques"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Réseaux sociaux et données",
+   "chapters": [
+    "Le cyberharcèlement : le repérer et s'en protéger"
+   ]
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Le numérique dans le monde physique",
+   "chapters": [
+    "Les interfaces homme-machine"
+   ]
+  },
+  {
+   "level": "Première",
+   "subject": "histoire",
+   "theme": "La France dans l'Europe des nationalités (1848-1871)",
+   "chapters": [
+    "La guerre de 1870 et la chute du Second Empire"
+   ]
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "Les espaces ruraux : multifonctionnalité ou fragmentation ?",
+   "chapters": [
+    "Affirmation des fonctions non agricoles et conflits d'usages"
+   ]
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "La Chine : des recompositions spatiales multiples",
+   "chapters": [
+    "Des ressources et des environnements sous pression"
+   ]
+  },
+  {
+   "level": "Première",
+   "subject": "spe-nsi",
+   "theme": "Langages et programmation",
+   "chapters": [
+    "Mener un projet informatique en équipe"
+   ]
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "L'Union européenne dans la mondialisation : des dynamiques complexes",
+   "chapters": [
+    "La France : les dynamiques différenciées des territoires transfrontaliers"
+   ]
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "La France et ses régions dans le monde",
+   "chapters": [
+    "Les lignes de force du territoire français",
+    "Des recompositions territoriales à toutes les échelles : attractivité, concurrence et inégalités"
+   ]
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-physique",
+   "theme": "Ondes et signaux",
+   "chapters": [
+    "Absorption et émission de photons : le rendement d'une cellule photovoltaïque"
+   ]
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-hggsp",
+   "theme": "Préparer le bac",
+   "chapters": [
+    "Les thèmes évaluables de la session : la rotation annuelle"
+   ]
+  },
+  {
+   "level": "Terminale",
+   "subject": "maths-complementaires",
+   "theme": "Fonctions et modélisation",
+   "chapters": [
+    "Approche historique de la fonction logarithme"
+   ]
+  },
+  {
+   "level": "Terminale",
+   "subject": "maths-complementaires",
+   "theme": "Statistiques à deux variables",
+   "chapters": [
+    "Répartition des richesses : courbe de Lorenz et indice de Gini"
+   ]
+  },
+  {
+   "level": "Terminale",
+   "subject": "maths-complementaires",
+   "theme": "Probabilités",
+   "chapters": [
+    "Inférence bayésienne : réviser une probabilité grâce à une information nouvelle"
+   ]
+  }
+ ],
+ "rename": [
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Sociétés et environnements : des équilibres fragiles",
+   "old": "L'environnement, du local au planétaire",
+   "new": "Les grands milieux et la répartition du peuplement dans le monde"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Territoires, populations et développement",
+   "old": "Des dynamiques démographiques inégales",
+   "new": "Des trajectoires démographiques différenciées : les défis du nombre et du vieillissement"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Territoires, populations et développement",
+   "old": "La France : une population qui vieillit et se répartit inégalement",
+   "new": "La France : dynamiques démographiques et inégalités socio-économiques"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Des mobilités généralisées",
+   "old": "Le tourisme international",
+   "new": "Les mobilités touristiques internationales"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "L'Afrique australe : un espace en profonde mutation",
+   "old": "Des milieux et des ressources convoités",
+   "new": "Des milieux à valoriser et à ménager"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "L'Afrique australe : un espace en profonde mutation",
+   "old": "Développement, inégalités et mobilités en Afrique australe",
+   "new": "Les défis de la transition et du développement pour des pays inégalement développés"
+  },
+  {
+   "level": "Première",
+   "subject": "histoire",
+   "theme": "La Première Guerre mondiale",
+   "old": "Sortir de la guerre : traités de paix et nouvelle carte de l'Europe",
+   "new": "Sortir de la guerre : la tentative de construction d'un ordre des nations démocratiques"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "La métropolisation : un processus mondial différencié",
+   "old": "Les villes à l'heure de la métropolisation",
+   "new": "Les villes à l'échelle mondiale : le poids croissant des métropoles"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "Une diversification des espaces et des acteurs de la production",
+   "old": "Métropoles et espaces productifs en France",
+   "new": "Métropolisation, littoralisation des espaces productifs et accroissement des flux"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "Une diversification des espaces et des acteurs de la production",
+   "old": "La France : des espaces productifs entre valorisation et fragilités",
+   "new": "La France : les systèmes productifs entre valorisation locale et intégration européenne et mondiale"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "Les espaces ruraux : multifonctionnalité ou fragmentation ?",
+   "old": "La France : des espaces ruraux multifonctionnels",
+   "new": "La France : des espaces ruraux multifonctionnels, entre initiatives locales et politiques européennes"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "La Chine : des recompositions spatiales multiples",
+   "old": "Métropolisation et littoralisation chinoises",
+   "new": "Recompositions spatiales : urbanisation et littoralisation"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-math",
+   "theme": "Probabilités et statistiques",
+   "old": "Espérance, variance et écart type",
+   "new": "Espérance, variance, écart type et formule de König-Huygens"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Analyser les dynamiques des puissances internationales",
+   "old": "La Russie : l'affirmation d'une puissance",
+   "new": "La puissance des États-Unis aujourd'hui"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Analyser les dynamiques des puissances internationales",
+   "old": "Les formes indirectes de la puissance : soft power et influence",
+   "new": "Les formes indirectes de la puissance : une approche géopolitique"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Analyser les relations entre États et religions",
+   "old": "Pouvoir politique et autorité religieuse",
+   "new": "Pouvoir et religion : des liens historiques traditionnels"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Analyser les relations entre États et religions",
+   "old": "États et religions en Inde",
+   "new": "État et religions en Inde"
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "Dynamiques territoriales, coopérations et tensions dans la mondialisation",
+   "old": "La France : un territoire attractif dans la mondialisation ?",
+   "new": "La France : un rayonnement international différencié et une inégale attractivité dans la mondialisation"
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "L'Union européenne dans la mondialisation : des dynamiques complexes",
+   "old": "Les régions européennes : intégration et inégalités",
+   "new": "Des politiques européennes entre compétitivité et cohésion des territoires"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-hggsp",
+   "theme": "Faire la guerre, faire la paix",
+   "old": "La dimension politique de la guerre : des conflits interétatiques aux conflits transnationaux",
+   "new": "La dimension politique de la guerre : des conflits interétatiques aux enjeux transnationaux"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-hggsp",
+   "theme": "Identifier, protéger et valoriser le patrimoine",
+   "old": "Le patrimoine, entre tensions et concurrences",
+   "new": "Le patrimoine : la préservation entre tensions et concurrences"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-hggsp",
+   "theme": "L'environnement, entre exploitation et protection",
+   "old": "Les États-Unis et la question environnementale",
+   "new": "Les États-Unis et la question environnementale : tensions et contrastes"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-hlp",
+   "theme": "Préparer le bac",
+   "old": "L'épreuve écrite et l'oral de l'épreuve",
+   "new": "L'épreuve écrite de quatre heures et l'oral du second groupe"
+  }
+ ],
+ "remove": [],
+ "links": [
+  {
+   "level": "Seconde",
+   "subject": "histoire",
+   "theme": "Le monde méditerranéen : empreintes de l'Antiquité et du Moyen Âge",
+   "label": "Eduscol – ressource d'accompagnement, thème 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegtcom2histtheme1antiquitemoyenage1169453pdf-83022.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "histoire",
+   "theme": "XVe-XVIe siècles : un nouveau rapport au monde",
+   "label": "Eduscol – ressource d'accompagnement, thème 2",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2histgeotheme2-xve-xvie-nouveau-rapport-monde1293851pdf-83025.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "histoire",
+   "theme": "L'État à l'époque moderne : France et Angleterre",
+   "label": "Eduscol – ressource d'accompagnement, thème 3",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2histgeotheme3-etat-epoque-moderne1293912pdf-83028.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "histoire",
+   "theme": "Méthodes en histoire",
+   "label": "Programme officiel d'histoire-géographie de Seconde (BO 2019)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe577annexe1corr1063699pdf-83007.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Sociétés et environnements : des équilibres fragiles",
+   "label": "Eduscol – ressource d'accompagnement, thème 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegtcom2geotheme1equilibrefragile1169452pdf-83037.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Territoires, populations et développement",
+   "label": "Eduscol – ressource d'accompagnement, thème 2",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegtcom2degeotheme2territoirespopulations1179775pdf-83040.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Des mobilités généralisées",
+   "label": "Eduscol – ressource d'accompagnement, thème 3",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2comgeotheme3mobilites1324199pdf-83043.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "L'Afrique australe : un espace en profonde mutation",
+   "label": "Eduscol – ressource d'accompagnement, thème 4",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2geotheme4afriqueaustrale1258341pdf-83046.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "geographie",
+   "theme": "Méthodes en géographie",
+   "label": "Programme officiel d'histoire-géographie de Seconde (BO 2019)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe577annexe1corr1063699pdf-83007.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "histoire",
+   "theme": "L'Europe face aux révolutions",
+   "label": "Eduscol – ressource d'accompagnement, thème 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegcom1histtheme1europerevolution1169455pdf-83031.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "histoire",
+   "theme": "Méthodes en histoire",
+   "label": "Programme officiel d'histoire-géographie de Première générale",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe577annexe21062939pdf-83010.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "La métropolisation : un processus mondial différencié",
+   "label": "Eduscol – ressource d'accompagnement, thème 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegcom1geotheme1metropolisation1169454pdf-83049.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "Une diversification des espaces et des acteurs de la production",
+   "label": "Eduscol – ressource d'accompagnement, thème 2",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegcom1regeotheme2diversificationespaces1179776pdf-83052.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "Les espaces ruraux : multifonctionnalité ou fragmentation ?",
+   "label": "Eduscol – ressource d'accompagnement, thème 3",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1geotheme3multifonctionnalitefragmentation1258339pdf-83055.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "La Chine : des recompositions spatiales multiples",
+   "label": "Eduscol – ressource d'accompagnement, thème conclusif",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1geotheme4chine1256344pdf-83058.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "geographie",
+   "theme": "Méthodes en géographie",
+   "label": "Programme officiel d'histoire-géographie de Première générale",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe577annexe21062939pdf-83010.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "histoire",
+   "theme": "Préparer le bac",
+   "label": "Programme officiel d'histoire-géographie de Terminale générale",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe243annexe11159172pdf-83013.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "Mers et océans : au cœur de la mondialisation",
+   "label": "Eduscol – ressource d'accompagnement, thème 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeggeottheme1mersetoceansvoiegenerale1313435pdf-83073.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "Dynamiques territoriales, coopérations et tensions dans la mondialisation",
+   "label": "Eduscol – ressource d'accompagnement, thème 2",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeggeottheme2dynamiquesterritorialesvoiegenerale21313437pdf-83076.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "La France et ses régions dans le monde",
+   "label": "Eduscol – ressource d'accompagnement, thème conclusif",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeggeotthemeconclusiffranceregionsunioneuforceetrecompositions1313446pdf-83079.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "geographie",
+   "theme": "Préparer le bac",
+   "label": "Programme officiel d'histoire-géographie de Terminale générale",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe243annexe11159172pdf-83013.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Comprendre un régime politique : la démocratie",
+   "label": "Eduscol – ressource d'accompagnement, thème 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegspe1hggsptheme1democratie1169458pdf-83250.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Analyser les dynamiques des puissances internationales",
+   "label": "Eduscol – ressource d'accompagnement, thème 2",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegspe1hggsptheme2puissancesinter1169460pdf-83253.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Étudier les divisions politiques du monde : les frontières",
+   "label": "Eduscol – ressource d'accompagnement, thème 3",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegspe1hggsptheme3frontieres1206062pdf-83256.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "S'informer : un regard critique sur les sources",
+   "label": "Eduscol – ressource d'accompagnement, thème 4",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1histgeogeopolitique-sciencespotheme4-sinformer-regard-critique1293847pdf-83259.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Analyser les relations entre États et religions",
+   "label": "Eduscol – ressource d'accompagnement, thème 5",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1histgeogeopolitique-sciencespoanalyser-relations-etats-religions1293914pdf-83262.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-hggsp",
+   "theme": "Méthodes de la spécialité",
+   "label": "Programme officiel de HGGSP de Première",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe576annexe1062925pdf-83244.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-hggsp",
+   "theme": "De nouveaux espaces de conquête",
+   "label": "Eduscol – ressource d'accompagnement, thème 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtspehgeotheme1espacesconquetes0021329089pdf-83265.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-hggsp",
+   "theme": "Préparer le bac",
+   "label": "Programme officiel de HGGSP de Terminale",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe254annexe1159180pdf-83247.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Programmer et comprendre le numérique",
+   "label": "Programme officiel de SNT (BO 2019)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe641annexe1063085pdf-83091.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Internet et le Web",
+   "label": "Eduscol – activité : le protocole TCP",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndprotocoletcp1156206pdf-83103.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Internet et le Web",
+   "label": "Eduscol – activité : le routage expliqué par la poste",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndroutagepostal1150598pdf-83097.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Internet et le Web",
+   "label": "Eduscol – activité : le classement PageRank",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndpagerank1156204pdf-83112.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Réseaux sociaux et données",
+   "label": "Eduscol – activités sur les réseaux sociaux",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndactivitesreseauxsociaux1161101pdf-83118.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Réseaux sociaux et données",
+   "label": "Eduscol – le petit monde de Milgram et les graphes",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndmilgramgraphe1161105pdf-83124.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Réseaux sociaux et données",
+   "label": "Eduscol – la cyberviolence",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndcyberviolence1161103pdf-83121.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Réseaux sociaux et données",
+   "label": "Eduscol – vocabulaire des données structurées",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndvocabulairedonnees1151938pdf-83133.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Le numérique dans le monde physique",
+   "label": "Eduscol – fonctionnement de la géolocalisation",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndfonctionnementgeoloc1160792pdf-83142.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Le numérique dans le monde physique",
+   "label": "Eduscol – calcul d'itinéraires",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndroutagecalculsitineraires1150596pdf-83100.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Le numérique dans le monde physique",
+   "label": "Eduscol – objets connectés, activité 1",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndobjetsconnectesactivite11201662pdf-83154.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Le numérique dans le monde physique",
+   "label": "Eduscol – traitement d'images",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndphototraitementimages1161115pdf-83169.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "snt",
+   "theme": "Enjeux du numérique",
+   "label": "Eduscol – frise chronologique du numérique",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndfrisechrono1182206pdf-83109.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "La Terre, la vie et l'organisation du vivant",
+   "label": "Eduscol – métabolisme et interconnexions",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmetabolismeinterconnexion1160686pdf-82914.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "La Terre, la vie et l'organisation du vivant",
+   "label": "Eduscol – cartographier la biodiversité (lichens)",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtbiodiversitelichencarto1179405pdf-82911.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Les enjeux contemporains de la planète",
+   "label": "Eduscol – l'érosion",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svterosion1156434pdf-82932.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Les enjeux contemporains de la planète",
+   "label": "Eduscol – les agrosystèmes",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtagrosysteme1156428pdf-82929.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Les enjeux contemporains de la planète",
+   "label": "Eduscol – l'évolution du trait de côte",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtevolution-trait-cote1160888pdf-82947.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Le corps humain et la santé",
+   "label": "Eduscol – micro-organismes et santé",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmicroorganismessante1156437pdf-82974.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Le corps humain et la santé",
+   "label": "Eduscol – le microbiote, une approche écosystémique",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmicrobioteapprocheecosystemique1160689pdf-82992.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Le corps humain et la santé",
+   "label": "Eduscol – les maladies vectorielles",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmaladiesvectorielles1179409pdf-82983.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "svt",
+   "theme": "Méthodes en SVT",
+   "label": "Eduscol – travailler l'oral avec la vidéo",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtoral-video1160892pdf-82989.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-svt",
+   "theme": "Écosystèmes et services environnementaux",
+   "label": "Eduscol – écosystèmes et services environnementaux",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg1svtecosystemesservicesenvironnementaux1160678pdf-82935.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-svt",
+   "theme": "Variation génétique et santé",
+   "label": "Eduscol – risque génétique : la mucoviscidose",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1svttheme3risquegenetiquemucosviscidose1313330pdf-83004.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-svt",
+   "theme": "Variation génétique et santé",
+   "label": "Eduscol – résistance bactérienne aux antibiotiques",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1svttheme3variation-gen-bacterienne-resistance-antibiotiques1313332pdf-83001.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-svt",
+   "theme": "Le fonctionnement du système immunitaire humain",
+   "label": "Eduscol – le système immunitaire",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg1svtsystemeimmunitaire1160682pdf-82977.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-svt",
+   "theme": "Génétique et évolution",
+   "label": "Eduscol – génétique et évolution",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvtgenetiqueevolution1296957pdf-82899.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-svt",
+   "theme": "Génétique et évolution",
+   "label": "Eduscol – la loi de Hardy-Weinberg",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvtloihardyweinberg1296958pdf-82917.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-svt",
+   "theme": "À la recherche du passé géologique de notre planète",
+   "label": "Eduscol – le passé géologique de la planète",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme1passegeologiqueplanete1313481pdf-82902.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-svt",
+   "theme": "De la plante sauvage à la plante domestiquée",
+   "label": "Eduscol – de la plante sauvage à la plante domestiquée",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme2plantes-sauvage-domestiquee1307949pdf-82941.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-svt",
+   "theme": "Les climats de la Terre",
+   "label": "Eduscol – les climats de la Terre",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme2climatsterre1307947pdf-82938.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-svt",
+   "theme": "Corps humain et santé",
+   "label": "Eduscol – comportements, mouvement et système nerveux",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme3comportement-mouvement-sysnerveux1331399pdf-82980.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-nsi",
+   "theme": "Langages et programmation",
+   "label": "Programme officiel de NSI de Première",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe633annexe1063268pdf-89499.pdf"
+  },
+  {
+   "level": "Terminale",
+   "subject": "spe-nsi",
+   "theme": "Préparer le bac",
+   "label": "Programme officiel de NSI de Terminale",
+   "url": "https://eduscol.education.gouv.fr/sites/default/files/document/spe247annexe1158933pdf-89502.pdf"
+  },
+  {
+   "level": "Seconde",
+   "subject": "mathematique",
+   "theme": "Logique, algorithmique et automatismes",
+   "label": "Académie de Normandie – nouveaux programmes de maths 2026 (Seconde et Première)",
+   "url": "https://mathematiques.ac-normandie.fr/IMG/pdf/nouveaux_programmes_lyce_es_r26_pre_sentation_ens.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "mathematique",
+   "theme": "Automatismes",
+   "label": "Académie de Normandie – nouveaux programmes de maths 2026",
+   "url": "https://mathematiques.ac-normandie.fr/IMG/pdf/nouveaux_programmes_lyce_es_r26_pre_sentation_ens.pdf"
+  },
+  {
+   "level": "Première",
+   "subject": "spe-math",
+   "theme": "Automatismes, logique et algorithmique",
+   "label": "Académie de Normandie – nouveaux programmes de maths 2026",
+   "url": "https://mathematiques.ac-normandie.fr/IMG/pdf/nouveaux_programmes_lyce_es_r26_pre_sentation_ens.pdf"
+  }
+ ],
+ "sources": [
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg1svtecosystemesservicesenvironnementaux1160678pdf-82935.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg1svtsystemeimmunitaire1160682pdf-82977.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtagrosysteme1156428pdf-82929.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtbiodiversitelichencarto1179405pdf-82911.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svterosion1156434pdf-82932.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtevolution-trait-cote1160888pdf-82947.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmaladiesvectorielles1179409pdf-82983.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmetabolismeinterconnexion1160686pdf-82914.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmicrobioteapprocheecosystemique1160689pdf-82992.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtmicroorganismessante1156437pdf-82974.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceeg2svtoral-video1160892pdf-82989.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegcom1geotheme1metropolisation1169454pdf-83049.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegcom1histtheme1europerevolution1169455pdf-83031.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegcom1regeotheme2diversificationespaces1179776pdf-83052.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndactivitesreseauxsociaux1161101pdf-83118.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndcyberviolence1161103pdf-83121.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndfonctionnementgeoloc1160792pdf-83142.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndfrisechrono1182206pdf-83109.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndmilgramgraphe1161105pdf-83124.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndobjetsconnectesactivite11201662pdf-83154.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndpagerank1156204pdf-83112.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndphototraitementimages1161115pdf-83169.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndprotocoletcp1156206pdf-83103.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndroutagecalculsitineraires1150596pdf-83100.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndroutagepostal1150598pdf-83097.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegsnt2ndvocabulairedonnees1151938pdf-83133.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegspe1hggsptheme1democratie1169458pdf-83250.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegspe1hggsptheme2puissancesinter1169460pdf-83253.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegspe1hggsptheme3frontieres1206062pdf-83256.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegtcom2degeotheme2territoirespopulations1179775pdf-83040.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegtcom2geotheme1equilibrefragile1169452pdf-83037.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra19lyceegtcom2histtheme1antiquitemoyenage1169453pdf-83022.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1geotheme3multifonctionnalitefragmentation1258339pdf-83055.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1geotheme4chine1256344pdf-83058.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1histgeogeopolitique-sciencespoanalyser-relations-etats-religions1293914pdf-83262.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1histgeogeopolitique-sciencespotheme4-sinformer-regard-critique1293847pdf-83259.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1svttheme3risquegenetiquemucosviscidose1313330pdf-83004.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeg1svttheme3variation-gen-bacterienne-resistance-antibiotiques1313332pdf-83001.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeggeottheme1mersetoceansvoiegenerale1313435pdf-83073.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeggeottheme2dynamiquesterritorialesvoiegenerale21313437pdf-83076.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceeggeotthemeconclusiffranceregionsunioneuforceetrecompositions1313446pdf-83079.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2comgeotheme3mobilites1324199pdf-83043.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2geotheme4afriqueaustrale1258341pdf-83046.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2histgeotheme2-xve-xvie-nouveau-rapport-monde1293851pdf-83025.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegt2histgeotheme3-etat-epoque-moderne1293912pdf-83028.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtspehgeotheme1espacesconquetes0021329089pdf-83265.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvtgenetiqueevolution1296957pdf-82899.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvtloihardyweinberg1296958pdf-82917.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme1passegeologiqueplanete1313481pdf-82902.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme2climatsterre1307947pdf-82938.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme2plantes-sauvage-domestiquee1307949pdf-82941.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/ra20lyceegtsvttheme3comportement-mouvement-sysnerveux1331399pdf-82980.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe243annexe11159172pdf-83013.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe247annexe1158933pdf-89502.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe254annexe1159180pdf-83247.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe576annexe1062925pdf-83244.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe577annexe1corr1063699pdf-83007.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe577annexe21062939pdf-83010.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe633annexe1063268pdf-89499.pdf",
+  "https://eduscol.education.gouv.fr/sites/default/files/document/spe641annexe1063085pdf-83091.pdf",
+  "https://mathematiques.ac-normandie.fr/IMG/pdf/nouveaux_programmes_lyce_es_r26_pre_sentation_ens.pdf",
+  "https://pedagogie.ac-rennes.fr/sites/pedagogie.ac-rennes.fr/IMG/pdf/emc_-_pre_sentation_programmes_diaporama_vd.pdf",
+  "https://www.snes.edu/IMG/pdf/physique_annexe_2e_bo.pdf",
+  "https://www.snes.edu/IMG/pdf/snt_annexe_2e_bo.pdf",
+  "https://www.snes.edu/IMG/pdf/svt_annexe_2e_bo.pdf",
+  "https://www.snes.edu/wp-content/uploads/hist-geog_annexe-2_1eg_bo.pdf"
+ ]
+}
