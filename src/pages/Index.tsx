@@ -4,6 +4,7 @@ import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminView } from "@/hooks/useAdminView";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import AppHeader from "@/components/layout/AppHeader";
@@ -92,6 +93,8 @@ const Index = () => {
     const ch3 = supabase.channel("badge-msg").on("postgres_changes", { event: "*", schema: "public", table: "messages" }, () => computeBadges()).subscribe();
     return () => { [ch1, ch2, ch3].forEach(c => supabase.removeChannel(c)); };
   }, [computeBadges]);
+  // En direct : pastille du cahier de texte quand un devoir est coché/décoché (ou le niveau changé)
+  useRealtimeRefresh(["homework_completions", "profiles"], () => computeBadges(), !!user && !isAdmin);
 
   const totalBadge = badges.appointments + badges.homework + badges.messages;
 

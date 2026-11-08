@@ -28,8 +28,8 @@ Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 202
 3. ✅ Lien Lovable ↔ GitHub coupé le 2026-11-08 (connexion workspace « Nadelb341 » supprimée dans Lovable ; ne PAS toucher à « Configure on GitHub » : l'appli GitHub Lovable sert peut-être aussi à Planning Girl).
 4. **Nadia** : se reconnecter sur téléphone + test réel (admin, puis compte parent).
 5. **Moi** : audit « tout en direct » des écrans (publication = 7 tables, comme avant).
-6. ⚠️ **Sécurité** : la clé Resend `re_231PpcSh_…` est écrite en clair dans le dépôt GitHub (migration `20260413000001_email_paiements.sql`, `send-notifications`, ce fichier) et dans la fonction SQL `process_email_queue`. À révoquer dans Resend par Nadia puis remplacer par un secret de fonction. Les e-mails ne partent plus de toute façon depuis avril (pg_net absent, `trg_auto_process_email` supprimé).
-7. ⚠️ Règle de stockage : seul l'admin peut envoyer un fichier dans `subject-files` → la pièce jointe d'un élève/parent dans Messages échoue (constaté dans les règles, pas encore testé à l'écran). À décider avec Nadia.
+6. 🔄 **Clé Resend (2026-11-08, « oui » de Nadia)** : retirée du code (send-notifications lit le secret `RESEND_API_KEY` ; sans secret, les e-mails restent en file sans être marqués envoyés), de la migration d'avril, et de la base (fonctions mortes `process_email_queue` + `trigger_process_email_queue` supprimées — pg_net absent). Reste : **Nadia** crée une NOUVELLE clé dans Resend, la colle dans Supabase › Edge Functions › Secrets `RESEND_API_KEY` (mon rôle Developer ne peut pas poser de secret), puis supprime l'ancienne clé dans Resend (elle reste dans l'historique Git). Déploiement de send-notifications à faire avec le feu vert de Nadia.
+7. ✅ Pièces jointes Messages (2026-11-08) : règle « Users can upload own message files » (chacun SEULEMENT dans `messages/<son id>/`). + BUG corrigé : les règles admin du stockage recréées le 2026-11-07 lisaient `auth.users` (interdit au rôle authenticated) → tout envoi de fichier échouait, admin comprise ; réécrites avec `auth.email()`. Testé en ROLLBACK : 5/5 (admin chapitre OK, admin message OK, autre son dossier OK, dossier d'un autre refusé, chapitre refusé). Migration `20261108010000_pj_messages_et_cle_resend.sql`.
 
 ## 📦 Pas de débordement de texte hors de son conteneur
 Voir règle complète dans `~/PROJETS CLAUDE CODE/CLAUDE.md`.
@@ -360,7 +360,7 @@ npm run test:watch   # Tests en watch mode
 
 ## Emails automatiques — màj session 2026-04-13
 - Destination : `nadiaelb341@hotmail.com` (contrainte Resend plan gratuit)
-- Service : **Resend** (clé `re_231PpcSh_...` dans la fonction SQL `process_email_queue`)
+- Service : **Resend** (clé dans le secret de fonction `RESEND_API_KEY`, plus jamais dans le code ; envoi par la fonction `send-notifications`)
 - Table `email_queue` : `id, to_email, subject, html_body, sent, created_at`
 - Traitement immédiat via trigger `trg_auto_process_email` (pg_cron non disponible dans ce projet)
 - **Triggers** :

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AppHeader from "@/components/layout/AppHeader";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Users, Lock, UserPlus, LogIn } from "lucide-react";
@@ -27,6 +28,9 @@ const SwitchAccountPage = () => {
   useEffect(() => {
     fetchFamilyMembers();
   }, [user]);
+
+  // En direct : comptes de la famille (les champs e-mail / mot de passe ne sont pas touchés)
+  useRealtimeRefresh(["family_accounts"], () => fetchFamilyMembers(), !!user);
 
   const fetchFamilyMembers = async () => {
     if (!user) return;

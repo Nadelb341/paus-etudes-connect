@@ -26,6 +26,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { moveToTrash } from "@/lib/trash";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 
 const formatEur = (n: number): string => {
   const rounded = Math.round(n * 100) / 100;
@@ -110,6 +111,30 @@ const ParentHome = () => {
       fetchChildCards(selectedParent);
     }
   }, [selectedParent]);
+
+  // En direct : cartes enfants (+ note générale de la carte ouverte si elle n'est pas en cours d'édition),
+  // listes parents/élèves (admin), heures de cours et règlements de la carte ouverte.
+  // Les champs de saisie (nouvelle carte, versement en cours) ne sont pas touchés.
+  const refreshCardsLive = async () => {
+    const parentId = isAdmin ? selectedParent : user?.id;
+    if (parentId) fetchChildCards(parentId);
+    if (selectedCard) {
+      const { data } = await supabase.from("parent_child_cards").select("*").eq("id", selectedCard.id).maybeSingle();
+      if (data && !editingNote) {
+        setSelectedCard(data as ChildCard);
+        setNoteText((data as ChildCard).general_note || "");
+      }
+    }
+  };
+  useRealtimeRefresh(["parent_child_cards"], () => refreshCardsLive(), !!user);
+  useRealtimeRefresh(["profiles"], () => {
+    if (isAdmin && viewMode === "parent") { fetchParents(); fetchStudentProfiles(); }
+    const parentId = isAdmin ? selectedParent : user?.id;
+    if (parentId) fetchChildCards(parentId);
+  }, !!user);
+  useRealtimeRefresh(["tutoring_hours", "payment_tracking"], () => {
+    if (selectedCard) fetchHourRows(selectedCard);
+  }, !!selectedCard);
 
   const fetchParents = async () => {
     const { data } = await supabase

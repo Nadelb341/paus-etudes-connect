@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ENCOURAGEMENT_MESSAGES } from "@/lib/constants";
 import { CheckCircle2, XCircle, HelpCircle, BarChart3 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 
 interface Quiz { id: string; title: string; }
 interface Question { id: string; question: string; options: string[]; correct_option: number; explanation: string; order_index: number; }
@@ -25,13 +26,17 @@ const QuizPlayer = ({ subjectId }: { subjectId: string }) => {
   const [responseCounts, setResponseCounts] = useState<Record<number, number>>({});
   const [userResponses, setUserResponses] = useState<Record<string, Response>>({});
 
+  const fetchQuizzes = async () => {
+    const { data } = await supabase.from("quizzes").select("*").eq("subject_id", subjectId);
+    if (data) setQuizzes(data);
+  };
+
   useEffect(() => {
-    const fetchQuizzes = async () => {
-      const { data } = await supabase.from("quizzes").select("*").eq("subject_id", subjectId);
-      if (data?.length) setQuizzes(data);
-    };
     fetchQuizzes();
   }, [subjectId]);
+
+  // En direct : liste des quiz (un quiz en cours de jeu n'est pas interrompu)
+  useRealtimeRefresh(["quizzes"], () => fetchQuizzes(), !!subjectId);
 
   const startQuiz = async (quiz: Quiz) => {
     setSelectedQuiz(quiz);
@@ -59,6 +64,10 @@ const QuizPlayer = ({ subjectId }: { subjectId: string }) => {
     data?.forEach(r => { counts[r.selected_option] = (counts[r.selected_option] || 0) + 1; });
     setResponseCounts(counts);
   };
+
+  // En direct : statistiques des réponses de la question affichée (après réponse)
+  const currentQuestionId = questions[currentIndex]?.id;
+  useRealtimeRefresh(["quiz_responses"], () => { if (currentQuestionId) fetchResponseCounts(currentQuestionId); }, answered && !!currentQuestionId);
 
   const handleAnswer = async (optionIndex: number) => {
     if (answered) return;

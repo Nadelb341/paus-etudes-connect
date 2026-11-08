@@ -7,6 +7,7 @@ import { SUBJECTS_GENERAL, SUBJECTS_LYCEE, ADMIN_EMAIL, levelSubjectId } from "@
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 
 interface SubjectVisibility { [key: string]: boolean; }
 type Subject = typeof SUBJECTS_GENERAL[0];
@@ -31,7 +32,7 @@ const SubjectsGrid = () => {
   useEffect(() => { fetchVisibility(); }, []);
 
   // Récupère le niveau réel de l'élève depuis la BDD (source de vérité — ignore les métadonnées auth qui peuvent être périmées)
-  useEffect(() => {
+  const fetchUserLevel = () => {
     if (!isAdmin && user?.id) {
       supabase
         .from("profiles")
@@ -42,7 +43,15 @@ const SubjectsGrid = () => {
           if (data?.school_level) setUserLevel(data.school_level);
         });
     }
+  };
+
+  useEffect(() => {
+    fetchUserLevel();
   }, [user?.id, isAdmin]);
+
+  // En direct : matières affichées/masquées + niveau de l'élève (si l'admin le change)
+  useRealtimeRefresh(["subject_content"], () => fetchVisibility());
+  useRealtimeRefresh(["profiles"], () => fetchUserLevel(), !isAdmin && !!user?.id);
 
   const fetchVisibility = async () => {
     const { data } = await supabase.from("subject_content").select("subject_id, is_visible");

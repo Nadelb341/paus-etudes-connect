@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Plus, Trash2, ChevronDown, ChevronUp, Pencil, Check, X, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { moveToTrash } from "@/lib/trash";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -58,6 +59,9 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
   useEffect(() => {
     fetchThemes();
   }, [subjectId]);
+
+  // En direct : grands thèmes (un renommage en cours garde son champ de saisie)
+  useRealtimeRefresh(["subject_themes"], () => fetchThemes(), !!baseSubjectId && hasThemesTable);
 
   const fetchThemes = async () => {
     const { data, error } = await supabase

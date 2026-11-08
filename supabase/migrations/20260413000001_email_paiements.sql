@@ -35,7 +35,7 @@ BEGIN
     UPDATE public.email_queue SET sent = true WHERE id = email_record.id;
     PERFORM net.http_post(
       url := 'https://api.resend.com/emails',
-      headers := jsonb_build_object('Content-Type', 'application/json', 'Authorization', 'Bearer re_231PpcSh_J4WCoE1n7DbD5DUtzRap9RDK'),
+      headers := jsonb_build_object('Content-Type', 'application/json', 'Authorization', 'Bearer CLE_RETIREE_VOIR_SECRET_RESEND_API_KEY'),
       body := jsonb_build_object('from', 'Paus''Etude <onboarding@resend.dev>', 'to', jsonb_build_array(email_record.to_email), 'subject', email_record.subject, 'html', email_record.html_body)
     );
   END LOOP;

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Plus, Trash2, Save, GripVertical } from "lucide-react";
 import { moveToTrash } from "@/lib/trash";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -36,6 +37,8 @@ const QuizManager = ({ subjectId }: { subjectId: string }) => {
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 
   useEffect(() => { fetchQuizzes(); }, [subjectId]);
+  // En direct : liste des quiz (le quiz en cours d'édition n'est jamais écrasé)
+  useRealtimeRefresh(["quizzes"], () => fetchQuizzes(), !!subjectId);
 
   const fetchQuizzes = async () => {
     const { data } = await supabase.from("quizzes").select("*").eq("subject_id", subjectId).order("created_at");

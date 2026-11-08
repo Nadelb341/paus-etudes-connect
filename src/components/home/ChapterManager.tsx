@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { YoutubePlayer, isYoutubeUrl, extractYoutubeVideoId, extractPlaylistId, fetchPlaylistVideos } from "@/utils/youtube";
 import { moveToTrash } from "@/lib/trash";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -91,13 +92,19 @@ const ChapterManager = ({ subjectId, manageMode, themeId, filterUnthemed }: Chap
     if (isAdmin && manageMode) fetchProfiles();
   }, [subjectId, themeId, filterUnthemed]);
 
+  // En direct : chapitres (sans vider la liste, pas de clignotement), documents des chapitres déjà ouverts,
+  // et liste des élèves pour la carte « Accès élèves ». Les champs de saisie en cours ne sont pas touchés.
+  useRealtimeRefresh(["subject_chapters"], () => fetchChapters(false), !!subjectId);
+  useRealtimeRefresh(["chapter_documents"], () => { Object.keys(chapterDocs).forEach(id => fetchChapterDocs(id)); }, !!subjectId);
+  useRealtimeRefresh(["profiles"], () => fetchProfiles(), isAdmin && manageMode);
+
   const fetchProfiles = async () => {
     const { data } = await supabase.from("profiles").select("user_id, first_name, school_level").eq("is_approved", true).neq("email", ADMIN_EMAIL);
     if (data) setProfiles(data as StudentProfile[]);
   };
 
-  const fetchChapters = async () => {
-    setChapters([]);
+  const fetchChapters = async (clear = true) => {
+    if (clear) setChapters([]);
     let q = supabase.from("subject_chapters").select("*").eq("subject_id", subjectId).order("order_index");
     // Élève : ne voir que les chapitres où il est explicitement listé
     if (!isAdmin && user) {

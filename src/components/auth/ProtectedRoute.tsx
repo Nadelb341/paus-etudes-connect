@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { readApprovalCache, writeApprovalCache } from "@/lib/offlineAuth";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 
 /**
  * 📡 Hors ligne (2026-11-07) : le statut « compte validé » de la dernière vérification réussie est gardé sur
@@ -47,6 +48,9 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     window.addEventListener("online", onOnline);
     return () => window.removeEventListener("online", onOnline);
   }, []);
+
+  // En direct : dès que l'admin valide l'inscription, la page d'attente s'ouvre toute seule
+  useRealtimeRefresh(["profiles"], () => setRetry((n) => n + 1), !!userId && !isAdmin);
 
   if (loading) {
     return (

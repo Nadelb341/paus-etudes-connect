@@ -119,8 +119,10 @@ Deno.serve(async (req) => {
     for (const ep of expired) await supabase.from("push_subscriptions").delete().eq("endpoint", ep);
 
     let emailSent = 0, emailFailed = 0;
-    const resendKey = "re_231PpcSh_J4WCoE1n7DbD5DUtzRap9RDK";
-    const { data: emails } = await supabase.from("email_queue").select("*").eq("sent", false).order("created_at", { ascending: true }).limit(20);
+    // Clé Resend : secret de fonction RESEND_API_KEY (plus jamais écrite dans le code)
+    const resendKey = Deno.env.get("RESEND_API_KEY");
+    const { data: emails } = resendKey ? await supabase.from("email_queue").select("*").eq("sent", false).order("created_at", { ascending: true }).limit(20) : { data: [] };
+    // Sans clé : les e-mails restent en file d'attente (pas marqués envoyés) et partiront dès que le secret sera posé
     for (const email of emails || []) {
       try {
         const res = await fetch("https://api.resend.com/emails", {

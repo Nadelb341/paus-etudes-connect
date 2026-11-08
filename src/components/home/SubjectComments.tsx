@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Send, Trash2, MessageCircle } from "lucide-react";
 import { moveToTrash } from "@/lib/trash";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -30,6 +31,8 @@ const SubjectComments = ({ subjectId, subjectLabel }: { subjectId: string; subje
   useEffect(() => {
     fetchComments();
   }, [subjectId]);
+  // En direct : commentaires (le champ de saisie n'est pas touché)
+  useRealtimeRefresh(["subject_comments"], () => fetchComments(), !!subjectId);
 
   const fetchComments = async () => {
     const { data } = await supabase

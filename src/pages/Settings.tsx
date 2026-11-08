@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import AppHeader from "@/components/layout/AppHeader";
 import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
 import { ScrollButtons } from "@/components/ui/ScrollButtons";
@@ -46,6 +47,8 @@ const SettingsPage = () => {
 
   const loadTrash = () => { if (user) fetchTrash(user.id).then(setTrashItems); };
   useEffect(() => { loadTrash(); }, [user?.id]);
+  // En direct : corbeille (suppression faite depuis un autre écran ou un autre appareil)
+  useRealtimeRefresh(["trash_items"], () => loadTrash(), !!user?.id);
 
   const restoreTarget = trashItems.find(i => i.id === restoreTargetId) || null;
   const deleteTarget = trashItems.find(i => i.id === deleteTargetId) || null;

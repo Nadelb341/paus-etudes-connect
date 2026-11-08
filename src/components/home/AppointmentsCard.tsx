@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { saveDraft, loadDraft, clearDraft } from "@/hooks/useDraftRecovery";
 import { moveToTrash } from "@/lib/trash";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constants";
@@ -161,6 +162,18 @@ const AppointmentsCard = ({ forParentStudentId, badgeCount = 0 }: AppointmentsCa
     if (isAdmin) fetchStudents();
     if (!isAdmin) fetchUnseenAppointments();
   }, [user]);
+
+  // En direct : liste des RDV (+ message flash côté élève/parent). Les formulaires de création,
+  // modification et report ne sont pas touchés : seule la liste est rechargée.
+  useRealtimeRefresh(["appointments", "appointment_views"], () => {
+    fetchAppointments();
+    if (!isAdmin) fetchUnseenAppointments();
+  }, !!user);
+  // Admin : liste des élèves et parents liés à l'élève choisi dans le formulaire (sans effacer le parent choisi)
+  useRealtimeRefresh(["profiles", "parent_child_cards"], () => {
+    fetchStudents();
+    if (selectedStudent) fetchParentsForStudent(selectedStudent);
+  }, isAdmin);
 
   const fetchUnseenAppointments = async () => {
     if (!user || isAdmin) return;

@@ -15,6 +15,7 @@ import { StickyNote, Plus, Check, Edit2, Trash2, ChevronDown, ChevronUp } from "
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { moveToTrash } from "@/lib/trash";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 
 interface QuickNote {
   id: string;
@@ -60,6 +61,9 @@ const QuickNotes = () => {
     fetchNotes();
     fetchStudents();
   }, []);
+
+  // En direct : notes rapides + liste des élèves (le formulaire ouvert n'est pas touché)
+  useRealtimeRefresh(["admin_quick_notes", "profiles"], () => { fetchNotes(); fetchStudents(); });
 
   const getStudentName = (studentId: string) => {
     return students.find(s => s.user_id === studentId)?.first_name || "Élève";

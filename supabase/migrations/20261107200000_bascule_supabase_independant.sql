@@ -8,6 +8,7 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- 2. Stockage des fichiers : même dossier public et mêmes règles que sur Lovable
+--    (corrigé le 2026-11-08 : auth.email() au lieu de lire auth.users, interdit au rôle authenticated)
 INSERT INTO storage.buckets (id, name, public) VALUES ('subject-files', 'subject-files', true)
   ON CONFLICT (id) DO NOTHING;
 DROP POLICY IF EXISTS "Authenticated can read files" ON storage.objects;
@@ -16,11 +17,11 @@ CREATE POLICY "Authenticated can read files" ON storage.objects
 DROP POLICY IF EXISTS "Admin can upload files" ON storage.objects;
 CREATE POLICY "Admin can upload files" ON storage.objects
   FOR INSERT WITH CHECK (bucket_id = 'subject-files'
-    AND (SELECT users.email FROM auth.users WHERE users.id = auth.uid())::text = 'nad341@live.fr');
+    AND auth.email() = 'nad341@live.fr');
 DROP POLICY IF EXISTS "Admin can delete files" ON storage.objects;
 CREATE POLICY "Admin can delete files" ON storage.objects
   FOR DELETE USING (bucket_id = 'subject-files'
-    AND (SELECT users.email FROM auth.users WHERE users.id = auth.uid())::text = 'nad341@live.fr');
+    AND auth.email() = 'nad341@live.fr');
 
 -- 3. Mises à jour en direct : mêmes 7 tables que sur Lovable
 ALTER PUBLICATION supabase_realtime ADD TABLE

@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, BookOpen, Check } from "lucide-react";
 import { DAYS_OF_WEEK, SUBJECTS_GENERAL, SUBJECTS_LYCEE } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 
 interface Homework {
   id: string; subject_id: string; title: string; due_date: string;
@@ -22,11 +23,15 @@ const CahierDeTexte = ({ badgeCount = 0 }: CahierDeTexteProps) => {
   const [futureCount, setFutureCount] = useState(0);
   const [userLevel, setUserLevel] = useState("");
 
-  useEffect(() => {
+  const fetchUserLevel = () => {
     if (user) {
       supabase.from("profiles").select("school_level").eq("user_id", user.id).maybeSingle()
         .then(({ data }) => { if (data) setUserLevel(data.school_level); });
     }
+  };
+
+  useEffect(() => {
+    fetchUserLevel();
   }, [user]);
 
   const getWeekDates = (offset: number) => {
@@ -48,6 +53,10 @@ const CahierDeTexte = ({ badgeCount = 0 }: CahierDeTexteProps) => {
   const endDate = weekDates[weekDates.length - 1].fullDate;
 
   useEffect(() => { fetchHomework(); fetchFutureCount(); }, [weekOffset, user, userLevel]);
+
+  // En direct : devoirs, cases « fait » et niveau scolaire (si l'admin le change)
+  useRealtimeRefresh(["homework", "homework_completions"], () => { fetchHomework(); fetchFutureCount(); }, !!user);
+  useRealtimeRefresh(["profiles"], () => fetchUserLevel(), !!user);
 
   const isHomeworkForMe = (hw: any) => {
     if (!user) return false;

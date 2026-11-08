@@ -4,6 +4,7 @@ import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
 import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
+import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import { ADMIN_EMAIL, SUBJECTS_GENERAL, SUBJECTS_LYCEE, SCHOOL_LEVELS, HOURLY_RATES } from "@/lib/constants";
 import { supabase } from "@/integrations/supabase/client";
 import { moveToTrash } from "@/lib/trash";
@@ -155,6 +156,14 @@ const DashboardPage = () => {
       return () => { supabase.removeChannel(channel); };
     }
   }, [isAdmin]);
+
+  // En direct : registre des heures, devoirs + suivi, liens parent-enfant et barème.
+  // Les fiches en cours d'édition (élève, parent, heure) sont des copies locales : jamais écrasées.
+  useRealtimeRefresh(["tutoring_hours"], () => fetchTutoringHours(), isAdmin);
+  useRealtimeRefresh(["homework", "homework_completions"], () => { fetchAllHomework(); fetchAllCompletions(); }, isAdmin);
+  useRealtimeRefresh(["parent_child_cards"], () => fetchParentChildLinks(), isAdmin);
+  // Barème : pas de rechargement pendant que la fenêtre « Barème » est ouverte (sinon la saisie serait écrasée)
+  useRealtimeRefresh(["hourly_rate_settings"], () => { if (!showRatesDialog) fetchHourlyRates(); }, isAdmin);
 
   const fetchProfiles = async () => {
     const { data } = await supabase.from("profiles").select("*").order("created_at", { ascending: false });
