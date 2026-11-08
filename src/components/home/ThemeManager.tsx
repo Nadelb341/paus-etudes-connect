@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL, DEFAULT_THEMES, getBaseSubjectId } from "@/lib/constants";
@@ -25,9 +25,12 @@ interface Theme {
 interface ThemeManagerProps {
   subjectId: string;
   manageMode?: boolean;
+  /** Recherche dans la bibliothèque : thème à ouvrir directement ("none" = chapitres sans thème) */
+  initialThemeId?: string | null;
+  initialChapterId?: string | null;
 }
 
-const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
+const ThemeManager = ({ subjectId, manageMode, initialThemeId, initialChapterId }: ThemeManagerProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
   const baseSubjectId = getBaseSubjectId(subjectId);
@@ -40,6 +43,10 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
   const [editingThemeId, setEditingThemeId] = useState<string | null>(null);
   const [editingTitle, setEditingTitle] = useState("");
   const [hasThemesTable, setHasThemesTable] = useState(true);
+  // Admin : chapitres remplis / vides (une seule requête groupée pour toute la matière)
+  const [filled, setFilled] = useState<{ chapter_id: string; theme_id: string | null; rempli: boolean }[]>([]);
+  const initialApplied = useRef(false);
+  const showFill = isAdmin && !!manageMode;
 
   const THEME_PALETTE = [
     "hsl(32, 80%, 50%)",
@@ -58,10 +65,34 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
 
   useEffect(() => {
     fetchThemes();
+    if (showFill) fetchFilled();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subjectId]);
+
+  // Ouverture directe depuis la recherche (une seule fois, quand les thèmes sont chargés)
+  useEffect(() => {
+    if (initialApplied.current || !initialThemeId) return;
+    if (initialThemeId === "none") { initialApplied.current = true; setShowUnthemed(true); return; }
+    if (themes.some(t => t.id === initialThemeId)) { initialApplied.current = true; setExpandedTheme(initialThemeId); }
+  }, [themes, initialThemeId]);
 
   // En direct : grands thèmes (un renommage en cours garde son champ de saisie)
   useRealtimeRefresh(["subject_themes", "subject_chapters"], () => fetchThemes(), !!subjectId && hasThemesTable);
+  // En direct : pastilles « remplis » dès qu'un contenu est ajouté ou retiré
+  useRealtimeRefresh(
+    ["subject_chapters", "chapter_documents", "quizzes", "chapter_exercises", "chapter_flashcards"],
+    () => fetchFilled(), !!subjectId && showFill, 800,
+  );
+
+  const fetchFilled = async () => {
+    const { data, error } = await supabase.rpc("chapitres_remplis", { p_subject_id: subjectId });
+    if (!error && data) setFilled(data as { chapter_id: string; theme_id: string | null; rempli: boolean }[]);
+  };
+  const filledMap: Record<string, boolean> = Object.fromEntries(filled.map(f => [f.chapter_id, f.rempli]));
+  const themeStats = (themeId: string | null) => {
+    const list = filled.filter(f => f.theme_id === themeId);
+    return { total: list.length, done: list.filter(f => f.rempli).length };
+  };
 
   const fetchThemes = async () => {
     const { data, error } = await supabase
@@ -225,7 +256,20 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
                     </button>
                   </div>
                 ) : (
-                  <span className="font-semibold text-sm leading-tight" style={{ color }}>{theme.title}</span>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-sm leading-tight [overflow-wrap:anywhere]" style={{ color }}>{theme.title}</span>
+                    {showFill && (() => {
+                      const st = themeStats(theme.id);
+                      if (st.total === 0) return <span className="text-[10px] text-muted-foreground">Aucun chapitre</span>;
+                      const full = st.done === st.total;
+                      return (
+                        <span className="self-start text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
+                          style={st.done === 0 ? { border: `1px solid ${color}`, color } : { backgroundColor: full ? color : color + "26", color: full ? "white" : color }}>
+                          {st.done} / {st.total} chapitre{st.total > 1 ? "s" : ""} rempli{st.done > 1 ? "s" : ""}
+                        </span>
+                      );
+                    })()}
+                  </div>
                 )}
               </div>
 
@@ -277,8 +321,11 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
                 <div className="border-t border-border p-4 bg-secondary/10">
                   <ChapterManager
                     subjectId={subjectId}
-                                manageMode={manageMode}
+                    manageMode={manageMode}
                     themeId={theme.id}
+                    themeColor={color}
+                    filledMap={showFill ? filledMap : undefined}
+                    initialChapterId={initialThemeId === theme.id ? initialChapterId : null}
                   />
                 </div>
               )}
@@ -302,15 +349,17 @@ const ThemeManager = ({ subjectId, manageMode }: ThemeManagerProps) => {
             onClick={() => setShowUnthemed(!showUnthemed)}
             className="w-full flex items-center justify-between p-3 hover:bg-secondary/20 transition-colors text-left"
           >
-            <span className="text-xs text-muted-foreground">📁 Chapitres sans thème</span>
+            <span className="text-xs text-muted-foreground">📁 Chapitres sans thème{showFill && themeStats(null).total > 0 ? ` · ${themeStats(null).done} / ${themeStats(null).total} remplis` : ""}</span>
             {showUnthemed ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </button>
           {showUnthemed && (
             <div className="border-t border-border p-3">
               <ChapterManager
                 subjectId={subjectId}
-                        manageMode={manageMode}
+                manageMode={manageMode}
                 filterUnthemed
+                filledMap={showFill ? filledMap : undefined}
+                initialChapterId={initialThemeId === "none" ? initialChapterId : null}
               />
             </div>
           )}

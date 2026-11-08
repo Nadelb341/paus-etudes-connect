@@ -3,6 +3,7 @@ import SubjectCard from "./SubjectCard";
 import SubjectContentDialog from "./SubjectContentDialog";
 import AdminLevelView from "./AdminLevelView";
 import LevelSubjectsDialog from "./LevelSubjectsDialog";
+import LibrarySearch from "./LibrarySearch";
 import { SUBJECTS_GENERAL, SUBJECTS_LYCEE, ADMIN_EMAIL, ADMIN_ONLY_SUBJECT_IDS, getSubjectsForLevel, levelSubjectId } from "@/lib/constants";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -28,6 +29,8 @@ const SubjectsGrid = () => {
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [manageMode, setManageMode] = useState(false);
+  // Recherche : thème / chapitre à ouvrir directement dans le dialog de contenu
+  const [focus, setFocus] = useState<{ themeId: string | null; chapterId: string | null } | null>(null);
 
   useEffect(() => { fetchVisibility(); }, []);
 
@@ -74,7 +77,8 @@ const SubjectsGrid = () => {
   };
 
   // Ouvre le dialog de contenu (admin depuis LevelSubjectsDialog, ou élève directement)
-  const openContentDialog = (subject: Subject, level: string | null, manage = true) => {
+  const openContentDialog = (subject: Subject, level: string | null, manage = true, target: { themeId: string | null; chapterId: string | null } | null = null) => {
+    setFocus(target);
     setSelectedSubject(subject);
     setSelectedLevel(level);
     setManageMode(manage);
@@ -86,6 +90,7 @@ const SubjectsGrid = () => {
       setSelectedSubject(null);
       setSelectedLevel(null);
       setManageMode(false);
+      setFocus(null);
     }
   };
 
@@ -110,6 +115,8 @@ const SubjectsGrid = () => {
       <div className="space-y-4">
         <h3 className="font-heading font-semibold text-foreground">Niveaux scolaires</h3>
 
+        <LibrarySearch onOpen={t => openContentDialog(t.subject, t.level, true, { themeId: t.themeId, chapterId: t.chapterId })} />
+
         <AdminLevelView onSelectSubLevel={setSelectedSubLevel} />
 
         {/* Dialog : matières du sous-niveau sélectionné */}
@@ -130,6 +137,8 @@ const SubjectsGrid = () => {
             subjectIcon={selectedSubject.icon}
             subjectColor={selectedSubject.color}
             manageMode={manageMode}
+            initialThemeId={focus?.themeId ?? null}
+            initialChapterId={focus?.chapterId ?? null}
           />
         )}
       </div>

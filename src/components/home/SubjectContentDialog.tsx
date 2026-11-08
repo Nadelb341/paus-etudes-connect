@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useAuth } from "@/hooks/useAuth";
 import { ADMIN_EMAIL } from "@/lib/constants";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
-import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
+import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import ThemeManager from "./ThemeManager";
 import ChapterManager from "./ChapterManager";
 import SubjectComments from "./SubjectComments";
@@ -15,12 +15,14 @@ interface SubjectContentDialogProps {
   subjectIcon: string;
   subjectColor: string;
   manageMode?: boolean;
+  initialThemeId?: string | null;
+  initialChapterId?: string | null;
 }
 
-const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, subjectIcon, manageMode }: SubjectContentDialogProps) => {
+const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, subjectIcon, manageMode, initialThemeId, initialChapterId }: SubjectContentDialogProps) => {
   const { user } = useAuth();
   const isAdmin = user?.email === ADMIN_EMAIL;
-  const { scrollRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop();
+  const { scrollRef, showTop, showBottom, handleScroll, scrollToTop, scrollToBottom } = useScrollToTop();
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -39,7 +41,8 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
 
           {isAdmin && manageMode ? (
             <div className="space-y-4">
-              <ThemeManager subjectId={subjectId} manageMode={true} />
+              <ThemeManager key={`${subjectId}-${initialChapterId || initialThemeId || ""}`} subjectId={subjectId} manageMode={true}
+                initialThemeId={initialThemeId} initialChapterId={initialChapterId} />
             </div>
           ) : (
             <div className="space-y-6">
@@ -49,7 +52,7 @@ const SubjectContentDialog = ({ open, onOpenChange, subjectId, subjectLabel, sub
           )}
         </div>
 
-        <ScrollToTopButton show={showScrollTop} onClick={scrollToTop} />
+        <ScrollButtons showTop={showTop} showBottom={showBottom} onScrollTop={scrollToTop} onScrollBottom={scrollToBottom} />
       </DialogContent>
     </Dialog>
   );

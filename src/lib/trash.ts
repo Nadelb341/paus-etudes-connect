@@ -2,7 +2,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 export type TrashItemType =
   | "quick_note" | "quiz" | "subject_comment" | "subject_theme"
-  | "appointment" | "parent_child_card" | "subject_chapter" | "chapter_document" | "tutoring_hour";
+  | "appointment" | "parent_child_card" | "subject_chapter" | "chapter_document" | "tutoring_hour"
+  | "chapter_exercise" | "chapter_flashcard";
 
 export interface TrashItem {
   id: string;
@@ -24,6 +25,8 @@ const TABLE_BY_TYPE: Record<TrashItemType, string> = {
   subject_chapter: "subject_chapters",
   chapter_document: "chapter_documents",
   tutoring_hour: "tutoring_hours",
+  chapter_exercise: "chapter_exercises",
+  chapter_flashcard: "chapter_flashcards",
 };
 
 export async function moveToTrash(userId: string, type: TrashItemType, originalId: string, label: string, data: any) {

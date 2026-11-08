@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.18"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       admin_quick_notes: {
@@ -129,6 +154,7 @@ export type Database = {
       }
       chapter_documents: {
         Row: {
+          category: string
           chapter_id: string
           created_at: string
           file_name: string
@@ -138,6 +164,7 @@ export type Database = {
           uploaded_by: string | null
         }
         Insert: {
+          category?: string
           chapter_id: string
           created_at?: string
           file_name: string
@@ -147,6 +174,7 @@ export type Database = {
           uploaded_by?: string | null
         }
         Update: {
+          category?: string
           chapter_id?: string
           created_at?: string
           file_name?: string
@@ -158,6 +186,103 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "chapter_documents_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "subject_chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chapter_exercises: {
+        Row: {
+          chapter_id: string
+          created_at: string
+          created_by: string | null
+          difficulty: number
+          done_log: Json
+          files: Json
+          id: string
+          order_index: number
+          solution: string
+          solution_visible_to_students: boolean
+          statement: string
+          target_student_ids: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          chapter_id: string
+          created_at?: string
+          created_by?: string | null
+          difficulty?: number
+          done_log?: Json
+          files?: Json
+          id?: string
+          order_index?: number
+          solution?: string
+          solution_visible_to_students?: boolean
+          statement?: string
+          target_student_ids?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          chapter_id?: string
+          created_at?: string
+          created_by?: string | null
+          difficulty?: number
+          done_log?: Json
+          files?: Json
+          id?: string
+          order_index?: number
+          solution?: string
+          solution_visible_to_students?: boolean
+          statement?: string
+          target_student_ids?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chapter_exercises_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "subject_chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chapter_flashcards: {
+        Row: {
+          back: string
+          chapter_id: string
+          created_at: string
+          created_by: string | null
+          front: string
+          id: string
+          order_index: number
+        }
+        Insert: {
+          back?: string
+          chapter_id: string
+          created_at?: string
+          created_by?: string | null
+          front?: string
+          id?: string
+          order_index?: number
+        }
+        Update: {
+          back?: string
+          chapter_id?: string
+          created_at?: string
+          created_by?: string | null
+          front?: string
+          id?: string
+          order_index?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chapter_flashcards_chapter_id_fkey"
             columns: ["chapter_id"]
             isOneToOne: false
             referencedRelation: "subject_chapters"
@@ -747,6 +872,7 @@ export type Database = {
           description: string | null
           id: string
           order_index: number | null
+          revision: string | null
           subject_id: string
           target_student_id: string | null
           target_student_ids: string[] | null
@@ -761,6 +887,7 @@ export type Database = {
           description?: string | null
           id?: string
           order_index?: number | null
+          revision?: string | null
           subject_id: string
           target_student_id?: string | null
           target_student_ids?: string[] | null
@@ -775,6 +902,7 @@ export type Database = {
           description?: string | null
           id?: string
           order_index?: number | null
+          revision?: string | null
           subject_id?: string
           target_student_id?: string | null
           target_student_ids?: string[] | null
@@ -1014,6 +1142,14 @@ export type Database = {
         Args: { target_user_id: string }
         Returns: undefined
       }
+      chapitres_remplis: {
+        Args: { p_subject_id: string }
+        Returns: {
+          chapter_id: string
+          rempli: boolean
+          theme_id: string
+        }[]
+      }
       get_admin_user_id: { Args: never; Returns: string }
       get_student_email_html: {
         Args: { p_student_id: string }
@@ -1023,10 +1159,23 @@ export type Database = {
         Args: { p_emoji: string; p_rows: string; p_titre: string }
         Returns: string
       }
-      process_email_queue: { Args: never; Returns: undefined }
+      pe_sans_accent: { Args: { t: string }; Returns: string }
       queue_pausetude_email: {
         Args: { p_html: string; p_subject: string }
         Returns: undefined
+      }
+      search_bibliotheque: {
+        Args: { q: string }
+        Returns: {
+          chapter_id: string
+          chapter_title: string
+          item_id: string
+          item_title: string
+          kind: string
+          subject_id: string
+          theme_id: string
+          theme_title: string
+        }[]
       }
     }
     Enums: {
@@ -1156,6 +1305,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },
