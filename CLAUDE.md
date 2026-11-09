@@ -42,6 +42,7 @@ Tour complet du CLAUDE.md commun fait le 2026-11-09 (contrôle dans le code et l
 4. 📡 Hors ligne renforcé (2026-11-09) : pas de file d'attente pour les ajouts/modifs hors ligne, pas de `navigator.storage.persist()`, pas de tableau « 📡 Hors ligne : ce qui marche / ce qui ne marche pas » dans ce fichier. + règle « libre » : les vidéos YouTube ne peuvent pas être lues sans Internet → à signaler dans le tableau.
 5. À contrôler écran par écran : brouillon automatique (seulement 4 écrans), rappel des actions inachevées à l'ouverture, filet « revenir à l'origine » en édition, interrupteurs de notifications par type (seulement un interrupteur général push), cadrage des photos, galerie défilable des pièces jointes, croix ✕ rouge, pastilles rouges en cascade, confirmation avant validation.
 6. Admin repérée par une adresse e-mail écrite dans le code (et dans les règles RLS) au lieu d'une table de rôles : marche, mais moins solide.
+7. Contrôle de code (eslint) : 17 alertes « any » déjà présentes avant le 2026-11-09 dans Messages, Dashboard, SwitchAccount, Settings (pas de danger d'écran blanc, aucune erreur des règles React) → à nettoyer.
 
 ## 📚 Bibliothèque CP → Terminale (2026-11-08)
 - Demande de Nadia : remplir toutes les cartes de niveaux (contenus « comme SchoolMouv »). Copie de SchoolMouv REFUSÉE (droits d'auteur + CGU, même pour usage privé ; jamais se connecter avec ses identifiants). À la place : programmes officiels.
