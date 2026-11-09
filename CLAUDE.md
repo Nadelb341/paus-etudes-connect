@@ -11,6 +11,9 @@ Règle née le 2026-09-15 sur Agenda Nadia (un hook mal placé a fait planter to
 ```
 🔴 FIN DE LA COPIE
 
+## 🧭 RÈGLE ABSOLUE — Tour complet avant de commencer (Nadia, 2026-11-09, voir CLAUDE.md commun)
+À chaque nouveau terminal sur Paus'Étude, AVANT tout travail : lire en entier ce fichier + `~/Projets Claude Code/CLAUDE.md` + les mémoires qui citent Paus'Étude ; repérer les règles « toutes les applis » pas encore appliquées ici ; vérifier pour de vrai (code, base, site) ; mettre à jour les 3 endroits (ici, commun, mémoire) ; présenter le bilan à Nadia ; ENSUITE seulement commencer. Règle complète : section « 🧭 Faire le TOUR COMPLET » du CLAUDE.md commun.
+
 ## ⏳ RÈGLE ABSOLUE — Ne jamais compter sur Nadia pour relancer / rappeler / redemander
 Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 2026-08-31). Toute suite à donner — blocage côté Nadia **OU** une amélioration/vérification que JE propose pour plus tard — doit être notée par moi dans une section **"⚠️ ACTION EN ATTENTE"** de ce fichier et reprise par moi au début de chaque session, jamais en attendant qu'elle m'en reparle. Nadia oublie tout : *"n'attends plus que je te dise de faire les choses à venir ou des sortes de rappels"*.
 
@@ -27,9 +30,18 @@ Voir la règle complète dans `~/Projets Claude Code/CLAUDE.md` (élargie le 202
 2. ✅ Accès temporaire `nadia_migration` + schéma `migration_tmp` supprimés le 2026-11-08 (SQL Lovable : `DROP OWNED` refusé → REVOKE un par un puis DROP ROLE ; vérifié : reste = 0, connexion refusée) ; entrée du trousseau supprimée.
 3. ✅ Lien Lovable ↔ GitHub coupé le 2026-11-08 (connexion workspace « Nadelb341 » supprimée dans Lovable ; ne PAS toucher à « Configure on GitHub » : l'appli GitHub Lovable sert peut-être aussi à Planning Girl).
 4. **Nadia** : se reconnecter sur téléphone + test réel (admin, puis compte parent).
-5. **Moi** : audit « tout en direct » des écrans (publication = 7 tables, comme avant).
+5. ✅ Audit « tout en direct » fait le 2026-11-08 (hook `useRealtimeRefresh`) ; revérifié le 2026-11-09 : 25 tables dans la publication, 17 fichiers abonnés. Reste seulement le test à l'écran avec Nadia (point 4).
 6. ✅ **Clé Resend (2026-11-08)** : retirée du code, de la migration d'avril et de la base (fonctions mortes `process_email_queue` + `trigger_process_email_queue` supprimées). NOUVELLE clé Resend « pausetude » (accès d'envoi seulement) posée par Nadia dans le secret `RESEND_API_KEY` (empreinte b1a43a04…), send-notifications v3 déployée (lit le secret). ✅ Ancienne clé `re_231PpcSh…` (« agenda-famille », seule utilisation sur 15 jours = un GET /domains manuel, aucun envoi) SUPPRIMÉE dans Resend le 2026-11-08 par Nadia. Restent : pausetude, nouvelle-base-vercel (Agenda), Mon agenda.
 7. ✅ Pièces jointes Messages (2026-11-08) : règle « Users can upload own message files » (chacun SEULEMENT dans `messages/<son id>/`). + BUG corrigé : les règles admin du stockage recréées le 2026-11-07 lisaient `auth.users` (interdit au rôle authenticated) → tout envoi de fichier échouait, admin comprise ; réécrites avec `auth.email()`. Testé en ROLLBACK : 5/5 (admin chapitre OK, admin message OK, autre son dossier OK, dossier d'un autre refusé, chapitre refusé). Migration `20261108010000_pj_messages_et_cle_resend.sql`.
+
+## ⚠️ ACTION EN ATTENTE (2026-11-09) — règles communes pas encore appliquées à Paus'Étude
+Tour complet du CLAUDE.md commun fait le 2026-11-09 (contrôle dans le code et la base). Déjà conformes : compression des photos, corbeille, mots jamais coupés, œil des mots de passe, boutons ⬆️⬇️, tout en direct, hors ligne (ouverture), lien Lovable coupé.
+1. 🚫 YouTube : `src/utils/youtube.tsx` = iframe brute avec un cache seulement en haut (55 px) → le logo YouTube en bas reste cliquable. À refaire selon la règle (lecteur `YT.Player` sans commandes + cache sur toute la vidéo + commandes maison).
+2. ⬅️ Bouton « ← Retour » absent de Paramètres, Tableau de bord (admin) et Changer de compte (présent seulement dans Messages et Mot de passe oublié).
+3. ✂️ Textes coupés par « … » dans `Messages.tsx` (noms des pièces jointes l. 343 et 456, aperçu du dernier message l. 553).
+4. 📡 Hors ligne renforcé (2026-11-09) : pas de file d'attente pour les ajouts/modifs hors ligne, pas de `navigator.storage.persist()`, pas de tableau « 📡 Hors ligne : ce qui marche / ce qui ne marche pas » dans ce fichier. + règle « libre » : les vidéos YouTube ne peuvent pas être lues sans Internet → à signaler dans le tableau.
+5. À contrôler écran par écran : brouillon automatique (seulement 4 écrans), rappel des actions inachevées à l'ouverture, filet « revenir à l'origine » en édition, interrupteurs de notifications par type (seulement un interrupteur général push), cadrage des photos, galerie défilable des pièces jointes, croix ✕ rouge, pastilles rouges en cascade, confirmation avant validation.
+6. Admin repérée par une adresse e-mail écrite dans le code (et dans les règles RLS) au lieu d'une table de rôles : marche, mais moins solide.
 
 ## 📚 Bibliothèque CP → Terminale (2026-11-08)
 - Demande de Nadia : remplir toutes les cartes de niveaux (contenus « comme SchoolMouv »). Copie de SchoolMouv REFUSÉE (droits d'auteur + CGU, même pour usage privé ; jamais se connecter avec ses identifiants). À la place : programmes officiels.
