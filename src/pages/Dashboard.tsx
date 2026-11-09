@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import AppHeader from "@/components/layout/AppHeader";
+import { BoutonRetour } from "@/components/ui/BoutonRetour";
 import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
 import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { useAuth } from "@/hooks/useAuth";
@@ -414,6 +415,7 @@ const DashboardPage = () => {
       <div className="min-h-screen bg-background">
         <AppHeader />
         <main className="max-w-lg mx-auto px-4 py-12 text-center">
+          <div className="text-left mb-6"><BoutonRetour /></div>
           <Shield size={48} className="mx-auto text-muted-foreground mb-4" />
           <h1 className="text-xl font-heading font-bold text-foreground">Accès restreint</h1>
           <p className="text-muted-foreground text-sm mt-2">Seul l'administrateur peut accéder au tableau de bord.</p>
@@ -449,6 +451,7 @@ const DashboardPage = () => {
     <div className="min-h-screen bg-background">
       <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-4">
+        <BoutonRetour />
         <div className="flex items-center gap-2">
           <Shield size={24} className="text-primary" />
           <h1 className="text-xl font-heading font-bold text-foreground">Tableau de bord</h1>

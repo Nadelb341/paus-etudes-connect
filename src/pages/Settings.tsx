@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
 import AppHeader from "@/components/layout/AppHeader";
+import { BoutonRetour } from "@/components/ui/BoutonRetour";
 import { useWindowScrollToTop } from "@/hooks/useScrollToTop";
 import { ScrollButtons } from "@/components/ui/ScrollButtons";
 import { Button } from "@/components/ui/button";
@@ -81,6 +82,7 @@ const SettingsPage = () => {
     <div className="min-h-screen bg-background">
       <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-lg mx-auto px-4 py-6 space-y-6">
+        <BoutonRetour />
         <h1 className="text-xl font-heading font-bold text-foreground">Paramètres</h1>
 
         <div className="bg-card rounded-lg border border-border shadow-card p-4 space-y-4">

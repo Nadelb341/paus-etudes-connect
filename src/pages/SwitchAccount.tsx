@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import AppHeader from "@/components/layout/AppHeader";
+import { BoutonRetour } from "@/components/ui/BoutonRetour";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { useRealtimeRefresh } from "@/hooks/useRealtimeRefresh";
@@ -86,6 +87,7 @@ const SwitchAccountPage = () => {
     <div className="min-h-screen bg-background">
       <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-lg mx-auto px-4 py-6 space-y-6">
+        <BoutonRetour />
         <div className="flex items-center gap-2">
           <Users size={24} className="text-primary" />
           <h1 className="text-xl font-heading font-bold text-foreground">Changer de compte</h1>

@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
+import { BoutonRetour } from "@/components/ui/BoutonRetour";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -96,6 +97,7 @@ const ResetPassword = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-md bg-card rounded-lg shadow-elevated p-6"
       >
+        <div className="mb-3"><BoutonRetour libelle="Retour à la connexion" onClick={() => navigate("/auth")} /></div>
         <h2 className="text-xl font-heading font-bold text-foreground mb-4 text-center">
           Nouveau mot de passe
         </h2>

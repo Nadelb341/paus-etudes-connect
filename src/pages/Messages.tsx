@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import AppHeader from "@/components/layout/AppHeader";
+import { BoutonRetour } from "@/components/ui/BoutonRetour";
+import { YoutubePlayer } from "@/utils/youtube";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminDashboardBadge } from "@/hooks/useAdminDashboardBadge";
 import { supabase } from "@/integrations/supabase/client";
 import { compressDocument } from "@/lib/compressImage";
 import { toast } from "sonner";
-import { Send, ArrowLeft, Search, Users, MessageSquarePlus, UserPlus, Smile, Paperclip, Camera, FileText, Image as ImageIcon, X, Play } from "lucide-react";
+import { Send, Search, Users, MessageSquarePlus, UserPlus, Smile, Paperclip, Camera, FileText, Image as ImageIcon, X, Play } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -43,6 +45,16 @@ const getYouTubeId = (text: string): { id: string; url: string } | null => {
   const match = text.match(regex);
   if (match) return { id: match[1], url: match[0] };
   return null;
+};
+
+// Aperçu du dernier message dans la liste : coupé entre deux mots (jamais au milieu d'un mot)
+const apercuMessage = (content: string, nbPiecesJointes = 0): string => {
+  const texte = (content || "").replace(/\s+/g, " ").trim();
+  if (!texte) return nbPiecesJointes > 0 ? "📎 Pièce jointe" : "";
+  if (texte.length <= 90) return texte;
+  const coupe = texte.slice(0, 90);
+  const dernierEspace = coupe.lastIndexOf(" ");
+  return `${dernierEspace > 40 ? coupe.slice(0, dernierEspace) : coupe} …`;
 };
 
 // Compute conversation key from a message (sorted set of all participants)
@@ -153,7 +165,7 @@ const MessagesPage = () => {
         key,
         participants,
         displayName: isGroup ? `👥 ${otherNames.join(", ")}` : otherNames[0] || "Conversation",
-        lastMessage: last.content.substring(0, 60),
+        lastMessage: apercuMessage(last.content, (last as { attachments?: unknown[] }).attachments?.length ?? 0),
         lastDate: last.created_at,
         isGroup,
       };
@@ -316,14 +328,7 @@ const MessagesPage = () => {
       return (
         <>
           {textWithoutUrl && <p className="text-sm whitespace-pre-wrap mb-2">{textWithoutUrl}</p>}
-          <a href={`https://www.youtube.com/watch?v=${yt.id}`} target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden">
-            <div className="relative">
-              <img src={`https://img.youtube.com/vi/${yt.id}/mqdefault.jpg`} alt="YouTube" className="w-full rounded-lg" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-red-600 rounded-full p-2.5 shadow-lg"><Play size={18} className="text-white fill-white ml-0.5" /></div>
-              </div>
-            </div>
-          </a>
+          <div className="w-[260px] max-w-full"><YoutubePlayer videoId={yt.id} /></div>
         </>
       );
     }
@@ -340,7 +345,7 @@ const MessagesPage = () => {
           }
           return (
             <a key={i} href={att.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2 rounded-lg bg-black/5 hover:bg-black/10 transition-colors">
-              <FileText size={16} className="shrink-0" /><span className="text-xs truncate">{att.name}</span>
+              <FileText size={16} className="shrink-0" /><span className="text-xs min-w-0 [overflow-wrap:anywhere]">{att.name}</span>
             </a>
           );
         })}
@@ -363,11 +368,9 @@ const MessagesPage = () => {
         <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
         {hiddenInputs}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-card">
-          {(isAdmin || conversations.length > 1) && (
-            <Button variant="ghost" size="icon" onClick={() => setSelectedConvo(null)}>
-              <ArrowLeft size={18} />
-            </Button>
-          )}
+          {(isAdmin || conversations.length > 1)
+            ? <BoutonRetour libelle="Conversations" onClick={() => setSelectedConvo(null)} />
+            : <BoutonRetour />}
           <div className="flex-1">
             <p className="font-heading font-semibold text-sm">{selectedConvo.displayName}</p>
             {selectedConvo.isGroup && (
@@ -453,7 +456,7 @@ const MessagesPage = () => {
               {pendingAttachments.map((att, i) => (
                 <div key={i} className="flex items-center gap-1 bg-secondary/50 rounded-lg px-2 py-1 text-xs">
                   {att.type?.startsWith("image/") ? <ImageIcon size={12} /> : <FileText size={12} />}
-                  <span className="truncate max-w-[120px]">{att.name}</span>
+                  <span className="min-w-0 max-w-[180px] [overflow-wrap:anywhere]">{att.name}</span>
                   <button onClick={() => removeAttachment(i)} className="text-destructive hover:text-destructive/80"><X size={12} /></button>
                 </div>
               ))}
@@ -507,6 +510,7 @@ const MessagesPage = () => {
     <div className="min-h-screen bg-background">
       <AppHeader notificationCounts={{ dashboard: dashboardBadge }} />
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-4">
+        <BoutonRetour />
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-heading font-bold text-foreground">Messages</h1>
           {isAdmin && (
@@ -547,13 +551,13 @@ const MessagesPage = () => {
           {filteredConversations.map(c => (
             <button key={c.key} onClick={() => setSelectedConvo(c)}
               className="w-full text-left bg-card rounded-lg border border-border shadow-card p-4 hover:bg-secondary/30 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-semibold text-sm">{c.displayName}</p>
-                  <p className="text-xs text-muted-foreground truncate max-w-[200px]">{c.lastMessage}</p>
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm [overflow-wrap:anywhere]">{c.displayName}</p>
+                  <p className="text-xs text-muted-foreground whitespace-pre-line [overflow-wrap:anywhere]">{c.lastMessage}</p>
                 </div>
                 {c.lastDate && (
-                  <span className="text-[10px] text-muted-foreground">
+                  <span className="text-[10px] text-muted-foreground shrink-0">
                     {new Date(c.lastDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
                   </span>
                 )}
